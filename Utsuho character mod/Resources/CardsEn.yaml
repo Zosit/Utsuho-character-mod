@@ -1,0 +1,144 @@
+PowerCycle:
+  Name: Power Cycle
+  Description: "|Vent| for damage and add 10.\nGain {Value1} |Heat|"
+
+BlastBurn:
+  Name: Blast Burn
+  Description: "|Vent| for damage.\nIf you have 5 or more |Heat|, apply {Value1} Weak and Vulnerable"
+
+FireWall:
+  Name: Fire Wall
+  Description: "|Vent| for damage and |Block|."
+
+StartReactor:
+  Name: Start Reactor
+  Description: "Gain {Value1} |Heat| at the start of each turn"
+
+MaxPower:
+  Name: Max Power
+  Description: "Exile your hand.\nSet mana to {Value1} rainbow, and draw {Value1} cards.\n|Time Limit| {Mana}."
+
+Aggregate:
+  Name: Aggregate
+  Description: "Deal {Damage} damage.\nGain {Block} |Block|.\nGain {Value1} |Heat|."
+
+Fission:
+  Name: Fission
+  Description: "Add a random Attack and Defense card to your hand with generic mana costs.\nGain {Value1} |Heat|."
+
+EverythingBurns:
+  Name: Everything Burns
+  Description: "Exile a card from the hand.\nFor every {Mana} spent:\nGain {Value1} |Heat|"
+
+SkyFlight:
+  Name: Sky Flight
+  Description: "Gain {Value1} |Graze|.\nGain {Block} |Block|"
+
+Salvo:
+  Name: Salvo
+  Description: "For every card played this turn, deal {Damage} damage to a random enemy."
+
+MegaFlare:
+  Name: Explosion Sign "Mega Flare"
+  Description: "Deal {Damage} damage to each enemy 4 times\n|When Retained|: Decrease {SelfName} damage by {Value1} this combat"
+
+NuclearFusion:
+  Name: Atomic Fire "Nuclear Fusion"
+  Description: "|Exile| a card from your hand.\nGain a |Nuclear Strike| with |Heat| gain equal to {Value1} times the cost of the card |Exiled|."
+
+NuclearStrike:
+  Name: Nuclear Strike
+  Description: "|Vent| for damage.\nGain {Value1} |Heat|"
+
+Initialize:
+  Name: Initialize
+  Description: "For every {Mana} spent:\nGain {Value1} |Heat|"
+
+SunlightReverie:
+  Name: Sunlight Reverie
+  Description: "Gain {Block} |Block|\n\
+    If you have 10 or more |Heat|, gain {Mana}"
+
+RecklessGamble:
+  Name: Reckless Gamble
+  Description: "Draw {Value1} cards.\n\
+    |Exile| a random card in your hand."
+
+PlasmaBurst:
+  Name: Plasma Burst
+  Description: "Add 2 |Flames| to your hand.\n|Exile| a random card in your discard."
+  UpgradedDescription: "Add 2 |Rainbows| to your hand.\n|Exile| a random card in your discard."
+
+NuclearDive:
+  Name: Uncontainable Nuclear Reaction Dive
+  Description: "Double your |Heat|.\n\
+    Take 1 damage for every 10 |Heat| you have\n\
+    |Vent| for damage"
+
+DarkMatter:
+  Name: Dark Matter
+  Description: "|On Draw|: |Retain| this turn."
+
+StarBreak:
+  Name: Star Break
+  Description: "Deal {Damage} damage\n|On Draw|: Add a |Dark Matter| to your discard pile."
+
+CloakStar:
+  Name: Cloak of Stars
+  Description: "Gain {Block} block\nAdd two |Dark Matter| to your discard pile."
+
+Unwinding:
+  Name: Unwinding
+  Description: "Return all |Dark Matter| from your discard pile to your draw pile.\nFor each moved, deal {Damage} damage to each enemy"
+
+VacuumSlash:
+  Name: Vacuum Slash
+  Description: "Discard all |Dark Matter| from your hand.\nIf you discarded any cards this way, deal {Damage} damage to all enemies"
+
+AbyssNova: 
+  Name: Abyss Nova
+  Description: "Deal {Damage} damage. For each Dark Matter on the |battlefield|, {SelfName} deals {Value1} more damage."
+
+SubterraneanSun: 
+  Name: Subterranean Sun
+  Description: "Add |Dark Matter| to your hand until it is full. Add an equal amount to your draw pile and discard pile."
+
+NightFalls: 
+  Name: Night Falls
+  Description: "Apply {Value1} |Weak| to all enemies. |Retain| {Value2} random cards in your hand this turn"
+
+BlackHole: 
+  Name: Black Hole
+  Description: "For every |Dark Matter| in hand, gain {Value1} |Barrier|."
+
+GravityWell:
+  Name: Gravity Well
+  Description: "At the start of your turn, Gain {Value1} Barrier and add 1 |DarkMatter| to your discard pile."
+
+PlanetaryOrbit:
+  Name: Planetary Orbit
+  Description: "Transpose |Dark Matter| between your draw and discard piles.\nEach moved to your discard deals {Damage} damage to all enemies, and each moved to your draw blocks for {Block}."
+
+Stasis:
+  Name: Stasis
+  Description: "Retain any number of cards in your hand this turn."
+
+EntropicStar:
+  Name: Entropic Star
+  Description: "For each |Dark Matter| on the battlefield, add a |Dark Matter| to your discard pile.\nGain 2 |Firepower|"
+
+EscapeVelocity:
+  Name: Escape Velocity
+  Description: "Discard all |Dark Matter| in your hand, and draw that many cards."
+
+MassDriver:
+  Name: Mass Driver
+  Description: "When you play a |Dark Matter|, deal {Value1} damage to all enemies."
+
+PointDevice:
+  Name: Point Device
+  Description: "For the next {Value1} turns, |Dark Matter| costs nothing, doesn't exile and draws a card when played."
+
+SuperGiant:
+  Name: Super Giant
+  Description: "Deal {Damage} damage.\nFor each |Dark Matter| in your hand, reduce the cost of {SelfName} by {Mana}"

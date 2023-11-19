@@ -1,0 +1,7 @@
+ControlRod:
+  Name: Control Rod
+  Description: "Whenever you play a card, gain 1 energy."
+
+BlackSun:
+  Name: Black Sun
+  Description: "On the first Dark Matter you play each turn, gain {Mana}."
