@@ -1,10 +1,10 @@
 PowerCycle:
   Name: Power Cycle
-  Description: "|Vent| for damage and add 10.\nGain {Value1} |Heat|"
+  Description: "Gain 10 |Heat|.\n|Vent| for damage.\nGain {Value1} |Heat|."
 
 BlastBurn:
   Name: Blast Burn
-  Description: "|Vent| for damage.\nIf you have 5 or more |Heat|, apply {Value1} Weak and Vulnerable"
+  Description: "|Vent| for damage.\nIf you have 5 or more |Heat|, apply {Value1} Weak and Vulnerable."
 
 FireWall:
   Name: Fire Wall
@@ -36,7 +36,7 @@ SkyFlight:
 
 Salvo:
   Name: Salvo
-  Description: "For every card played this turn, deal {Damage} damage to a random enemy."
+  Description: "For every card played before {SelfName} this turn, deal {Damage} damage to a random enemy."
 
 MegaFlare:
   Name: Explosion Sign "Mega Flare"

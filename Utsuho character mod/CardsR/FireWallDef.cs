@@ -59,7 +59,7 @@ namespace Utsuho_character_mod
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
                 Cost: new ManaGroup() { Red = 1, Any = 2 },
-                UpgradedCost: null,
+                UpgradedCost: new ManaGroup() { Red = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: 0,
                 UpgradedDamage: 0,
@@ -87,7 +87,7 @@ namespace Utsuho_character_mod
                 UpgradedUltimateCost: null,
 
                 Keywords: Keyword.Exile,
-                UpgradedKeywords: Keyword.Exile,
+                UpgradedKeywords: Keyword.Exile | Keyword.Accuracy,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,

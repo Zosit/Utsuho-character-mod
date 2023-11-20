@@ -334,6 +334,11 @@
 
 
     <ItemGroup>
+      <None Remove="DirResources\ChargingStatus.png" />
+      <None Remove="DirResources\EnergyStatus.png" />
+      <None Remove="DirResources\GravityWellStatus.png" />
+      <None Remove="DirResources\Utsuho.png" />
+      <None Remove="icon.png" />
       <None Remove="resources\CardsEn.yaml" />
       <None Remove="Resources\ChargingStatus.png" />
       <None Remove="Resources\ControlRod.png" />
@@ -341,6 +346,15 @@
       <None Remove="Resources\GravityWellStatus.png" />
       <None Remove="Resources\PlayerUnitEn.yaml" />
       <None Remove="Resources\StatusEffectsEn.yaml" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <EmbeddedResource Include="DirResources\ChargingStatus.png" />
+      <EmbeddedResource Include="DirResources\EnergyStatus.png" />
+      <EmbeddedResource Include="DirResources\GravityWellStatus.png" />
+      <EmbeddedResource Include="DirResources\Utsuho.png" />
+      <EmbeddedResource Include="icon.png" />
     </ItemGroup>
 
 
