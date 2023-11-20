@@ -63,8 +63,8 @@ namespace Utsuho_character_mod.CardsR
                 Cost: new ManaGroup() { Red = 1, Any = 2 },
                 UpgradedCost: new ManaGroup() { Red = 1, Any = 2 },
                 MoneyCost: null,
-                Damage: 7,
-                UpgradedDamage: 9,
+                Damage: 6,
+                UpgradedDamage: 8,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
@@ -116,7 +116,7 @@ namespace Utsuho_character_mod.CardsR
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 int num;
-                for (int i = 0; i < base.Battle._turnCardUsageHistory.Count; i = num + 1) 
+                for (int i = 0; i < (base.Battle._turnCardUsageHistory.Count + 1); i = num + 1) 
                 {
                     EnemyUnit target = Battle.EnemyGroup.Alives.Sample(GameRun.BattleRng);
                     if (target != null && target.IsAlive)

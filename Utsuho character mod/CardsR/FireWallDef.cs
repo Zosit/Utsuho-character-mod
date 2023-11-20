@@ -87,7 +87,7 @@ namespace Utsuho_character_mod
                 UpgradedUltimateCost: null,
 
                 Keywords: Keyword.Exile,
-                UpgradedKeywords: Keyword.Exile | Keyword.Accuracy,
+                UpgradedKeywords: Keyword.Exile | Keyword.Retain,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,

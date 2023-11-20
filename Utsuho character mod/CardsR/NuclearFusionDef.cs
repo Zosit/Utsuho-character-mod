@@ -72,7 +72,7 @@ namespace Utsuho_character_mod
                 Shield: null,
                 UpgradedShield: null,
                 Value1: 5,
-                UpgradedValue1: 5,
+                UpgradedValue1: 7,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -139,25 +139,6 @@ namespace Utsuho_character_mod
                 }
                 yield break;
             }
-            /*protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
-            {
-                yield return base.AttackAction(selector.SelectedEnemy);
-
-                if (!base.Battle.BattleShouldEnd)
-                {
-                    EnergyStatus statusEffect = base.Battle.Player.GetStatusEffect<EnergyStatus>();
-                    if (statusEffect != null)
-                    {
-                        yield return base.BuffAction<EnergyStatus>(-(statusEffect.Level) + base.Value1, 0, 0, 0, 0.2f);
-                    }
-                    else
-                    {
-                        yield return new ApplyStatusEffectAction<EnergyStatus>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
-                    }
-                    yield break;
-                }
-            }*/
-
         }
 
     }

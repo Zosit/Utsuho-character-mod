@@ -4,7 +4,8 @@ PowerCycle:
 
 BlastBurn:
   Name: Blast Burn
-  Description: "|Vent| for damage.\nIf you have 5 or more |Heat|, apply {Value1} Weak and Vulnerable."
+  Description: "|Vent| for damage.\nIf you had 10 or more |Heat|, apply {Value1} Weak and Vulnerable."
+  UpgradedDescription: "If you have 10 or more |Heat|, apply {Value1} Weak and Vulnerable.\n|Vent| for damage."
 
 FireWall:
   Name: Fire Wall
@@ -36,7 +37,7 @@ SkyFlight:
 
 Salvo:
   Name: Salvo
-  Description: "For every card played before {SelfName} this turn, deal {Damage} damage to a random enemy."
+  Description: "For every card played this turn, deal {Damage} damage to a random enemy."
 
 MegaFlare:
   Name: Explosion Sign "Mega Flare"
@@ -44,7 +45,7 @@ MegaFlare:
 
 NuclearFusion:
   Name: Atomic Fire "Nuclear Fusion"
-  Description: "|Exile| a card from your hand.\nGain a |Nuclear Strike| with |Heat| gain equal to {Value1} times the cost of the card |Exiled|."
+  Description: "|Exile| a card from your hand.\nGain a |Nuclear Strike| and gain |Heat| equal to {Value1} times the cost of the card |Exiled|."
 
 NuclearStrike:
   Name: Nuclear Strike
