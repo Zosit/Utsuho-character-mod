@@ -114,7 +114,7 @@ namespace Utsuho_character_mod
 
         public override ModelOption LoadModelOptions()
         {
-            return new ModelOption(ResourceLoader.LoadSpriteAsync("Utsuho_Sprite.png", directorySource, ppu: 565));
+            return new ModelOption(ResourceLoader.LoadSpriteAsync("Utsuho_Sprite.png", directorySource, ppu: 84));
         }
 
 

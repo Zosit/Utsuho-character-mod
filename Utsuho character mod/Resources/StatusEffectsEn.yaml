@@ -17,3 +17,11 @@ MassDriverStatus:
 PointDeviceStatus:
   Name: Point Device
   Description: "|Dark Matter| costs nothing, doesn't exile and draws a card when played."
+
+ResonanceStatus:
+  Name: Resonance
+  Description: "When you |Exile| a card, add a |Resonance| to your hand."
+
+ResonancePlusStatus:
+  Name: Resonance+
+  Description: "When you |Exile| a card, add a |Resonance+| to your hand."

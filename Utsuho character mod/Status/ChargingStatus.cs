@@ -41,7 +41,7 @@ namespace Utsuho_character_mod.Status
         public override StatusEffectConfig MakeConfig()
         {
             var statusEffectConfig = new StatusEffectConfig(
-                            Id: "EnergyStatus",
+                            Id: "",
                             Order: 10,
                             Type: StatusEffectType.Positive,
                             IsVerbose: false,

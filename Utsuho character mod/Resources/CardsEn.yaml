@@ -37,7 +37,7 @@ SkyFlight:
 
 Salvo:
   Name: Salvo
-  Description: "For every card played this turn, deal {Damage} damage to a random enemy."
+  Description: "For every card you've played this turn, deal {Damage} damage to a random enemy."
 
 MegaFlare:
   Name: Explosion Sign "Mega Flare"
@@ -86,7 +86,7 @@ StarBreak:
 
 CloakStar:
   Name: Cloak of Stars
-  Description: "Gain {Block} block\nAdd two |Dark Matter| to your discard pile."
+  Description: "Gain {Block} block.\nAdd two |Dark Matter| to your discard pile."
 
 Unwinding:
   Name: Unwinding
@@ -143,3 +143,16 @@ PointDevice:
 SuperGiant:
   Name: Super Giant
   Description: "Deal {Damage} damage.\nFor each |Dark Matter| in your hand, reduce the cost of {SelfName} by {Mana}"
+
+Coolant:
+  Name: Coolant
+  Description: "Gain {Value1} |Firepower| for every card in your |Exile|."
+  UpgradedDescription: "Gain {Value1} |Firepower| for every card in your |Exile|.\nGain an equal amount of |Temporary Firepower|."
+  
+Blueshift:
+  Name: Blueshift
+  Description: "Gain {Block} block.\nReturn {SelfName} to your hand."
+
+Resonance:
+  Name: Resonance
+  Description: "Deal {Damage} damage.\nFor the rest of combat, each {SelfName} deals {Value1} more damage.\nWhen you exile a card, add a {SelfName} to your hand."
