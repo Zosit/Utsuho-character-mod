@@ -1,6 +1,6 @@
 ControlRod:
   Name: Control Rod
-  Description: "Whenever you play a card, gain 1 energy."
+  Description: "Whenever you play a card, gain 1 |Heat|."
 
 BlackSun:
   Name: Black Sun

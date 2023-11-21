@@ -1,6 +1,6 @@
 PowerCycle:
   Name: Power Cycle
-  Description: "Gain 10 |Heat|.\n|Vent| for damage.\nGain {Value1} |Heat|."
+  Description: "Gain {Value1} |Heat|.\n|Vent| for damage.\nGain {Value2} |Heat|."
 
 BlastBurn:
   Name: Blast Burn
@@ -45,7 +45,7 @@ MegaFlare:
 
 NuclearFusion:
   Name: Atomic Fire "Nuclear Fusion"
-  Description: "|Exile| a card from your hand.\nGain a |Nuclear Strike| and gain |Heat| equal to {Value1} times the cost of the card |Exiled|."
+  Description: "|Exile| a card from your hand.\nGain |Heat| and add a |Nuclear Strike| with |Heat| equal to {Value1} times the cost of the card |Exiled|."
 
 NuclearStrike:
   Name: Nuclear Strike

@@ -58,8 +58,8 @@ namespace Utsuho_character_mod
                 TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1, Any = 2 },
-                UpgradedCost: new ManaGroup() { Red = 1, Any = 2 },
+                Cost: new ManaGroup() { Red = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Red = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: 0,
                 UpgradedDamage: 0,
@@ -113,15 +113,8 @@ namespace Utsuho_character_mod
             {
                 get
                 {
-                    HeatStatus statusEffect = base.Battle.Player.GetStatusEffect<HeatStatus>();
-                    if (statusEffect != null)
-                    {
-                        return statusEffect.Level;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                    int level = base.GetSeLevel<HeatStatus>();
+                    return level;
                 }
             }
 
@@ -130,26 +123,23 @@ namespace Utsuho_character_mod
 
                 if (!base.Battle.BattleShouldEnd)
                 {
-                    HeatStatus statusEffect = base.Battle.Player.GetStatusEffect<HeatStatus>();
-                    if (statusEffect != null)
+                    int level = base.GetSeLevel<HeatStatus>();
+                    bool canDebuff = false;
+                    if (selector.SelectedEnemy.IsAlive && (level >= 10))
                     {
-                        bool canDebuff = false;
-                        if (selector.SelectedEnemy.IsAlive && (statusEffect.Level >= 10))
-                        {
-                            canDebuff = true;
-                        }
-                        if (canDebuff && this.IsUpgraded)
-                        {
-                            yield return base.DebuffAction<Weak>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
-                            yield return base.DebuffAction<Vulnerable>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
-                        }
-                        yield return base.AttackAction(selector.SelectedEnemy);
-                        yield return base.BuffAction<HeatStatus>(-(statusEffect.Level) + base.Value1, 0, 0, 0, 0.2f);
-                        if (canDebuff && !this.IsUpgraded)
-                        {
-                            yield return base.DebuffAction<Weak>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
-                            yield return base.DebuffAction<Vulnerable>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
-                        }
+                        canDebuff = true;
+                    }
+                    if (canDebuff && this.IsUpgraded)
+                    {
+                        yield return base.DebuffAction<Weak>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
+                        yield return base.DebuffAction<Vulnerable>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
+                    }
+                    yield return base.AttackAction(selector.SelectedEnemy);
+                    yield return base.BuffAction<HeatStatus>(-(level) + base.Value1, 0, 0, 0, 0.2f);
+                    if (canDebuff && !this.IsUpgraded)
+                    {
+                        yield return base.DebuffAction<Weak>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
+                        yield return base.DebuffAction<Vulnerable>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
                     }
                     else
                     {

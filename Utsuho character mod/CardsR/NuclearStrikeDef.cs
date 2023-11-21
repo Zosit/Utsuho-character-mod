@@ -62,7 +62,7 @@ namespace Utsuho_character_mod
                 UpgradedCost: new ManaGroup() { Red = 1 },
                 MoneyCost: null,
                 Damage: 0,
-                UpgradedDamage: null,
+                UpgradedDamage: 0,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
@@ -113,15 +113,8 @@ namespace Utsuho_character_mod
             {
                 get
                 {
-                    HeatStatus statusEffect = base.Battle.Player.GetStatusEffect<HeatStatus>();
-                    if (statusEffect != null)
-                    {
-                        return statusEffect.Level;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                    int level = base.GetSeLevel<HeatStatus>();
+                    return level;
                 }
             }
 
@@ -131,15 +124,8 @@ namespace Utsuho_character_mod
 
                 if (!base.Battle.BattleShouldEnd)
                 {
-                    HeatStatus statusEffect = base.Battle.Player.GetStatusEffect<HeatStatus>();
-                    if (statusEffect != null)
-                    {
-                        yield return base.BuffAction<HeatStatus>(-(statusEffect.Level) + base.Value1, 0, 0, 0, 0.2f);
-                    }
-                    else
-                    {
-                        yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
-                    }
+                    int level = base.GetSeLevel<HeatStatus>();
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1) - level, null, null, null, 0f, true);
                     yield break;
                 }
             }

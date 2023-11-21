@@ -61,16 +61,16 @@ namespace Utsuho_character_mod
                 Cost: new ManaGroup() { Red = 2 },
                 UpgradedCost: null,
                 MoneyCost: null,
-                Damage: 10,
+                Damage: 0,
                 UpgradedDamage: null,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 9,
-                UpgradedValue1: 12,
-                Value2: null,
-                UpgradedValue2: null,
+                Value1: 10,
+                UpgradedValue1: 10,
+                Value2: 9,
+                UpgradedValue2: 12,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -127,19 +127,13 @@ namespace Utsuho_character_mod
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
                 yield return base.AttackAction(selector.SelectedEnemy);
 
                 if (!base.Battle.BattleShouldEnd)
                 {
-                    HeatStatus statusEffect = base.Battle.Player.GetStatusEffect<HeatStatus>();
-                    if (statusEffect != null)
-                    {
-                        yield return base.BuffAction<HeatStatus>(-(statusEffect.Level) + base.Value1, 0, 0, 0, 0.2f);
-                    }
-                    else
-                    {
-                        yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
-                    }
+                    int level = base.GetSeLevel<HeatStatus>();
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value2) - level, null, null, null, 0f, true);
                     yield break;
                 }
             }

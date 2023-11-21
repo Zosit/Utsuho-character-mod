@@ -84,7 +84,7 @@ namespace Utsuho_character_mod
             MaxHp: 80,
             InitialMana: new LBoL.Base.ManaGroup() { Red = 2, Black = 2 },
             InitialMoney: 3,
-            InitialPower: 30,
+            InitialPower: 0,
             //temp
             UltimateSkillA: reimuConfig.UltimateSkillA,
             UltimateSkillB: reimuConfig.UltimateSkillA,

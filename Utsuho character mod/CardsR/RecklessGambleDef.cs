@@ -19,6 +19,9 @@ using LBoL.Core.Battle.Interactions;
 using System.Linq;
 using LBoL.Core.Units;
 using LBoL.EntityLib.StatusEffects.Neutral;
+using LBoL.Presentation;
+using System.Collections;
+using UnityEngine;
 
 namespace Utsuho_character_mod
 {
@@ -114,10 +117,18 @@ namespace Utsuho_character_mod
         [EntityLogic(typeof(RecklessGambleDef))]
         public sealed class RecklessGamble : Card
         {
+            IEnumerator ResetTrigger()
+            {
+                yield return new WaitForSecondsRealtime(1.0f);
+                NotifyChanged();
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield return new DrawManyCardAction(Value1);
-                yield return new ExileCardAction(Battle.HandZone.Sample(base.GameRun.BattleRng));
+                Card card = Battle.HandZone.Sample(base.GameRun.BattleRng);
+                card.NotifyActivating();
+                GameMaster.Instance.StartCoroutine(ResetTrigger());
+                yield return new ExileCardAction(card);
 
                 yield break;
             }           

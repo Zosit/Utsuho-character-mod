@@ -59,7 +59,7 @@ namespace Utsuho_character_mod
                 IsUpgradable: true,
                 Rarity: Rarity.Rare,
                 Type: CardType.Skill,
-                TargetType: TargetType.SingleEnemy,
+                TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
                 Cost: new ManaGroup() { Red = 1, Any = 1 },
@@ -133,7 +133,6 @@ namespace Utsuho_character_mod
                         NuclearStrike nuclearStrike = Library.CreateCard<NuclearStrike>(this.IsUpgraded);
                         nuclearStrike.DeltaValue1 = cardValue * Value1;
                         yield return new AddCardsToHandAction(nuclearStrike);
-                        //yield return AttackAction(selector);
                         yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, cardValue * (new int?(base.Value1)), null, null, null, 0f, true);
                     }
                 }

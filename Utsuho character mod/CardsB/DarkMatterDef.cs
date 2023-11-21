@@ -108,12 +108,18 @@ namespace Utsuho_character_mod.CardsB
         [EntityLogic(typeof(DarkMatterDef))]
         public sealed class DarkMatter : Card
         {
+            public override bool Triggered
+            {
+                get
+                {
+                    return this.IsTempRetain;
+                }
+            }
             public override IEnumerable<BattleAction> OnDraw()
             {
-                IsTempRetain = true;
+                this.IsTempRetain = true;
                 yield break;
             }
-
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield break;

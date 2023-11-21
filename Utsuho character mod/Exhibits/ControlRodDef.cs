@@ -101,7 +101,6 @@ namespace Utsuho_character_mod.Exhibits
                 NotifyActivating();
                 triggered = true;
                 GameMaster.Instance.StartCoroutine(ResetTrigger());
-                HeatStatus statusEffect = base.Battle.Player.GetStatusEffect<HeatStatus>();
                 yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(Value1), null, null, null, 0f, true);
             }
 

@@ -113,30 +113,16 @@ namespace Utsuho_character_mod
             {
                 get
                 {
-                    HeatStatus statusEffect = base.Battle.Player.GetStatusEffect<HeatStatus>();
-                    if (statusEffect != null)
-                    {
-                        return statusEffect.Level;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                    int level = base.GetSeLevel<HeatStatus>();
+                    return level;
                 }
             }
             public override int AdditionalBlock
             {
                 get
                 {
-                    HeatStatus statusEffect = base.Battle.Player.GetStatusEffect<HeatStatus>();
-                    if (statusEffect != null)
-                    {
-                        return statusEffect.Level;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                    int level = base.GetSeLevel<HeatStatus>();
+                    return level;
                 }
             }
 
@@ -147,11 +133,8 @@ namespace Utsuho_character_mod
                     yield return base.AttackAction(selector);
                     yield return base.DefenseAction();
 
-                    HeatStatus statusEffect = base.Battle.Player.GetStatusEffect<HeatStatus>();
-                    if (statusEffect != null)
-                    {
-                        yield return base.BuffAction<HeatStatus>(-(statusEffect.Level), 0, 0, 0, 0.2f);
-                    }
+                    int level = base.GetSeLevel<HeatStatus>();
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level), null, null, null, 0f, true);
 
                     yield break;
                 }

@@ -16,6 +16,7 @@ using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using LBoL.Core.Randoms;
 using LBoL.Core.Battle.Interactions;
+using System.Linq;
 
 namespace Utsuho_character_mod
 {
@@ -88,8 +89,8 @@ namespace Utsuho_character_mod
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.None,
-                UpgradedKeywords: Keyword.None,
+                Keywords: Keyword.Exile,
+                UpgradedKeywords: Keyword.Exile,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
@@ -112,9 +113,22 @@ namespace Utsuho_character_mod
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                Card Attack = base.Battle.RollCard(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.Valid, CardTypeWeightTable.CanBeLoot), (CardConfig config) => config.Type == CardType.Attack);
-                Card Defense = base.Battle.RollCard(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.Valid, CardTypeWeightTable.CanBeLoot), (CardConfig config) => config.Type == CardType.Defense);
-                if ((Attack != null) && (Defense != null))
+                Card Attack = base.Battle.RollCard(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.Valid, CardTypeWeightTable.OnlyAttack), delegate (CardConfig config)
+                {
+                    if (config.Colors.Count > 0)
+                    {
+                        return config.Colors.All((ManaColor color) => color == ManaColor.Red);
+                    }
+                    return false;
+                });
+                Card Defense = base.Battle.RollCard(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.Valid, CardTypeWeightTable.OnlyDefense), delegate (CardConfig config)
+                {
+                    if (config.Colors.Count > 0)
+                    {
+                        return config.Colors.All((ManaColor color) => color == ManaColor.Red);
+                    }
+                    return false;
+                }); if ((Attack != null) && (Defense != null))
                 {
 
                     Attack.SetBaseCost(ManaGroup.Anys(Attack.ConfigCost.Amount));
