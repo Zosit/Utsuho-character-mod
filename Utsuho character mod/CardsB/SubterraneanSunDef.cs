@@ -59,7 +59,7 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 3, Any = 2 },
+                Cost: new ManaGroup() { Black = 3 },
                 UpgradedCost: new ManaGroup() { Black = 1, Any = 2 },
                 MoneyCost: null,
                 Damage: null,

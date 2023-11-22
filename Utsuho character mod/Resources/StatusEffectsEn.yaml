@@ -8,7 +8,7 @@ ChargingStatus:
 
 GravityWellStatus:
   Name: Gravity Well
-  Description: At the start of {PlayerName}'s turn, Gain {Level} Barrier and add 1 |Dark Matter| to your discard pile.
+  Description: At the end of {PlayerName}'s turn, Gain {Level} Barrier and add 1 |Dark Matter| to your discard pile.
 
 MassDriverStatus:
   Name: Mass Driver
@@ -25,3 +25,7 @@ ResonanceStatus:
 ResonancePlusStatus:
   Name: Resonance+
   Description: "When you |Exile| a card, add a |Resonance+| to your hand."
+
+WasteNotStatus:
+  Name: Waste Not
+  Description: "When you exile a card, gain |Heat|"

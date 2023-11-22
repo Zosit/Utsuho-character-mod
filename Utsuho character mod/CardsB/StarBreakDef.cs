@@ -62,8 +62,8 @@ namespace Utsuho_character_mod.CardsR
                 Cost: new ManaGroup() { Black = 2 },
                 UpgradedCost: new ManaGroup() { Black = 2 },
                 MoneyCost: null,
-                Damage: 15,
-                UpgradedDamage: 20,
+                Damage: 17,
+                UpgradedDamage: 22,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
@@ -112,7 +112,7 @@ namespace Utsuho_character_mod.CardsR
         {
             public override IEnumerable<BattleAction> OnDraw()
             {
-                yield return new AddCardsToDiscardAction(Library.CreateCard("DarkMatter"));
+                yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"));
                 yield break;
             }
 

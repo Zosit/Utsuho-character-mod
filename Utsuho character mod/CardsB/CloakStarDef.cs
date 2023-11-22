@@ -64,8 +64,8 @@ namespace Utsuho_character_mod.CardsR
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
-                Block: 15,
-                UpgradedBlock: 20,
+                Block: 17,
+                UpgradedBlock: 22,
                 Shield: null,
                 UpgradedShield: null,
                 Value1: null,
@@ -114,7 +114,7 @@ namespace Utsuho_character_mod.CardsR
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return new AddCardsToDiscardAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
+                yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
                 yield return DefenseAction();
                 yield break;
             }

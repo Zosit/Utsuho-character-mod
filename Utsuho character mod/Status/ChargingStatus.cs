@@ -57,7 +57,7 @@ namespace Utsuho_character_mod.Status
                             LimitStackType: StackType.Keep,
                             ShowPlusByLimit: false,
                             Keywords: Keyword.None,
-                            RelativeEffects: new List<string>() { },
+                            RelativeEffects: new List<string>() { "HeatStatus" },
                             VFX: "Default",
                             VFXloop: "Default",
                             SFX: "Default"
@@ -79,8 +79,8 @@ namespace Utsuho_character_mod.Status
                 yield break;
             }
             NotifyActivating();
-            ChargingStatus statusEffect = Battle.Player.GetStatusEffect<ChargingStatus>();
-            yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, statusEffect.Level, null, null, null, 0f, true);
+            int level = base.GetSeLevel<ChargingStatus>();
+            yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, level, null, null, null, 0f, true);
             yield break;
         }
     }

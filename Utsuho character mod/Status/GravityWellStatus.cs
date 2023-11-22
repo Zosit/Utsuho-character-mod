@@ -72,7 +72,7 @@ namespace Utsuho_character_mod.Status
     {
         protected override void OnAdded(Unit unit)
         {
-            ReactOwnerEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
+            ReactOwnerEvent(Owner.TurnEnded, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
         }
         private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
         {

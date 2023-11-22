@@ -57,7 +57,7 @@ namespace Utsuho_character_mod.CardsR
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Common,
+                Rarity: Rarity.Uncommon,
                 Type: CardType.Skill,
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black },

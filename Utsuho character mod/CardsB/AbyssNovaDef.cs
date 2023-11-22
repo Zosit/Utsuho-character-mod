@@ -120,14 +120,17 @@ namespace Utsuho_character_mod.CardsR
             {
                 get
                 {
-                    if (GameRun != null)
+                    if (base.Battle == null)
+                    {
+                        return 0;
+                    }
+                    else
                     {
                         List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => card != this).ToList<Card>();
                         int total = cards.FindAll((Card card) => card.BaseName == "Dark Matter").Count;
 
                         return base.Value1 * total;
                     }
-                    return 0;
                 }
             }
 

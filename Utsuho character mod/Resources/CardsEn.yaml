@@ -25,7 +25,7 @@ Aggregate:
 
 Fission:
   Name: Fission
-  Description: "Add a random Attack and Defense card to your hand with generic mana costs.\nGain {Value1} |Heat|."
+  Description: "Add a random |Red| Attack and Defense card to your hand with generic mana costs.\nGain {Value1} |Heat|."
 
 EverythingBurns:
   Name: Everything Burns
@@ -72,9 +72,11 @@ PlasmaBurst:
 
 NuclearDive:
   Name: Uncontainable Nuclear Reaction Dive
-  Description: "Double your |Heat|.\n\
-    Take 1 damage for every 10 |Heat| you have\n\
-    |Vent| for damage"
+  Description: "Double your |Heat|.\nTake 1 damage for every 10 |Heat| you have\n|Vent| for damage"
+
+WasteNot:
+  Name: Waste Not
+  Description: "When you |Exile| a card, gain {Value1} |Heat|"
 
 DarkMatter:
   Name: Dark Matter
@@ -82,11 +84,15 @@ DarkMatter:
 
 StarBreak:
   Name: Star Break
-  Description: "Deal {Damage} damage\n|On Draw|: Add a |Dark Matter| to your discard pile."
+  Description: "Deal {Damage} damage\n|On Draw|: Add a |Dark Matter| to your draw pile."
 
 CloakStar:
   Name: Cloak of Stars
-  Description: "Gain {Block} block.\nAdd two |Dark Matter| to your discard pile."
+  Description: "Gain {Block} block.\nAdd two |Dark Matter| to your draw pile."
+
+SpaceScanner:
+  Name: Space Scanner
+  Description: "Add 2 |Dark Matter| to your deck.\n|Scry| {Scry}. Draw 1 card"
 
 Unwinding:
   Name: Unwinding
@@ -114,7 +120,7 @@ BlackHole:
 
 GravityWell:
   Name: Gravity Well
-  Description: "At the start of your turn, Gain {Value1} Barrier and add 1 |DarkMatter| to your discard pile."
+  Description: "At the end of your turn, Gain {Value1} Barrier and add 1 |DarkMatter| to your discard pile."
 
 PlanetaryOrbit:
   Name: Planetary Orbit
@@ -144,10 +150,13 @@ SuperGiant:
   Name: Super Giant
   Description: "Deal {Damage} damage.\nFor each |Dark Matter| in your hand, reduce the cost of {SelfName} by {Mana}"
 
+WhiteHole:
+  Name: White Hole
+  Description: "|On Retain:| Gain {Value1} block, and add a |Dark Matter| to your discard pile."
+
 Coolant:
   Name: Coolant
   Description: "Gain {Value1} |Firepower| for every card in your |Exile|."
-  UpgradedDescription: "Gain {Value1} |Firepower| for every card in your |Exile|.\nGain an equal amount of |Temporary Firepower|."
   
 Blueshift:
   Name: Blueshift

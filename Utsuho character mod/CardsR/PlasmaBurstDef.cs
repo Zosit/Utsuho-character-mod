@@ -123,9 +123,12 @@ namespace Utsuho_character_mod
                 {
                     yield return new AddCardsToHandAction(Library.CreateCards<PManaCard>(Value1, false));
                 }
-                Card card = Battle.DiscardZone.Sample(base.GameRun.BattleRng);
-                if(card != null)
-                    yield return new ExileCardAction(card);
+                if (Battle.DiscardZone.NotEmpty())
+                {
+                    Card card = Battle.DiscardZone.Sample(base.GameRun.BattleRng);
+                    if (card != null)
+                        yield return new ExileCardAction(card);
+                }
 
                 yield break;
             }           

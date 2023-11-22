@@ -62,8 +62,8 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Blue },
                 IsXCost: false,
-                Cost: new ManaGroup() { Blue = 1, Any = 2 },
-                UpgradedCost: new ManaGroup() { Blue = 1, Any = 2 },
+                Cost: new ManaGroup() { Blue = 1, Any = 3 },
+                UpgradedCost: new ManaGroup() { Blue = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -97,7 +97,7 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedRelativeKeyword: Keyword.None,
 
                 RelativeEffects: new List<string>() { },
-                UpgradedRelativeEffects: new List<string>() { "TempFirepower" },
+                UpgradedRelativeEffects: new List<string>() { /*"TempFirepower"*/ },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -116,10 +116,10 @@ namespace Utsuho_character_mod.CardsR
             {
                 int total = base.Battle.ExileZone.Count;
                 yield return BuffAction<Firepower>(base.Value1 * total, 0, 0, 0, 0.2f);
-                if (this.IsUpgraded)
+                /*if (this.IsUpgraded)
                 {
                     yield return BuffAction<TempFirepower>(base.Value1 * total, 0, 0, 0, 0.2f);
-                }
+                }*/
                 yield break;
             }
         }
