@@ -117,6 +117,26 @@ namespace Utsuho_character_mod.CardsR
                 {
                     yield return battleAction;
                 }
+                /*int num = base.Battle.MaxHand - base.Battle.HandZone.Count;
+                IReadOnlyList<Card> drawZoneIndexOrder = base.Battle.DrawZoneIndexOrder;
+                List<Card> cards = base.Battle.DrawZone.Where((Card card) => card != this).ToList<Card>();
+                List<Card> darkMatter = drawZoneIndexOrder.FindAll((Card card) => card.BaseName == "Dark Matter");
+                int totalDM = darkMatter.Count;
+
+                if (num > Value2)
+                {
+                    num = Value2;
+                }
+                if (num > totalDM)
+                {
+                    num = totalDM;
+                }
+                for (int i = 0; i < num; i++)
+                {
+                    Battle.MoveCard(darkMatter[i], CardZone.Hand);
+                }*/
+
+
                 Card card;
                 Card card2;
                 if (Battle.HandZone.Count > 0)

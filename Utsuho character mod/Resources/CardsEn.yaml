@@ -7,9 +7,9 @@ BlastBurn:
   Description: "|Vent| for damage.\nIf you had 10 or more |Heat|, apply {Value1} Weak and Vulnerable."
   UpgradedDescription: "If you have 10 or more |Heat|, apply {Value1} Weak and Vulnerable.\n|Vent| for damage."
 
-FireWall:
-  Name: Fire Wall
-  Description: "|Vent| for damage and |Block|."
+PlasmaBurn:
+  Name: Plasma Burn
+  Description: "Gain {Value1} |Heat|.\nIf you have less than {Value2} heat, Vent for Damage."
 
 StartReactor:
   Name: Start Reactor
@@ -17,7 +17,7 @@ StartReactor:
 
 MaxPower:
   Name: Max Power
-  Description: "Exile your hand.\nSet mana to {Value1} rainbow, and draw {Value1} cards.\n|Time Limit| {Mana}."
+  Description: "Exile your hand.\nSet mana to {Value1} rainbow, and draw {Value1} cards.\nGain {Value1} |Temporary Firepower||.\nTime Limit| {Mana}."
 
 Aggregate:
   Name: Aggregate
@@ -25,7 +25,7 @@ Aggregate:
 
 Fission:
   Name: Fission
-  Description: "Add a random |Red| Attack and Defense card to your hand with generic mana costs.\nGain {Value1} |Heat|."
+  Description: "Add a random |Red| Attack and Defense card to your hand. Mana of any color can be spent to pay their mana costs.\nGain {Value1} |Heat|."
 
 EverythingBurns:
   Name: Everything Burns
@@ -33,7 +33,7 @@ EverythingBurns:
 
 SkyFlight:
   Name: Sky Flight
-  Description: "Gain {Value1} |Graze|.\nGain {Block} |Block|"
+  Description: "Gain {Value1} |Graze|.\nDraw {Value2} cards at the start of next turn."
 
 Salvo:
   Name: Salvo
@@ -55,18 +55,18 @@ Initialize:
   Name: Initialize
   Description: "For every {Mana} spent:\nGain {Value1} |Heat|"
 
-SunlightReverie:
-  Name: Sunlight Reverie
+FireWall:
+  Name: Fire Wall
   Description: "Gain {Block} |Block|\n\
-    If you have 10 or more |Heat|, gain {Mana}"
+    If you have {Value1} or more |Heat|, gain {Mana}"
 
 RecklessGamble:
   Name: Reckless Gamble
   Description: "Draw {Value1} cards.\n\
     |Exile| a random card in your hand."
 
-PlasmaBurst:
-  Name: Plasma Burst
+SunlightReverie:
+  Name: Sunlight Reverie
   Description: "Add 2 |Flames| to your hand.\n|Exile| a random card in your discard."
   UpgradedDescription: "Add 2 |Rainbows| to your hand.\n|Exile| a random card in your discard."
 
@@ -80,11 +80,11 @@ WasteNot:
 
 DarkMatter:
   Name: Dark Matter
-  Description: "|On Draw|: |Retain| this turn."
+  Description: "|When Drawn|: |Retain| this turn."
 
 StarBreak:
   Name: Star Break
-  Description: "Deal {Damage} damage\n|On Draw|: Add a |Dark Matter| to your draw pile."
+  Description: "Deal {Damage} damage\n|When Drawn|: Add a |Dark Matter| to your draw pile."
 
 CloakStar:
   Name: Cloak of Stars
@@ -98,8 +98,8 @@ Unwinding:
   Name: Unwinding
   Description: "Return all |Dark Matter| from your discard pile to your draw pile.\nFor each moved, deal {Damage} damage to each enemy"
 
-VacuumSlash:
-  Name: Vacuum Slash
+VacuumWave:
+  Name: Vacuum Wave
   Description: "Discard all |Dark Matter| from your hand.\nIf you discarded any cards this way, deal {Damage} damage to all enemies"
 
 AbyssNova: 

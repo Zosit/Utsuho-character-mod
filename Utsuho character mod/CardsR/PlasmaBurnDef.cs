@@ -17,11 +17,11 @@ using Utsuho_character_mod.Status;
 
 namespace Utsuho_character_mod
 {
-    public sealed class SunlightReverieDef : CardTemplate
+    public sealed class PlasmaBurnDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(SunlightReverie);
+            return nameof(PlasmaBurn);
         }
 
         public override CardImages LoadCardImages()
@@ -54,25 +54,25 @@ namespace Utsuho_character_mod
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Common,
-                Type: CardType.Defense,
-                TargetType: TargetType.Nobody,
+                Type: CardType.Attack,
+                TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1, Any = 1 },
+                Cost: new ManaGroup() { Red = 1, Any = 2 },
                 UpgradedCost: new ManaGroup() { Red = 1, Any = 1 },
                 MoneyCost: null,
-                Damage: null,
-                UpgradedDamage: null,
-                Block: 12,
-                UpgradedBlock: 17,
+                Damage: 0,
+                UpgradedDamage: 0,
+                Block: null,
+                UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 10,
-                UpgradedValue1: 10,
-                Value2: null,
-                UpgradedValue2: null,
-                Mana: new ManaGroup() { Red = 1 },
-                UpgradedMana: new ManaGroup() { Red = 1 },
+                Value1: 18,
+                UpgradedValue1: 24,
+                Value2: 40,
+                UpgradedValue2: 40,
+                Mana: null,
+                UpgradedMana: null,
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -94,7 +94,6 @@ namespace Utsuho_character_mod
 
                 RelativeEffects: new List<string>() { "HeatStatus" },
                 UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
-                //RelativeCards: new List<string>() { "AyaNews" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -106,8 +105,8 @@ namespace Utsuho_character_mod
             return cardConfig;            
         }
 
-        [EntityLogic(typeof(SunlightReverieDef))]
-        public sealed class SunlightReverie : Card
+        [EntityLogic(typeof(PlasmaBurnDef))]
+        public sealed class PlasmaBurn : Card
         {
             public override int AdditionalDamage
             {
@@ -120,14 +119,22 @@ namespace Utsuho_character_mod
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return base.DefenseAction();
-                int level = base.GetSeLevel<HeatStatus>();
-                if (level >= 10)
+                if (!base.Battle.BattleShouldEnd)
                 {
-                    yield return new GainManaAction(Mana);
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, Value1, null, null, null, 0f, true);
+
+                    int level = base.GetSeLevel<HeatStatus>();
+                    if (level < Value2)
+                    {
+                        yield return base.AttackAction(selector);
+                        yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level), null, null, null, 0f, true);
+                    }
+
+                    yield break;
                 }
-                yield break;
             }
+
         }
+
     }
 }

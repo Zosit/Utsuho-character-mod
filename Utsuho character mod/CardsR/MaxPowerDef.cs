@@ -100,7 +100,6 @@ namespace Utsuho_character_mod
 
                 RelativeEffects: new List<string>() {  },
                 UpgradedRelativeEffects: new List<string>() {  },
-                //RelativeCards: new List<string>() { "AyaNews" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -127,7 +126,8 @@ namespace Utsuho_character_mod
                 }
                 yield return new DrawManyCardAction(Value1);
                 yield return new LoseManaAction(base.Battle.BattleMana);
-                yield return new GainManaAction(new ManaGroup() { Philosophy = Value2 });
+                yield return new GainManaAction(new ManaGroup() { Philosophy = Value1 });
+                yield return new ApplyStatusEffectAction<TempFirepower>(Battle.Player, base.Value1, null, null, null, 0.2f);
                 yield return new ApplyStatusEffectAction<TimeIsLimited>(Battle.Player, 1, null, null, null, 0f, true);
                 yield break;
             }           

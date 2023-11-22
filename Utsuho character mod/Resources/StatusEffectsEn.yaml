@@ -1,6 +1,6 @@
 HeatStatus:
   Name: Heat
-  Description: Build up to use elsewhere.
+  Description: "The keyword |Vent| spends all of this at once for an effect."
 
 ChargingStatus:
   Name: Charging

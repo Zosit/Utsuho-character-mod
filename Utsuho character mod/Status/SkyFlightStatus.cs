@@ -19,11 +19,11 @@ using LBoL.Core.Randoms;
 
 namespace Utsuho_character_mod.Status
 {
-    public sealed class GravityWellEffect : StatusEffectTemplate
+    public sealed class SkyFlightEffect : StatusEffectTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(GravityWellStatus);
+            return nameof(SkyFlightStatus);
         }
 
         [DontOverwrite]
@@ -67,23 +67,22 @@ namespace Utsuho_character_mod.Status
             return statusEffectConfig;
         }
     }
-    [EntityLogic(typeof(GravityWellEffect))]
-    public sealed class GravityWellStatus : StatusEffect
-    {
+    [EntityLogic(typeof(SkyFlightEffect))]
+    public sealed class SkyFlightStatus : StatusEffect
+    { 
         protected override void OnAdded(Unit unit)
         {
-            ReactOwnerEvent(Owner.TurnEnded, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnEnded));
+            ReactOwnerEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
         }
-        private IEnumerable<BattleAction> OnOwnerTurnEnded(UnitEventArgs args)
+        private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
         {
             if (Battle.BattleShouldEnd)
             {
                 yield break;
             }
             NotifyActivating();
-            //GravityWellStatus statusEffect = Battle.Player.GetStatusEffect<GravityWellStatus>();
-            yield return new CastBlockShieldAction(base.Owner, base.Owner, 0, base.Level, BlockShieldType.Direct, false);
-            yield return new AddCardsToDiscardAction(Library.CreateCard("DarkMatter"));
+            yield return new DrawManyCardAction(base.Level);
+            yield return new RemoveStatusEffectAction(this);
             yield break;
         }
     }

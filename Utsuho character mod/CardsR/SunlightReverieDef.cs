@@ -23,11 +23,11 @@ using LBoL.EntityLib.Cards.Neutral.NoColor;
 
 namespace Utsuho_character_mod
 {
-    public sealed class PlasmaBurstDef : CardTemplate
+    public sealed class SunlightReverieDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(PlasmaBurst);
+            return nameof(SunlightReverie);
         }
 
         public override CardImages LoadCardImages()
@@ -64,8 +64,8 @@ namespace Utsuho_character_mod
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1 },
-                UpgradedCost: new ManaGroup() { Red = 1 },
+                Cost: new ManaGroup() { Red = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Red = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -111,8 +111,8 @@ namespace Utsuho_character_mod
             return cardConfig;            
         }
 
-        [EntityLogic(typeof(PlasmaBurstDef))]
-        public sealed class PlasmaBurst : Card
+        [EntityLogic(typeof(SunlightReverieDef))]
+        public sealed class SunlightReverie : Card
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {

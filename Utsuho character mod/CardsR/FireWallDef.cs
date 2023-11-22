@@ -54,25 +54,25 @@ namespace Utsuho_character_mod
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Uncommon,
-                Type: CardType.Attack,
-                TargetType: TargetType.SingleEnemy,
+                Type: CardType.Defense,
+                TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
                 Cost: new ManaGroup() { Red = 1, Any = 2 },
-                UpgradedCost: new ManaGroup() { Red = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Red = 1, Any = 2 },
                 MoneyCost: null,
-                Damage: 0,
-                UpgradedDamage: 0,
-                Block: 0,
-                UpgradedBlock: 0,
+                Damage: null,
+                UpgradedDamage: null,
+                Block: 18,
+                UpgradedBlock: 24,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: null,
-                UpgradedValue1: null,
+                Value1: 20,
+                UpgradedValue1: 20,
                 Value2: null,
                 UpgradedValue2: null,
-                Mana: null,
-                UpgradedMana: null,
+                Mana: new ManaGroup() { Red = 1 },
+                UpgradedMana: new ManaGroup() { Red = 1 },
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -86,8 +86,8 @@ namespace Utsuho_character_mod
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Exile,
-                UpgradedKeywords: Keyword.Exile | Keyword.Retain,
+                Keywords: Keyword.None,
+                UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
@@ -117,30 +117,17 @@ namespace Utsuho_character_mod
                     return level;
                 }
             }
-            public override int AdditionalBlock
-            {
-                get
-                {
-                    int level = base.GetSeLevel<HeatStatus>();
-                    return level;
-                }
-            }
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                if (!base.Battle.BattleShouldEnd)
+                yield return base.DefenseAction();
+                int level = base.GetSeLevel<HeatStatus>();
+                if (level >= Value1)
                 {
-                    yield return base.AttackAction(selector);
-                    yield return base.DefenseAction();
-
-                    int level = base.GetSeLevel<HeatStatus>();
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level), null, null, null, 0f, true);
-
-                    yield break;
+                    yield return new GainManaAction(Mana);
                 }
+                yield break;
             }
-
         }
-
     }
 }

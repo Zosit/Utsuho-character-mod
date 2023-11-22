@@ -53,24 +53,24 @@ namespace Utsuho_character_mod.CardsR
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Common,
-                Type: CardType.Defense,
+                Rarity: Rarity.Uncommon,
+                Type: CardType.Skill,
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1 },
-                UpgradedCost: new ManaGroup() { Red = 1 },
+                Cost: new ManaGroup() { Red = 2, Any = 1 },
+                UpgradedCost: new ManaGroup() { Red = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
-                Block: 4,
-                UpgradedBlock: 4,
+                Block: null,
+                UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 1,
+                Value1: 2,
                 UpgradedValue1: 2,
-                Value2: null,
-                UpgradedValue2: null,
+                Value2: 2,
+                UpgradedValue2: 2,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -108,12 +108,10 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(SkyFlightDef))]
         public sealed class SkyFlight : Card
         {
-
-
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return DefenseAction();
                 yield return new ApplyStatusEffectAction<Graze>(Battle.Player, new int?(Value1), null, null, null, 0f, true);
+                yield return new ApplyStatusEffectAction<SkyFlightStatus>(Battle.Player, new int?(Value2), null, null, null, 0.2f);
                 yield break;
             }
 

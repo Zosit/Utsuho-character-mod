@@ -113,7 +113,8 @@ namespace Utsuho_character_mod.CardsR
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return new AddCardsToDeckAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
+                Card[] cards = { Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter") };
+                yield return new AddCardsToDrawZoneAction(cards , DrawZoneTarget.Random);
                 yield return new ScryAction(this.Scry);
                 yield return new DrawCardAction();
                 yield break;

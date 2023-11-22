@@ -132,7 +132,7 @@ namespace Utsuho_character_mod.CardsR
                 {
                     cards3.Add(Library.CreateCard("DarkMatter"));
                 }
-                yield return new AddCardsToDeckAction(cards3);
+                yield return new AddCardsToDrawZoneAction(cards3, DrawZoneTarget.Random);
                 yield break;
             }
 

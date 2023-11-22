@@ -19,11 +19,11 @@ using LBoL.Base.Extensions;
 
 namespace Utsuho_character_mod.CardsR
 {
-    public sealed class VacuumSlashDef : CardTemplate
+    public sealed class VacuumWaveDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(VacuumSlash);
+            return nameof(VacuumWave);
         }
 
         public override CardImages LoadCardImages()
@@ -108,8 +108,8 @@ namespace Utsuho_character_mod.CardsR
             return cardConfig;
         }
 
-        [EntityLogic(typeof(VacuumSlashDef))]
-        public sealed class VacuumSlash : Card
+        [EntityLogic(typeof(VacuumWaveDef))]
+        public sealed class VacuumWave : Card
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {

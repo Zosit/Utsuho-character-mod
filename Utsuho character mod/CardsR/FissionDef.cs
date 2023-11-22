@@ -61,7 +61,7 @@ namespace Utsuho_character_mod
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 3 },
+                Cost: new ManaGroup() { Red = 2 },
                 UpgradedCost: new ManaGroup() { Red = 1 },
                 MoneyCost: null,
                 Damage: null,
