@@ -46,6 +46,7 @@ MegaFlare:
 NuclearFusion:
   Name: Atomic Fire "Nuclear Fusion"
   Description: "|Exile| a card from your hand.\nGain |Heat| and add a |Nuclear Strike| with |Heat| equal to {Value1} times the cost of the card |Exiled|."
+  UpgradedDescription: "|Exile| a card from your hand.\nGain |Heat| and add a |Nuclear Strike+| with |Heat| equal to {Value1} times the cost of the card |Exiled|."
 
 NuclearStrike:
   Name: Nuclear Strike
@@ -57,8 +58,13 @@ Initialize:
 
 FireWall:
   Name: Fire Wall
-  Description: "Gain {Block} |Block|\n\
+  Description: "Gain {Block} |Block|.\n\
     If you have {Value1} or more |Heat|, gain {Mana}"
+
+HeatShield:
+  Name: Heat Shield
+  Description: "Gain {Block} |Block|.\n\
+    If you have {Value2} or less |Heat|, gain {Value1} Heat."
 
 RecklessGamble:
   Name: Reckless Gamble
@@ -84,15 +90,15 @@ DarkMatter:
 
 StarBreak:
   Name: Star Break
-  Description: "Deal {Damage} damage\n|When Drawn|: Add a |Dark Matter| to your draw pile."
+  Description: "Deal {Damage} damage\n|When Drawn|: Add a |Dark Matter| to your hand."
 
 CloakStar:
   Name: Cloak of Stars
-  Description: "Gain {Block} block.\nAdd two |Dark Matter| to your draw pile."
+  Description: "Gain {Block} block.\nAdd two |Dark Matter| to your hand."
 
 SpaceScanner:
   Name: Space Scanner
-  Description: "Add 2 |Dark Matter| to your deck.\n|Scry| {Scry}. Draw 1 card"
+  Description: "Add 2 |Dark Matter| to your draw pile.\n|Scry| {Scry}. Draw 1 card"
 
 Unwinding:
   Name: Unwinding
@@ -156,7 +162,7 @@ WhiteHole:
 
 Coolant:
   Name: Coolant
-  Description: "Gain {Value1} |Firepower| for every card in your |Exile|."
+  Description: "Gain {Value1} |Spirit|.\nDiscard all\nnon-defense cards from the hand."
   
 Blueshift:
   Name: Blueshift
@@ -164,4 +170,4 @@ Blueshift:
 
 Resonance:
   Name: Resonance
-  Description: "Deal {Damage} damage.\nFor the rest of combat, each {SelfName} deals {Value1} more damage.\nWhen you exile a card, add a {SelfName} to your hand."
+  Description: "Deal {Damage} damage.\nFor the rest of combat, each {SelfName} deals {Value1} more damage.\nWhen you |Exile| a card, add a {SelfName} to your hand."

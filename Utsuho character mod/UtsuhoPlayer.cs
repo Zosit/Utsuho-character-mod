@@ -86,7 +86,7 @@ namespace Utsuho_character_mod
             InitialMoney: 3,
             InitialPower: 0,
             //temp
-            UltimateSkillA: reimuConfig.UltimateSkillA,
+            UltimateSkillA: "UtsuhoUlt",
             UltimateSkillB: reimuConfig.UltimateSkillA,
             ExhibitA: "ControlRod",
             ExhibitB: "BlackSun",

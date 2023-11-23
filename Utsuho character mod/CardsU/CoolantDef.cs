@@ -62,8 +62,8 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Blue },
                 IsXCost: false,
-                Cost: new ManaGroup() { Blue = 1, Any = 3 },
-                UpgradedCost: new ManaGroup() { Blue = 1, Any = 1 },
+                Cost: new ManaGroup() { Blue = 1, Any = 2 },
+                UpgradedCost: new ManaGroup() { Blue = 1, Any = 2 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -71,8 +71,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 1,
-                UpgradedValue1: 1,
+                Value1: 4,
+                UpgradedValue1: 6,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -114,12 +114,9 @@ namespace Utsuho_character_mod.CardsR
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                int total = base.Battle.ExileZone.Count;
-                yield return BuffAction<Firepower>(base.Value1 * total, 0, 0, 0, 0.2f);
-                /*if (this.IsUpgraded)
-                {
-                    yield return BuffAction<TempFirepower>(base.Value1 * total, 0, 0, 0, 0.2f);
-                }*/
+                yield return BuffAction<Spirit>(base.Value1, 0, 0, 0, 0.2f);
+                List<Card> list = base.Battle.HandZone.Where((Card card) => card.CardType != CardType.Defense).ToList<Card>();
+                yield return new DiscardManyAction(list);
                 yield break;
             }
         }
