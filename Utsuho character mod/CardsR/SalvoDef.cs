@@ -96,7 +96,6 @@ namespace Utsuho_character_mod.CardsR
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
-                //RelativeCards: new List<string>() { "AyaNews" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",

@@ -21,7 +21,7 @@ using LBoL.Core.Units;
 using LBoL.EntityLib.StatusEffects.Neutral;
 using LBoL.EntityLib.Cards.Neutral.NoColor;
 
-namespace Utsuho_character_mod
+namespace Utsuho_character_mod.CardsR
 {
     public sealed class SunlightReverieDef : CardTemplate
     {

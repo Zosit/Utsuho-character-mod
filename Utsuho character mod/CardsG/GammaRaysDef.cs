@@ -14,27 +14,31 @@ using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
+using static Utsuho_character_mod.CardsB.DarkMatterDef;
+using LBoL.Base.Extensions;
+using JetBrains.Annotations;
+using System.Linq;
 
-namespace Utsuho_character_mod.CardsR
+namespace Utsuho_character_mod.CardsG
 {
-    public sealed class NuclearStrikeDefinition : CardTemplate
+    public sealed class GammaRaysDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(NuclearStrike);
+            return nameof(GammaRays);
         }
 
         public override CardImages LoadCardImages()
         {
-            var imgs = new CardImages(BepinexPlugin.embeddedSource);
+            var imgs = new CardImages(embeddedSource);
             imgs.AutoLoad(this, extension: ".png");
             return imgs;
         }
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(BepinexPlugin.embeddedSource);
-            loc.LocalizationFiles.AddLocaleFile(LBoL.Core.Locale.En, "CardsEn.yaml");
+            var loc = new GlobalLocalization(embeddedSource);
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "CardsEn.yaml");
             return loc;
         }
 
@@ -50,27 +54,27 @@ namespace Utsuho_character_mod.CardsR
                 GunNameBurst: "Simple1",
                 DebugLevel: 0,
                 Revealable: false,
-                IsPooled: false,
-                HideMesuem: true,
+                IsPooled: true,
+                HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Rare,
-                Type: CardType.Attack,
-                TargetType: TargetType.SingleEnemy,
-                Colors: new List<ManaColor>() { ManaColor.Red },
+                Rarity: Rarity.Uncommon,
+                Type: CardType.Skill,
+                TargetType: TargetType.Nobody,
+                Colors: new List<ManaColor>() { ManaColor.Green },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 3 },
-                UpgradedCost: new ManaGroup() { Red = 1 },
+                Cost: new ManaGroup() { Green = 1, Any = 2 },
+                UpgradedCost: new ManaGroup() { Green = 1, Any = 2 },
                 MoneyCost: null,
-                Damage: 0,
-                UpgradedDamage: 0,
+                Damage: null,
+                UpgradedDamage: null,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 0,
-                UpgradedValue1: 0,
-                Value2: null,
-                UpgradedValue2: null,
+                Value1: 9,
+                UpgradedValue1: 9,
+                Value2: 0,
+                UpgradedValue2: 3,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -86,14 +90,14 @@ namespace Utsuho_character_mod.CardsR
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Accuracy,
-                UpgradedKeywords: Keyword.Accuracy,
+                Keywords: Keyword.None,
+                UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                UpgradedRelativeKeyword: Keyword.Grow,
 
-                RelativeEffects: new List<string>() { "HeatStatus" },
-                UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
+                RelativeEffects: new List<string>() { "RadiationStatus" },
+                UpgradedRelativeEffects: new List<string>() { "RadiationStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -102,34 +106,18 @@ namespace Utsuho_character_mod.CardsR
                 SubIllustrator: new List<string>() { }
              );
 
-            return cardConfig;            
+            return cardConfig;
         }
 
-        [EntityLogic(typeof(NuclearStrikeDefinition))]
-        public sealed class NuclearStrike : Card
+        [EntityLogic(typeof(GammaRaysDef))]
+        public sealed class GammaRays : Card
         {
-            public override int AdditionalDamage
-            {
-                get
-                {
-                    int level = base.GetSeLevel<HeatStatus>();
-                    return level;
-                }
-            }
-
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return base.AttackAction(selector.SelectedEnemy);
-
-                if (!base.Battle.BattleShouldEnd)
-                {
-                    int level = base.GetSeLevel<HeatStatus>();
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1) - level, null, null, null, 0f, true);
-                    yield break;
-                }
+                yield return BuffAction<RadiationStatus>(Value1, 0, 0, 0, 0.2f);
+                this.DeltaValue1 += this.Value2;
+                yield break;
             }
-
         }
-
     }
 }

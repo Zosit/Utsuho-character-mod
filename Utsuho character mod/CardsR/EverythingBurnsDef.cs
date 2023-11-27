@@ -18,7 +18,7 @@ using LBoL.Base.Extensions;
 using LBoL.Core.Battle.Interactions;
 using Utsuho_character_mod.Status;
 
-namespace Utsuho_character_mod
+namespace Utsuho_character_mod.CardsR
 {
     public sealed class EverythingBurnsDefinition : CardTemplate
     {

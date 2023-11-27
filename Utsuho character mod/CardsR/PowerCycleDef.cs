@@ -15,7 +15,7 @@ using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 
-namespace Utsuho_character_mod
+namespace Utsuho_character_mod.CardsR
 {
     public sealed class PowerCycleDefinition : CardTemplate
     {
@@ -94,7 +94,6 @@ namespace Utsuho_character_mod
 
                 RelativeEffects: new List<string>() { "HeatStatus" },
                 UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
-                //RelativeCards: new List<string>() { "AyaNews" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",

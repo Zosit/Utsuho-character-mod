@@ -16,7 +16,7 @@ using LBoL.Presentation.UI.Panels;
 using LBoL.Core.Units;
 using LBoL.Core.Cards;
 using Utsuho_character_mod.CardsR;
-using static Utsuho_character_mod.CardsR.ResonanceDef;
+using static Utsuho_character_mod.CardsU.ResonanceDef;
 using LBoL.EntityLib.Cards.Character.Cirno;
 
 namespace Utsuho_character_mod.Status

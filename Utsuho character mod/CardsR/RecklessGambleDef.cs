@@ -23,7 +23,7 @@ using LBoL.Presentation;
 using System.Collections;
 using UnityEngine;
 
-namespace Utsuho_character_mod
+namespace Utsuho_character_mod.CardsR
 {
     public sealed class RecklessGambleDef : CardTemplate
     {
@@ -102,7 +102,6 @@ namespace Utsuho_character_mod
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
-                //RelativeCards: new List<string>() { "AyaNews" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",

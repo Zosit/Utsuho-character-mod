@@ -32,4 +32,12 @@ WasteNotStatus:
 
 CautionStatus:
   Name: CAUTION!
-  Description: "All cards have |Exile| and |Retain|.\nWhen you play a card, add a random card to your hand."
+  Description: "All cards have |Exile| and |Retain|.\nWhen you play a card, add {level} random card to your hand."
+
+TurboFuelStatus:
+  Name: Turbo Fuel
+  Description: "At the start of your turn, gain {level} mana and draw {level} cards.\nThen exile a random card in your hand."
+
+RadiationStatus:
+  Name: Radiation
+  Description: "At the end of your turn, deal {level} damage to all enemies."

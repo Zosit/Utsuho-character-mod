@@ -19,7 +19,7 @@ using LBoL.Base.Extensions;
 using JetBrains.Annotations;
 using System.Linq;
 
-namespace Utsuho_character_mod.CardsR
+namespace Utsuho_character_mod.CardsW
 {
     public sealed class CautionDef : CardTemplate
     {

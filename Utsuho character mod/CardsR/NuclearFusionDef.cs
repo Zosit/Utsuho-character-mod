@@ -17,9 +17,9 @@ using System.Linq;
 using LBoL.Base.Extensions;
 using LBoL.Core.Battle.Interactions;
 using Utsuho_character_mod.Status;
-using static Utsuho_character_mod.NuclearStrikeDefinition;
+using static Utsuho_character_mod.CardsR.NuclearStrikeDefinition;
 
-namespace Utsuho_character_mod
+namespace Utsuho_character_mod.CardsR
 {
     public sealed class NuclearFusionDefinition : CardTemplate
     {

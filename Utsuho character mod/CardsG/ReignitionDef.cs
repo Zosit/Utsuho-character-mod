@@ -15,26 +15,26 @@ using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 
-namespace Utsuho_character_mod.CardsR
+namespace Utsuho_character_mod.CardsG
 {
-    public sealed class NuclearStrikeDefinition : CardTemplate
+    public sealed class ReignitionDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(NuclearStrike);
+            return nameof(Reignition);
         }
 
         public override CardImages LoadCardImages()
         {
-            var imgs = new CardImages(BepinexPlugin.embeddedSource);
+            var imgs = new CardImages(embeddedSource);
             imgs.AutoLoad(this, extension: ".png");
             return imgs;
         }
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(BepinexPlugin.embeddedSource);
-            loc.LocalizationFiles.AddLocaleFile(LBoL.Core.Locale.En, "CardsEn.yaml");
+            var loc = new GlobalLocalization(embeddedSource);
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "CardsEn.yaml");
             return loc;
         }
 
@@ -50,16 +50,16 @@ namespace Utsuho_character_mod.CardsR
                 GunNameBurst: "Simple1",
                 DebugLevel: 0,
                 Revealable: false,
-                IsPooled: false,
-                HideMesuem: true,
+                IsPooled: true,
+                HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Rare,
+                Rarity: Rarity.Uncommon,
                 Type: CardType.Attack,
                 TargetType: TargetType.SingleEnemy,
-                Colors: new List<ManaColor>() { ManaColor.Red },
+                Colors: new List<ManaColor>() { ManaColor.Green },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 3 },
-                UpgradedCost: new ManaGroup() { Red = 1 },
+                Cost: new ManaGroup() { Green = 1, Any = 2 },
+                UpgradedCost: new ManaGroup() { Green = 1, Any = 2 },
                 MoneyCost: null,
                 Damage: 0,
                 UpgradedDamage: 0,
@@ -67,8 +67,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 0,
-                UpgradedValue1: 0,
+                Value1: null,
+                UpgradedValue1: null,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -86,14 +86,14 @@ namespace Utsuho_character_mod.CardsR
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Accuracy,
-                UpgradedKeywords: Keyword.Accuracy,
+                Keywords: Keyword.Exile,
+                UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "HeatStatus" },
-                UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
+                RelativeEffects: new List<string>() { },
+                UpgradedRelativeEffects: new List<string>() { },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -102,31 +102,32 @@ namespace Utsuho_character_mod.CardsR
                 SubIllustrator: new List<string>() { }
              );
 
-            return cardConfig;            
+            return cardConfig;
         }
 
-        [EntityLogic(typeof(NuclearStrikeDefinition))]
-        public sealed class NuclearStrike : Card
+        [EntityLogic(typeof(ReignitionDef))]
+        public sealed class Reignition : Card
         {
             public override int AdditionalDamage
             {
                 get
                 {
-                    int level = base.GetSeLevel<HeatStatus>();
-                    return level;
+                    int total = base.Battle.ExileZone.Count;
+                    if (total != 0)
+                    {
+                        return total;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
             }
-
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return base.AttackAction(selector.SelectedEnemy);
-
-                if (!base.Battle.BattleShouldEnd)
-                {
-                    int level = base.GetSeLevel<HeatStatus>();
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1) - level, null, null, null, 0f, true);
-                    yield break;
-                }
+                int total = base.Battle.ExileZone.Count;
+                yield return AttackAction(selector.SelectedEnemy);
+                yield break;
             }
 
         }

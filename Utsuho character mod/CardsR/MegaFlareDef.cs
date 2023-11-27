@@ -20,7 +20,7 @@ using System.Linq;
 using LBoL.Core.Units;
 using LBoL.EntityLib.StatusEffects.Neutral;
 
-namespace Utsuho_character_mod
+namespace Utsuho_character_mod.CardsR
 {
     public sealed class MegaFlareDef : CardTemplate
     {
@@ -99,7 +99,6 @@ namespace Utsuho_character_mod
 
                 RelativeEffects: new List<string>() {  },
                 UpgradedRelativeEffects: new List<string>() {  },
-                //RelativeCards: new List<string>() { "AyaNews" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",

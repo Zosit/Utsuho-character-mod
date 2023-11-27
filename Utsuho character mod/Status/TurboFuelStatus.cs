@@ -14,19 +14,20 @@ using LBoL.Core;
 using LBoL.Core.Battle.BattleActions;
 using LBoL.Presentation.UI.Panels;
 using LBoL.Core.Units;
+using System.Threading;
+using LBoL.Core.Randoms;
 using LBoL.Core.Cards;
-using Utsuho_character_mod.CardsR;
-using static Utsuho_character_mod.CardsU.ResonanceDef;
-using LBoL.EntityLib.Cards.Character.Cirno;
-using BepInEx.Logging;
+using LBoL.Presentation;
+using System.Collections;
+using LBoL.Base.Extensions;
 
 namespace Utsuho_character_mod.Status
 {
-    public sealed class WasteNotEffect : StatusEffectTemplate
+    public sealed class TurboFuelEffect : StatusEffectTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(WasteNotStatus);
+            return nameof(TurboFuelStatus);
         }
 
         [DontOverwrite]
@@ -56,13 +57,13 @@ namespace Utsuho_character_mod.Status
                             LevelStackType: StackType.Add,
                             HasDuration: false,
                             DurationStackType: StackType.Add,
-                            DurationDecreaseTiming: DurationDecreaseTiming.Custom,
+                            DurationDecreaseTiming: DurationDecreaseTiming.TurnEnd,
                             HasCount: false,
                             CountStackType: StackType.Keep,
                             LimitStackType: StackType.Keep,
                             ShowPlusByLimit: false,
                             Keywords: Keyword.None,
-                            RelativeEffects: new List<string>() { "HeatStatus" },
+                            RelativeEffects: new List<string>() { },
                             VFX: "Default",
                             VFXloop: "Default",
                             SFX: "Default"
@@ -70,25 +71,28 @@ namespace Utsuho_character_mod.Status
             return statusEffectConfig;
         }
     }
-    [EntityLogic(typeof(WasteNotEffect))]
-    public sealed class WasteNotStatus : StatusEffect
+    [EntityLogic(typeof(TurboFuelEffect))]
+    public sealed class TurboFuelStatus : StatusEffect
     {
         protected override void OnAdded(Unit unit)
         {
-            ReactOwnerEvent<CardEventArgs>(base.Battle.CardExiled, new EventSequencedReactor<CardEventArgs>(this.OnCardExiled));
+            ReactOwnerEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
         }
-        private IEnumerable<BattleAction> OnCardExiled(CardEventArgs args)
+        IEnumerator ResetTrigger()
         {
-            if (Battle.BattleShouldEnd)
-            {
-                yield break;
-            }
-            if (args.Cause != ActionCause.AutoExile)
-            {
-                base.NotifyActivating();
-                int level = base.GetSeLevel<WasteNotStatus>();
-                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, level, null, null, null, 0f, true);
-            }
+            yield return new WaitForSecondsRealtime(1.0f);
+            NotifyChanged();
+        }
+        private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
+        {
+            yield return new DrawManyCardAction(this.Level);
+            yield return new GainManaAction(new ManaGroup() { Philosophy = this.Level });
+
+            Card card = Battle.HandZone.Sample(base.GameRun.BattleRng);
+            card.NotifyActivating();
+            GameMaster.Instance.StartCoroutine(ResetTrigger());
+            yield return new ExileCardAction(card);
+
             yield break;
         }
     }

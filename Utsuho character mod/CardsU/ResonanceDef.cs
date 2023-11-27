@@ -19,7 +19,7 @@ using LBoL.Base.Extensions;
 using JetBrains.Annotations;
 using System.Linq;
 
-namespace Utsuho_character_mod.CardsR
+namespace Utsuho_character_mod.CardsU
 {
     public sealed class ResonanceDef : CardTemplate
     {

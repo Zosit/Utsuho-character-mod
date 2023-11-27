@@ -183,3 +183,16 @@ ExpandingBrilliance:
 Caution:
   Name: CAUTION!
   Description: "All cards have |Exile| and |Retain| for the rest of combat.\nWhen you play a card, add a random card to your hand."
+
+GammaRays:
+  Name: Gamma Rays
+  Description: "Gain {Value1} |Radiation|."
+  UpgradedDescription: "Gain {Value1} radiation.\n|Growth:| Gain {Value2} more."
+
+Reignition:
+  Name: Reignition
+  Description: "Deal damage equal to the size of your Exile."
+
+TurboFuel:
+  Name: Turbo Fuel
+  Description: "At the start of your turn, gain {Value1} mana and draw {Value1} cards.\nThen exile a random card in your hand."

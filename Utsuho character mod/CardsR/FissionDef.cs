@@ -18,7 +18,7 @@ using LBoL.Core.Randoms;
 using LBoL.Core.Battle.Interactions;
 using System.Linq;
 
-namespace Utsuho_character_mod
+namespace Utsuho_character_mod.CardsR
 {
     public sealed class FissionDefinition : CardTemplate
     {

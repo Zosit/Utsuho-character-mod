@@ -15,18 +15,14 @@ using LBoL.Core.Battle.BattleActions;
 using LBoL.Presentation.UI.Panels;
 using LBoL.Core.Units;
 using LBoL.Core.Cards;
-using Utsuho_character_mod.CardsR;
-using static Utsuho_character_mod.CardsU.ResonanceDef;
-using LBoL.EntityLib.Cards.Character.Cirno;
-using BepInEx.Logging;
 
 namespace Utsuho_character_mod.Status
 {
-    public sealed class WasteNotEffect : StatusEffectTemplate
+    public sealed class RadiationEffect : StatusEffectTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(WasteNotStatus);
+            return nameof(RadiationStatus);
         }
 
         [DontOverwrite]
@@ -62,7 +58,7 @@ namespace Utsuho_character_mod.Status
                             LimitStackType: StackType.Keep,
                             ShowPlusByLimit: false,
                             Keywords: Keyword.None,
-                            RelativeEffects: new List<string>() { "HeatStatus" },
+                            RelativeEffects: new List<string>() { },
                             VFX: "Default",
                             VFXloop: "Default",
                             SFX: "Default"
@@ -70,25 +66,33 @@ namespace Utsuho_character_mod.Status
             return statusEffectConfig;
         }
     }
-    [EntityLogic(typeof(WasteNotEffect))]
-    public sealed class WasteNotStatus : StatusEffect
+    [EntityLogic(typeof(RadiationEffect))]
+    public sealed class RadiationStatus : StatusEffect
     {
+        private string GunName
+        {
+            get
+            {
+                if (base.Level <= 10)
+                {
+                    return "无差别起火";
+                }
+                return "无差别起火B";
+            }
+        }
         protected override void OnAdded(Unit unit)
         {
-            ReactOwnerEvent<CardEventArgs>(base.Battle.CardExiled, new EventSequencedReactor<CardEventArgs>(this.OnCardExiled));
+            ReactOwnerEvent(Owner.TurnEnded, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnEnded));
         }
-        private IEnumerable<BattleAction> OnCardExiled(CardEventArgs args)
+        private IEnumerable<BattleAction> OnOwnerTurnEnded(UnitEventArgs args)
         {
             if (Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            if (args.Cause != ActionCause.AutoExile)
-            {
-                base.NotifyActivating();
-                int level = base.GetSeLevel<WasteNotStatus>();
-                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, level, null, null, null, 0f, true);
-            }
+            NotifyActivating();
+            int level = base.GetSeLevel<RadiationStatus>();
+            yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)base.Level), this.GunName, GunType.Single);
             yield break;
         }
     }

@@ -17,7 +17,7 @@ using Utsuho_character_mod.Status;
 using LBoL.Core.Battle.Interactions;
 using System.Linq;
 
-namespace Utsuho_character_mod
+namespace Utsuho_character_mod.CardsW
 {
     public sealed class ExpandingBrillianceDefinition : CardTemplate
     {
