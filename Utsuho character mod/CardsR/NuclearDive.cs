@@ -128,6 +128,10 @@ namespace Utsuho_character_mod
                 {
                     yield return base.AttackAction(selector.SelectedEnemy);
                 }
+                if (!base.Battle.BattleShouldEnd)
+                {
+                    yield return base.BuffAction<HeatStatus>(-(level), 0, 0, 0, 0.2f);
+                }
                 yield break;
             }
         }

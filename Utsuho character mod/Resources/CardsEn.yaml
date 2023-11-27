@@ -118,7 +118,7 @@ SubterraneanSun:
 
 NightFalls: 
   Name: Night Falls
-  Description: "Apply {Value1} |Weak| to all enemies. |Retain| {Value2} random cards in your hand this turn"
+  Description: "Apply {Value1} |Weak| to each enemy.\n|Retain| {Value2} random cards in your hand this turn"
 
 BlackHole: 
   Name: Black Hole
@@ -171,3 +171,15 @@ Blueshift:
 Resonance:
   Name: Resonance
   Description: "Deal {Damage} damage.\nFor the rest of combat, each {SelfName} deals {Value1} more damage.\nWhen you |Exile| a card, add a {SelfName} to your hand."
+
+Disintegrate:
+  Name: Disintegrate
+  Description: "Deal {Damage} damage.\n|Expel|: Remove a card from your library."
+
+ExpandingBrilliance:
+  Name: Expanding Brilliance
+  Description: "Apply {Value1} |Temporary Firepower Down| to each enemy.\nUpgrade a card in your hand until end of combat.\nDraw 1 card."
+
+Caution:
+  Name: CAUTION!
+  Description: "All cards have |Exile| and |Retain| for the rest of combat.\nWhen you play a card, add a random card to your hand."

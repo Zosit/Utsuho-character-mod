@@ -96,8 +96,8 @@ namespace Utsuho_character_mod.CardsR
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { },
-                UpgradedRelativeEffects: new List<string>() { /*"TempFirepower"*/ },
+                RelativeEffects: new List<string>() { "Spirit" },
+                UpgradedRelativeEffects: new List<string>() { "Spirit" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",

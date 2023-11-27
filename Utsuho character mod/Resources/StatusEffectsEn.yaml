@@ -29,3 +29,7 @@ ResonancePlusStatus:
 WasteNotStatus:
   Name: Waste Not
   Description: "When you exile a card, gain |Heat|"
+
+CautionStatus:
+  Name: CAUTION!
+  Description: "All cards have |Exile| and |Retain|.\nWhen you play a card, add a random card to your hand."
