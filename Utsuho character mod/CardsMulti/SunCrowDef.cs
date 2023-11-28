@@ -19,13 +19,13 @@ using LBoL.Base.Extensions;
 using JetBrains.Annotations;
 using System.Linq;
 
-namespace Utsuho_character_mod.CardsG
+namespace Utsuho_character_mod.CardsMulti
 {
-    public sealed class TurboFuelDef : CardTemplate
+    public sealed class SunCrowDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(TurboFuel);
+            return nameof(SunCrow);
         }
 
         public override CardImages LoadCardImages()
@@ -60,10 +60,10 @@ namespace Utsuho_character_mod.CardsG
                 Rarity: Rarity.Rare,
                 Type: CardType.Ability,
                 TargetType: TargetType.Nobody,
-                Colors: new List<ManaColor>() { ManaColor.Green },
+                Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Green = 1, Any = 3 },
-                UpgradedCost: new ManaGroup() { Green = 1, Any = 1 },
+                Cost: new ManaGroup() { Black = 2, Red = 2, Any = 1 },
+                UpgradedCost: new ManaGroup() { Black = 2, Red = 2, Any = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -71,8 +71,8 @@ namespace Utsuho_character_mod.CardsG
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 2,
-                UpgradedValue1: 2,
+                Value1: 12,
+                UpgradedValue1: 16,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -96,10 +96,10 @@ namespace Utsuho_character_mod.CardsG
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "TurboFuelStatus" },
-                UpgradedRelativeEffects: new List<string>() { "TurboFuelStatus" },
-                RelativeCards: new List<string>() { },
-                UpgradedRelativeCards: new List<string>() { },
+                RelativeEffects: new List<string>() { "HeatStatus" },
+                UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
+                RelativeCards: new List<string>() { "DarkMatter" },
+                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -109,19 +109,17 @@ namespace Utsuho_character_mod.CardsG
             return cardConfig;
         }
 
-        [EntityLogic(typeof(TurboFuelDef))]
-        public sealed class TurboFuel : Card
+        [EntityLogic(typeof(SunCrowDef))]
+        public sealed class SunCrow : Card
         {
-            public ManaGroup manatype
-            {
-                get
-                {
-                    return new ManaGroup() { Philosophy = 2 };
-                }
-            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return BuffAction<TurboFuelStatus>(Value1, 0, 0, 0, 0.2f);
+                List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => (card != this) && (card.BaseName == "Dark Matter")).ToList<Card>();
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1) * cards.Count, null, null, null, 0f, true);
+                foreach (Card card in cards)
+                {
+                    yield return new RemoveCardAction(card);
+                }
                 yield break;
             }
         }

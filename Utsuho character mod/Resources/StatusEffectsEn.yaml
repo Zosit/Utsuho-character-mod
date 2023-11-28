@@ -36,8 +36,12 @@ CautionStatus:
 
 TurboFuelStatus:
   Name: Turbo Fuel
-  Description: "At the start of your turn, gain {level} mana and draw {level} cards.\nThen exile a random card in your hand."
+  Description: "At the start of your turn, gain {level} {manatype} and draw {level} cards.\nThen exile a random card in your hand."
 
 RadiationStatus:
   Name: Radiation
   Description: "At the end of your turn, deal {level} damage to all enemies."
+
+MaintainReactionStatus:
+  Name: Maintain Reaction
+  Description: "When you |Retain| a card, gain {level} |Heat|."

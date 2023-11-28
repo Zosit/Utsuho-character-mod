@@ -14,20 +14,14 @@ using LBoL.Core;
 using LBoL.Core.Battle.BattleActions;
 using LBoL.Presentation.UI.Panels;
 using LBoL.Core.Units;
-using System.Threading;
-using LBoL.Core.Randoms;
-using LBoL.Core.Cards;
-using LBoL.Presentation;
-using System.Collections;
-using LBoL.Base.Extensions;
 
 namespace Utsuho_character_mod.Status
 {
-    public sealed class TurboFuelEffect : StatusEffectTemplate
+    public sealed class MaintainReactionEffect : StatusEffectTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(TurboFuelStatus);
+            return nameof(MaintainReactionStatus);
         }
 
         [DontOverwrite]
@@ -57,13 +51,13 @@ namespace Utsuho_character_mod.Status
                             LevelStackType: StackType.Add,
                             HasDuration: false,
                             DurationStackType: StackType.Add,
-                            DurationDecreaseTiming: DurationDecreaseTiming.TurnEnd,
+                            DurationDecreaseTiming: DurationDecreaseTiming.Custom,
                             HasCount: false,
                             CountStackType: StackType.Keep,
                             LimitStackType: StackType.Keep,
                             ShowPlusByLimit: false,
                             Keywords: Keyword.None,
-                            RelativeEffects: new List<string>() { },
+                            RelativeEffects: new List<string>() { "HeatStatus" },
                             VFX: "Default",
                             VFXloop: "Default",
                             SFX: "Default"
@@ -71,35 +65,22 @@ namespace Utsuho_character_mod.Status
             return statusEffectConfig;
         }
     }
-    [EntityLogic(typeof(TurboFuelEffect))]
-    public sealed class TurboFuelStatus : StatusEffect
+    [EntityLogic(typeof(MaintainReactionEffect))]
+    public sealed class MaintainReactionStatus : StatusEffect
     {
-        public ManaGroup manatype
-        {
-            get
-            {
-                return new ManaGroup() { Philosophy = 1 };
-            }
-        }
         protected override void OnAdded(Unit unit)
         {
-            ReactOwnerEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
+            ReactOwnerEvent(base.Battle.CardRetaining, new EventSequencedReactor<CardEventArgs>(this.OnCardRetaining));
         }
-        IEnumerator ResetTrigger()
+        private IEnumerable<BattleAction> OnCardRetaining(CardEventArgs args)
         {
-            yield return new WaitForSecondsRealtime(1.0f);
-            NotifyChanged();
-        }
-        private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
-        {
-            yield return new DrawManyCardAction(this.Level);
-            yield return new GainManaAction(new ManaGroup() { Philosophy = this.Level });
-
-            Card card = Battle.HandZone.Sample(base.GameRun.BattleRng);
-            card.NotifyActivating();
-            GameMaster.Instance.StartCoroutine(ResetTrigger());
-            yield return new ExileCardAction(card);
-
+            if (Battle.BattleShouldEnd)
+            {
+                yield break;
+            }
+            NotifyActivating();
+            int level = base.GetSeLevel<MaintainReactionStatus>();
+            yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, level, null, null, null, 0f, true);
             yield break;
         }
     }

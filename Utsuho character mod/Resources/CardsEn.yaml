@@ -52,10 +52,6 @@ NuclearStrike:
   Name: Nuclear Strike
   Description: "|Vent| for damage.\nGain {Value1} |Heat|"
 
-Initialize:
-  Name: Initialize
-  Description: "For every {Mana} spent:\nGain {Value1} |Heat|"
-
 FireWall:
   Name: Fire Wall
   Description: "Gain {Block} |Block|.\n\
@@ -110,7 +106,7 @@ VacuumWave:
 
 AbyssNova: 
   Name: Abyss Nova
-  Description: "Deal {Damage} damage. For each Dark Matter on the |battlefield|, {SelfName} deals {Value1} more damage."
+  Description: "Deal {Damage} damage. For each |Dark Matter| on the |battlefield|, {SelfName} deals {Value1} more damage."
 
 SubterraneanSun: 
   Name: Subterranean Sun
@@ -195,4 +191,20 @@ Reignition:
 
 TurboFuel:
   Name: Turbo Fuel
-  Description: "At the start of your turn, gain {Value1} mana and draw {Value1} cards.\nThen exile a random card in your hand."
+  Description: "At the start of your turn, gain {manatype} and draw {Value1} cards.\nThen exile a random card in your hand."
+
+MaintainReaction:
+  Name: Maintain Reaction
+  Description: "When you |Retain| a card, gain {Value1} |Heat|."
+
+Initialize:
+  Name: Initialize
+  Description: "For every {Mana} spent:\nGain {Value1} |Heat| and add a |Dark Matter| to your hand."
+
+Crossfeed:
+  Name: Crossfeed
+  Description: "|Vent| for damage.\nAdd {Value1} |Dark Matter| to your discard for every 10 |Heat| you had.\nDiscard all |Dark Matter| in your hand and gain {Value2} |Heat| for each one discarded."
+
+SunCrow: 
+  Name: The Crow who Stole the Sun
+  Description: "Remove all |Dark Matter| on the |battlefield|\nGain {Value1} |Heat| for each removed."

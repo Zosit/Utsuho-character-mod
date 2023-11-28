@@ -13,19 +13,18 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
-using Utsuho_character_mod.Status;
-using static Utsuho_character_mod.CardsB.DarkMatterDef;
-using LBoL.Base.Extensions;
-using JetBrains.Annotations;
 using System.Linq;
+using LBoL.Base.Extensions;
+using LBoL.Core.Battle.Interactions;
+using Utsuho_character_mod.Status;
 
-namespace Utsuho_character_mod.CardsG
+namespace Utsuho_character_mod.CardsMulti
 {
-    public sealed class TurboFuelDef : CardTemplate
+    public sealed class CrossfeedDefinition : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(TurboFuel);
+            return nameof(Crossfeed);
         }
 
         public override CardImages LoadCardImages()
@@ -57,24 +56,24 @@ namespace Utsuho_character_mod.CardsG
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Rare,
-                Type: CardType.Ability,
-                TargetType: TargetType.Nobody,
-                Colors: new List<ManaColor>() { ManaColor.Green },
+                Rarity: Rarity.Common,
+                Type: CardType.Attack,
+                TargetType: TargetType.SingleEnemy,
+                Colors: new List<ManaColor>() { ManaColor.Red, ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Green = 1, Any = 3 },
-                UpgradedCost: new ManaGroup() { Green = 1, Any = 1 },
+                Cost: new ManaGroup() { Red = 1, Black = 1 },
+                UpgradedCost: null,
                 MoneyCost: null,
-                Damage: null,
-                UpgradedDamage: null,
+                Damage: 0,
+                UpgradedDamage: 0,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 2,
-                UpgradedValue1: 2,
-                Value2: null,
-                UpgradedValue2: null,
+                Value1: 1,
+                UpgradedValue1: 1,
+                Value2: 6,
+                UpgradedValue2: 10,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -96,10 +95,10 @@ namespace Utsuho_character_mod.CardsG
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "TurboFuelStatus" },
-                UpgradedRelativeEffects: new List<string>() { "TurboFuelStatus" },
-                RelativeCards: new List<string>() { },
-                UpgradedRelativeCards: new List<string>() { },
+                RelativeEffects: new List<string>() { "HeatStatus" },
+                UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
+                RelativeCards: new List<string>() { "DarkMatter" },
+                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -109,19 +108,47 @@ namespace Utsuho_character_mod.CardsG
             return cardConfig;
         }
 
-        [EntityLogic(typeof(TurboFuelDef))]
-        public sealed class TurboFuel : Card
+        [EntityLogic(typeof(CrossfeedDefinition))]
+        public sealed class Crossfeed : Card
         {
-            public ManaGroup manatype
+            public override int AdditionalDamage
             {
                 get
                 {
-                    return new ManaGroup() { Philosophy = 2 };
+                    HeatStatus statusEffect = base.Battle.Player.GetStatusEffect<HeatStatus>();
+                    if (statusEffect != null)
+                    {
+                        return statusEffect.Level;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
             }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return BuffAction<TurboFuelStatus>(Value1, 0, 0, 0, 0.2f);
+                int level = base.GetSeLevel<HeatStatus>();
+                int total = 0;
+                Card[] array = base.Battle.HandZone.SampleManyOrAll(999, base.GameRun.BattleRng);
+                if (array.Length != 0)
+                {
+                    foreach (Card card in array)
+                    {
+                        if (card.BaseName == "Dark Matter")
+                        {
+                            yield return new DiscardAction(card);
+                            total++;
+                        }
+                    }
+                }
+                yield return AttackAction(selector);
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, (total*this.Value2)-level, null, null, null, 0f, true);
+                for(int i = 0; i < (level/5); i++)
+                {
+                    yield return new AddCardsToDiscardAction(Library.CreateCard("DarkMatter"));
+                }
+
                 yield break;
             }
         }

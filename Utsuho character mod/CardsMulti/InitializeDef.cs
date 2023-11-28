@@ -18,7 +18,7 @@ using LBoL.Base.Extensions;
 using LBoL.Core.Battle.Interactions;
 using Utsuho_character_mod.Status;
 
-namespace Utsuho_character_mod.CardsR
+namespace Utsuho_character_mod.CardsMulti
 {
     public sealed class InitializeDefinition : CardTemplate
     {
@@ -29,15 +29,15 @@ namespace Utsuho_character_mod.CardsR
 
         public override CardImages LoadCardImages()
         {
-            var imgs = new CardImages(BepinexPlugin.embeddedSource);
+            var imgs = new CardImages(embeddedSource);
             imgs.AutoLoad(this, extension: ".png");
             return imgs;
         }
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(BepinexPlugin.embeddedSource);
-            loc.LocalizationFiles.AddLocaleFile(LBoL.Core.Locale.En, "CardsEn.yaml");
+            var loc = new GlobalLocalization(embeddedSource);
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "CardsEn.yaml");
             return loc;
         }
 
@@ -59,9 +59,9 @@ namespace Utsuho_character_mod.CardsR
                 Rarity: Rarity.Uncommon,
                 Type: CardType.Skill,
                 TargetType: TargetType.Nobody,
-                Colors: new List<ManaColor>() { ManaColor.Red },
+                Colors: new List<ManaColor>() { ManaColor.Red, ManaColor.Black },
                 IsXCost: true,
-                Cost: new ManaGroup() { Red = 1 },
+                Cost: new ManaGroup() { Red = 1, Black = 1 },
                 UpgradedCost: null,
                 MoneyCost: null,
                 Damage: null,
@@ -70,10 +70,10 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 5,
-                UpgradedValue1: 7,
-                Value2: null,
-                UpgradedValue2: null,
+                Value1: 8,
+                UpgradedValue1: 12,
+                Value2: 1,
+                UpgradedValue2: 1,
                 Mana: new ManaGroup() { Any = 1 },
                 UpgradedMana: new ManaGroup() { Any = 1 },
                 Scry: null,
@@ -90,23 +90,22 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedUltimateCost: null,
 
                 Keywords: Keyword.Initial | Keyword.Ethereal | Keyword.Exile,
-                UpgradedKeywords: Keyword.Initial | Keyword.Exile,
+                UpgradedKeywords: Keyword.Initial | Keyword.Ethereal | Keyword.Exile,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
                 RelativeEffects: new List<string>() { "HeatStatus" },
                 UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
-                //RelativeCards: new List<string>() { "AyaNews" },
-                RelativeCards: new List<string>() { },
-                UpgradedRelativeCards: new List<string>() { },
+                RelativeCards: new List<string>() { "DarkMatter" },
+                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
                 SubIllustrator: new List<string>() { }
              );
 
-            return cardConfig;            
+            return cardConfig;
         }
 
         [EntityLogic(typeof(InitializeDefinition))]
@@ -121,7 +120,12 @@ namespace Utsuho_character_mod.CardsR
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, base.SynergyAmount(consumingMana, ManaColor.Any, 1) * (new int?(base.Value1)), null, null, null, 0f, true);
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, SynergyAmount(consumingMana, ManaColor.Any, 1) * new int?(Value1), null, null, null, 0f, true);
+                for(int i = 0; i < SynergyAmount(consumingMana, ManaColor.Any, 1); i++)
+                {
+                    yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"));
+                }
+
                 yield break;
             }
         }
