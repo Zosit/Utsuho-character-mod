@@ -208,3 +208,15 @@ Crossfeed:
 SunCrow: 
   Name: The Crow who Stole the Sun
   Description: "Remove all |Dark Matter| on the |battlefield|\nGain {Value1} |Heat| for each removed."
+
+HotSpring:
+  Name: Earth Spirit Hot Spring
+  Description: "At the start of each turn, gain {Value1} |Radiation|, and increase this amount by 1."
+
+Dojo:
+  Name: Okuu's' Nuclear Fusion Dojo
+  Description: "Gain {Value1} Firepower.\nEnd the turn."
+
+Remember:
+  Name: Help Me Remember, Satori-sama!
+  Description: "Return any number of cards from your |Exile| to your hand."

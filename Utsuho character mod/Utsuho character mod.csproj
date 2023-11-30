@@ -353,9 +353,7 @@
 
 
     <ItemGroup>
-      <EmbeddedResource Include="DirResources\ChargingStatus.png" />
       <EmbeddedResource Include="DirResources\EnergyStatus.png" />
-      <EmbeddedResource Include="DirResources\GravityWellStatus.png" />
       <EmbeddedResource Include="DirResources\Nuclear.png" />
       <EmbeddedResource Include="DirResources\Utsuho.png" />
       <EmbeddedResource Include="icon.png" />

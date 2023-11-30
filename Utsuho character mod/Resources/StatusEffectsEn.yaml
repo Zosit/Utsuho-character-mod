@@ -42,6 +42,10 @@ RadiationStatus:
   Name: Radiation
   Description: "At the end of your turn, deal {level} damage to all enemies."
 
+HotSpringStatus:
+  Name: Hot Spring
+  Description: "At the start of your turn, gain {Level} |Radiation| and 1 |Hot Spring|."
+
 MaintainReactionStatus:
   Name: Maintain Reaction
   Description: "When you |Retain| a card, gain {level} |Heat|."
