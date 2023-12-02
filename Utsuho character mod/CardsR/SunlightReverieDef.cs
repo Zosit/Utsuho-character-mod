@@ -20,6 +20,7 @@ using System.Linq;
 using LBoL.Core.Units;
 using LBoL.EntityLib.StatusEffects.Neutral;
 using LBoL.EntityLib.Cards.Neutral.NoColor;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -125,7 +126,8 @@ namespace Utsuho_character_mod.CardsR
                 }
                 if (Battle.DiscardZone.NotEmpty())
                 {
-                    Card card = Battle.DiscardZone.Sample(base.GameRun.BattleRng);
+                    Card card = UsefulFunctions.RandomUtsuho(Battle.DiscardZone);
+                    //Card card = Battle.DiscardZone.Sample(base.GameRun.BattleRng);
                     if (card != null)
                         yield return new ExileCardAction(card);
                 }

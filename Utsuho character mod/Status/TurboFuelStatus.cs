@@ -20,6 +20,7 @@ using LBoL.Core.Cards;
 using LBoL.Presentation;
 using System.Collections;
 using LBoL.Base.Extensions;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.Status
 {
@@ -95,7 +96,8 @@ namespace Utsuho_character_mod.Status
             yield return new DrawManyCardAction(this.Level);
             yield return new GainManaAction(new ManaGroup() { Philosophy = this.Level });
 
-            Card card = Battle.HandZone.Sample(base.GameRun.BattleRng);
+            Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+            //Card card = Battle.HandZone.Sample(base.GameRun.BattleRng);
             card.NotifyActivating();
             GameMaster.Instance.StartCoroutine(ResetTrigger());
             yield return new ExileCardAction(card);

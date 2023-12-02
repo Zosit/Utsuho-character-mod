@@ -22,6 +22,7 @@ using LBoL.EntityLib.StatusEffects.Neutral;
 using LBoL.Presentation;
 using System.Collections;
 using UnityEngine;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -124,7 +125,8 @@ namespace Utsuho_character_mod.CardsR
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield return new DrawManyCardAction(Value1);
-                Card card = Battle.HandZone.Sample(base.GameRun.BattleRng);
+                Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                //Card card = Battle.HandZone.Sample(base.GameRun.BattleRng);
                 card.NotifyActivating();
                 GameMaster.Instance.StartCoroutine(ResetTrigger());
                 yield return new ExileCardAction(card);

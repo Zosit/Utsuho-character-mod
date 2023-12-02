@@ -82,7 +82,7 @@ WasteNot:
 
 DarkMatter:
   Name: Dark Matter
-  Description: "|When Drawn|: |Retain| this turn."
+  Description: "|When Drawn|: |Retain| this turn.\n|Utsuho| cards with random effects target {SelfName}."
 
 StarBreak:
   Name: Star Break
@@ -214,9 +214,9 @@ HotSpring:
   Description: "At the start of each turn, gain {Value1} |Radiation|, and increase this amount by 1."
 
 Dojo:
-  Name: Okuu's' Nuclear Fusion Dojo
+  Name: "Okuu's Nuclear Fusion Dojo"
   Description: "Gain {Value1} Firepower.\nEnd the turn."
 
 Remember:
-  Name: Help Me Remember, Satori-sama!
+  Name: "Help Me Remember, Satori-sama!"
   Description: "Return any number of cards from your |Exile| to your hand."
