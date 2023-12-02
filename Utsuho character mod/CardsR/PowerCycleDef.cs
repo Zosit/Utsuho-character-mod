@@ -70,7 +70,7 @@ namespace Utsuho_character_mod.CardsR
                 Value1: 10,
                 UpgradedValue1: 10,
                 Value2: 9,
-                UpgradedValue2: 12,
+                UpgradedValue2: 15,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,

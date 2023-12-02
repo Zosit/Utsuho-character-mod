@@ -18,6 +18,12 @@ using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using LBoL.Base.Extensions;
 using JetBrains.Annotations;
 using System.Linq;
+using System.Collections;
+using UnityEngine;
+using LBoL.Presentation;
+using Utsuho_character_mod.Util;
+using static UnityEngine.UI.GridLayoutGroup;
+using LBoL.Core.Randoms;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -58,21 +64,21 @@ namespace Utsuho_character_mod.CardsR
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Uncommon,
-                Type: CardType.Defense,
+                Type: CardType.Skill,
                 TargetType: TargetType.Self,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 2, Any = 1 },
-                UpgradedCost: new ManaGroup() { Black = 2, Any = 1 },
+                Cost: new ManaGroup() { Any = 0 },
+                UpgradedCost: new ManaGroup() { Any = 0 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
-                Block: null,
-                UpgradedBlock: null,
-                Shield: 0,
-                UpgradedShield: 0,
-                Value1: 3,
-                UpgradedValue1: 4,
+                Block: 0,
+                UpgradedBlock: 0,
+                Shield: null,
+                UpgradedShield: null,
+                Value1: 8,
+                UpgradedValue1: 12,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -90,17 +96,16 @@ namespace Utsuho_character_mod.CardsR
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.None,
-                UpgradedKeywords: Keyword.None,
+                Keywords: Keyword.Retain,
+                UpgradedKeywords: Keyword.Retain,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
-                //RelativeCards: new List<string>() { "AyaNews" },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -113,28 +118,22 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(BlackHoleDef))]
         public sealed class BlackHole : Card
         {
-            // Token: 0x1700015E RID: 350
-            // (get) Token: 0x06000CB0 RID: 3248 RVA: 0x000178A9 File Offset: 0x00015AA9
-            [UsedImplicitly]
-            public override int AdditionalShield
+            IEnumerator ResetTrigger()
             {
-                get
-                {
-                    if (GameRun != null)
-                    {
-                        List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
-                        int total = cards.FindAll((Card card) => card.BaseName == "Dark Matter").Count;
-
-                        return base.Value1 * total;
-                    }
-                    return 0;
-                }
+                yield return new WaitForSecondsRealtime(1.0f);
+                NotifyChanged();
             }
-
-            // Token: 0x06000CB1 RID: 3249 RVA: 0x000178B7 File Offset: 0x00015AB7
-            protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
+            public override IEnumerable<BattleAction> OnTurnStartedInHand()
             {
-                yield return DefenseAction();
+                if (base.Zone == CardZone.Hand)
+                {
+                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                    //Card card = Battle.HandZone.Sample(base.GameRun.BattleRng);
+                    card.NotifyActivating();
+                    GameMaster.Instance.StartCoroutine(ResetTrigger());
+                    yield return new DiscardAction(card);
+                    yield return DefenseAction(Value1, 0);
+                }
                 yield break;
             }
         }

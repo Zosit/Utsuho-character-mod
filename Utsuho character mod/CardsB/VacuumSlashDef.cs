@@ -16,6 +16,7 @@ using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using LBoL.Base.Extensions;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -63,8 +64,8 @@ namespace Utsuho_character_mod.CardsR
                 Cost: new ManaGroup() { Black = 1, Any = 1 },
                 UpgradedCost: new ManaGroup() { Black = 1, Any = 1 },
                 MoneyCost: null,
-                Damage: 14,
-                UpgradedDamage: 20,
+                Damage: 9,
+                UpgradedDamage: 12,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
@@ -96,7 +97,6 @@ namespace Utsuho_character_mod.CardsR
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
-                //RelativeCards: new List<string>() { "AyaNews" },
                 RelativeCards: new List<string>() { "DarkMatter" },
                 UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
@@ -113,25 +113,13 @@ namespace Utsuho_character_mod.CardsR
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                bool triggered = false;
-                Card[] array = base.Battle.HandZone.SampleManyOrAll(999, base.GameRun.BattleRng);
-                if (array.Length != 0)
-                {
-                    foreach (Card card in array)
-                    {
-                        if (card.BaseName == "Dark Matter")
-                        {
-                            yield return new DiscardAction(card);
-                            triggered = true;
-                        }
-                    }
-                }
-                if(triggered)
+                Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                yield return new DiscardAction(card);
+                if (card.BaseName == "Dark Matter")
                 {
                     yield return AttackAction(selector);
-                    triggered = false;
                 }
-
+                yield return AttackAction(selector);
                 yield break;
             }
 

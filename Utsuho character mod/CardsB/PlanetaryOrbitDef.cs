@@ -60,19 +60,19 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.AllEnemies,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 3 },
-                UpgradedCost: new ManaGroup() { Black = 3 },
+                Cost: new ManaGroup() { Black = 2, Any = 2 },
+                UpgradedCost: new ManaGroup() { Black = 2, Any = 1 },
                 MoneyCost: null,
-                Damage: 5,
-                UpgradedDamage: 7,
-                Block: 5,
-                UpgradedBlock: 7,
+                Damage: 0,
+                UpgradedDamage: 0,
+                Block: 0,
+                UpgradedBlock: 0,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: null,
-                UpgradedValue1: null,
-                Value2: null,
-                UpgradedValue2: null,
+                Value1: 1,
+                UpgradedValue1: 1,
+                Value2: 1,
+                UpgradedValue2: 1,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -88,17 +88,16 @@ namespace Utsuho_character_mod.CardsR
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.None,
-                UpgradedKeywords: Keyword.None,
+                Keywords: Keyword.Accuracy,
+                UpgradedKeywords: Keyword.Accuracy,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
-                //RelativeCards: new List<string>() { "AyaNews" },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -119,31 +118,35 @@ namespace Utsuho_character_mod.CardsR
                 {
                     foreach (Card card in array)
                     {
-                        if (card.BaseName == "Dark Matter")
-                        {
-                            yield return new DiscardAction(card);
-                        }
+                        //if (card.BaseName == "Dark Matter")
+                        //{
+                        yield return new DiscardAction(card);
+                        this.DeltaDamage += Value1;
+                        //}
                     }
                 }
                 if (array2.Length != 0)
                 {
                     foreach (Card card in array2)
                     {
-                        if (card.BaseName == "Dark Matter")
-                        {
-                            yield return new MoveCardToDrawZoneAction(card, 0);
-                        }
+                        //if (card.BaseName == "Dark Matter")
+                        //{
+                        yield return new MoveCardToDrawZoneAction(card, 0);
+                        this.DeltaBlock += Value2;
+                        //}
                     }
                     yield return new ReshuffleAction();
                 }
-                for (int i = 0; i < array.Length; i++)
-                {
+                //for (int i = 0; i < array.Length; i++)
+                //{
                     yield return AttackAction(selector);
-                }
-                for (int i = 0; i < array.Length; i++)
-                {
+                //}
+                //for (int i = 0; i < array.Length; i++)
+                //{
                     yield return DefenseAction();
-                }
+                //}
+                this.DeltaDamage = 0;
+                this.DeltaBlock = 0;
 
                 yield break;
             }

@@ -16,6 +16,7 @@ using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using LBoL.Base.Extensions;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -61,7 +62,7 @@ namespace Utsuho_character_mod.CardsR
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
                 Cost: new ManaGroup() { Black = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Black = 1 },
+                UpgradedCost: new ManaGroup() { Black = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -69,8 +70,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: null,
-                UpgradedValue1: null,
+                Value1: 3,
+                UpgradedValue1: 4,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -96,9 +97,8 @@ namespace Utsuho_character_mod.CardsR
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
-                //RelativeCards: new List<string>() { "AyaNews" },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -115,26 +115,16 @@ namespace Utsuho_character_mod.CardsR
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                int total = 0;
-                Card[] array = base.Battle.HandZone.SampleManyOrAll(999, base.GameRun.BattleRng);
-                if (array.Length != 0)
+                for (int i = 0; i < Value1; i++)
                 {
-                    foreach (Card card in array)
-                    {
-                        if (card.BaseName == "Dark Matter")
-                        {
-                            yield return new DiscardAction(card);
-                            total++;
-                        }
-                    }
-                    for (int i = 0; i < total; i++)
-                    {
-                        yield return new DrawCardAction();
-                    }
+                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                    yield return new DiscardAction(card);
+                }
+                for (int i = 0; i< Value1; i++)
+                {
+                    yield return new DrawCardAction();
                 }
             }
-
         }
-
     }
 }

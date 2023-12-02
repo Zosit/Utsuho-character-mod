@@ -102,7 +102,7 @@ Unwinding:
 
 VacuumWave:
   Name: Vacuum Wave
-  Description: "Discard all |Dark Matter| from your hand.\nIf you discarded any cards this way, deal {Damage} damage to all enemies"
+  Description: "Deal {Damage} damage to each enemy.\nDiscard a random card from your hand.\nIf you discarded a |Dark Matter| this way, deal that much damage 1 additional time."
 
 AbyssNova: 
   Name: Abyss Nova
@@ -118,7 +118,7 @@ NightFalls:
 
 BlackHole: 
   Name: Black Hole
-  Description: "For every |Dark Matter| in hand, gain {Value1} |Barrier|."
+  Description: "|While in hand:| At the start of your turn gain {Value1} Block and discard a card."
 
 GravityWell:
   Name: Gravity Well
@@ -126,7 +126,7 @@ GravityWell:
 
 PlanetaryOrbit:
   Name: Planetary Orbit
-  Description: "Transpose |Dark Matter| between your draw and discard piles.\nEach moved to your discard deals {Damage} damage to all enemies, and each moved to your draw blocks for {Block}."
+  Description: "Transpose your draw and discard piles.\nEach card moved to your discard adds {Value1} damage to all enemies, and each moved to your draw adds {Value2} Block."
 
 Stasis:
   Name: Stasis
@@ -138,7 +138,7 @@ EntropicStar:
 
 EscapeVelocity:
   Name: Escape Velocity
-  Description: "Discard all |Dark Matter| in your hand, and draw that many cards."
+  Description: "Discard {Value1} random cards.\nDraw {Value1} cards."
 
 MassDriver:
   Name: Mass Driver

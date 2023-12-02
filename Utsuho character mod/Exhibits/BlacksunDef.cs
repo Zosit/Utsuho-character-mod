@@ -79,7 +79,6 @@ namespace Utsuho_character_mod.Exhibits
                 InitialCounter: null,
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
                 RelativeCards: new List<string>() { "DarkMatter" }
                 )
             {
