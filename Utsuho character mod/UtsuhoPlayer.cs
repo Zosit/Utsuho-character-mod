@@ -60,7 +60,7 @@ namespace Utsuho_character_mod
         {
             var sprites = new PlayerImages();
 
-            var asyncLoading = ResourceLoader.LoadSpriteAsync("utsuho.png", directorySource);
+            var asyncLoading = ResourceLoader.LoadSpriteAsync("Utsuho\\Images\\utsuho.png", directorySource);
 
             sprites.SetStartPanelStand(asyncLoading);
             sprites.SetWinStand(asyncLoading);
@@ -86,8 +86,8 @@ namespace Utsuho_character_mod
             InitialMoney: 3,
             InitialPower: 0,
             //temp
-            UltimateSkillA: "UtsuhoUlt",
-            UltimateSkillB: reimuConfig.UltimateSkillA,
+            UltimateSkillA: "UtsuhoUltR",
+            UltimateSkillB: "UtsuhoUltB",
             ExhibitA: "ControlRod",
             ExhibitB: "BlackSun",
             DeckA: new List<string> { "Shoot", "Shoot", "Boundary", "Boundary", "MarisaAttackR", "MarisaAttackR", "MarisaBlockB", "MarisaBlockB", "MarisaBlockB", "PowerCycle" },
@@ -114,7 +114,7 @@ namespace Utsuho_character_mod
 
         public override ModelOption LoadModelOptions()
         {
-            return new ModelOption(ResourceLoader.LoadSpriteAsync("Utsuho_Sprite.png", directorySource, ppu: 84));
+            return new ModelOption(ResourceLoader.LoadSpriteAsync("Utsuho\\Images\\Utsuho_Sprite.png", directorySource, ppu: 84));
         }
 
 

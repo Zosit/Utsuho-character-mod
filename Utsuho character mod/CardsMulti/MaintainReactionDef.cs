@@ -36,8 +36,8 @@ namespace Utsuho_character_mod.CardsMulti
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(embeddedSource);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "CardsEn.yaml");
+            var loc = new GlobalLocalization(directorySource);
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "Utsuho\\Localization\\CardsEn.yaml");
             return loc;
         }
 
@@ -59,9 +59,9 @@ namespace Utsuho_character_mod.CardsMulti
                 Rarity: Rarity.Uncommon,
                 Type: CardType.Ability,
                 TargetType: TargetType.Nobody,
-                Colors: new List<ManaColor>() { ManaColor.Red, ManaColor.Black },
+                Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1, Black = 1, Any = 1 },
+                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
                 UpgradedCost: null,
                 MoneyCost: null,
                 Damage: null,

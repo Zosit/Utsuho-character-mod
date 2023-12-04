@@ -29,7 +29,7 @@ Fission:
 
 EverythingBurns:
   Name: Everything Burns
-  Description: "Exile a card from the hand.\nFor every {Mana} spent:\nGain {Value1} |Heat|"
+  Description: "For every {Mana} spent: You may exile a card from your hand and gain {Value1} |Heat|"
 
 SkyFlight:
   Name: Sky Flight
@@ -114,7 +114,7 @@ SubterraneanSun:
 
 NightFalls: 
   Name: Night Falls
-  Description: "Apply {Value1} |Weak| to each enemy.\n|Retain| {Value2} random cards in your hand this turn"
+  Description: "Fill your hand with |Dark Matter|.\nDeal {Value1} damage times the number of |Dark Matter| generated."
 
 BlackHole: 
   Name: Black Hole

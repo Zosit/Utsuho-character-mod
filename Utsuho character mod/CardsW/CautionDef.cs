@@ -37,8 +37,8 @@ namespace Utsuho_character_mod.CardsW
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(embeddedSource);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "CardsEn.yaml");
+            var loc = new GlobalLocalization(directorySource);
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "Utsuho\\Localization\\CardsEn.yaml");
             return loc;
         }
 
@@ -102,7 +102,7 @@ namespace Utsuho_character_mod.CardsW
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Flippin'Loser",
                 SubIllustrator: new List<string>() { }
              );
 

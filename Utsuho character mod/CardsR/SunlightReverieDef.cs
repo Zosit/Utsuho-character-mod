@@ -40,8 +40,8 @@ namespace Utsuho_character_mod.CardsR
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(BepinexPlugin.embeddedSource);
-            loc.LocalizationFiles.AddLocaleFile(LBoL.Core.Locale.En, "CardsEn.yaml");
+            var loc = new GlobalLocalization(directorySource);
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "Utsuho\\Localization\\CardsEn.yaml");
             return loc;
         }
 

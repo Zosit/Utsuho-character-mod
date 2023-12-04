@@ -36,8 +36,8 @@ namespace Utsuho_character_mod.CardsR
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(BepinexPlugin.embeddedSource);
-            loc.LocalizationFiles.AddLocaleFile(LBoL.Core.Locale.En, "CardsEn.yaml");
+            var loc = new GlobalLocalization(directorySource);
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "Utsuho\\Localization\\CardsEn.yaml");
             return loc;
         }
 
@@ -70,8 +70,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 5,
-                UpgradedValue1: 7,
+                Value1: 7,
+                UpgradedValue1: 10,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: new ManaGroup() { Any = 1 },
@@ -97,7 +97,6 @@ namespace Utsuho_character_mod.CardsR
 
                 RelativeEffects: new List<string>() { "HeatStatus" },
                 UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
-                //RelativeCards: new List<string>() { "AyaNews" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -112,27 +111,26 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(EverythingBurnsDefinition))]
         public sealed class EverythingBurns : Card
         {
-            public override Interaction Precondition()
-            {
-                List<Card> list = (base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>());
-                if (!list.Empty<Card>())
-                {
-                    return new SelectCardInteraction(1, 1, list, SelectedCardHandling.DoNothing);
-                }
-                return null;
-            }
-
             public override ManaGroup GetXCostFromPooled(ManaGroup pooledMana)
             {
                 return pooledMana;
             }
-
-
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                if (precondition != null)
+                IReadOnlyList<Card> selectedCards = null;
+                List<Card> list = (base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>());
+                if (!list.Empty<Card>())
                 {
-                    IReadOnlyList<Card> selectedCards = ((SelectCardInteraction)precondition).SelectedCards;
+                    int number = base.SynergyAmount(consumingMana, ManaColor.Any, 1);
+                    SelectHandInteraction interaction = new SelectHandInteraction(0, number, list)
+                    {
+                        Source = this
+                    };
+                    yield return new InteractionAction(interaction, false);
+                    selectedCards = interaction.SelectedCards.ToList();
+                }
+                if (selectedCards != null)
+                {
                     if (selectedCards.Count > 0)
                     {
                         yield return new ExileManyCardAction(selectedCards);
@@ -141,26 +139,6 @@ namespace Utsuho_character_mod.CardsR
                 }
                 yield break;
             }
-            /*protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
-            {
-                yield return base.AttackAction(selector.SelectedEnemy);
-
-                if (!base.Battle.BattleShouldEnd)
-                {
-                    EnergyStatus statusEffect = base.Battle.Player.GetStatusEffect<EnergyStatus>();
-                    if (statusEffect != null)
-                    {
-                        yield return base.BuffAction<EnergyStatus>(-(statusEffect.Level) + base.Value1, 0, 0, 0, 0.2f);
-                    }
-                    else
-                    {
-                        yield return new ApplyStatusEffectAction<EnergyStatus>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
-                    }
-                    yield break;
-                }
-            }*/
-
         }
-
     }
 }

@@ -34,8 +34,8 @@ namespace Utsuho_character_mod.CardsR
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(embeddedSource);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "CardsEn.yaml");
+            var loc = new GlobalLocalization(directorySource);
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "Utsuho\\Localization\\CardsEn.yaml");
             return loc;
         }
 
@@ -64,8 +64,8 @@ namespace Utsuho_character_mod.CardsR
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
-                Block: 17,
-                UpgradedBlock: 22,
+                Block: 15,
+                UpgradedBlock: 20,
                 Shield: null,
                 UpgradedShield: null,
                 Value1: null,

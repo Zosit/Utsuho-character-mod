@@ -16,6 +16,7 @@ using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using LBoL.Base.Extensions;
+using System.Linq;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -35,8 +36,8 @@ namespace Utsuho_character_mod.CardsR
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(embeddedSource);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "CardsEn.yaml");
+            var loc = new GlobalLocalization(directorySource);
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "Utsuho\\Localization\\CardsEn.yaml");
             return loc;
         }
 
@@ -56,23 +57,23 @@ namespace Utsuho_character_mod.CardsR
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Uncommon,
-                Type: CardType.Skill,
-                TargetType: TargetType.AllEnemies,
+                Type: CardType.Attack,
+                TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
                 Cost: new ManaGroup() { Black = 1, Any = 1 },
                 UpgradedCost: new ManaGroup() { Black = 1, Any = 1 },
                 MoneyCost: null,
-                Damage: null,
-                UpgradedDamage: null,
+                Damage: 0,
+                UpgradedDamage: 0,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 3,
-                UpgradedValue1: 3,
-                Value2: 1,
-                UpgradedValue2: 2,
+                Value1: 4,
+                UpgradedValue1: 6,
+                Value2: null,
+                UpgradedValue2: null,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -96,9 +97,8 @@ namespace Utsuho_character_mod.CardsR
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
-                //RelativeCards: new List<string>() { "AyaNews" },
-                RelativeCards: new List<string>() { },
-                UpgradedRelativeCards: new List<string>() { },
+                RelativeCards: new List<string>() { "DarkMatter" },
+                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -113,47 +113,18 @@ namespace Utsuho_character_mod.CardsR
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                foreach (BattleAction battleAction in base.DebuffAction<Weak>(selector.GetUnits(base.Battle), 0, base.Value1, 0, 0, true, 0.2f))
+                /*foreach (BattleAction battleAction in base.DebuffAction<Weak>(selector.GetUnits(base.Battle), 0, base.Value1, 0, 0, true, 0.2f))
                 {
                     yield return battleAction;
-                }
-                /*int num = base.Battle.MaxHand - base.Battle.HandZone.Count;
-                IReadOnlyList<Card> drawZoneIndexOrder = base.Battle.DrawZoneIndexOrder;
-                List<Card> cards = base.Battle.DrawZone.Where((Card card) => card != this).ToList<Card>();
-                List<Card> darkMatter = drawZoneIndexOrder.FindAll((Card card) => card.BaseName == "Dark Matter");
-                int totalDM = darkMatter.Count;
-
-                if (num > Value2)
-                {
-                    num = Value2;
-                }
-                if (num > totalDM)
-                {
-                    num = totalDM;
-                }
+                }*/
+                int num = base.Battle.MaxHand - base.Battle.HandZone.Count;
                 for (int i = 0; i < num; i++)
                 {
-                    Battle.MoveCard(darkMatter[i], CardZone.Hand);
-                }*/
-
-
-                Card card;
-                Card card2;
-                if (Battle.HandZone.Count > 0)
-                    card = Battle.HandZone.Sample(base.GameRun.BattleRng);
-                else
-                    yield break;
-                if (this.IsUpgraded && Battle.HandZone.Count > 1)
-                {
-                    do
-                    {
-                        card2 = Battle.HandZone.Sample(base.GameRun.BattleRng);
-                    }
-                    while (card == card2);
-
-                    card2.IsTempRetain = true;
-                }                
-                card.IsTempRetain = true;
+                    yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"));
+                    this.DeltaDamage += Value1;
+                }
+                yield return AttackAction(selector);
+                this.DeltaDamage = 0;
                 yield break;
             }
 

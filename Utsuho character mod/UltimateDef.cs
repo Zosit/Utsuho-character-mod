@@ -23,7 +23,7 @@ namespace Utsuho_character_mod
 {
     public sealed class UtsuhoUltRDef : UltimateSkillTemplate
     {
-        public override IdContainer GetId() => nameof(UtsuhoUlt);
+        public override IdContainer GetId() => nameof(UtsuhoUltR);
 
         public override LocalizationOption LoadLocalization()
         {
@@ -34,7 +34,6 @@ namespace Utsuho_character_mod
 
         public override Sprite LoadSprite()
         {
-            //return ResourceLoader.LoadSprite("reimu_fist.png", embeddedSource);
             return ResourceLoader.LoadSprite("Nuclear.png", embeddedSource);
         }
 
@@ -60,9 +59,9 @@ namespace Utsuho_character_mod
     }
 
     [EntityLogic(typeof(UtsuhoUltRDef))]
-    public sealed class UtsuhoUlt : UltimateSkill
+    public sealed class UtsuhoUltR : UltimateSkill
     {
-        public UtsuhoUlt()
+        public UtsuhoUltR()
         {
             base.TargetType = TargetType.SingleEnemy;
             base.GunName = "Simple1";
@@ -78,8 +77,80 @@ namespace Utsuho_character_mod
             yield return PerformAction.Spell(Owner, new UtsuhoUltRDef().UniqueId);*/
 
             yield return new DamageAction(base.Owner, selector.GetEnemy(base.Battle), this.Damage, base.GunName, GunType.Single);
-            yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, Value1, null, null, null, 0f, true);
+            if (!base.Battle.BattleShouldEnd)
+            {
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, Value1, null, null, null, 0f, true);
+            }
+        }
+        IEnumerator DeactivateDeez(GameObject go)
+        {
+            yield return new WaitForSeconds(5f);
+            go.SetActive(false);
+        }
+    }
 
+
+    public sealed class UtsuhoUltBDef : UltimateSkillTemplate
+    {
+        public override IdContainer GetId() => nameof(UtsuhoUltB);
+
+        public override LocalizationOption LoadLocalization()
+        {
+            var gl = new GlobalLocalization(embeddedSource);
+            gl.LocalizationFiles.AddLocaleFile(Locale.En, "UltimateSkillEn");
+            return gl;
+        }
+
+        public override Sprite LoadSprite()
+        {
+            return ResourceLoader.LoadSprite("Nuclear.png", embeddedSource);
+        }
+
+        public override UltimateSkillConfig MakeConfig()
+        {
+            var config = new UltimateSkillConfig(
+                Id: "",
+                Order: 10,
+                PowerCost: 100,
+                PowerPerLevel: 100,
+                MaxPowerLevel: 2,
+                RepeatableType: UsRepeatableType.OncePerTurn,
+                Damage: 30,
+                Value1: 0,
+                Value2: 0,
+                Keywords: Keyword.None,
+                RelativeEffects: new List<string>() { },
+                RelativeCards: new List<string>() { "DarkMatter" }
+                );
+
+            return config;
+        }
+    }
+
+    [EntityLogic(typeof(UtsuhoUltBDef))]
+    public sealed class UtsuhoUltB : UltimateSkill
+    {
+        public UtsuhoUltB()
+        {
+            base.TargetType = TargetType.AllEnemies;
+            base.GunName = "Simple1";
+        }
+
+        protected override IEnumerable<BattleAction> Actions(UnitSelector selector)
+        {
+            /*var bgGo = StageTemplate.TryGetEnvObject(NewBackgrounds.ghibliDeez);
+
+            bgGo.SetActive(true);
+            GameMaster.Instance.StartCoroutine(DeactivateDeez(bgGo));
+
+            yield return PerformAction.Spell(Owner, new UtsuhoUltRDef().UniqueId);*/
+            yield return new DamageAction(base.Owner, selector.GetEnemies(base.Battle), this.Damage, base.GunName, GunType.Middle);
+            if (!base.Battle.BattleShouldEnd) {
+                Card[] cards = { Library.CreateCard("DarkMatter") };
+                yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
+                yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"));
+                yield return new AddCardsToDiscardAction(Library.CreateCard("DarkMatter"));
+            }
         }
         IEnumerator DeactivateDeez(GameObject go)
         {
