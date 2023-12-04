@@ -43,9 +43,7 @@ namespace Utsuho_character_mod.CardsR
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(directorySource);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "Utsuho\\Localization\\CardsEn.yaml");
-            return loc;
+            return UsefulFunctions.LocalizationCard(directorySource);
         }
 
         public override CardConfig MakeConfig()

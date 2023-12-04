@@ -18,6 +18,7 @@ using LBoL.Base.Extensions;
 using LBoL.Core.Battle.Interactions;
 using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsR.NuclearStrikeDefinition;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -37,9 +38,7 @@ namespace Utsuho_character_mod.CardsR
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(directorySource);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "Utsuho\\Localization\\CardsEn.yaml");
-            return loc;
+            return UsefulFunctions.LocalizationCard(directorySource);
         }
 
         public override CardConfig MakeConfig()
@@ -62,8 +61,8 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Red = 1, Any = 1 },
+                Cost: new ManaGroup() { Red = 1, Any = 2 },
+                UpgradedCost: new ManaGroup() { Red = 1, Any = 2 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -71,8 +70,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 5,
-                UpgradedValue1: 7,
+                Value1: 7,
+                UpgradedValue1: 10,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -99,7 +98,7 @@ namespace Utsuho_character_mod.CardsR
                 RelativeEffects: new List<string>() { "HeatStatus" },
                 UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
                 RelativeCards: new List<string>() { "NuclearStrike" },
-                UpgradedRelativeCards: new List<string>() { "NuclearStrike+" },
+                UpgradedRelativeCards: new List<string>() { "NuclearStrike" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -130,7 +129,7 @@ namespace Utsuho_character_mod.CardsR
                     {
                         int cardValue = selectedCards[0].TurnCost.Total;
                         yield return new ExileManyCardAction(selectedCards);
-                        NuclearStrike nuclearStrike = Library.CreateCard<NuclearStrike>(this.IsUpgraded);
+                        NuclearStrike nuclearStrike = Library.CreateCard<NuclearStrike>(false);
                         nuclearStrike.DeltaValue1 = cardValue * Value1;
                         yield return new AddCardsToHandAction(nuclearStrike);
                         yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, cardValue * (new int?(base.Value1)), null, null, null, 0f, true);

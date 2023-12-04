@@ -35,6 +35,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 using UnityEngine.Windows;
+using Utsuho_character_mod.Util;
 using static Utsuho_character_mod.BepinexPlugin;
 
 
@@ -50,9 +51,7 @@ namespace Utsuho_character_mod
 
         public override LocalizationOption LoadLocalization()
         {
-            var gl = new GlobalLocalization(embeddedSource);
-            gl.LocalizationFiles.AddLocaleFile(Locale.En, "PlayerUnitEn");
-            return gl;
+            return UsefulFunctions.LocalizationPlayer(directorySource);
         }
 
 
@@ -60,7 +59,7 @@ namespace Utsuho_character_mod
         {
             var sprites = new PlayerImages();
 
-            var asyncLoading = ResourceLoader.LoadSpriteAsync("Utsuho\\Images\\utsuho.png", directorySource);
+            var asyncLoading = ResourceLoader.LoadSpriteAsync("utsuho.png", directorySource);
 
             sprites.SetStartPanelStand(asyncLoading);
             sprites.SetWinStand(asyncLoading);
@@ -114,7 +113,7 @@ namespace Utsuho_character_mod
 
         public override ModelOption LoadModelOptions()
         {
-            return new ModelOption(ResourceLoader.LoadSpriteAsync("Utsuho\\Images\\Utsuho_Sprite.png", directorySource, ppu: 84));
+            return new ModelOption(ResourceLoader.LoadSpriteAsync("Utsuho_Sprite.png", directorySource, ppu: 84));
         }
 
 

@@ -15,6 +15,8 @@ using LBoL.Core.Battle.BattleActions;
 using LBoL.Presentation.UI.Panels;
 using LBoL.Core.Units;
 using LBoL.Core.Cards;
+using static Utsuho_character_mod.BepinexPlugin;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.Status
 {
@@ -28,9 +30,7 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(BepinexPlugin.embeddedSource);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "StatusEffectsEn.yaml");
-            return loc;
+            return UsefulFunctions.LocalizationStatus(directorySource);
         }
 
         [DontOverwrite]

@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -33,9 +34,7 @@ namespace Utsuho_character_mod.CardsR
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(directorySource);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "Utsuho\\Localization\\CardsEn.yaml");
-            return loc;
+            return UsefulFunctions.LocalizationCard(directorySource);
         }
 
         public override CardConfig MakeConfig()
@@ -58,7 +57,7 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1, Any = 2 },
+                Cost: new ManaGroup() { Red = 1, Any = 1 },
                 UpgradedCost: new ManaGroup() { Red = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: 0,
@@ -67,10 +66,10 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 18,
-                UpgradedValue1: 24,
-                Value2: 40,
-                UpgradedValue2: 40,
+                Value1: 15,
+                UpgradedValue1: 20,
+                Value2: 50,
+                UpgradedValue2: 50,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -124,7 +123,7 @@ namespace Utsuho_character_mod.CardsR
                     yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, Value1, null, null, null, 0f, true);
 
                     int level = base.GetSeLevel<HeatStatus>();
-                    if (level < Value2)
+                    if (level >= Value2)
                     {
                         yield return base.AttackAction(selector);
                         yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level), null, null, null, 0f, true);

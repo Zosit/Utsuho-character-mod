@@ -18,6 +18,7 @@ using static UnityEngine.UI.GridLayoutGroup;
 using UnityEngine;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod
 {
@@ -27,9 +28,7 @@ namespace Utsuho_character_mod
 
         public override LocalizationOption LoadLocalization()
         {
-            var gl = new GlobalLocalization(embeddedSource);
-            gl.LocalizationFiles.AddLocaleFile(Locale.En, "UltimateSkillEn");
-            return gl;
+            return UsefulFunctions.LocalizationUlt(directorySource);
         }
 
         public override Sprite LoadSprite()
@@ -96,9 +95,7 @@ namespace Utsuho_character_mod
 
         public override LocalizationOption LoadLocalization()
         {
-            var gl = new GlobalLocalization(embeddedSource);
-            gl.LocalizationFiles.AddLocaleFile(Locale.En, "UltimateSkillEn");
-            return gl;
+            return UsefulFunctions.LocalizationUlt(directorySource);
         }
 
         public override Sprite LoadSprite()

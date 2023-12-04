@@ -17,6 +17,7 @@ using System.Linq;
 using LBoL.Base.Extensions;
 using LBoL.Core.Battle.Interactions;
 using Utsuho_character_mod.Status;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -36,9 +37,7 @@ namespace Utsuho_character_mod.CardsR
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(directorySource);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "Utsuho\\Localization\\CardsEn.yaml");
-            return loc;
+            return UsefulFunctions.LocalizationCard(directorySource);
         }
 
         public override CardConfig MakeConfig()

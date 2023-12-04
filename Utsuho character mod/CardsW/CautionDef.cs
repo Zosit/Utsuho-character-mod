@@ -18,6 +18,7 @@ using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using LBoL.Base.Extensions;
 using JetBrains.Annotations;
 using System.Linq;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsW
 {
@@ -37,9 +38,7 @@ namespace Utsuho_character_mod.CardsW
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(directorySource);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "Utsuho\\Localization\\CardsEn.yaml");
-            return loc;
+            return UsefulFunctions.LocalizationCard(directorySource);
         }
 
         public override CardConfig MakeConfig()

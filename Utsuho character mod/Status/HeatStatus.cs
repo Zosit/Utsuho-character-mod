@@ -9,6 +9,13 @@ using LBoL.Core.StatusEffects;
 using LBoL.Base;
 using System.Collections.Generic;
 using Mono.Cecil;
+using static Utsuho_character_mod.BepinexPlugin;
+using Utsuho_character_mod.Util;
+using LBoL.Core.Units;
+using LBoL.Core.Battle;
+using LBoL.Core;
+using LBoL.Core.Battle.BattleActions;
+using LBoL.Core.Cards;
 
 namespace Utsuho_character_mod.Status
 {
@@ -22,9 +29,7 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(BepinexPlugin.embeddedSource);
-            loc.LocalizationFiles.AddLocaleFile(LBoL.Core.Locale.En, "StatusEffectsEn.yaml");
-            return loc;
+            return UsefulFunctions.LocalizationStatus(directorySource);
         }
 
         [DontOverwrite]
@@ -63,6 +68,34 @@ namespace Utsuho_character_mod.Status
     [EntityLogic(typeof(EnergyEffect))]
     public sealed class HeatStatus : StatusEffect
     {
+        private string GunName
+        {
+            get
+            {
+                if (base.Level <= 50)
+                {
+                    return "无差别起火";
+                }
+                return "无差别起火B";
+            }
+        }
+        protected override void OnAdded(Unit unit)
+        {
+            ReactOwnerEvent(Owner.TurnEnded, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
+        }
+        private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
+        {
+            int level = base.GetSeLevel<HeatStatus>();
 
+            yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(level / 5)), this.GunName, GunType.Single);
+
+            if (Battle.BattleShouldEnd)
+            {
+                yield break;
+            }
+            NotifyActivating();
+            yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level/5), null, null, null, 0f, true);
+            yield break;
+        }
     }
 }

@@ -9,7 +9,7 @@ BlastBurn:
 
 PlasmaBurn:
   Name: Plasma Burn
-  Description: "Gain {Value1} |Heat|.\nIf you have less than {Value2} heat, Vent for Damage."
+  Description: "Gain {Value1} |Heat|.\nIf you have at least {Value2} heat, |Vent| for Damage."
 
 StartReactor:
   Name: Start Reactor
@@ -46,7 +46,7 @@ MegaFlare:
 NuclearFusion:
   Name: Atomic Fire "Nuclear Fusion"
   Description: "|Exile| a card from your hand.\nGain |Heat| and add a |Nuclear Strike| with |Heat| equal to {Value1} times the cost of the card |Exiled|."
-  UpgradedDescription: "|Exile| a card from your hand.\nGain |Heat| and add a |Nuclear Strike+| with |Heat| equal to {Value1} times the cost of the card |Exiled|."
+  UpgradedDescription: "|Exile| a card from your hand.\nGain |Heat| and add a |Nuclear Strike| with |Heat| equal to {Value1} times the cost of the card |Exiled|."
 
 NuclearStrike:
   Name: Nuclear Strike

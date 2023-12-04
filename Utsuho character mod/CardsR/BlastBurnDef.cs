@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -33,9 +34,7 @@ namespace Utsuho_character_mod.CardsR
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(BepinexPlugin.directorySource);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "Utsuho\\Localization\\CardsEn.yaml");
-            return loc;
+            return UsefulFunctions.LocalizationCard(directorySource);
         }
 
         public override CardConfig MakeConfig()
@@ -123,19 +122,14 @@ namespace Utsuho_character_mod.CardsR
                 if (!base.Battle.BattleShouldEnd)
                 {
                     int level = base.GetSeLevel<HeatStatus>();
-                    bool canDebuff = false;
-                    if (selector.SelectedEnemy.IsAlive && (level >= 10))
-                    {
-                        canDebuff = true;
-                    }
-                    if (canDebuff && this.IsUpgraded)
+                    if (this.IsUpgraded)
                     {
                         yield return base.DebuffAction<Weak>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
                         yield return base.DebuffAction<Vulnerable>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
                     }
                     yield return base.AttackAction(selector.SelectedEnemy);
                     yield return base.BuffAction<HeatStatus>(-(level) + base.Value1, 0, 0, 0, 0.2f);
-                    if (canDebuff && !this.IsUpgraded)
+                    if (!this.IsUpgraded)
                     {
                         yield return base.DebuffAction<Weak>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
                         yield return base.DebuffAction<Vulnerable>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);

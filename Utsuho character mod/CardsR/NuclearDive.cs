@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -33,9 +34,7 @@ namespace Utsuho_character_mod.CardsR
 
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(directorySource);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "Utsuho\\Localization\\CardsEn.yaml");
-            return loc;
+            return UsefulFunctions.LocalizationCard(directorySource);
         }
 
         public override CardConfig MakeConfig()
@@ -58,8 +57,8 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 2, Any = 1 },
-                UpgradedCost: new ManaGroup() { Red = 2, Any = 1 },
+                Cost: new ManaGroup() { Red = 3 },
+                UpgradedCost: new ManaGroup() { Red = 3 },
                 MoneyCost: null,
                 Damage: 0,
                 UpgradedDamage: 0,

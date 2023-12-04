@@ -21,6 +21,7 @@ using LBoL.EntityLib.Exhibits.Shining;
 using LBoL.EntityLib.Exhibits;
 using LBoL.Core.Units;
 using Utsuho_character_mod.Status;
+using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.Exhibits
 {
@@ -33,11 +34,7 @@ namespace Utsuho_character_mod.Exhibits
 
         public override LocalizationOption LoadLocalization()
         {
-            // creates global localization for exhibits. Each entity type needs to have their own global localization
-            var globalLoc = new GlobalLocalization(embeddedSource);
-            globalLoc.LocalizationFiles.AddLocaleFile(Locale.En, "ExhibitsEn.yaml");
-
-            return globalLoc;
+            return UsefulFunctions.LocalizationExhibit(directorySource);
         }
 
         public override ExhibitSprites LoadSprite()

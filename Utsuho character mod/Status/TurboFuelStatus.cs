@@ -20,6 +20,7 @@ using LBoL.Core.Cards;
 using LBoL.Presentation;
 using System.Collections;
 using LBoL.Base.Extensions;
+using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.Status
@@ -34,9 +35,7 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override LocalizationOption LoadLocalization()
         {
-            var loc = new GlobalLocalization(BepinexPlugin.embeddedSource);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "StatusEffectsEn.yaml");
-            return loc;
+            return UsefulFunctions.LocalizationStatus(directorySource);
         }
 
         [DontOverwrite]
