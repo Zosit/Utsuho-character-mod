@@ -127,7 +127,7 @@ namespace Utsuho_character_mod.CardsR
             }
             private IEnumerable<BattleAction> OnCardUse(CardUsingEventArgs args)
             {
-                if (args.Card.BaseName == "Dark Matter")
+                if (args.Card.Id == "DarkMatter")
                 {
                     if (base.Battle.BattleShouldEnd)
                     {
@@ -135,27 +135,27 @@ namespace Utsuho_character_mod.CardsR
                     }
 
                     List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
-                    int total = cards.FindAll((Card card) => card.BaseName == "Dark Matter").Count;
+                    int total = cards.FindAll((Card card) => card.Id == "DarkMatter").Count;
                     this.SetTurnCost(this.BaseCost);
                     this.DecreaseTurnCost(new ManaGroup() { Any = total });
                 }
             }
             private IEnumerable<BattleAction> OnCardMove(CardMovingEventArgs args)
             {
-                if (args.Card.BaseName == "Dark Matter")
+                if (args.Card.Id == "DarkMatter")
                 {
                     if (base.Battle.BattleShouldEnd)
                     {
                         yield break;
                     }
-                    if (base.Zone != CardZone.Hand)
+                    /*if (base.Zone != CardZone.Hand)
                     {
                         yield break;
-                    }
+                    }*/
                     if ((args.SourceZone == CardZone.Hand) || args.DestinationZone == CardZone.Hand)
                     {
                         List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
-                        int total = cards.FindAll((Card card) => card.BaseName == "Dark Matter").Count;
+                        int total = cards.FindAll((Card card) => card.Id == "DarkMatter").Count;
                         this.SetTurnCost(this.BaseCost);
                         this.DecreaseTurnCost(new ManaGroup() { Any = total });
                     }
@@ -163,7 +163,7 @@ namespace Utsuho_character_mod.CardsR
             }
             private IEnumerable<BattleAction> OnCardDraw(CardEventArgs args)
             {
-                if (args.Card.BaseName == "Dark Matter")
+                if (args.Card.Id == "DarkMatter")
                 {
                     if (base.Battle.BattleShouldEnd)
                     {
@@ -174,9 +174,30 @@ namespace Utsuho_character_mod.CardsR
                         yield break;
                     }
                     List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
-                    int total = cards.FindAll((Card card) => card.BaseName == "Dark Matter").Count;
+                    int total = cards.FindAll((Card card) => card.Id == "DarkMatter").Count;
                     this.SetTurnCost(this.BaseCost);
                     this.DecreaseTurnCost(new ManaGroup() { Any = total });
+                }
+            }
+            private IEnumerable<BattleAction> OnCardAdded(CardsEventArgs args)
+            {
+                foreach (Card card in args.Cards)
+                {
+                    if (card.Id == "DarkMatter")
+                    {
+                        if (base.Battle.BattleShouldEnd)
+                        {
+                            yield break;
+                        }
+                        if (base.Zone != CardZone.Hand)
+                        {
+                            yield break;
+                        }
+                        List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
+                        int total = cards.FindAll((Card card) => card.Id == "DarkMatter").Count;
+                        this.SetTurnCost(this.BaseCost);
+                        this.DecreaseTurnCost(new ManaGroup() { Any = total });
+                    }
                 }
             }
             protected override void OnEnterBattle(BattleController battle)
@@ -188,13 +209,14 @@ namespace Utsuho_character_mod.CardsR
                 if (this.Zone == CardZone.Hand)
                 {
                     List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
-                    int total = cards.FindAll((Card card) => card.BaseName == "Dark Matter").Count;
+                    int total = cards.FindAll((Card card) => card.Id == "DarkMatter").Count;
                     this.DecreaseTurnCost(new ManaGroup() { Any = total });
                 }
 
                 base.ReactBattleEvent<CardMovingEventArgs>(battle.CardMoved, new EventSequencedReactor<CardMovingEventArgs>(this.OnCardMove));
                 base.ReactBattleEvent<CardEventArgs>(battle.CardDrawn, new EventSequencedReactor<CardEventArgs>(this.OnCardDraw));
                 base.ReactBattleEvent<CardUsingEventArgs>(battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUse));
+                base.ReactBattleEvent<CardsEventArgs>(battle.CardsAddedToHand, new EventSequencedReactor<CardsEventArgs>(this.OnCardAdded));
             }
 
             private IEnumerable<BattleAction> EnterHandReactor()
@@ -208,7 +230,7 @@ namespace Utsuho_character_mod.CardsR
                     yield break;
                 }
                 List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
-                int total = cards.FindAll((Card card) => card.BaseName == "Dark Matter").Count;
+                int total = cards.FindAll((Card card) => card.Id == "DarkMatter").Count;
                 this.SetTurnCost(this.BaseCost);
                 this.DecreaseTurnCost(new ManaGroup() { Any = total });
             }

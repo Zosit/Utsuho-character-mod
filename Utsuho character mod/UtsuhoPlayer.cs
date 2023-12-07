@@ -82,17 +82,16 @@ namespace Utsuho_character_mod
             IsSelectable: true,
             MaxHp: 80,
             InitialMana: new LBoL.Base.ManaGroup() { Red = 2, Black = 2 },
-            InitialMoney: 3,
+            InitialMoney: 10,
             InitialPower: 0,
-            //temp
             UltimateSkillA: "UtsuhoUltR",
             UltimateSkillB: "UtsuhoUltB",
             ExhibitA: "ControlRod",
             ExhibitB: "BlackSun",
             DeckA: new List<string> { "Shoot", "Shoot", "Boundary", "Boundary", "MarisaAttackR", "MarisaAttackR", "MarisaBlockB", "MarisaBlockB", "MarisaBlockB", "PowerCycle" },
             DeckB: new List<string> { "Shoot", "Shoot", "Boundary", "Boundary", "MarisaAttackB", "MarisaAttackB", "MarisaBlockR", "MarisaBlockR", "MarisaBlockR", "StarBreak" },
-            DifficultyA: 1,
-            DifficultyB: 1
+            DifficultyA: 2,
+            DifficultyB: 3
             );
             return config;
         }
@@ -109,7 +108,11 @@ namespace Utsuho_character_mod
 
         public override IdContainer GetId() => new UtsuhoPlayerDef().UniqueId;
 
-        public override LocalizationOption LoadLocalization() => new DirectLocalization(new Dictionary<string, object>() { { "Default", "Utsuho Reiuji" }, { "Short", "Utsuho" } });
+        //public override LocalizationOption LoadLocalization() => new DirectLocalization(new Dictionary<string, object>() { { "Default", "Utsuho Reiuji" }, { "Short", "Utsuho" } });
+        public override LocalizationOption LoadLocalization()
+        {
+            return UsefulFunctions.LocalizationModel(directorySource);
+        }
 
         public override ModelOption LoadModelOptions()
         {

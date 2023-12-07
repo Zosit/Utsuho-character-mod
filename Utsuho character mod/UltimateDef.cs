@@ -141,7 +141,7 @@ namespace Utsuho_character_mod
             GameMaster.Instance.StartCoroutine(DeactivateDeez(bgGo));
 
             yield return PerformAction.Spell(Owner, new UtsuhoUltRDef().UniqueId);*/
-            yield return new DamageAction(base.Owner, selector.GetEnemies(base.Battle), this.Damage, base.GunName, GunType.Middle);
+            yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, Damage, this.GunName, GunType.Single);
             if (!base.Battle.BattleShouldEnd) {
                 Card[] cards = { Library.CreateCard("DarkMatter") };
                 yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);

@@ -1,51 +1,51 @@
 HeatStatus:
-  Name: Heat
-  Description: "The keyword |Vent| spends all of this at once for an effect."
+  Name: 작열
+  Description: "{PlayerName}의 턴 종료시, |작열|의 20%를 소모하여 모든 적에게 그만큼 피해를 줍니다.\n|냉각|될시 한번에 전부 소모됩니다."
 
 ChargingStatus:
-  Name: Charging
-  Description: Gain |Heat| at the start of each turn.
+  Name: 가열
+  Description: "매 턴 시작시 |작열|을 얻습니다."
 
 GravityWellStatus:
-  Name: Gravity Well
-  Description: At the end of {PlayerName}'s turn, Gain {Level} Barrier and add 1 |Dark Matter| to your discard pile.
+  Name: 중력 분출
+  Description: "{PlayerName}의 턴 종료시 보호막을 {Level} 얻고 버린 카드 더미에 |암흑 물질|을 1장 추가합니다."
 
 MassDriverStatus:
-  Name: Mass Driver
-  Description: When you play a |Dark Matter|, deal {level} damage to all enemies.
+  Name: 매스 드라이버
+  Description: "|암흑 물질|을 사용할 때마다, 모든 적에게 피해를 {level} 줍니다."
 
 PointDeviceStatus:
-  Name: Point Device
-  Description: "|Dark Matter| costs nothing, doesn't exile and draws a card when played."
+  Name: 정밀장치
+  Description: "|암흑 물질|은 비용이 들지 않고, 소멸하지 않고 사용시 카드를 한장 뽑습니다."
 
 ResonanceStatus:
-  Name: Resonance
-  Description: "When you |Exile| a card, add a |Resonance| to your hand."
+  Name: 공명
+  Description: "자신의 카드가 |소멸|하면, |공명|을 패에 넣습니다."
 
 ResonancePlusStatus:
-  Name: Resonance+
-  Description: "When you |Exile| a card, add a |Resonance+| to your hand."
+  Name: 공명+
+  Description: "자신의 카드가 |소멸|하면, |공명+|를 패에 넣습니다."
 
 WasteNotStatus:
-  Name: Waste Not
-  Description: "When you exile a card, gain |Heat|"
+  Name: 재활용
+  Description: 자신의 카드가 |소멸|할때, |작열|을 얻습니다."
 
 CautionStatus:
   Name: CAUTION!
-  Description: "All cards have |Exile| and |Retain|.\nWhen you play a card, add {level} random card to your hand."
+  Description: "모든 카드가 |소멸|과 |보존|을 얻습니다.\n카드를 사용하면, 무작위 카드를 {level}장 패에 추가합니다."
 
 TurboFuelStatus:
-  Name: Turbo Fuel
-  Description: "At the start of your turn, gain {level} {manatype} and draw {level} cards.\nThen exile a random card in your hand."
+  Name: 터보연료
+  Description: "턴 시작시, {level}{manatype}를 얻고 카드를 {level}장 뽑는다.\n그 후 패의 무작위 카드를 소멸시킨다."
 
 RadiationStatus:
-  Name: Radiation
-  Description: "At the end of your turn, deal {level} damage to all enemies."
+  Name: 방사능
+  Description: "턴 종료시 모든 적에게 피해를 {level} 줍니다."
 
 HotSpringStatus:
-  Name: Hot Spring
-  Description: "At the start of your turn, gain {Level} |Radiation| and 1 |Hot Spring|."
+  Name: 구 지옥 온천
+  Description: "턴 시작시 |방사능|을 {Level}얻고 |구 지옥 온천|을 1 얻습니다."
 
 MaintainReactionStatus:
-  Name: Maintain Reaction
-  Description: "When you |Retain| a card, gain {level} |Heat|."
+  Name: 유지 보수
+  Description: "카드가 |보존|되면, |작열|을 {level} 얻습니다."

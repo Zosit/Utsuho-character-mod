@@ -113,7 +113,7 @@ namespace Utsuho_character_mod.CardsR
             {
                 Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
                 yield return new DiscardAction(card);
-                if (card.BaseName == "Dark Matter")
+                if (card.Id == "DarkMatter")
                 {
                     yield return AttackAction(selector);
                 }

@@ -111,8 +111,6 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(AbyssNovaDef))]
         public sealed class AbyssNova : Card
         {
-            // Token: 0x1700015E RID: 350
-            // (get) Token: 0x06000CB0 RID: 3248 RVA: 0x000178A9 File Offset: 0x00015AA9
             [UsedImplicitly]
             public override int AdditionalDamage
             {
@@ -125,14 +123,12 @@ namespace Utsuho_character_mod.CardsR
                     else
                     {
                         List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => card != this).ToList<Card>();
-                        int total = cards.FindAll((Card card) => card.BaseName == "Dark Matter").Count;
+                        int total = cards.FindAll((Card card) => card.Id == "DarkMatter").Count;
 
                         return base.Value1 * total;
                     }
                 }
             }
-
-            // Token: 0x06000CB1 RID: 3249 RVA: 0x000178B7 File Offset: 0x00015AB7
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield return AttackAction(selector);

@@ -116,7 +116,7 @@ namespace Utsuho_character_mod.CardsR
                 {
                     foreach (Card card in array)
                     {
-                        if (card.BaseName == "Dark Matter")
+                        if (card.Id == "DarkMatter")
                         {
                             yield return new MoveCardToDrawZoneAction(card, DrawZoneTarget.Random);
                             yield return AttackAction(selector);

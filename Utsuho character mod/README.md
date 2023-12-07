@@ -13,7 +13,7 @@ Alioth Studio for making Lost Branch of Legends.
 Programmer/Designer:
 - Zosit
 
-Card Illustrators:
+Artists:
 - Xeno
 - Flippin'Loser
 
@@ -22,3 +22,4 @@ Translators:
 
 Special Thanks:
 - NeoShrimp for making the Sideloader and Watermark mods used in this mod
+- Everyone on the Discord who chatted and commented about coding or design (special notice to Lvalon and IntoxicatedKid)

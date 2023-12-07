@@ -29,7 +29,7 @@ Fission:
 
 EverythingBurns:
   Name: Everything Burns
-  Description: "For every {Mana} spent: You may exile a card from your hand and gain {Value1} |Heat|"
+  Description: "For every {Mana} spent: Deal {Damage} damage, and you may exile a card from your hand."
 
 SkyFlight:
   Name: Sky Flight
@@ -76,6 +76,11 @@ NuclearDive:
   Name: Uncontainable Nuclear Reaction Dive
   Description: "Double your |Heat|.\nTake 1 damage for every 10 |Heat| you have\n|Vent| for damage"
 
+BunkerDown:
+  Name: Bunker Down
+  Description: "Gain {Block} Block.\n|Debut:| Gain {Value1} Barrier and reduce the cost of {SelfName} by {Mana}."
+  ExtraDescription1: "Gain {Block} Block.\n|d:Debut: Gain {Value1} Barrier. {SelfName} costs {Mana} less this combat.|"
+
 WasteNot:
   Name: Waste Not
   Description: "When you |Exile| a card, gain {Value1} |Heat|"
@@ -110,7 +115,7 @@ AbyssNova:
 
 SubterraneanSun: 
   Name: Subterranean Sun
-  Description: "Add |Dark Matter| to your hand until it is full. Add an equal amount to your draw pile and discard pile."
+  Description: "|While in hand:| At the start of your turn remove a random card from the |battlefield| and deal {Damage} damage to a random enemy.\nRepeat this an additional time for each turn {SelfName} is retained."
 
 NightFalls: 
   Name: Night Falls

@@ -56,21 +56,21 @@ namespace Utsuho_character_mod.CardsR
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Uncommon,
-                Type: CardType.Skill,
-                TargetType: TargetType.Nobody,
+                Type: CardType.Attack,
+                TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: true,
                 Cost: new ManaGroup() { Red = 2 },
                 UpgradedCost: null,
                 MoneyCost: null,
-                Damage: null,
-                UpgradedDamage: null,
+                Damage: 6,
+                UpgradedDamage: 9,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 7,
-                UpgradedValue1: 10,
+                Value1: null,
+                UpgradedValue1: null,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: new ManaGroup() { Any = 1 },
@@ -118,9 +118,9 @@ namespace Utsuho_character_mod.CardsR
             {
                 IReadOnlyList<Card> selectedCards = null;
                 List<Card> list = (base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>());
+                int number = base.SynergyAmount(consumingMana, ManaColor.Any, 1);
                 if (!list.Empty<Card>())
                 {
-                    int number = base.SynergyAmount(consumingMana, ManaColor.Any, 1);
                     SelectHandInteraction interaction = new SelectHandInteraction(0, number, list)
                     {
                         Source = this
@@ -133,9 +133,16 @@ namespace Utsuho_character_mod.CardsR
                     if (selectedCards.Count > 0)
                     {
                         yield return new ExileManyCardAction(selectedCards);
-                        yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, base.SynergyAmount(consumingMana, ManaColor.Any, 1) * (new int?(base.Value1)), null, null, null, 0f, true);
                     }
                 }
+                for(int i = 0; i < number; i++)
+                {
+                    if (selector.SelectedEnemy != null && selector.SelectedEnemy.IsAlive)
+                    {
+                        yield return base.AttackAction(selector.SelectedEnemy);
+                    }
+                }
+
                 yield break;
             }
         }

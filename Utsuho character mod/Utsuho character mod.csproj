@@ -342,11 +342,7 @@
       <None Remove="resources\CardsEn.yaml" />
       <None Remove="Resources\ChargingStatus.png" />
       <None Remove="Resources\ControlRod.png" />
-      <None Remove="Resources\ExhibitsEn.yaml" />
       <None Remove="Resources\GravityWellStatus.png" />
-      <None Remove="Resources\PlayerUnitEn.yaml" />
-      <None Remove="Resources\StatusEffectsEn.yaml" />
-      <None Remove="Resources\UltimateSkillEn.yaml" />
     </ItemGroup>
 
 

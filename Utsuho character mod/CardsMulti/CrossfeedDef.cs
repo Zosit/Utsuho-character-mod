@@ -134,7 +134,7 @@ namespace Utsuho_character_mod.CardsMulti
                 {
                     foreach (Card card in array)
                     {
-                        if (card.BaseName == "Dark Matter")
+                        if (card.Id == "DarkMatter")
                         {
                             yield return new DiscardAction(card);
                             total++;

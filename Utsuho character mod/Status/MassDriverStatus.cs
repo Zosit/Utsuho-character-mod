@@ -88,7 +88,7 @@ namespace Utsuho_character_mod.Status
         }
         private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
         {
-            if (args.Card.BaseName == "Dark Matter")
+            if (args.Card.Id == "DarkMatter")
             {
                 yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)base.Level), this.GunName, GunType.Single);
             }

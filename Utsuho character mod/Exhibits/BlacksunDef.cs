@@ -42,7 +42,7 @@ namespace Utsuho_character_mod.Exhibits
             // embedded resource folders are separated by a dot
             var folder = "Resources.";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
 
             exhibitSprites.main = wrap("");
 
@@ -103,7 +103,7 @@ namespace Utsuho_character_mod.Exhibits
 
             private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
             {
-                if ((args.Card.BaseName == "Dark Matter") && (triggered == false))
+                if ((args.Card.Id == "DarkMatter") && (triggered == false))
                 {
                     NotifyActivating();
                     triggered = true;

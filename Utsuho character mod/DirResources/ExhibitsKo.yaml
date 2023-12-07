@@ -1,7 +1,7 @@
 ControlRod:
-  Name: Control Rod
-  Description: "Whenever you play a card, gain 1 |Heat|."
+  Name: 제어봉
+  Description: "카드를 사용할 때 마다 |작열|을 1 얻습니다."
 
 BlackSun:
-  Name: Black Sun
-  Description: "On the first Dark Matter you play each turn, gain {Mana}."
+  Name: 검은 태양
+  Description: "매 턴마다 |암흑 물질|을 처음 사용할때 {Mana}를 얻습니다."

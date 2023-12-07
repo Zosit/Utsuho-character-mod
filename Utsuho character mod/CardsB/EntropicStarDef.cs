@@ -97,7 +97,6 @@ namespace Utsuho_character_mod.CardsR
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
-                //RelativeCards: new List<string>() { "AyaNews" },
                 RelativeCards: new List<string>() { "DarkMatter" },
                 UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
@@ -117,7 +116,7 @@ namespace Utsuho_character_mod.CardsR
                 if (GameRun != null)
                 {
                     List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => card != this).ToList<Card>();
-                    int total = cards.FindAll((Card card) => card.BaseName == "Dark Matter").Count;
+                    int total = cards.FindAll((Card card) => card.Id == "DarkMatter").Count;
                     for (int i = 0; i < total; i++)
                     {
                         yield return new AddCardsToDiscardAction(Library.CreateCard("DarkMatter"));

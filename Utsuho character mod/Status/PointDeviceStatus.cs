@@ -82,7 +82,7 @@ namespace Utsuho_character_mod.Status
         }
         private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
         {
-            if (args.Card.BaseName == "Dark Matter")
+            if (args.Card.Id == "DarkMatter")
             {
                 yield return new MoveCardAction(args.Card, CardZone.Discard);
                 yield return new DrawCardAction();
@@ -102,7 +102,7 @@ namespace Utsuho_character_mod.Status
         {
             foreach (Card card in cards)
             {
-                if (card.BaseName == "Dark Matter")
+                if (card.Id == "DarkMatter")
                 {
                     card.FreeCost = true;
                 }
@@ -113,7 +113,7 @@ namespace Utsuho_character_mod.Status
         {
             foreach (Card card in base.Battle.EnumerateAllCards())
             {
-                if (card.BaseName == "Dark Matter")
+                if (card.Id == "DarkMatter")
                 {
                     card.FreeCost = false;
                 }

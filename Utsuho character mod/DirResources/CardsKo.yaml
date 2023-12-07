@@ -4,8 +4,8 @@ PowerCycle:
 
 BlastBurn:
   Name: 블라스트번
-  Description: "|냉각|하고, 그 수치만큼 피해를 줍니다.\n|작열|이 10 이상이라면, 허약과 취약 {Value1} 부여"
-  UpgradedDescription: "|작열|이 10 이상이라면, 허약과 취약 {Value1} 부여.\n|냉각|하고, 그 수치만큼 피해를 줍니다."
+  Description: "|냉각|하고, 그 수치만큼 피해를 줍니다.\n허약과 취약 {Value1} 부여"
+  UpgradedDescription: "허약과 취약 {Value1} 부여.\n|냉각|하고, 그 수치만큼 피해를 줍니다."
 
 PlasmaBurn:
   Name: 플라즈마 연소
@@ -82,7 +82,7 @@ WasteNot:
 
 DarkMatter:
   Name: 암흑 물질
-  Description: "|뽑을때 발동|: 이번 턴 |보존|.\n|우츠호|카드의 무작위 효과를 {SelfName}에 적용합니다."
+  Description: "|뽑을때 발동|: 이번 턴 |보존|.\n무작위 대상의 |우츠호|카드는 {SelfName}을 대상으로 합니다."
 
 StarBreak:
   Name: 스타 브레이크
@@ -166,7 +166,7 @@ Blueshift:
 
 Resonance:
   Name: 공명
-  Description: "피해를 {Damage} 줍니다.\n남은 전투동안, {SelfName}이 피해를 추가로 {Value1} 줍니다.\n자신의 카드가 |소멸|하면, {SelfName}를 패에 넣습니다."
+  Description: "피해를 {Damage} 줍니다.\n남은 전투동안, {SelfName}이 피해를 추가로 {Value1} 줍니다.\n자신의 카드가 |소멸|하면, {SelfName}을 패에 넣습니다."
 
 Disintegrate:
   Name: 붕괴
@@ -199,15 +199,15 @@ MaintainReaction:
 
 Initialize:
   Name: 초기화
-  Description: "{Mana}를 지불할 시:\n|작열|을 {Value1} 얻고 패에 |암흑 물질|을 한장 추가한다."
+  Description: "{Mana}를 지불할 시:\n|작열|을 {Value1} 얻고 패에 |암흑 물질|을 한장 추가합니다."
 
 Crossfeed:
   Name: 교차공급
-  Description: "|냉각|하고, 그 수치만큼 피해를 줍니다.\n|작열| 10 마다 |암흑 물질|을 {Value1}장 버린 카드 더미에 추가한다.\n패의 모든 |암흑 물질|을 버리고 그 수만큼 |작열|을 {Value2}얻습니다."
+  Description: "|냉각|하고, 그 수치만큼 피해를 줍니다.\n|작열| 10 마다 |암흑 물질|을 {Value1}장 버린 카드 더미에 추가합니다.\n패의 모든 |암흑 물질|을 버리고 그 수만큼 |작열|을 {Value2}얻습니다."
 
 SunCrow:
   Name: 태양을 훔친 까마귀
-  Description: "|전장|의 모든 |암흑 물질|을 제거한다.\n제거한 만큼 |작열|을 {Value1} 얻습니다."
+  Description: "|전장|의 모든 |암흑 물질|을 제거합니다.\n제거한 만큼 |작열|을 {Value1} 얻습니다."
 
 HotSpring:
   Name: 구 지옥 온천

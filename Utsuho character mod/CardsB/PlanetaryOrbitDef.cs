@@ -117,7 +117,7 @@ namespace Utsuho_character_mod.CardsR
                 {
                     foreach (Card card in array)
                     {
-                        //if (card.BaseName == "Dark Matter")
+                        //if (card.Id == "DarkMatter")
                         //{
                         yield return new DiscardAction(card);
                         this.DeltaDamage += Value1;
@@ -128,7 +128,7 @@ namespace Utsuho_character_mod.CardsR
                 {
                     foreach (Card card in array2)
                     {
-                        //if (card.BaseName == "Dark Matter")
+                        //if (card.Id == "DarkMatter")
                         //{
                         yield return new MoveCardToDrawZoneAction(card, 0);
                         this.DeltaBlock += Value2;

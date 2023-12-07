@@ -16,6 +16,9 @@ using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using Utsuho_character_mod.Util;
+using System.Linq;
+using LBoL.Base.Extensions;
+using LBoL.Core.Units;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -55,14 +58,14 @@ namespace Utsuho_character_mod.CardsR
                 IsUpgradable: true,
                 Rarity: Rarity.Rare,
                 Type: CardType.Skill,
-                TargetType: TargetType.Nobody,
+                TargetType: TargetType.RandomEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 3 },
-                UpgradedCost: new ManaGroup() { Black = 1, Any = 2 },
+                Cost: new ManaGroup() { },
+                UpgradedCost: new ManaGroup() { },
                 MoneyCost: null,
-                Damage: null,
-                UpgradedDamage: null,
+                Damage: 10,
+                UpgradedDamage: 14,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
@@ -86,8 +89,8 @@ namespace Utsuho_character_mod.CardsR
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Exile,
-                UpgradedKeywords: Keyword.Exile,
+                Keywords: Keyword.Retain | Keyword.Forbidden,
+                UpgradedKeywords: Keyword.Retain | Keyword.Forbidden,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
@@ -108,33 +111,28 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(SubterraneanSunDef))]
         public sealed class SubterraneanSun : Card
         {
+            private int count = 1;
 
-
-            protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
+            public override IEnumerable<BattleAction> OnTurnStartedInHand()
             {
-                int totalAdded = Battle.MaxHand - Battle.HandZone.Count;
-                List<Card> cards = new List<Card>();
-                for (int i = 0; i < totalAdded; i++)
+                for (int i = 0; i < count; i++)
                 {
-                    cards.Add(Library.CreateCard("DarkMatter"));
+                    List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => card != this).ToList<Card>();
+                    if(cards.Count != 0)
+                    {
+                        Card card = Util.UsefulFunctions.RandomUtsuho(cards);
+                        yield return new ExileCardAction(card);
+                        yield return new RemoveCardAction(card);
+                        EnemyUnit target = Battle.EnemyGroup.Alives.Sample(GameRun.BattleRng);
+                        if (target != null && target.IsAlive)
+                        {
+                            yield return AttackAction(target);
+                        }
+                    }
                 }
-                yield return new AddCardsToHandAction(cards);
-                List<Card> cards2 = new List<Card>();
-                for (int i = 0; i < totalAdded; i++)
-                {
-                    cards2.Add(Library.CreateCard("DarkMatter"));
-                }
-                yield return new AddCardsToDiscardAction(cards2);
-                List<Card> cards3 = new List<Card>();
-                for (int i = 0; i < totalAdded; i++)
-                {
-                    cards3.Add(Library.CreateCard("DarkMatter"));
-                }
-                yield return new AddCardsToDrawZoneAction(cards3, DrawZoneTarget.Random);
+                count++;
                 yield break;
             }
-
         }
-
     }
 }

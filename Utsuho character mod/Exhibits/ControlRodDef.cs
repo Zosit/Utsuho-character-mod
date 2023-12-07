@@ -42,7 +42,7 @@ namespace Utsuho_character_mod.Exhibits
             // embedded resource folders are separated by a dot
             var folder = "Resources.";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
 
             exhibitSprites.main = wrap("");
 

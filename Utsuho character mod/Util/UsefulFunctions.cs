@@ -15,7 +15,7 @@ namespace Utsuho_character_mod.Util
         {
             foreach (Card card in cards)
             {
-                if (card.BaseName == "Dark Matter") 
+                if (card.Id == "DarkMatter") 
                     return card; 
             }
             return cards.Sample(cards[0].GameRun.BattleRng);
@@ -24,7 +24,7 @@ namespace Utsuho_character_mod.Util
         {
             foreach (Card card in cards)
             {
-                if (card.BaseName == "Dark Matter")
+                if (card.Id == "DarkMatter")
                     return card;
             }
             return cards.Sample(cards[0].GameRun.BattleRng);
@@ -63,6 +63,13 @@ namespace Utsuho_character_mod.Util
             var loc = new GlobalLocalization(dirsorc);
             loc.LocalizationFiles.AddLocaleFile(Locale.En, "PlayerUnitEn.yaml");
             loc.LocalizationFiles.AddLocaleFile(Locale.Ko, "PlayerUnitKo.yaml");
+            return loc;
+        }
+        public static GlobalLocalization LocalizationModel(DirectorySource dirsorc)
+        {
+            var loc = new GlobalLocalization(dirsorc);
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "PlayerModelEn.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.Ko, "PlayerModelKo.yaml");
             return loc;
         }
     }
