@@ -42,6 +42,8 @@ namespace Utsuho_character_mod.CardsR
             var cardConfig = new CardConfig(
                 Index: sequenceTable.Next(typeof(CardConfig)),
                 Id: "",
+                ImageId: "",
+                UpgradeImageId: "",
                 Order: 10,
                 AutoPerform: true,
                 Perform: new string[0][],
@@ -128,15 +130,13 @@ namespace Utsuho_character_mod.CardsR
                         yield return base.DebuffAction<Vulnerable>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
                     }
                     yield return base.AttackAction(selector.SelectedEnemy);
-                    yield return base.BuffAction<HeatStatus>(-(level) + base.Value1, 0, 0, 0, 0.2f);
+                    if (level != 0) {
+                        yield return new RemoveStatusEffectAction(Battle.Player.GetStatusEffect<HeatStatus>());
+                    }
                     if (!this.IsUpgraded)
                     {
                         yield return base.DebuffAction<Weak>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
                         yield return base.DebuffAction<Vulnerable>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
-                    }
-                    else
-                    {
-                        yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
                     }
                     yield break;
                 }

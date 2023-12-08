@@ -42,6 +42,7 @@ namespace Utsuho_character_mod.Status
         {
             var statusEffectConfig = new StatusEffectConfig(
                             Id: "",
+                            Index: 0,
                             Order: 10,
                             Type: StatusEffectType.Positive,
                             IsVerbose: false,

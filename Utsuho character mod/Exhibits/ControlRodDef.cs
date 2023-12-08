@@ -45,7 +45,6 @@ namespace Utsuho_character_mod.Exhibits
             Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
 
             exhibitSprites.main = wrap("");
-
             return exhibitSprites;
         }
 

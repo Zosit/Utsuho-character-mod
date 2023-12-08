@@ -42,6 +42,8 @@ namespace Utsuho_character_mod.CardsR
             var cardConfig = new CardConfig(
                 Index: sequenceTable.Next(typeof(CardConfig)),
                 Id: "",
+                ImageId: "",
+                UpgradeImageId: "",
                 Order: 10,
                 AutoPerform: true,
                 Perform: new string[0][],
@@ -119,8 +121,10 @@ namespace Utsuho_character_mod.CardsR
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 int level = base.GetSeLevel<HeatStatus>();
-                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, level, null, null, null, 0f, true);
-
+                if (level != 0)
+                {
+                    yield return new RemoveStatusEffectAction(Battle.Player.GetStatusEffect<HeatStatus>());
+                }
                 yield return base.DamageSelfAction(level / 10);
 
                 if (!base.Battle.BattleShouldEnd)
@@ -129,7 +133,7 @@ namespace Utsuho_character_mod.CardsR
                 }
                 if (!base.Battle.BattleShouldEnd)
                 {
-                    yield return base.BuffAction<HeatStatus>(-(level), 0, 0, 0, 0.2f);
+                    yield return new RemoveStatusEffectAction(Battle.Player.GetStatusEffect<HeatStatus>());
                 }
                 yield break;
             }

@@ -42,6 +42,7 @@ namespace Utsuho_character_mod.Status
         {
             var statusEffectConfig = new StatusEffectConfig(
                             Id: "",
+                            Index: 0,
                             Order: 10,
                             Type: StatusEffectType.Positive,
                             IsVerbose: false,
@@ -87,8 +88,10 @@ namespace Utsuho_character_mod.Status
         {
             int level = base.GetSeLevel<HeatStatus>();
 
-            yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(level / 5)), this.GunName, GunType.Single);
-
+            if (level >= 5)
+            {
+                yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(level / 5)), this.GunName, GunType.Single);
+            }
             if (Battle.BattleShouldEnd)
             {
                 yield break;

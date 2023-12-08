@@ -4,8 +4,8 @@ PowerCycle:
 
 BlastBurn:
   Name: Blast Burn
-  Description: "|Vent| for damage.\nIf you had 10 or more |Heat|, apply {Value1} Weak and Vulnerable."
-  UpgradedDescription: "If you have 10 or more |Heat|, apply {Value1} Weak and Vulnerable.\n|Vent| for damage."
+  Description: "|Vent| for damage.\nApply {Value1} Weak and Vulnerable."
+  UpgradedDescription: "Apply {Value1} Weak and Vulnerable.\n|Vent| for damage."
 
 PlasmaBurn:
   Name: Plasma Burn

@@ -47,6 +47,8 @@ namespace Utsuho_character_mod.CardsR
             var cardConfig = new CardConfig(
                 Index: sequenceTable.Next(typeof(CardConfig)),
                 Id: "",
+                ImageId: "",
+                UpgradeImageId: "",
                 Order: 10,
                 AutoPerform: true,
                 Perform: new string[0][],

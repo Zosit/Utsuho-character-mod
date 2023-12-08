@@ -261,16 +261,16 @@
           <HintPath>D:\SteamLibrary\steamapps\common\LBoL\LBoL_Data\Managed\LBoL.Base.dll</HintPath>
         </Reference>
         <Reference Include="LBoL.ConfigData">
-            <HintPath>$(GameFolder)\LBoL_Data\Managed\LBoL.ConfigData.dll</HintPath>
+          <HintPath>D:\SteamLibrary\steamapps\common\LBoL\LBoL_Data\Managed\LBoL.ConfigData.dll</HintPath>
         </Reference>
         <Reference Include="LBoL.Core">
-            <HintPath>$(GameFolder)\LBoL_Data\Managed\LBoL.Core.dll</HintPath>
+          <HintPath>D:\SteamLibrary\steamapps\common\LBoL\LBoL_Data\Managed\LBoL.Core.dll</HintPath>
         </Reference>
         <Reference Include="LBoL.EntityLib">
-            <HintPath>$(GameFolder)\LBoL_Data\Managed\LBoL.EntityLib.dll</HintPath>
+          <HintPath>D:\SteamLibrary\steamapps\common\LBoL\LBoL_Data\Managed\LBoL.EntityLib.dll</HintPath>
         </Reference>
         <Reference Include="LBoL.Presentation">
-            <HintPath>$(GameFolder)\LBoL_Data\Managed\LBoL.Presentation.dll</HintPath>
+          <HintPath>D:\SteamLibrary\steamapps\common\LBoL\LBoL_Data\Managed\LBoL.Presentation.dll</HintPath>
         </Reference>
         <Reference Include="Untitled.ConfigDataBuilder.Base">
             <HintPath>$(GameFolder)\LBoL_Data\Managed\Untitled.ConfigDataBuilder.Base.dll</HintPath>

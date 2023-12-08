@@ -42,6 +42,8 @@ namespace Utsuho_character_mod.CardsR
             var cardConfig = new CardConfig(
                 Index: sequenceTable.Next(typeof(CardConfig)),
                 Id: "",
+                ImageId: "",
+                UpgradeImageId: "",
                 Order: 10,
                 AutoPerform: true,
                 Perform: new string[0][],
@@ -126,7 +128,7 @@ namespace Utsuho_character_mod.CardsR
                     if (level >= Value2)
                     {
                         yield return base.AttackAction(selector);
-                        yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level), null, null, null, 0f, true);
+                        yield return new RemoveStatusEffectAction(Battle.Player.GetStatusEffect<HeatStatus>());
                     }
 
                     yield break;
