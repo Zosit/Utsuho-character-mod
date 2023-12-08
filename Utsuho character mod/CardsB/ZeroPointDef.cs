@@ -18,11 +18,11 @@ using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsB
 {
-    public sealed class PointDeviceDefinition : CardTemplate
+    public sealed class ZeroPointDefinition : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(PointDevice);
+            return nameof(ZeroPoint);
         }
 
         public override CardImages LoadCardImages()
@@ -53,21 +53,21 @@ namespace Utsuho_character_mod.CardsB
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Rare,
-                Type: CardType.Skill,
+                Type: CardType.Defense,
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Black = 1, Any = 1 },
+                Cost: new ManaGroup() { Black = 1 },
+                UpgradedCost: new ManaGroup() { Black = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
                 Block: null,
                 UpgradedBlock: null,
-                Shield: null,
-                UpgradedShield: null,
-                Value1: 2,
-                UpgradedValue1: 3,
+                Shield: 5,
+                UpgradedShield: 8,
+                Value1: null,
+                UpgradedValue1: null,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -85,14 +85,14 @@ namespace Utsuho_character_mod.CardsB
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Exile,
-                UpgradedKeywords: Keyword.Exile,
+                Keywords: Keyword.None,
+                UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "PointDeviceStatus" },
-                UpgradedRelativeEffects: new List<string>() { "PointDeviceStatus" },
+                RelativeEffects: new List<string>() { },
+                UpgradedRelativeEffects: new List<string>() { },
                 RelativeCards: new List<string>() { "DarkMatter" },
                 UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
@@ -104,16 +104,31 @@ namespace Utsuho_character_mod.CardsB
             return cardConfig;
         }
 
-        [EntityLogic(typeof(PointDeviceDefinition))]
-        public sealed class PointDevice : Card
+        [EntityLogic(typeof(ZeroPointDefinition))]
+        public sealed class ZeroPoint : Card
         {
 
-
+            protected override void OnEnterBattle(BattleController battle)
+            {
+                base.ReactBattleEvent<CardUsingEventArgs>(battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsed));
+            }
+            private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
+            {
+                if ((args.Card.Id == "DarkMatter") && (this.Zone == CardZone.Discard))
+                {
+                    if (base.Battle.BattleShouldEnd)
+                    {
+                        yield break;
+                    }
+                    yield return new MoveCardAction(this, CardZone.Hand);
+                    yield break;
+                }
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 if (!Battle.BattleShouldEnd)
                 {
-                    yield return new ApplyStatusEffectAction<PointDeviceStatus>(Battle.Player, null, new int?(Value1), null, null, 0f, true);
+                    yield return DefenseAction();
                     yield break;
                 }
             }

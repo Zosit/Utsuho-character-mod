@@ -62,11 +62,11 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Any = 4 },
-                UpgradedCost: new ManaGroup() { Black = 1, Any = 3 },
+                Cost: new ManaGroup() { Black = 1, Any = 6 },
+                UpgradedCost: new ManaGroup() { Black = 1, Any = 5 },
                 MoneyCost: null,
-                Damage: 30,
-                UpgradedDamage: 30,
+                Damage: 40,
+                UpgradedDamage: 40,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
@@ -148,10 +148,10 @@ namespace Utsuho_character_mod.CardsR
                     {
                         yield break;
                     }
-                    /*if (base.Zone != CardZone.Hand)
+                    if (base.Zone != CardZone.Hand)
                     {
                         yield break;
-                    }*/
+                    }
                     if ((args.SourceZone == CardZone.Hand) || args.DestinationZone == CardZone.Hand)
                     {
                         List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
@@ -200,12 +200,26 @@ namespace Utsuho_character_mod.CardsR
                     }
                 }
             }
+            private IEnumerable<BattleAction> OnCardExiled(CardEventArgs args)
+            {
+                if (args.Card.Id == "DarkMatter")
+                {
+                    if (base.Battle.BattleShouldEnd)
+                    {
+                        yield break;
+                    }
+                    if (base.Zone != CardZone.Hand)
+                    {
+                        yield break;
+                    }
+                    List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
+                    int total = cards.FindAll((Card card) => card.Id == "DarkMatter").Count;
+                    this.SetTurnCost(this.BaseCost);
+                    this.DecreaseTurnCost(new ManaGroup() { Any = total });
+                }
+            }
             protected override void OnEnterBattle(BattleController battle)
             {
-                /*if (base.Zone == CardZone.Hand)
-                {
-                    base.React(new LazySequencedReactor(this.EnterHandReactor));
-                }*/
                 if (this.Zone == CardZone.Hand)
                 {
                     List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
@@ -217,6 +231,7 @@ namespace Utsuho_character_mod.CardsR
                 base.ReactBattleEvent<CardEventArgs>(battle.CardDrawn, new EventSequencedReactor<CardEventArgs>(this.OnCardDraw));
                 base.ReactBattleEvent<CardUsingEventArgs>(battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUse));
                 base.ReactBattleEvent<CardsEventArgs>(battle.CardsAddedToHand, new EventSequencedReactor<CardsEventArgs>(this.OnCardAdded));
+                base.ReactBattleEvent<CardEventArgs>(base.Battle.CardExiled, new EventSequencedReactor<CardEventArgs>(this.OnCardExiled));
             }
 
             private IEnumerable<BattleAction> EnterHandReactor()

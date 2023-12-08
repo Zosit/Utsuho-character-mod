@@ -123,7 +123,7 @@ NightFalls:
 
 BlackHole: 
   Name: Black Hole
-  Description: "|While in hand:| At the start of your turn gain {Value1} Block and discard a card."
+  Description: "|While in hand:| At the start of your turn gain {Value1} Block and discard a random card."
 
 GravityWell:
   Name: Gravity Well
@@ -149,9 +149,9 @@ MassDriver:
   Name: Mass Driver
   Description: "When you play a |Dark Matter|, deal {Value1} damage to all enemies."
 
-PointDevice:
-  Name: Point Device
-  Description: "For the next {Value1} turns, |Dark Matter| costs nothing, doesn't exile and draws a card when played."
+ZeroPoint:
+  Name: Zero Point Module
+  Description: "Gain {Shield} Barrier.\nWhenever the Player plays a |Dark Matter|, return {SelfName} from the discard pile to the hand."
 
 SuperGiant:
   Name: Super Giant
@@ -160,6 +160,10 @@ SuperGiant:
 WhiteHole:
   Name: White Hole
   Description: "|On Retain:| Gain {Value1} block, and add a |Dark Matter| to your discard pile."
+
+FixedStar:
+  Name: "Blazing Star \"Fixed Star\""
+  Description: "At the start of your turn, discard {Value1} random cards.\nAt the end of your turn, temporarily |retain| {Value1} cards."
 
 Coolant:
   Name: Coolant

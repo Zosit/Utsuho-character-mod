@@ -14,24 +14,15 @@ using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
-using static Utsuho_character_mod.CardsB.DarkMatterDef;
-using LBoL.Base.Extensions;
-using JetBrains.Annotations;
-using System.Linq;
-using System.Collections;
-using UnityEngine;
-using LBoL.Presentation;
 using Utsuho_character_mod.Util;
-using static UnityEngine.UI.GridLayoutGroup;
-using LBoL.Core.Randoms;
 
-namespace Utsuho_character_mod.CardsR
+namespace Utsuho_character_mod.CardsB
 {
-    public sealed class BlackHoleDef : CardTemplate
+    public sealed class FixedStarDefinition : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(BlackHole);
+            return nameof(FixedStar);
         }
 
         public override CardImages LoadCardImages()
@@ -61,22 +52,22 @@ namespace Utsuho_character_mod.CardsR
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Uncommon,
-                Type: CardType.Skill,
-                TargetType: TargetType.Self,
+                Rarity: Rarity.Rare,
+                Type: CardType.Ability,
+                TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Any = 0 },
-                UpgradedCost: new ManaGroup() { Any = 0 },
+                Cost: new ManaGroup() { Black = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Black = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
-                Block: 0,
-                UpgradedBlock: 0,
+                Block: null,
+                UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 8,
-                UpgradedValue1: 12,
+                Value1: 2,
+                UpgradedValue1: 3,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -94,14 +85,14 @@ namespace Utsuho_character_mod.CardsR
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Retain,
-                UpgradedKeywords: Keyword.Retain,
+                Keywords: Keyword.None,
+                UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { },
-                UpgradedRelativeEffects: new List<string>() { },
+                RelativeEffects: new List<string>() { "FixedStarStatus" },
+                UpgradedRelativeEffects: new List<string>() { "FixedStarStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -113,26 +104,21 @@ namespace Utsuho_character_mod.CardsR
             return cardConfig;
         }
 
-        [EntityLogic(typeof(BlackHoleDef))]
-        public sealed class BlackHole : Card
+        [EntityLogic(typeof(FixedStarDefinition))]
+        public sealed class FixedStar : Card
         {
-            IEnumerator ResetTrigger()
+
+
+            protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return new WaitForSecondsRealtime(1.0f);
-                NotifyChanged();
-            }
-            public override IEnumerable<BattleAction> OnTurnStartedInHand()
-            {
-                if (base.Zone == CardZone.Hand)
+                if (!Battle.BattleShouldEnd)
                 {
-                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                    card.NotifyActivating();
-                    GameMaster.Instance.StartCoroutine(ResetTrigger());
-                    yield return new DiscardAction(card);
-                    yield return DefenseAction(Value1, 0);
+                    yield return new ApplyStatusEffectAction<FixedStarStatus>(Battle.Player, new int?(Value1), null, null, null, 0f, true);
+                    yield break;
                 }
-                yield break;
             }
+
         }
+
     }
 }
