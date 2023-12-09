@@ -15,16 +15,17 @@ using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsB.DarkMatterDef;
-using LBoL.Base.Extensions;
 using Utsuho_character_mod.Util;
+using HarmonyLib;
+using static Utsuho_character_mod.CardsMulti.OmegaProtocolDef;
 
-namespace Utsuho_character_mod.CardsR
+namespace Utsuho_character_mod.CardsMulti
 {
-    public sealed class VacuumWaveDef : CardTemplate
+    public sealed class BetaProtocolDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(VacuumWave);
+            return nameof(BetaProtocol);
         }
 
         public override CardImages LoadCardImages()
@@ -53,25 +54,25 @@ namespace Utsuho_character_mod.CardsR
                 GunNameBurst: "Simple1",
                 DebugLevel: 0,
                 Revealable: false,
-                IsPooled: true,
-                HideMesuem: false,
+                IsPooled: false,
+                HideMesuem: true,
                 IsUpgradable: true,
-                Rarity: Rarity.Uncommon,
-                Type: CardType.Attack,
-                TargetType: TargetType.AllEnemies,
-                Colors: new List<ManaColor>() { ManaColor.Black },
+                Rarity: Rarity.Rare,
+                Type: CardType.Ability,
+                TargetType: TargetType.Nobody,
+                Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Black = 1, Any = 1 },
+                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
                 MoneyCost: null,
-                Damage: 9,
-                UpgradedDamage: 12,
+                Damage: null,
+                UpgradedDamage: null,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: null,
-                UpgradedValue1: null,
+                Value1: 3,
+                UpgradedValue1: 3,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -89,16 +90,16 @@ namespace Utsuho_character_mod.CardsR
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Accuracy,
-                UpgradedKeywords: Keyword.Accuracy,
+                Keywords: Keyword.None,
+                UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { },
-                UpgradedRelativeEffects: new List<string>() { },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeEffects: new List<string>() { "OmegaStatus" },
+                UpgradedRelativeEffects: new List<string>() { "OmegaStatus" },
+                RelativeCards: new List<string>() { "OmegaProtocol" },
+                UpgradedRelativeCards: new List<string>() { "OmegaProtocol+" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -108,19 +109,29 @@ namespace Utsuho_character_mod.CardsR
             return cardConfig;
         }
 
-        [EntityLogic(typeof(VacuumWaveDef))]
-        public sealed class VacuumWave : Card
+        [EntityLogic(typeof(BetaProtocolDef))]
+        public sealed class BetaProtocol : Card
         {
+
+
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                yield return new DiscardAction(card);
-                if (card.Id == "DarkMatter")
+                if (!this.IsUpgraded)
                 {
-                    yield return AttackAction(selector);
+                    Card[] cards = { Library.CreateCard("OmegaProtocol") };
+                    yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
                 }
-                yield return AttackAction(selector);
+                else
+                {
+                    Card[] cards = { Library.CreateCard("OmegaProtocol+") };
+                    yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
+                }
+                for (int i = 0; i < Value1; i++)
+                {
+                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                    yield return new ExileCardAction(card);
+                }
                 yield break;
             }
 

@@ -127,7 +127,7 @@ namespace Utsuho_character_mod.CardsR
                 if (Battle.DiscardZone.NotEmpty())
                 {
                     Card card = UsefulFunctions.RandomUtsuho(Battle.DiscardZone);
-                    //Card card = Battle.DiscardZone.Sample(base.GameRun.BattleRng);
+                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                     if (card != null)
                         yield return new ExileCardAction(card);
                 }

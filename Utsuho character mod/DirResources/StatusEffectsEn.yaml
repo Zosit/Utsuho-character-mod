@@ -57,3 +57,15 @@ FixedStarStatus:
 ConflagrationStatus:
   Name: Conflagration
   Description: "When you lose |Heat| at the end of turn, instead gain |Heat|."
+
+QuantumReflectorStatus:
+  Name: Quantum Reflector
+  Description: "Whenever Dark Matter is randomly targeted through it's effect, gain {level} |Reflection|."
+
+OmegaStatus:
+  Name: Omega
+  Description: "At the end of your turn, deal {level} damage to all enemies."
+
+DysonSphereStatus:
+  Name: Dyson Sphere
+  Description: "When you play a |Dark Matter|, trigger your |Heat| {level} more times per turn."

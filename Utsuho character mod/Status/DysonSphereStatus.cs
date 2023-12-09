@@ -9,25 +9,23 @@ using LBoL.Core.StatusEffects;
 using LBoL.Base;
 using System.Collections.Generic;
 using Mono.Cecil;
+using static Utsuho_character_mod.BepinexPlugin;
+using Utsuho_character_mod.Util;
+using LBoL.Core.Units;
 using LBoL.Core.Battle;
 using LBoL.Core;
 using LBoL.Core.Battle.BattleActions;
-using LBoL.Presentation.UI.Panels;
-using LBoL.Core.Units;
-using static Utsuho_character_mod.BepinexPlugin;
-using Utsuho_character_mod.Util;
 using LBoL.Core.Cards;
-using LBoL.Core.Battle.Interactions;
-using LBoL.Base.Extensions;
-using System.Linq;
+using static Utsuho_character_mod.CardsR.ConflagrationDefinition;
+using LBoL.EntityLib.StatusEffects.Marisa;
 
 namespace Utsuho_character_mod.Status
 {
-    public sealed class FixedStarEffect : StatusEffectTemplate
+    public sealed class DysonSphereEffect : StatusEffectTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(FixedStarStatus);
+            return nameof(DysonSphereStatus);
         }
 
         [DontOverwrite]
@@ -39,7 +37,7 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override Sprite LoadSprite()
         {
-            return ResourceLoader.LoadSprite("ReactorStartSe.png", BepinexPlugin.embeddedSource);
+            return ResourceLoader.LoadSprite("EnergyStatus.png", BepinexPlugin.embeddedSource);
         }
 
         public override StatusEffectConfig MakeConfig()
@@ -70,52 +68,50 @@ namespace Utsuho_character_mod.Status
             return statusEffectConfig;
         }
     }
-    [EntityLogic(typeof(FixedStarEffect))]
-    public sealed class FixedStarStatus : StatusEffect
+    [EntityLogic(typeof(DysonSphereEffect))]
+    public sealed class DysonSphereStatus : StatusEffect
     {
+        private string GunName
+        {
+            get
+            {
+                if (base.Level <= 50)
+                {
+                    return "无差别起火";
+                }
+                return "无差别起火B";
+            }
+        }
         protected override void OnAdded(Unit unit)
         {
-            ReactOwnerEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
-            ReactOwnerEvent(Owner.TurnEnding, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnEnding));
+            base.ReactOwnerEvent<CardUsingEventArgs>(base.Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsed));
         }
-        private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
+        private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
         {
-            if (Battle.BattleShouldEnd)
+            if (args.Card.Id == "DarkMatter")
             {
-                yield break;
-            }
-            NotifyActivating();
-            for (int i = 0; i < this.Level; i++)
-            {
-                Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                yield return new DiscardAction(card);
-            }
-            yield break;
-        }
-        private IEnumerable<BattleAction> OnOwnerTurnEnding(UnitEventArgs args)
-        {
-            if (Battle.BattleShouldEnd)
-            {
-                yield break;
-            }
-            NotifyActivating();
-            IReadOnlyList<Card> selectedCards = null;
-            List<Card> list = (base.Battle.HandZone.ToList<Card>());
-            if (!list.Empty<Card>())
-            {
-                SelectHandInteraction interaction = new SelectHandInteraction(0, this.Level, list)
+                int dyLevel = base.GetSeLevel<DysonSphereStatus>();
+
+                for (int i = 0; i < dyLevel; i++)
                 {
-                    Source = this
-                };
-                yield return new InteractionAction(interaction, false);
-                selectedCards = interaction.SelectedCards.ToList();
-            }
-            if (selectedCards != null)
-            {
-                foreach (Card card in selectedCards)
-                {
-                    card.IsTempRetain = true;
+                    int level = base.GetSeLevel<HeatStatus>();
+                    if (level >= 5)
+                    {
+                        yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(level / 5)), this.GunName, GunType.Single);
+                    }
+                    if (Battle.BattleShouldEnd)
+                    {
+                        yield break;
+                    }
+                    NotifyActivating();
+                    if (base.Battle.Player.GetStatusEffect<ConflagrationStatus>() != null)
+                    {
+                        yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, (level / 5), null, null, null, 0f, true);
+                    }
+                    else
+                    {
+                        yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level / 5), null, null, null, 0f, true);
+                    }
                 }
             }
             yield break;

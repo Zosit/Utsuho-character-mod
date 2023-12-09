@@ -118,6 +118,7 @@ namespace Utsuho_character_mod.CardsR
                 for (int i = 0; i < Value1; i++)
                 {
                     Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                     yield return new DiscardAction(card);
                 }
                 for (int i = 0; i< Value1; i++)

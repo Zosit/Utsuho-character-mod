@@ -127,7 +127,7 @@ NightFalls:
 
 BlackHole: 
   Name: Black Hole
-  Description: "|While in hand:| At the start of your turn gain {Value1} Block and discard a random card."
+  Description: "|While in hand:| At the start of your turn gain {Value1} Block and discard a random card in your hand."
 
 GravityWell:
   Name: Gravity Well
@@ -143,7 +143,7 @@ Stasis:
 
 EntropicStar:
   Name: Entropic Star
-  Description: "For each |Dark Matter| on the battlefield, add a |Dark Matter| to your discard pile.\nGain 2 |Firepower|"
+  Description: "For each |Dark Matter| on the battlefield, add a |Dark Matter| to your discard pile.\nGain {Value1} |Firepower|"
 
 EscapeVelocity:
   Name: Escape Velocity
@@ -168,7 +168,7 @@ WhiteHole:
 SpatialDistortion:
   Name: Spatial Distortion
   Description: "Deal {Damage} damage to all enemies.\nAdd 2 |Dark Matter| to your draw pile."
-  UpgradedDescription: "Deal {Damage} damage to all enemies.\nAdd 2 |Dark Matter| to your draw pile.\nGain {Value1} Reflection."
+  UpgradedDescription: "Deal {Damage} damage to all enemies.\nAdd 2 |Dark Matter| to your draw pile.\nGain {Value1} |Reflection|."
 
 FixedStar:
   Name: "Blazing Star \"Fixed Star\""
@@ -222,6 +222,36 @@ Initialize:
 Crossfeed:
   Name: Crossfeed
   Description: "|Vent| for damage.\nAdd {Value1} |Dark Matter| to your discard for every 10 |Heat| you had.\nDiscard all |Dark Matter| in your hand and gain {Value2} |Heat| for each one discarded."
+
+EternityEngine: 
+  Name: Eternity Engine
+  Description: "|While in hand:| At the start of your turn gain {Value1} |Firepower| and Exile a random card in your hand."
+
+Starlight:
+  Name: Starlight
+  Description: "Gain {Value1} |Heat|.\nIf you have at least {Value2} heat, add 2 |Dark Matter| to your hand and gain {Shield} Barrier."
+
+QuantumReflector:
+  Name: Quantum Reflector
+  Description: "Whenever Dark Matter is randomly targeted through it's effect, gain {Value1} |Reflection|."
+
+AlphaProtocol:
+  Name: Alpha Protocol
+  Description: "Add a |Beta Protocol| to your draw pile.\nDiscard {Value1} random cards from your hand."
+  UpgradedDescription: "Add a |Beta Protocol+| to your draw pile.\nDiscard {Value1} random cards from your hand."
+
+BetaProtocol:
+  Name: Beta Protocol
+  Description: "Add a |Omega Protocol| to your draw pile.\nExile {Value1} random cards from your hand."
+  UpgradedDescription: "Add a |Omega Protocol+| to your draw pile.\nExile {Value1} random cards from your hand."
+
+OmegaProtocol:
+  Name: Omega Protocol
+  Description: "At the end of your turn, deal {Value1} damage to all enemies."
+
+DysonSphere:
+  Name: Dyson Sphere
+  Description: "Gain {Value1} |Heat|.\nAdd {Value2} |Dark Matter| to your discard pile.\nWhen you play a |Dark Matter|, trigger your |Heat|."
 
 SunCrow: 
   Name: The Crow who Stole the Sun

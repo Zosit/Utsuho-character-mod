@@ -9,27 +9,23 @@ using LBoL.Core.StatusEffects;
 using LBoL.Base;
 using System.Collections.Generic;
 using Mono.Cecil;
+using static Utsuho_character_mod.BepinexPlugin;
+using Utsuho_character_mod.Util;
+using LBoL.Core.Units;
 using LBoL.Core.Battle;
 using LBoL.Core;
 using LBoL.Core.Battle.BattleActions;
-using LBoL.Presentation.UI.Panels;
-using LBoL.Core.Units;
-using System.Threading;
-using LBoL.Core.Randoms;
 using LBoL.Core.Cards;
-using LBoL.Presentation;
-using System.Collections;
-using LBoL.Base.Extensions;
-using static Utsuho_character_mod.BepinexPlugin;
-using Utsuho_character_mod.Util;
+using static Utsuho_character_mod.CardsR.ConflagrationDefinition;
+using LBoL.EntityLib.StatusEffects.Marisa;
 
 namespace Utsuho_character_mod.Status
 {
-    public sealed class TurboFuelEffect : StatusEffectTemplate
+    public sealed class OmegaEffect : StatusEffectTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(TurboFuelStatus);
+            return nameof(OmegaStatus);
         }
 
         [DontOverwrite]
@@ -41,7 +37,7 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override Sprite LoadSprite()
         {
-            return ResourceLoader.LoadSprite("ChargingStatus.png", BepinexPlugin.embeddedSource);
+            return ResourceLoader.LoadSprite("EnergyStatus.png", BepinexPlugin.embeddedSource);
         }
 
         public override StatusEffectConfig MakeConfig()
@@ -58,7 +54,7 @@ namespace Utsuho_character_mod.Status
                             LevelStackType: StackType.Add,
                             HasDuration: false,
                             DurationStackType: StackType.Add,
-                            DurationDecreaseTiming: DurationDecreaseTiming.TurnEnd,
+                            DurationDecreaseTiming: DurationDecreaseTiming.Custom,
                             HasCount: false,
                             CountStackType: StackType.Keep,
                             LimitStackType: StackType.Keep,
@@ -72,36 +68,28 @@ namespace Utsuho_character_mod.Status
             return statusEffectConfig;
         }
     }
-    [EntityLogic(typeof(TurboFuelEffect))]
-    public sealed class TurboFuelStatus : StatusEffect
+    [EntityLogic(typeof(OmegaEffect))]
+    public sealed class OmegaStatus : StatusEffect
     {
-        public ManaGroup manatype
+        private string GunName
         {
             get
             {
-                return new ManaGroup() { Philosophy = 1 };
+                if (base.Level <= 50)
+                {
+                    return "无差别起火";
+                }
+                return "无差别起火B";
             }
         }
         protected override void OnAdded(Unit unit)
         {
-            ReactOwnerEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
-        }
-        IEnumerator ResetTrigger()
-        {
-            yield return new WaitForSecondsRealtime(1.0f);
-            NotifyChanged();
+            ReactOwnerEvent(Owner.TurnEnded, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
         }
         private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
         {
-            yield return new DrawManyCardAction(this.Level);
-            yield return new GainManaAction(new ManaGroup() { Philosophy = this.Level });
-
-            Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-            foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-            card.NotifyActivating();
-            GameMaster.Instance.StartCoroutine(ResetTrigger());
-            yield return new ExileCardAction(card);
-
+            int level = base.GetSeLevel<OmegaStatus>();
+            yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(level)), this.GunName, GunType.Single);
             yield break;
         }
     }

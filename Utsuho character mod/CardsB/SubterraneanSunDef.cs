@@ -123,6 +123,7 @@ namespace Utsuho_character_mod.CardsR
                     if(cards.Count != 0)
                     {
                         Card card = Util.UsefulFunctions.RandomUtsuho(cards);
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                         yield return new ExileCardAction(card);
                         yield return new RemoveCardAction(card);
                         EnemyUnit target = Battle.EnemyGroup.Alives.Sample(GameRun.BattleRng);

@@ -126,7 +126,7 @@ namespace Utsuho_character_mod.CardsR
             {
                 yield return new DrawManyCardAction(Value1);
                 Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                //Card card = Battle.HandZone.Sample(base.GameRun.BattleRng);
+                foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                 card.NotifyActivating();
                 GameMaster.Instance.StartCoroutine(ResetTrigger());
                 yield return new ExileCardAction(card);

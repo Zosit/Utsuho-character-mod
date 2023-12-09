@@ -16,15 +16,22 @@ using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using LBoL.Base.Extensions;
+using JetBrains.Annotations;
+using System.Linq;
+using System.Collections;
+using UnityEngine;
+using LBoL.Presentation;
 using Utsuho_character_mod.Util;
+using static UnityEngine.UI.GridLayoutGroup;
+using LBoL.Core.Randoms;
 
-namespace Utsuho_character_mod.CardsR
+namespace Utsuho_character_mod.CardsMulti
 {
-    public sealed class VacuumWaveDef : CardTemplate
+    public sealed class EternityEngineDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(VacuumWave);
+            return nameof(EternityEngine);
         }
 
         public override CardImages LoadCardImages()
@@ -57,21 +64,21 @@ namespace Utsuho_character_mod.CardsR
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Uncommon,
-                Type: CardType.Attack,
-                TargetType: TargetType.AllEnemies,
-                Colors: new List<ManaColor>() { ManaColor.Black },
+                Type: CardType.Skill,
+                TargetType: TargetType.Self,
+                Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Black = 1, Any = 1 },
+                Cost: new ManaGroup() { Any = 0 },
+                UpgradedCost: new ManaGroup() { Any = 0 },
                 MoneyCost: null,
-                Damage: 9,
-                UpgradedDamage: 12,
+                Damage: null,
+                UpgradedDamage: null,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: null,
-                UpgradedValue1: null,
+                Value1: 1,
+                UpgradedValue1: 2,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -89,16 +96,16 @@ namespace Utsuho_character_mod.CardsR
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Accuracy,
-                UpgradedKeywords: Keyword.Accuracy,
+                Keywords: Keyword.Retain,
+                UpgradedKeywords: Keyword.Retain,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { },
-                UpgradedRelativeEffects: new List<string>() { },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeEffects: new List<string>() { "Firepower" },
+                UpgradedRelativeEffects: new List<string>() { "Firepower" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -108,23 +115,27 @@ namespace Utsuho_character_mod.CardsR
             return cardConfig;
         }
 
-        [EntityLogic(typeof(VacuumWaveDef))]
-        public sealed class VacuumWave : Card
+        [EntityLogic(typeof(EternityEngineDef))]
+        public sealed class EternityEngine : Card
         {
-            protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
+            IEnumerator ResetTrigger()
             {
-                Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                yield return new DiscardAction(card);
-                if (card.Id == "DarkMatter")
+                yield return new WaitForSecondsRealtime(1.0f);
+                NotifyChanged();
+            }
+            public override IEnumerable<BattleAction> OnTurnStartedInHand()
+            {
+                if (base.Zone == CardZone.Hand)
                 {
-                    yield return AttackAction(selector);
+                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                    foreach(BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) {  yield return action; }
+                    card.NotifyActivating();
+                    GameMaster.Instance.StartCoroutine(ResetTrigger());
+                    yield return new ExileCardAction(card);
+                    yield return BuffAction<Firepower>(Value1, 0, 0, 0, 0.2f);
                 }
-                yield return AttackAction(selector);
                 yield break;
             }
-
         }
-
     }
 }

@@ -115,16 +115,19 @@ namespace Utsuho_character_mod.CardsR
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 DeltaBlock = 0;
-
                 for (int i = 0; i < Value2; i++)
                 {
-                    IReadOnlyList<Card> drawZoneIndexOrder = base.Battle.DrawZoneIndexOrder;
-                    Card card = Util.UsefulFunctions.RandomUtsuho(drawZoneIndexOrder);
-                    if (card.Id == "DarkMatter")
+                    if (Battle.DrawZone.Count != 0)
                     {
-                        DeltaBlock += Value1;
+                        IReadOnlyList<Card> drawZoneIndexOrder = base.Battle.DrawZoneIndexOrder;
+                        Card card = Util.UsefulFunctions.RandomUtsuho(drawZoneIndexOrder);
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                        if (card.Id == "DarkMatter")
+                        {
+                            DeltaBlock += Value1;
+                        }
+                        yield return new MoveCardAction(card, CardZone.Hand);
                     }
-                    yield return new MoveCardAction(Util.UsefulFunctions.RandomUtsuho(drawZoneIndexOrder), CardZone.Hand);
                 }
                 yield return DefenseAction();
                 yield break;
