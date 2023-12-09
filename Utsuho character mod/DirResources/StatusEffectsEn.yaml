@@ -53,3 +53,7 @@ MaintainReactionStatus:
 FixedStarStatus:
   Name: Fixed Star
   Description: "At the start of your turn, discard {level} random cards.\nAt the end of your turn, |retain| {level} cards this turn."
+
+ConflagrationStatus:
+  Name: Conflagration
+  Description: "When you lose |Heat| at the end of turn, instead gain |Heat|."

@@ -14,22 +14,20 @@ using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
-using static Utsuho_character_mod.CardsB.DarkMatterDef;
-using LBoL.Base.Extensions;
 using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
-    public sealed class UnwindingDef : CardTemplate
+    public sealed class ConflagrationDefinition : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(Unwinding);
+            return nameof(Conflagration);
         }
 
         public override CardImages LoadCardImages()
         {
-            var imgs = new CardImages(embeddedSource);
+            var imgs = new CardImages(BepinexPlugin.embeddedSource);
             imgs.AutoLoad(this, extension: ".png");
             return imgs;
         }
@@ -56,16 +54,16 @@ namespace Utsuho_character_mod.CardsR
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Uncommon,
-                Type: CardType.Attack,
-                TargetType: TargetType.AllEnemies,
-                Colors: new List<ManaColor>() { ManaColor.Black },
+                Rarity: Rarity.Rare,
+                Type: CardType.Ability,
+                TargetType: TargetType.Nobody,
+                Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Any = 2 },
-                UpgradedCost: new ManaGroup() { Black = 1, Any = 2 },
+                Cost: new ManaGroup() { Red = 3 },
+                UpgradedCost: new ManaGroup() { Red = 1 },
                 MoneyCost: null,
-                Damage: 5,
-                UpgradedDamage: 7,
+                Damage: null,
+                UpgradedDamage: null,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
@@ -95,38 +93,31 @@ namespace Utsuho_character_mod.CardsR
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { },
-                UpgradedRelativeEffects: new List<string>() { },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeEffects: new List<string>() { "ConflagrationStatus" },
+                UpgradedRelativeEffects: new List<string>() { "ConflagrationStatus" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
                 SubIllustrator: new List<string>() { }
              );
 
-            return cardConfig;
+            return cardConfig;            
         }
 
-        [EntityLogic(typeof(UnwindingDef))]
-        public sealed class Unwinding : Card
+        [EntityLogic(typeof(ConflagrationDefinition))]
+        public sealed class Conflagration : Card
         {
+
+
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                Card[] array = base.Battle.DiscardZone.SampleManyOrAll(999, base.GameRun.BattleRng);
-                if (array.Length != 0)
+                if (!base.Battle.BattleShouldEnd)
                 {
-                    foreach (Card card in array)
-                    {
-                        if (card.Id == "DarkMatter")
-                        {
-                            yield return new MoveCardToDrawZoneAction(card, DrawZoneTarget.Random);
-                            yield return AttackAction(selector);
-                        }
-                    }
+                    yield return new ApplyStatusEffectAction<ConflagrationStatus>(Battle.Player, null, null, null, null, 0f, true);
+                    yield break;
                 }
-
-                yield break;
             }
 
         }

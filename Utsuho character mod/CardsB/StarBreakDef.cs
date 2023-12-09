@@ -63,8 +63,8 @@ namespace Utsuho_character_mod.CardsR
                 Cost: new ManaGroup() { Black = 2 },
                 UpgradedCost: new ManaGroup() { Black = 2 },
                 MoneyCost: null,
-                Damage: 15,
-                UpgradedDamage: 20,
+                Damage: 8,
+                UpgradedDamage: 10,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
@@ -118,6 +118,7 @@ namespace Utsuho_character_mod.CardsR
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
+                yield return AttackAction(selector.SelectedEnemy);
                 yield return AttackAction(selector.SelectedEnemy);
                 yield break;
             }

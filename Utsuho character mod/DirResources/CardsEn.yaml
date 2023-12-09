@@ -85,13 +85,17 @@ WasteNot:
   Name: Waste Not
   Description: "When you |Exile| a card, gain {Value1} |Heat|"
 
+Conflagration:
+  Name: Conflagration
+  Description: "When you lose |Heat| at the end of turn, instead gain |Heat|."
+
 DarkMatter:
   Name: Dark Matter
   Description: "|When Drawn|: |Retain| this turn.\n|Utsuho| cards with random effects target {SelfName}."
 
 StarBreak:
   Name: Star Break
-  Description: "Deal {Damage} damage\n|When Drawn|: Add a |Dark Matter| to your hand."
+  Description: "Deal {Damage} damage twice\n|When Drawn|: Add a |Dark Matter| to your hand."
 
 CloakStar:
   Name: Cloak of Stars
@@ -101,9 +105,9 @@ SpaceScanner:
   Name: Space Scanner
   Description: "Add 2 |Dark Matter| to your draw pile.\n|Scry| {Scry}. Draw 1 card"
 
-Unwinding:
-  Name: Unwinding
-  Description: "Return all |Dark Matter| from your discard pile to your draw pile.\nFor each moved, deal {Damage} damage to each enemy"
+WarpShield:
+  Name: Warp Shield
+  Description: "Gain {Block} block.\nMove {Value2} random cards from your Draw Pile to your hand.\nGain {Value1} more Block for each |Dark Matter| moved."
 
 VacuumWave:
   Name: Vacuum Wave
@@ -160,6 +164,11 @@ SuperGiant:
 WhiteHole:
   Name: White Hole
   Description: "|On Retain:| Gain {Value1} block, and add a |Dark Matter| to your discard pile."
+
+SpatialDistortion:
+  Name: Spatial Distortion
+  Description: "Deal {Damage} damage to all enemies.\nAdd 2 |Dark Matter| to your draw pile."
+  UpgradedDescription: "Deal {Damage} damage to all enemies.\nAdd 2 |Dark Matter| to your draw pile.\nGain {Value1} Reflection."
 
 FixedStar:
   Name: "Blazing Star \"Fixed Star\""

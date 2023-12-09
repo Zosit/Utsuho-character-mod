@@ -16,6 +16,8 @@ using LBoL.Core.Battle;
 using LBoL.Core;
 using LBoL.Core.Battle.BattleActions;
 using LBoL.Core.Cards;
+using static Utsuho_character_mod.CardsR.ConflagrationDefinition;
+using LBoL.EntityLib.StatusEffects.Marisa;
 
 namespace Utsuho_character_mod.Status
 {
@@ -97,7 +99,14 @@ namespace Utsuho_character_mod.Status
                 yield break;
             }
             NotifyActivating();
-            yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level/5), null, null, null, 0f, true);
+            if (base.Battle.Player.GetStatusEffect<ConflagrationStatus>() != null)
+            {
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, (level / 5), null, null, null, 0f, true);
+            }
+            else
+            {
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level / 5), null, null, null, 0f, true);
+            }
             yield break;
         }
     }
