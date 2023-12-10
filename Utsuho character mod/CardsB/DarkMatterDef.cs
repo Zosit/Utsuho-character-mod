@@ -40,7 +40,7 @@ namespace Utsuho_character_mod.CardsB
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: sequenceTable.Next(typeof(CardConfig)),
+                Index: 12060,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -52,7 +52,7 @@ namespace Utsuho_character_mod.CardsB
                 DebugLevel: 0,
                 Revealable: false,
                 IsPooled: false,
-                HideMesuem: true,
+                HideMesuem: false,
                 IsUpgradable: false,
                 Rarity: Rarity.Common,
                 Type: CardType.Status,

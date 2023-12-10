@@ -21,11 +21,11 @@ using LBoL.EntityLib.StatusEffects.Marisa;
 
 namespace Utsuho_character_mod.Status
 {
-    public sealed class OmegaEffect : StatusEffectTemplate
+    public sealed class GammaEffect : StatusEffectTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(OmegaStatus);
+            return nameof(GammaStatus);
         }
 
         [DontOverwrite]
@@ -68,8 +68,8 @@ namespace Utsuho_character_mod.Status
             return statusEffectConfig;
         }
     }
-    [EntityLogic(typeof(OmegaEffect))]
-    public sealed class OmegaStatus : StatusEffect
+    [EntityLogic(typeof(GammaEffect))]
+    public sealed class GammaStatus : StatusEffect
     {
         private string GunName
         {
@@ -88,7 +88,7 @@ namespace Utsuho_character_mod.Status
         }
         private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
         {
-            int level = base.GetSeLevel<OmegaStatus>();
+            int level = base.GetSeLevel<GammaStatus>();
             yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(level)), this.GunName, GunType.Single);
             yield break;
         }

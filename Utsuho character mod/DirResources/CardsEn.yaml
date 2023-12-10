@@ -245,8 +245,8 @@ BetaProtocol:
   Description: "Add a |Omega Protocol| to your draw pile.\nExile {Value1} random cards from your hand."
   UpgradedDescription: "Add a |Omega Protocol+| to your draw pile.\nExile {Value1} random cards from your hand."
 
-OmegaProtocol:
-  Name: Omega Protocol
+GammaProtocol:
+  Name: Gamma Protocol
   Description: "At the end of your turn, deal {Value1} damage to all enemies."
 
 DysonSphere:

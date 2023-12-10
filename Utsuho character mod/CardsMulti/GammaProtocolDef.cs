@@ -20,11 +20,11 @@ using HarmonyLib;
 
 namespace Utsuho_character_mod.CardsMulti
 {
-    public sealed class OmegaProtocolDef : CardTemplate
+    public sealed class GammaProtocolDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(OmegaProtocol);
+            return nameof(GammaProtocol);
         }
 
         public override CardImages LoadCardImages()
@@ -42,7 +42,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: sequenceTable.Next(typeof(CardConfig)),
+                Index: 12532,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -108,14 +108,14 @@ namespace Utsuho_character_mod.CardsMulti
             return cardConfig;
         }
 
-        [EntityLogic(typeof(OmegaProtocolDef))]
-        public sealed class OmegaProtocol : Card
+        [EntityLogic(typeof(GammaProtocolDef))]
+        public sealed class GammaProtocol : Card
         {
 
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return new ApplyStatusEffectAction<OmegaStatus>(Battle.Player, Value1, null, null, null, 0f, true);
+                yield return new ApplyStatusEffectAction<GammaStatus>(Battle.Player, Value1, null, null, null, 0f, true);
                 yield break;
             }
 

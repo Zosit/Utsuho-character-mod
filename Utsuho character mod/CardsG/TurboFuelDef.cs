@@ -44,7 +44,7 @@ namespace Utsuho_character_mod.CardsG
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: sequenceTable.Next(typeof(CardConfig)),
+                Index: 12650,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -103,7 +103,7 @@ namespace Utsuho_character_mod.CardsG
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Flippin'Loser",
                 SubIllustrator: new List<string>() { }
              );
 

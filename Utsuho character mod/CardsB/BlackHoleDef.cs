@@ -49,7 +49,7 @@ namespace Utsuho_character_mod.CardsR
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: sequenceTable.Next(typeof(CardConfig)),
+                Index: 12180,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -128,7 +128,6 @@ namespace Utsuho_character_mod.CardsR
                 if (base.Zone == CardZone.Hand)
                 {
                     Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                     card.NotifyActivating();
                     GameMaster.Instance.StartCoroutine(ResetTrigger());
                     yield return new DiscardAction(card);

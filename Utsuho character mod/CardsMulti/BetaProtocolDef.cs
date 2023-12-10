@@ -17,7 +17,7 @@ using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using Utsuho_character_mod.Util;
 using HarmonyLib;
-using static Utsuho_character_mod.CardsMulti.OmegaProtocolDef;
+using static Utsuho_character_mod.CardsMulti.GammaProtocolDef;
 
 namespace Utsuho_character_mod.CardsMulti
 {
@@ -43,7 +43,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: sequenceTable.Next(typeof(CardConfig)),
+                Index: 12531,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
