@@ -44,7 +44,7 @@ namespace Utsuho_character_mod.CardsU
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 12600,
+                Index: 13600,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",

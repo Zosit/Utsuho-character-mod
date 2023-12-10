@@ -39,8 +39,11 @@ namespace Utsuho_character_mod.Util
         {
             if (card.Id == "DarkMatter")
             {
-                QuantumReflectorStatus status = battle.Player.GetStatusEffect<QuantumReflectorStatus>();
-                yield return new ApplyStatusEffectAction<Reflect>(battle.Player, status.Level, null, null, null, 0f, true);
+                if (battle.Player.HasStatusEffect<QuantumReflectorStatus>())
+                {
+                    QuantumReflectorStatus status = battle.Player.GetStatusEffect<QuantumReflectorStatus>();
+                    yield return new ApplyStatusEffectAction<Reflect>(battle.Player, status.Level, null, null, null, 0f, true);
+                }
             }
         }
 

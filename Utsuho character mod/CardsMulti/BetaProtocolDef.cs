@@ -43,7 +43,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 12531,
+                Index: 13531,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -96,10 +96,10 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "OmegaStatus" },
-                UpgradedRelativeEffects: new List<string>() { "OmegaStatus" },
-                RelativeCards: new List<string>() { "OmegaProtocol" },
-                UpgradedRelativeCards: new List<string>() { "OmegaProtocol+" },
+                RelativeEffects: new List<string>() { "GammaStatus" },
+                UpgradedRelativeEffects: new List<string>() { "GammaStatus" },
+                RelativeCards: new List<string>() { "GammaProtocol" },
+                UpgradedRelativeCards: new List<string>() { "GammaProtocol+" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
