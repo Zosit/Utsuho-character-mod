@@ -28,7 +28,7 @@ namespace Utsuho_character_mod.CardsMulti
 
         public override CardImages LoadCardImages()
         {
-            var imgs = new CardImages(BepinexPlugin.embeddedSource);
+            var imgs = new CardImages(embeddedSource);
             imgs.AutoLoad(this, extension: ".png");
             return imgs;
         }
@@ -104,7 +104,7 @@ namespace Utsuho_character_mod.CardsMulti
                 SubIllustrator: new List<string>() { }
              );
 
-            return cardConfig;            
+            return cardConfig;
         }
 
         [EntityLogic(typeof(AblativeArmorDef))]
@@ -112,21 +112,21 @@ namespace Utsuho_character_mod.CardsMulti
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                if (!base.Battle.BattleShouldEnd)
+                if (!Battle.BattleShouldEnd)
                 {
-                    this.DeltaShield = 0;
+                    DeltaShield = 0;
                     Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
                     while(card.Id == "DarkMatter")
                     {
                         yield return new ExileCardAction(card);
-                        this.DeltaShield += Value1;
+                        DeltaShield += Value1;
                         if (Battle.HandZone.Count != 0)
                             card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
                         else
                             break;
                     }
                     yield return base.DefenseAction();
-                    this.DeltaShield = 0;
+                    DeltaShield = 0;
 
                     yield break;
                 }

@@ -76,9 +76,9 @@ QuantumReflectorStatus:
 GammaStatus:
   Name: Gamma
   Description: "At the end of your turn, deal {Level} damage to all enemies."
-  Breif: "At the end of your turn, deal damage to all enemies."
+  Brief: "At the end of your turn, deal damage to all enemies."
 
 DysonSphereStatus:
   Name: Dyson Sphere
   Description: "When you play a |Dark Matter|, trigger your |Heat| {Level} more times per turn."
-  Breif: "When you play a |Dark Matter|, trigger your |Heat| extra times."
+  Brief: "When you play a |Dark Matter|, trigger your |Heat| extra times."

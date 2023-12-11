@@ -43,7 +43,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13170,
+                Index: 13390,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -73,8 +73,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedShield: null,
                 Value1: 1,
                 UpgradedValue1: 1,
-                Value2: 6,
-                UpgradedValue2: 10,
+                Value2: 10,
+                UpgradedValue2: 14,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -145,7 +145,7 @@ namespace Utsuho_character_mod.CardsMulti
                 }
                 yield return AttackAction(selector);
                 yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, (total*this.Value2)-level, null, null, null, 0f, true);
-                for(int i = 0; i < (level/5); i++)
+                for(int i = 0; i < (level/10); i++)
                 {
                     yield return new AddCardsToDiscardAction(Library.CreateCard("DarkMatter"));
                 }

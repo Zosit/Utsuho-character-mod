@@ -74,7 +74,8 @@ SunlightReverie:
 
 NuclearDive:
   Name: Uncontainable Nuclear Reaction Dive
-  Description: "Double your |Heat|.\nTake 1 damage for every 10 |Heat| you have\n|Vent| for damage"
+  Description: "Double your |Heat|.\nTake 1 damage for every 10 |Heat| you have.\n|Vent| for damage"
+  UpgradedDescription: "Triple your |Heat|.\nTake 1 damage for every 10 |Heat| you have.\n|Vent| for damage"
 
 BunkerDown:
   Name: Bunker Down
@@ -257,8 +258,8 @@ AblativeArmor:
   Name: Ablative Armor
   Description: "Gain {Block} block.\nExile all |Dark Matter| in your hand, and gain {Value1} Barrier for each exiled."
 
-SpacialRend:
-  Name: Spacial Rend
+SpatialRend:
+  Name: Spatial Rend
   Description: "Exile {Value1} random cards from your draw pile.\nDeal {Damage} damage.\nFor each |Dark Matter| exiled, deal {Value2} additional damage."
 
 SunCrow: 

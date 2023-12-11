@@ -95,6 +95,7 @@ namespace Utsuho_character_mod.Status
                 for (int i = 0; i < dyLevel; i++)
                 {
                     int level = base.GetSeLevel<HeatStatus>();
+                    NotifyActivating();
                     if (level >= 5)
                     {
                         yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(level / 5)), this.GunName, GunType.Single);
@@ -102,15 +103,6 @@ namespace Utsuho_character_mod.Status
                     if (Battle.BattleShouldEnd)
                     {
                         yield break;
-                    }
-                    NotifyActivating();
-                    if (base.Battle.Player.GetStatusEffect<ConflagrationStatus>() != null)
-                    {
-                        yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, (level / 5), null, null, null, 0f, true);
-                    }
-                    else
-                    {
-                        yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level / 5), null, null, null, 0f, true);
                     }
                 }
             }

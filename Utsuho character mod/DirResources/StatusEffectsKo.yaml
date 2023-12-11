@@ -1,51 +1,84 @@
 HeatStatus:
   Name: 작열
-  Description: "{PlayerName}의 턴 종료시, |작열|의 20%를 소모하여 모든 적에게 그만큼 피해를 줍니다.\n|냉각|될시 한번에 전부 소모됩니다."
+  Description: "{PlayerName}의 턴 종료시, |작열|의 20%를 소모하여 모든 적에게 그만큼 피해를 줍니다.(5미만일시 0)\n|냉각|될시 한번에 전부 소모됩니다."
+  Brief: "{PlayerName}의 턴 종료시, |작열|의 20%를 소모하여 모든 적에게 그만큼 피해를 줍니다.(5미만일시 0)\n|냉각|될시 한번에 전부 소모됩니다."
 
 ChargingStatus:
   Name: 가열
   Description: "매 턴 시작시 |작열|을 얻습니다."
+  Brief: "매 턴 시작시 |작열|을 얻습니다."
 
 GravityWellStatus:
   Name: 중력 분출
   Description: "{PlayerName}의 턴 종료시 보호막을 {Level} 얻고 버린 카드 더미에 |암흑 물질|을 1장 추가합니다."
+  Brief: "{PlayerName}의 턴 종료시 보호막을 얻고 버린 카드 더미에 |암흑 물질|을 1장 추가합니다."
 
 MassDriverStatus:
   Name: 매스 드라이버
   Description: "|암흑 물질|을 사용할 때마다, 모든 적에게 피해를 {level} 줍니다."
-
-PointDeviceStatus:
-  Name: 정밀장치
-  Description: "|암흑 물질|은 비용이 들지 않고, 소멸하지 않고 사용시 카드를 한장 뽑습니다."
+  Brief: "|암흑 물질|을 사용할 때마다, 모든 적에게 피해를 줍니다."
 
 ResonanceStatus:
   Name: 공명
   Description: "자신의 카드가 |소멸|하면, |공명|을 패에 넣습니다."
+  Brief: "자신의 카드가 |소멸|하면, |공명|을 패에 넣습니다."
 
 ResonancePlusStatus:
   Name: 공명+
   Description: "자신의 카드가 |소멸|하면, |공명+|를 패에 넣습니다."
+  Brief: "자신의 카드가 |소멸|하면, |공명+|를 패에 넣습니다."
 
 WasteNotStatus:
   Name: 재활용
-  Description: 자신의 카드가 |소멸|할때, |작열|을 얻습니다."
+  Description: "자신의 카드가 |소멸|할때, |작열|을 얻습니다."
+  Brief: "자신의 카드가 |소멸|할때, |작열|을 얻습니다."
 
 CautionStatus:
   Name: CAUTION!
   Description: "모든 카드가 |소멸|과 |보존|을 얻습니다.\n카드를 사용하면, 무작위 카드를 {level}장 패에 추가합니다."
+  Brief: "모든 카드가 |소멸|과 |보존|을 얻습니다.\n카드를 사용하면, 무작위 카드를 패에 추가합니다."
 
 TurboFuelStatus:
   Name: 터보연료
-  Description: "턴 시작시, {level}{manatype}를 얻고 카드를 {level}장 뽑는다.\n그 후 패의 무작위 카드를 소멸시킨다."
+  Description: "턴 시작시, {level}{manatype}를 얻고 카드를 {level}장 뽑습니다.\n그 후 패의 무작위 카드를 소멸시킵니다."
+  Brief: "턴 시작시, 마나를 얻고 카드를 뽑습니다.\n그 후 패의 무작위 카드를 소멸시킵니다."
 
 RadiationStatus:
   Name: 방사능
   Description: "턴 종료시 모든 적에게 피해를 {level} 줍니다."
+  Brief: "턴 종료시 모든 적에게 피해를 줍니다."
 
 HotSpringStatus:
   Name: 구 지옥 온천
   Description: "턴 시작시 |방사능|을 {Level}얻고 |구 지옥 온천|을 1 얻습니다."
+  Brief: "턴 시작시 |방사능|을 얻고 |구 지옥 온천|을 1 얻습니다."
 
 MaintainReactionStatus:
   Name: 유지 보수
   Description: "카드가 |보존|되면, |작열|을 {level} 얻습니다."
+  Brief: "카드가 |보존|되면, |작열|을 얻습니다."
+
+FixedStarStatus:
+  Name: "염성 「픽스드 스타」"
+  Description: "매 턴 시작시, 무작위 카드를 {Level} 장 버립니다.\n턴 종료시, 무작위 카드를 {Level}장 일시|보존| 합니다."
+  Brief: "매 턴 시작시, 무작위 카드를 버립니다.\n턴 종료시, 무작위 카드를 일시|보존| 합니다."
+
+ConflagrationStatus:
+  Name: 화마
+  Description: "턴 종료시 |작열|을 잃는 대신 |작열|을 얻습니다."
+  Brief: "턴 종료시 |작열|을 잃는 대신 |작열|을 얻습니다."
+
+QuantumReflectorStatus:
+  Name: 양자 반사
+  Description: "|암흑 물질|이 무작위 효과의 대상이 될 때마다, |반사|를 {Level} 얻습니다."
+  Brief: "|암흑 물질|이 무작위 효과의 대상이 될 때마다, |반사|를 얻습니다."
+
+GammaStatus:
+  Name: 감마
+  Description: "턴 종료시, 모든 적에게 피해를 {Level} 줍니다."
+  Brief: "턴 종료시, 모든 적에게 피해를 줍니다."
+
+DysonSphereStatus:
+  Name: 다이슨 스피어
+  Description: "|암흑 물질|을 사용할시, 턴마다 {Level}번 더 |작열|이 발동합니다."
+  Brief: "|암흑 물질|을 사용할시, |작열|이 추가로 발동합니다."

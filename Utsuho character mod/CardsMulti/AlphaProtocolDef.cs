@@ -116,7 +116,7 @@ namespace Utsuho_character_mod.CardsMulti
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                if (!this.IsUpgraded)
+                if (!IsUpgraded)
                 {
                     Card[] cards = { Library.CreateCard("BetaProtocol") };
                     yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);

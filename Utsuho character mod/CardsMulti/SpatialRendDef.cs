@@ -18,11 +18,11 @@ using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsMulti
 {
-    public sealed class SpacialRendDef : CardTemplate
+    public sealed class SpatialRendDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(SpacialRend);
+            return nameof(SpatialRend);
         }
 
         public override CardImages LoadCardImages()
@@ -106,8 +106,8 @@ namespace Utsuho_character_mod.CardsMulti
             return cardConfig;            
         }
 
-        [EntityLogic(typeof(SpacialRendDef))]
-        public sealed class SpacialRend : Card
+        [EntityLogic(typeof(SpatialRendDef))]
+        public sealed class SpatialRend : Card
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {

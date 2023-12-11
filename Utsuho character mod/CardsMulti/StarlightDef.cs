@@ -40,7 +40,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13390,
+                Index: 13170, 
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -56,7 +56,7 @@ namespace Utsuho_character_mod.CardsMulti
                 IsUpgradable: true,
                 Rarity: Rarity.Uncommon,
                 Type: CardType.Defense,
-                TargetType: TargetType.SingleEnemy,
+                TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
                 Cost: new ManaGroup() { Black = 1, Red = 1,  },
@@ -70,8 +70,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedShield: 10,
                 Value1: 12,
                 UpgradedValue1: 16,
-                Value2: 50,
-                UpgradedValue2: 50,
+                Value2: 40,
+                UpgradedValue2: 40,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,

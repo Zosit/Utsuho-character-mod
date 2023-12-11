@@ -87,8 +87,8 @@ namespace Utsuho_character_mod.CardsR
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.None,
-                UpgradedKeywords: Keyword.Accuracy,
+                Keywords: Keyword.Accuracy | Keyword.Exile,
+                UpgradedKeywords: Keyword.Accuracy | Keyword.Exile,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
@@ -114,17 +114,20 @@ namespace Utsuho_character_mod.CardsR
                 get
                 {
                     int level = base.GetSeLevel<HeatStatus>();
-                    return level * 2;
+                    if (!IsUpgraded)
+                    {
+                        return level * 2;
+                    }
+                    else
+                    {
+                        return level * 3;
+                    }
                 }
             }
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 int level = base.GetSeLevel<HeatStatus>();
-                if (level != 0)
-                {
-                    yield return new RemoveStatusEffectAction(Battle.Player.GetStatusEffect<HeatStatus>());
-                }
                 yield return base.DamageSelfAction(level / 10);
 
                 if (!base.Battle.BattleShouldEnd)
