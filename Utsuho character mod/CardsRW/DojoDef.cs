@@ -15,17 +15,18 @@ using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsB.DarkMatterDef;
+using LBoL.Base.Extensions;
+using JetBrains.Annotations;
+using System.Linq;
 using Utsuho_character_mod.Util;
-using HarmonyLib;
-using static Utsuho_character_mod.CardsMulti.BetaProtocolDef;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsRW
 {
-    public sealed class AlphaProtocolDef : CardTemplate
+    public sealed class DojoDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(AlphaProtocol);
+            return nameof(Dojo);
         }
 
         public override CardImages LoadCardImages()
@@ -43,7 +44,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13530,
+                Index: 67,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -58,12 +59,12 @@ namespace Utsuho_character_mod.CardsMulti
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Rare,
-                Type: CardType.Ability,
+                Type: CardType.Skill,
                 TargetType: TargetType.Nobody,
-                Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
+                Colors: new List<ManaColor>() { ManaColor.Red, ManaColor.White },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Red = 1 },
-                UpgradedCost: new ManaGroup() { Black = 1, Red = 1 },
+                Cost: new ManaGroup() { Red = 1, White = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Red = 1, White = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -71,8 +72,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 3,
-                UpgradedValue1: 3,
+                Value1: 4,
+                UpgradedValue1: 6,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -96,10 +97,10 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "GammaStatus" },
-                UpgradedRelativeEffects: new List<string>() { "GammaStatus" },
-                RelativeCards: new List<string>() { "BetaProtocol", "GammaProtocol" },
-                UpgradedRelativeCards: new List<string>() { "BetaProtocol+", "GammaProtocol+" },
+                RelativeEffects: new List<string>() { },
+                UpgradedRelativeEffects: new List<string>() { },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -109,33 +110,15 @@ namespace Utsuho_character_mod.CardsMulti
             return cardConfig;
         }
 
-        [EntityLogic(typeof(AlphaProtocolDef))]
-        public sealed class AlphaProtocol : Card
+        [EntityLogic(typeof(DojoDef))]
+        public sealed class Dojo : Card
         {
-
-
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                if (!this.IsUpgraded)
-                {
-                    Card[] cards = { Library.CreateCard("BetaProtocol") };
-                    yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
-                }
-                else
-                {
-                    Card[] cards = { Library.CreateCard("BetaProtocol+") };
-                    yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
-                }
-                for (int i = 0; i < Value1; i++)
-                {
-                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                    yield return new DiscardAction(card);
-                }
+                yield return BuffAction<Firepower>(Value1, 0, 0, 0, 0.2f);
+                yield return new RequestEndPlayerTurnAction();
                 yield break;
             }
-
         }
-
     }
 }

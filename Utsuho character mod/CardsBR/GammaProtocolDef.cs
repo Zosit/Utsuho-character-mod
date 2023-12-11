@@ -17,15 +17,14 @@ using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using Utsuho_character_mod.Util;
 using HarmonyLib;
-using static Utsuho_character_mod.CardsMulti.GammaProtocolDef;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsBR
 {
-    public sealed class BetaProtocolDef : CardTemplate
+    public sealed class GammaProtocolDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(BetaProtocol);
+            return nameof(GammaProtocol);
         }
 
         public override CardImages LoadCardImages()
@@ -43,7 +42,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13531,
+                Index: 49,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -62,8 +61,8 @@ namespace Utsuho_character_mod.CardsMulti
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
+                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 2 },
+                UpgradedCost: new ManaGroup() { Black = 1, Red = 1, Any = 2 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -71,8 +70,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 3,
-                UpgradedValue1: 3,
+                Value1: 50,
+                UpgradedValue1: 70,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -96,10 +95,10 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "GammaStatus" },
-                UpgradedRelativeEffects: new List<string>() { "GammaStatus" },
-                RelativeCards: new List<string>() { "GammaProtocol" },
-                UpgradedRelativeCards: new List<string>() { "GammaProtocol+" },
+                RelativeEffects: new List<string>() { "OmegaStatus" },
+                UpgradedRelativeEffects: new List<string>() { "OmegaStatus" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -109,29 +108,14 @@ namespace Utsuho_character_mod.CardsMulti
             return cardConfig;
         }
 
-        [EntityLogic(typeof(BetaProtocolDef))]
-        public sealed class BetaProtocol : Card
+        [EntityLogic(typeof(GammaProtocolDef))]
+        public sealed class GammaProtocol : Card
         {
 
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                if (!this.IsUpgraded)
-                {
-                    Card[] cards = { Library.CreateCard("OmegaProtocol") };
-                    yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
-                }
-                else
-                {
-                    Card[] cards = { Library.CreateCard("OmegaProtocol+") };
-                    yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
-                }
-                for (int i = 0; i < Value1; i++)
-                {
-                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                    yield return new ExileCardAction(card);
-                }
+                yield return new ApplyStatusEffectAction<GammaStatus>(Battle.Player, Value1, null, null, null, 0f, true);
                 yield break;
             }
 

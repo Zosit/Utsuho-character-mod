@@ -25,7 +25,7 @@ using Utsuho_character_mod.Util;
 using static UnityEngine.UI.GridLayoutGroup;
 using LBoL.Core.Randoms;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsBR
 {
     public sealed class EternityEngineDef : CardTemplate
     {
@@ -49,7 +49,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13380,
+                Index: 48,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -125,10 +125,10 @@ namespace Utsuho_character_mod.CardsMulti
             }
             public override IEnumerable<BattleAction> OnTurnStartedInHand()
             {
-                if (base.Zone == CardZone.Hand)
+                if (Zone == CardZone.Hand)
                 {
                     Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                    foreach(BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) {  yield return action; }
+                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, Battle)) { yield return action; }
                     card.NotifyActivating();
                     GameMaster.Instance.StartCoroutine(ResetTrigger());
                     yield return new ExileCardAction(card);

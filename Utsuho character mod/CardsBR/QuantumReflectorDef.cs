@@ -13,18 +13,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
+using System.Linq;
+using LBoL.Base.Extensions;
+using LBoL.Core.Battle.Interactions;
 using Utsuho_character_mod.Status;
-using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using Utsuho_character_mod.Util;
-using HarmonyLib;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsBR
 {
-    public sealed class GammaProtocolDef : CardTemplate
+    public sealed class QuantumReflectorDefinition : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(GammaProtocol);
+            return nameof(QuantumReflector);
         }
 
         public override CardImages LoadCardImages()
@@ -42,7 +43,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13532,
+                Index: 52,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -53,16 +54,16 @@ namespace Utsuho_character_mod.CardsMulti
                 GunNameBurst: "Simple1",
                 DebugLevel: 0,
                 Revealable: false,
-                IsPooled: false,
-                HideMesuem: true,
+                IsPooled: true,
+                HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Rare,
+                Rarity: Rarity.Uncommon,
                 Type: CardType.Ability,
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 2 },
-                UpgradedCost: new ManaGroup() { Black = 1, Red = 1, Any = 2 },
+                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
+                UpgradedCost: null,
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -70,8 +71,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 50,
-                UpgradedValue1: 70,
+                Value1: 8,
+                UpgradedValue1: 12,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -95,10 +96,10 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "OmegaStatus" },
-                UpgradedRelativeEffects: new List<string>() { "OmegaStatus" },
-                RelativeCards: new List<string>() { },
-                UpgradedRelativeCards: new List<string>() { },
+                RelativeEffects: new List<string>() { "Reflect" },
+                UpgradedRelativeEffects: new List<string>() { "Reflect" },
+                RelativeCards: new List<string>() { "DarkMatter" },
+                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -108,18 +109,14 @@ namespace Utsuho_character_mod.CardsMulti
             return cardConfig;
         }
 
-        [EntityLogic(typeof(GammaProtocolDef))]
-        public sealed class GammaProtocol : Card
+        [EntityLogic(typeof(QuantumReflectorDefinition))]
+        public sealed class QuantumReflector : Card
         {
-
-
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return new ApplyStatusEffectAction<GammaStatus>(Battle.Player, Value1, null, null, null, 0f, true);
+                yield return BuffAction<QuantumReflectorStatus>(Value1, 0, 0, 0, 0.2f);
                 yield break;
             }
-
         }
-
     }
 }

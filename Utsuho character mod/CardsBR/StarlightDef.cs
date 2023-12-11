@@ -16,7 +16,7 @@ using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsBR
 {
     public sealed class StarlightDef : CardTemplate
     {
@@ -40,7 +40,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13390,
+                Index: 54,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",

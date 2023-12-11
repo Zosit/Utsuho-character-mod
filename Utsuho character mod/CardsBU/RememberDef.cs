@@ -14,21 +14,25 @@ using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
+using static Utsuho_character_mod.CardsB.DarkMatterDef;
+using LBoL.Base.Extensions;
+using JetBrains.Annotations;
+using System.Linq;
+using LBoL.Core.Battle.Interactions;
 using Utsuho_character_mod.Util;
-using HarmonyLib;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsBU
 {
-    public sealed class AblativeArmorDef : CardTemplate
+    public sealed class RememberDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(AblativeArmor);
+            return nameof(Remember);
         }
 
         public override CardImages LoadCardImages()
         {
-            var imgs = new CardImages(BepinexPlugin.embeddedSource);
+            var imgs = new CardImages(embeddedSource);
             imgs.AutoLoad(this, extension: ".png");
             return imgs;
         }
@@ -41,7 +45,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13527,
+                Index: 65,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -56,21 +60,21 @@ namespace Utsuho_character_mod.CardsMulti
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Rare,
-                Type: CardType.Defense,
+                Type: CardType.Skill,
                 TargetType: TargetType.Nobody,
-                Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
+                Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Blue },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Any = 3 },
+                Cost: new ManaGroup() { Black = 1, Blue = 1, Any = 2 },
+                UpgradedCost: new ManaGroup() { Black = 1, Blue = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
-                Block: 15,
-                UpgradedBlock: 20,
-                Shield: 0,
-                UpgradedShield: 0,
-                Value1: 10,
-                UpgradedValue1: 14,
+                Block: null,
+                UpgradedBlock: null,
+                Shield: null,
+                UpgradedShield: null,
+                Value1: 4,
+                UpgradedValue1: 6,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -88,51 +92,50 @@ namespace Utsuho_character_mod.CardsMulti
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Retain,
-                UpgradedKeywords: Keyword.Retain,
+                Keywords: Keyword.Exile,
+                UpgradedKeywords: Keyword.Exile,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
                 SubIllustrator: new List<string>() { }
              );
 
-            return cardConfig;            
+            return cardConfig;
         }
 
-        [EntityLogic(typeof(AblativeArmorDef))]
-        public sealed class AblativeArmor : Card
+        [EntityLogic(typeof(RememberDef))]
+        public sealed class Remember : Card
         {
+            public override Interaction Precondition()
+            {
+                if (Battle.ExileZone.Count <= 0)
+                {
+                    return null;
+                }
+                return new SelectCardInteraction(1, 12, Battle.ExileZone, SelectedCardHandling.DoNothing);
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                if (!base.Battle.BattleShouldEnd)
+                SelectCardInteraction selectCardInteraction = (SelectCardInteraction)precondition;
+                foreach (Card card in selectCardInteraction.SelectedCards)
                 {
-                    this.DeltaShield = 0;
-                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                    while(card.Id == "DarkMatter")
+                    if (card != null)
                     {
-                        yield return new ExileCardAction(card);
-                        this.DeltaShield += Value1;
-                        if (Battle.HandZone.Count != 0)
-                            card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                        else
-                            break;
+                        yield return new MoveCardAction(card, CardZone.Hand);
+                        //card.SetTurnCost(base.Mana);
                     }
-                    yield return base.DefenseAction();
-                    this.DeltaShield = 0;
-
-                    yield break;
                 }
+
+                yield break;
             }
-
         }
-
     }
 }

@@ -13,19 +13,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
-using System.Linq;
-using LBoL.Base.Extensions;
-using LBoL.Core.Battle.Interactions;
 using Utsuho_character_mod.Status;
+using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using Utsuho_character_mod.Util;
+using HarmonyLib;
+using static Utsuho_character_mod.CardsBR.GammaProtocolDef;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsBR
 {
-    public sealed class QuantumReflectorDefinition : CardTemplate
+    public sealed class BetaProtocolDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(QuantumReflector);
+            return nameof(BetaProtocol);
         }
 
         public override CardImages LoadCardImages()
@@ -43,7 +43,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13410,
+                Index: 45,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -54,16 +54,16 @@ namespace Utsuho_character_mod.CardsMulti
                 GunNameBurst: "Simple1",
                 DebugLevel: 0,
                 Revealable: false,
-                IsPooled: true,
-                HideMesuem: false,
+                IsPooled: false,
+                HideMesuem: true,
                 IsUpgradable: true,
-                Rarity: Rarity.Uncommon,
+                Rarity: Rarity.Rare,
                 Type: CardType.Ability,
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
                 Cost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
-                UpgradedCost: null,
+                UpgradedCost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -71,8 +71,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 8,
-                UpgradedValue1: 12,
+                Value1: 3,
+                UpgradedValue1: 3,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -96,10 +96,10 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "Reflect" },
-                UpgradedRelativeEffects: new List<string>() { "Reflect" },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeEffects: new List<string>() { "GammaStatus" },
+                UpgradedRelativeEffects: new List<string>() { "GammaStatus" },
+                RelativeCards: new List<string>() { "GammaProtocol" },
+                UpgradedRelativeCards: new List<string>() { "GammaProtocol+" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -109,14 +109,33 @@ namespace Utsuho_character_mod.CardsMulti
             return cardConfig;
         }
 
-        [EntityLogic(typeof(QuantumReflectorDefinition))]
-        public sealed class QuantumReflector : Card
+        [EntityLogic(typeof(BetaProtocolDef))]
+        public sealed class BetaProtocol : Card
         {
+
+
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return BuffAction<QuantumReflectorStatus>(Value1, 0, 0, 0, 0.2f);
+                if (!IsUpgraded)
+                {
+                    Card[] cards = { Library.CreateCard("OmegaProtocol") };
+                    yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
+                }
+                else
+                {
+                    Card[] cards = { Library.CreateCard("OmegaProtocol+") };
+                    yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
+                }
+                for (int i = 0; i < Value1; i++)
+                {
+                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, Battle)) { yield return action; }
+                    yield return new ExileCardAction(card);
+                }
                 yield break;
             }
+
         }
+
     }
 }

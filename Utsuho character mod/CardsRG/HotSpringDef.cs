@@ -20,13 +20,13 @@ using JetBrains.Annotations;
 using System.Linq;
 using Utsuho_character_mod.Util;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsRG
 {
-    public sealed class DojoDef : CardTemplate
+    public sealed class HotSpringDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(Dojo);
+            return nameof(HotSpring);
         }
 
         public override CardImages LoadCardImages()
@@ -44,7 +44,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13590,
+                Index: 66,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -59,12 +59,12 @@ namespace Utsuho_character_mod.CardsMulti
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Rare,
-                Type: CardType.Skill,
+                Type: CardType.Ability,
                 TargetType: TargetType.Nobody,
-                Colors: new List<ManaColor>() { ManaColor.Red, ManaColor.White },
+                Colors: new List<ManaColor>() { ManaColor.Red, ManaColor.Green },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1, White = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Red = 1, White = 1, Any = 1 },
+                Cost: new ManaGroup() { Red = 1, Green = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Red = 1, Green = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -97,8 +97,8 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { },
-                UpgradedRelativeEffects: new List<string>() { },
+                RelativeEffects: new List<string>() { "HotSpringStatus", "RadiationStatus" },
+                UpgradedRelativeEffects: new List<string>() { "HotSpringStatus", "RadiationStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -110,13 +110,12 @@ namespace Utsuho_character_mod.CardsMulti
             return cardConfig;
         }
 
-        [EntityLogic(typeof(DojoDef))]
-        public sealed class Dojo : Card
+        [EntityLogic(typeof(HotSpringDef))]
+        public sealed class HotSpring : Card
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return BuffAction<Firepower>(Value1, 0, 0, 0, 0.2f);
-                yield return new RequestEndPlayerTurnAction();
+                yield return BuffAction<HotSpringStatus>(Value1, 0, 0, 0, 0.2f);
                 yield break;
             }
         }

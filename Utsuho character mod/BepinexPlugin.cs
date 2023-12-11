@@ -150,7 +150,7 @@ namespace Utsuho_character_mod
                 WatermarkWrapper.ActivateWatermark();
 
             // unload asset bundles OnDestroy
-            utsuhoAB = ResourceLoader.LoadAssetBundle("utsuhoBundle", UtsuhoPlayerDef.dir);
+            //utsuhoAB = ResourceLoader.LoadAssetBundle("utsuhoBundle", UtsuhoPlayerDef.dir);
         }
 
         private void OnDestroy()

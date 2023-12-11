@@ -16,18 +16,18 @@ using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsBR
 {
-    public sealed class DysonSphereDefinition : CardTemplate
+    public sealed class SpacialRendDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(DysonSphere);
+            return nameof(SpacialRend);
         }
 
         public override CardImages LoadCardImages()
         {
-            var imgs = new CardImages(embeddedSource);
+            var imgs = new CardImages(BepinexPlugin.embeddedSource);
             imgs.AutoLoad(this, extension: ".png");
             return imgs;
         }
@@ -40,7 +40,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13540,
+                Index: 53,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -55,23 +55,23 @@ namespace Utsuho_character_mod.CardsMulti
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Rare,
-                Type: CardType.Ability,
-                TargetType: TargetType.Nobody,
+                Type: CardType.Attack,
+                TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 2 },
-                UpgradedCost: new ManaGroup() { Black = 1, Red = 1, Any = 2 },
+                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
                 MoneyCost: null,
-                Damage: null,
-                UpgradedDamage: null,
+                Damage: 15,
+                UpgradedDamage: 20,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 20,
-                UpgradedValue1: 30,
-                Value2: 3,
-                UpgradedValue2: 5,
+                Value1: 2,
+                UpgradedValue1: 3,
+                Value2: 10,
+                UpgradedValue2: 14,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -87,14 +87,14 @@ namespace Utsuho_character_mod.CardsMulti
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.None,
-                UpgradedKeywords: Keyword.None,
+                Keywords: Keyword.Retain | Keyword.Exile,
+                UpgradedKeywords: Keyword.Retain | Keyword.Exile,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "HeatStatus", "DysonSphereStatus" },
-                UpgradedRelativeEffects: new List<string>() { "HeatStatus", "DysonSphereStatus" },
+                RelativeEffects: new List<string>() { },
+                UpgradedRelativeEffects: new List<string>() { },
                 RelativeCards: new List<string>() { "DarkMatter" },
                 UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
@@ -103,28 +103,32 @@ namespace Utsuho_character_mod.CardsMulti
                 SubIllustrator: new List<string>() { }
              );
 
-            return cardConfig;
+            return cardConfig;            
         }
 
-        [EntityLogic(typeof(DysonSphereDefinition))]
-        public sealed class DysonSphere : Card
+        [EntityLogic(typeof(SpacialRendDef))]
+        public sealed class SpacialRend : Card
         {
-
-
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                if (!Battle.BattleShouldEnd)
+                if (!base.Battle.BattleShouldEnd)
                 {
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(Value1), null, null, null, 0f, true);
-                    if (!this.IsUpgraded)
+                    this.DeltaDamage = 0;
+                    for (int i = 0; i < Value1; i++)
                     {
-                        yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
+                        IReadOnlyList<Card> drawZoneIndexOrder = base.Battle.DrawZoneIndexOrder;
+                        Card card = Util.UsefulFunctions.RandomUtsuho(drawZoneIndexOrder);
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                        if (card.Id == "DarkMatter")
+                        {
+                            this.DeltaDamage += Value2;
+                        }
+                        yield return new ExileCardAction(card);
                     }
-                    else
-                    {
-                        yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
-                    }
-                    yield return new ApplyStatusEffectAction<DysonSphereStatus>(Battle.Player, 1, null, null, null, 0f, true);
+
+                    yield return base.AttackAction(selector);
+                    this.DeltaDamage = 0;
+
                     yield break;
                 }
             }

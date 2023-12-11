@@ -77,10 +77,8 @@ namespace Utsuho_character_mod.Exhibits
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { },
                 RelativeCards: new List<string>() { "DarkMatter" }
-                )
-            {
+                );
 
-            };
             return exhibitConfig;
         }
 
