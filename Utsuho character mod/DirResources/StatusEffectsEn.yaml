@@ -1,6 +1,6 @@
 HeatStatus:
   Name: Heat
-  Description: "At the end of {PlayerName}'s turn, lose 1 of every {Value1} |Heat| and deal that much damage to all enemies.\nThe keyword |Vent| spends all of this at once for an effect."
+  Description: "At the end of {PlayerName}'s turn, lose 1 of every 5 |Heat| and deal that much damage to all enemies.\nThe keyword |Vent| spends all of this at once for an effect."
   Brief: "At the end of {PlayerName}'s turn, lose |Heat| and deal that much damage to all enemies.\nThe keyword |Vent| spends all of this at once for an effect."
 
 ChargingStatus:

@@ -242,8 +242,8 @@ AlphaProtocol:
 
 BetaProtocol:
   Name: Beta Protocol
-  Description: "Add a |Omega Protocol| to your draw pile.\nExile {Value1} random cards from your hand."
-  UpgradedDescription: "Add a |Omega Protocol+| to your draw pile.\nExile {Value1} random cards from your hand."
+  Description: "Add a |Gamma Protocol| to your draw pile.\nExile {Value1} random cards from your hand."
+  UpgradedDescription: "Add a |Gamma Protocol+| to your draw pile.\nExile {Value1} random cards from your hand."
 
 GammaProtocol:
   Name: Gamma Protocol
@@ -251,7 +251,15 @@ GammaProtocol:
 
 DysonSphere:
   Name: Dyson Sphere
-  Description: "Gain {Value1} |Heat|.\nAdd {Value2} |Dark Matter| to your discard pile.\nWhen you play a |Dark Matter|, trigger your |Heat|."
+  Description: "Gain {Value1} |Heat|.\nAdd {Value2} |Dark Matter| to your hand.\nWhen you play a |Dark Matter|, trigger your |Heat|."
+
+AblativeArmor:
+  Name: Ablative Armor
+  Description: "Gain {Block} block.\nExile all |Dark Matter| in your hand, and gain {Value1} Barrier for each exiled."
+
+SpacialRend:
+  Name: Spacial Rend
+  Description: "Exile {Value1} random cards from your draw pile.\nDeal {Damage} damage.\nFor each |Dark Matter| exiled, deal {Value2} additional damage."
 
 SunCrow: 
   Name: The Crow who Stole the Sun
