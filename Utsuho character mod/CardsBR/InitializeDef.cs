@@ -13,20 +13,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
-using Utsuho_character_mod.Status;
-using static Utsuho_character_mod.CardsB.DarkMatterDef;
-using LBoL.Base.Extensions;
-using JetBrains.Annotations;
 using System.Linq;
+using LBoL.Base.Extensions;
+using LBoL.Core.Battle.Interactions;
+using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsBR
 {
-    public sealed class SunCrowDef : CardTemplate
+    public sealed class InitializeDefinition : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(SunCrow);
+            return nameof(Initialize);
         }
 
         public override CardImages LoadCardImages()
@@ -44,7 +43,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13550,
+                Index: 50,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -58,13 +57,13 @@ namespace Utsuho_character_mod.CardsMulti
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Rare,
-                Type: CardType.Ability,
+                Rarity: Rarity.Uncommon,
+                Type: CardType.Skill,
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
-                IsXCost: false,
-                Cost: new ManaGroup() { Black = 2, Red = 2, Any = 1 },
-                UpgradedCost: new ManaGroup() { Black = 2, Red = 2, Any = 1 },
+                IsXCost: true,
+                Cost: new ManaGroup() { Black = 1, Red = 1 },
+                UpgradedCost: null,
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -72,12 +71,12 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 12,
-                UpgradedValue1: 16,
-                Value2: null,
-                UpgradedValue2: null,
-                Mana: null,
-                UpgradedMana: null,
+                Value1: 8,
+                UpgradedValue1: 12,
+                Value2: 1,
+                UpgradedValue2: 1,
+                Mana: new ManaGroup() { Any = 1 },
+                UpgradedMana: new ManaGroup() { Any = 1 },
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -91,8 +90,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.None,
-                UpgradedKeywords: Keyword.None,
+                Keywords: Keyword.Initial | Keyword.Ethereal | Keyword.Exile,
+                UpgradedKeywords: Keyword.Initial | Keyword.Ethereal | Keyword.Exile,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
@@ -103,24 +102,31 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "Flippin'Loser",
+                Illustrator: "",
                 SubIllustrator: new List<string>() { }
              );
 
             return cardConfig;
         }
 
-        [EntityLogic(typeof(SunCrowDef))]
-        public sealed class SunCrow : Card
+        [EntityLogic(typeof(InitializeDefinition))]
+        public sealed class Initialize : Card
         {
+
+            public override ManaGroup GetXCostFromPooled(ManaGroup pooledMana)
+            {
+                return pooledMana;
+            }
+
+
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => (card != this) && (card.Id == "DarkMatter")).ToList<Card>();
-                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1) * cards.Count, null, null, null, 0f, true);
-                foreach (Card card in cards)
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, SynergyAmount(consumingMana, ManaColor.Any, 1) * new int?(Value1), null, null, null, 0f, true);
+                for (int i = 0; i < SynergyAmount(consumingMana, ManaColor.Any, 1); i++)
                 {
-                    yield return new RemoveCardAction(card);
+                    yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"));
                 }
+
                 yield break;
             }
         }

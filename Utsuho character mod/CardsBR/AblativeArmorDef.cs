@@ -15,19 +15,20 @@ using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
+using HarmonyLib;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsBR
 {
-    public sealed class SpacialRendDef : CardTemplate
+    public sealed class AblativeArmorDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(SpacialRend);
+            return nameof(AblativeArmor);
         }
 
         public override CardImages LoadCardImages()
         {
-            var imgs = new CardImages(BepinexPlugin.embeddedSource);
+            var imgs = new CardImages(embeddedSource);
             imgs.AutoLoad(this, extension: ".png");
             return imgs;
         }
@@ -40,7 +41,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13524,
+                Index: 43,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -55,23 +56,23 @@ namespace Utsuho_character_mod.CardsMulti
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Rare,
-                Type: CardType.Attack,
-                TargetType: TargetType.SingleEnemy,
+                Type: CardType.Defense,
+                TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
                 Cost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Any = 3 },
                 MoneyCost: null,
-                Damage: 15,
-                UpgradedDamage: 20,
-                Block: null,
-                UpgradedBlock: null,
-                Shield: null,
-                UpgradedShield: null,
-                Value1: 2,
-                UpgradedValue1: 3,
-                Value2: 10,
-                UpgradedValue2: 14,
+                Damage: null,
+                UpgradedDamage: null,
+                Block: 15,
+                UpgradedBlock: 20,
+                Shield: 0,
+                UpgradedShield: 0,
+                Value1: 10,
+                UpgradedValue1: 14,
+                Value2: null,
+                UpgradedValue2: null,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -87,8 +88,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Retain | Keyword.Exile,
-                UpgradedKeywords: Keyword.Retain | Keyword.Exile,
+                Keywords: Keyword.Retain,
+                UpgradedKeywords: Keyword.Retain,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
@@ -103,31 +104,29 @@ namespace Utsuho_character_mod.CardsMulti
                 SubIllustrator: new List<string>() { }
              );
 
-            return cardConfig;            
+            return cardConfig;
         }
 
-        [EntityLogic(typeof(SpacialRendDef))]
-        public sealed class SpacialRend : Card
+        [EntityLogic(typeof(AblativeArmorDef))]
+        public sealed class AblativeArmor : Card
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                if (!base.Battle.BattleShouldEnd)
+                if (!Battle.BattleShouldEnd)
                 {
-                    this.DeltaDamage = 0;
-                    for (int i = 0; i < Value1; i++)
+                    DeltaShield = 0;
+                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                    while (card.Id == "DarkMatter")
                     {
-                        IReadOnlyList<Card> drawZoneIndexOrder = base.Battle.DrawZoneIndexOrder;
-                        Card card = Util.UsefulFunctions.RandomUtsuho(drawZoneIndexOrder);
-                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                        if (card.Id == "DarkMatter")
-                        {
-                            this.DeltaDamage += Value2;
-                        }
                         yield return new ExileCardAction(card);
+                        DeltaShield += Value1;
+                        if (Battle.HandZone.Count != 0)
+                            card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                        else
+                            break;
                     }
-
-                    yield return base.AttackAction(selector);
-                    this.DeltaDamage = 0;
+                    yield return DefenseAction();
+                    DeltaShield = 0;
 
                     yield break;
                 }

@@ -19,13 +19,13 @@ using LBoL.Core.Battle.Interactions;
 using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsBR
 {
-    public sealed class MaintainReactionDefinition : CardTemplate
+    public sealed class CrossfeedDefinition : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(MaintainReaction);
+            return nameof(Crossfeed);
         }
 
         public override CardImages LoadCardImages()
@@ -43,7 +43,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13400,
+                Index: 46,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -57,24 +57,24 @@ namespace Utsuho_character_mod.CardsMulti
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Uncommon,
-                Type: CardType.Ability,
-                TargetType: TargetType.Nobody,
+                Rarity: Rarity.Common,
+                Type: CardType.Attack,
+                TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
+                Cost: new ManaGroup() { Black = 1, Red = 1 },
                 UpgradedCost: null,
                 MoneyCost: null,
-                Damage: null,
-                UpgradedDamage: null,
+                Damage: 0,
+                UpgradedDamage: 0,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 8,
-                UpgradedValue1: 12,
-                Value2: null,
-                UpgradedValue2: null,
+                Value1: 1,
+                UpgradedValue1: 1,
+                Value2: 6,
+                UpgradedValue2: 10,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -98,8 +98,8 @@ namespace Utsuho_character_mod.CardsMulti
 
                 RelativeEffects: new List<string>() { "HeatStatus" },
                 UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
-                RelativeCards: new List<string>() { },
-                UpgradedRelativeCards: new List<string>() { },
+                RelativeCards: new List<string>() { "DarkMatter" },
+                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -109,12 +109,47 @@ namespace Utsuho_character_mod.CardsMulti
             return cardConfig;
         }
 
-        [EntityLogic(typeof(MaintainReactionDefinition))]
-        public sealed class MaintainReaction : Card
+        [EntityLogic(typeof(CrossfeedDefinition))]
+        public sealed class Crossfeed : Card
         {
+            public override int AdditionalDamage
+            {
+                get
+                {
+                    HeatStatus statusEffect = Battle.Player.GetStatusEffect<HeatStatus>();
+                    if (statusEffect != null)
+                    {
+                        return statusEffect.Level;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return BuffAction<MaintainReactionStatus>(Value1, 0, 0, 0, 0.2f);
+                int level = GetSeLevel<HeatStatus>();
+                int total = 0;
+                Card[] array = Battle.HandZone.SampleManyOrAll(999, GameRun.BattleRng);
+                if (array.Length != 0)
+                {
+                    foreach (Card card in array)
+                    {
+                        if (card.Id == "DarkMatter")
+                        {
+                            yield return new DiscardAction(card);
+                            total++;
+                        }
+                    }
+                }
+                yield return AttackAction(selector);
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, total * Value2 - level, null, null, null, 0f, true);
+                for (int i = 0; i < level / 5; i++)
+                {
+                    yield return new AddCardsToDiscardAction(Library.CreateCard("DarkMatter"));
+                }
+
                 yield break;
             }
         }
