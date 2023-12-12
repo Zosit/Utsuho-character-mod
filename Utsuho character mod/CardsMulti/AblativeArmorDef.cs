@@ -60,13 +60,13 @@ namespace Utsuho_character_mod.CardsMulti
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Any = 3 },
+                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 2 },
+                UpgradedCost: new ManaGroup() { Any = 4 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
-                Block: 15,
-                UpgradedBlock: 20,
+                Block: 20,
+                UpgradedBlock: 25,
                 Shield: 0,
                 UpgradedShield: 0,
                 Value1: 10,
@@ -115,15 +115,18 @@ namespace Utsuho_character_mod.CardsMulti
                 if (!Battle.BattleShouldEnd)
                 {
                     DeltaShield = 0;
-                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                    while(card.Id == "DarkMatter")
+                    if (Battle.DiscardZone.Count != 0)
                     {
-                        yield return new ExileCardAction(card);
-                        DeltaShield += Value1;
-                        if (Battle.HandZone.Count != 0)
-                            card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                        else
-                            break;
+                        Card card = UsefulFunctions.RandomUtsuho(Battle.DiscardZone);
+                        while (card.Id == "DarkMatter")
+                        {
+                            yield return new ExileCardAction(card);
+                            DeltaShield += Value1;
+                            if (Battle.DiscardZone.Count != 0)
+                                card = UsefulFunctions.RandomUtsuho(Battle.DiscardZone);
+                            else
+                                break;
+                        }
                     }
                     yield return base.DefenseAction();
                     DeltaShield = 0;

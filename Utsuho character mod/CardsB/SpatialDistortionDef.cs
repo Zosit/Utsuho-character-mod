@@ -64,7 +64,7 @@ namespace Utsuho_character_mod.CardsB
                 UpgradedCost: new ManaGroup() { Black = 1, Any = 2 },
                 MoneyCost: null,
                 Damage: 16,
-                UpgradedDamage: 16,
+                UpgradedDamage: 18,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,

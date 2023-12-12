@@ -18,6 +18,7 @@ using LBoL.Base.Extensions;
 using LBoL.Core.Battle.Interactions;
 using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
+using static Utsuho_character_mod.CardsB.DarkMatterDef;
 
 namespace Utsuho_character_mod.CardsMulti
 {
@@ -43,7 +44,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13390,
+                Index: 13170,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -71,10 +72,10 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 1,
-                UpgradedValue1: 1,
+                Value1: 8,
+                UpgradedValue1: 10,
                 Value2: 10,
-                UpgradedValue2: 14,
+                UpgradedValue2: 8,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -131,23 +132,29 @@ namespace Utsuho_character_mod.CardsMulti
             {
                 int level = base.GetSeLevel<HeatStatus>();
                 int total = 0;
-                Card[] array = base.Battle.HandZone.SampleManyOrAll(999, base.GameRun.BattleRng);
+                Card[] array = base.Battle.DiscardZone.SampleManyOrAll(999, base.GameRun.BattleRng);
                 if (array.Length != 0)
                 {
                     foreach (Card card in array)
                     {
                         if (card.Id == "DarkMatter")
                         {
-                            yield return new DiscardAction(card);
                             total++;
                         }
                     }
                 }
                 yield return AttackAction(selector);
-                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, (total*this.Value2)-level, null, null, null, 0f, true);
-                for(int i = 0; i < (level/10); i++)
+                if (total == 0 && level != 0)
                 {
-                    yield return new AddCardsToDiscardAction(Library.CreateCard("DarkMatter"));
+                    yield return new RemoveStatusEffectAction(Battle.Player.GetStatusEffect<HeatStatus>());
+                }
+                else if (total != 0)
+                {
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, (total * this.Value1) - level, null, null, null, 0f, true);
+                }
+                if ((level/Value2) != 0)
+                {
+                    yield return new AddCardsToDiscardAction(Library.CreateCards<DarkMatter>(level/Value2));
                 }
 
                 yield break;

@@ -78,8 +78,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedValue1: 7,
                 Value2: 5,
                 UpgradedValue2: 7,
-                Mana: new ManaGroup() { Any = 1 },
-                UpgradedMana: new ManaGroup() { Any = 1 },
+                Mana: new ManaGroup() { Philosophy = 5 },
+                UpgradedMana: new ManaGroup() { Philosophy = 7 },
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -131,7 +131,7 @@ namespace Utsuho_character_mod.CardsR
                 yield return new ApplyStatusEffectAction<TempFirepower>(Battle.Player, base.Value1, null, null, null, 0.2f);
                 yield return new ApplyStatusEffectAction<TimeIsLimited>(Battle.Player, 1, null, null, null, 0f, true);
                 yield break;
-            }           
+            }
         }
     }
 }

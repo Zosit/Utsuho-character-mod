@@ -18,6 +18,7 @@ using LBoL.Core.Battle.BattleActions;
 using LBoL.Core.Cards;
 using static Utsuho_character_mod.CardsR.ConflagrationDefinition;
 using LBoL.EntityLib.StatusEffects.Marisa;
+using System.Linq;
 
 namespace Utsuho_character_mod.Status
 {
@@ -84,28 +85,30 @@ namespace Utsuho_character_mod.Status
         }
         protected override void OnAdded(Unit unit)
         {
-            ReactOwnerEvent(Owner.TurnEnded, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
+            ReactOwnerEvent(Owner.TurnEnding, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnEnding));
         }
-        private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
+        private IEnumerable<BattleAction> OnOwnerTurnEnding(UnitEventArgs args)
         {
             int level = base.GetSeLevel<HeatStatus>();
+            if (!Battle.BattleShouldEnd)
+            {
+                if (level >= 5)
+                {
+                    yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(level / 5)), this.GunName, GunType.Single);
+                }
+            }
 
-            if (level >= 5)
+
+            if (!Battle.BattleShouldEnd)
             {
-                yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(level / 5)), this.GunName, GunType.Single);
-            }
-            if (Battle.BattleShouldEnd)
-            {
-                yield break;
-            }
-            NotifyActivating();
-            if (base.Battle.Player.GetStatusEffect<ConflagrationStatus>() != null)
-            {
-                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, (level / 5), null, null, null, 0f, true);
-            }
-            else
-            {
-                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level / 5), null, null, null, 0f, true);
+                if (base.Battle.Player.GetStatusEffect<ConflagrationStatus>() != null)
+                {
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, (level / 5), null, null, null, 0f, true);
+                }
+                else
+                {
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level / 5), null, null, null, 0f, true);
+                }
             }
             yield break;
         }

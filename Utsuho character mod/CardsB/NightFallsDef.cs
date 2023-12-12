@@ -18,6 +18,8 @@ using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using LBoL.Base.Extensions;
 using System.Linq;
 using Utsuho_character_mod.Util;
+using LBoL.Core.Randoms;
+using HarmonyLib;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -119,11 +121,8 @@ namespace Utsuho_character_mod.CardsR
                     yield return battleAction;
                 }*/
                 int num = base.Battle.MaxHand - base.Battle.HandZone.Count;
-                for (int i = 0; i < num; i++)
-                {
-                    yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"));
-                    this.DeltaDamage += Value1;
-                }
+                this.DeltaDamage += Value1 * num;
+                yield return new AddCardsToHandAction(Library.CreateCards<DarkMatter>(num));
                 yield return AttackAction(selector);
                 this.DeltaDamage = 0;
                 yield break;

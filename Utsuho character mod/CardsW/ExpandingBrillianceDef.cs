@@ -126,6 +126,7 @@ namespace Utsuho_character_mod.CardsW
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
+                yield return new DrawCardAction();
                 foreach (BattleAction battleAction in base.DebuffAction<TempFirepowerNegative>(selector.GetUnits(base.Battle), base.Value1, 0, 0, 0, true, 0.2f))
                 {
                     yield return battleAction;
@@ -145,7 +146,6 @@ namespace Utsuho_character_mod.CardsW
                     yield return new UpgradeCardAction(this.oneTargetHand);
                     this.oneTargetHand = null;
                 }
-                yield return new DrawCardAction();
                 yield break;
             }
             private Card oneTargetHand;

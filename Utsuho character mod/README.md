@@ -18,6 +18,7 @@ Artists:
 - Flippin'Loser
 
 Translators:
+- Xeno (English edit)
 - Raspberry Caffeine Monster (Korean translations)
 
 Special Thanks:

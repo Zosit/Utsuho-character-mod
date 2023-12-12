@@ -18,6 +18,7 @@ using LBoL.Base.Extensions;
 using LBoL.Core.Battle.Interactions;
 using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
+using static Utsuho_character_mod.CardsB.DarkMatterDef;
 
 namespace Utsuho_character_mod.CardsMulti
 {
@@ -122,10 +123,7 @@ namespace Utsuho_character_mod.CardsMulti
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, SynergyAmount(consumingMana, ManaColor.Any, 1) * new int?(Value1), null, null, null, 0f, true);
-                for(int i = 0; i < SynergyAmount(consumingMana, ManaColor.Any, 1); i++)
-                {
-                    yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"));
-                }
+                yield return new AddCardsToHandAction(Library.CreateCards<DarkMatter>(SynergyAmount(consumingMana, ManaColor.Any, 1)));
 
                 yield break;
             }

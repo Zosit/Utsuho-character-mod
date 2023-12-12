@@ -17,6 +17,7 @@ using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using LBoL.Base.Extensions;
 using Utsuho_character_mod.Util;
+using System.Linq;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -114,38 +115,27 @@ namespace Utsuho_character_mod.CardsR
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 Card[] array = base.Battle.DrawZone.SampleManyOrAll(999, base.GameRun.BattleRng);
-                Card[] array2 = base.Battle.DiscardZone.SampleManyOrAll(999, base.GameRun.BattleRng);
+                Card[] array2 = base.Battle.DiscardZone.ToArray<Card>();
                 if (array.Length != 0)
                 {
                     foreach (Card card in array)
                     {
-                        //if (card.Id == "DarkMatter")
-                        //{
                         yield return new DiscardAction(card);
                         this.DeltaDamage += Value1;
-                        //}
                     }
                 }
                 if (array2.Length != 0)
                 {
                     foreach (Card card in array2)
                     {
-                        //if (card.Id == "DarkMatter")
-                        //{
-                        yield return new MoveCardToDrawZoneAction(card, 0);
+                        yield return new MoveCardToDrawZoneAction(card, DrawZoneTarget.Top);
                         this.DeltaBlock += Value2;
-                        //}
                     }
-                    yield return new ReshuffleAction();
                 }
-                //for (int i = 0; i < array.Length; i++)
-                //{
+
                     yield return AttackAction(selector);
-                //}
-                //for (int i = 0; i < array.Length; i++)
-                //{
+
                     yield return DefenseAction();
-                //}
                 this.DeltaDamage = 0;
                 this.DeltaBlock = 0;
 

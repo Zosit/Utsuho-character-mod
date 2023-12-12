@@ -74,7 +74,8 @@ SunlightReverie:
 
 NuclearDive:
   Name: 핵반응 제어불능 다이브
-  Description: "|작열|이 두배로 증가합니다.\n자신의 |작열| 10 마다 1의 피해를 받습니다.\n|냉각|한 만큼 피해를 줍니다"
+  Description: "|작열|이 두배로 증가합니다.\n자신의 |작열| 10 마다 1의 피해를 받습니다.\n|냉각|한 만큼 피해를 줍니다."
+  UpgradedDescription: "|작열|이 세배로 증가합니다.\n자신의 |작열| 10 마다 1의 피해를 받습니다.\n|냉각|한 만큼 피해를 줍니다."
 
 BunkerDown:
   Name: 긴급 대피
@@ -257,7 +258,7 @@ AblativeArmor:
   Name: 융제 장갑
   Description: "방어를 {Block} 얻습니다.\n패의 모든 |암흑 물질|을 소멸시키고, 소멸한 만큼 보호막을 {Value1} 얻습니다."
 
-SpacialRend:
+SpatialRend:
   Name: 공간 절단
   Description: "뽑을 카드 더미에서 무작위 카드 {Value1}장을 소멸시킵니다.\n피해를 {Damage} 줍니다.\n소멸된 |암흑 물질| 마다, 추가로 피해를 {Value2} 줍니다"
 
