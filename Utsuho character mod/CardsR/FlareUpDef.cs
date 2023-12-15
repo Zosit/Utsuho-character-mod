@@ -16,18 +16,18 @@ using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsR
 {
-    public sealed class DysonSphereDefinition : CardTemplate
+    public sealed class FlareUpDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(DysonSphere);
+            return nameof(FlareUp);
         }
 
         public override CardImages LoadCardImages()
         {
-            var imgs = new CardImages(embeddedSource);
+            var imgs = new CardImages(BepinexPlugin.embeddedSource);
             imgs.AutoLoad(this, extension: ".png");
             return imgs;
         }
@@ -40,7 +40,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13540,
+                Index: 13130,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -54,24 +54,24 @@ namespace Utsuho_character_mod.CardsMulti
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Rare,
-                Type: CardType.Ability,
-                TargetType: TargetType.Nobody,
-                Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
+                Rarity: Rarity.Common,
+                Type: CardType.Attack,
+                TargetType: TargetType.SingleEnemy,
+                Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 2 },
-                UpgradedCost: new ManaGroup() { Black = 1, Red = 1, Any = 2 },
+                Cost: new ManaGroup() { Red = 1 },
+                UpgradedCost: new ManaGroup() { Red = 1 },
                 MoneyCost: null,
-                Damage: null,
-                UpgradedDamage: null,
+                Damage: 0,
+                UpgradedDamage: 0,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 20,
-                UpgradedValue1: 30,
-                Value2: 3,
-                UpgradedValue2: 5,
+                Value1: 2,
+                UpgradedValue1: 2,
+                Value2: null,
+                UpgradedValue2: null,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -93,38 +93,51 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "HeatStatus", "DysonSphereStatus" },
-                UpgradedRelativeEffects: new List<string>() { "HeatStatus", "DysonSphereStatus" },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeEffects: new List<string>() { "HeatStatus", "Weak", "Vulnerable" },
+                UpgradedRelativeEffects: new List<string>() { "HeatStatus", "Weak", "Vulnerable" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
                 SubIllustrator: new List<string>() { }
              );
 
-            return cardConfig;
+            return cardConfig;            
         }
 
-        [EntityLogic(typeof(DysonSphereDefinition))]
-        public sealed class DysonSphere : Card
+        [EntityLogic(typeof(FlareUpDef))]
+        public sealed class FlareUp : Card
         {
-
+            public override int AdditionalDamage
+            {
+                get
+                {
+                    int level = base.GetSeLevel<HeatStatus>();
+                    return level;
+                }
+            }
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                if (!Battle.BattleShouldEnd)
+
+                if (!base.Battle.BattleShouldEnd)
                 {
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(Value1), null, null, null, 0f, true);
+                    int level = base.GetSeLevel<HeatStatus>();
+                    if (this.IsUpgraded)
+                    {
+                        yield return base.DebuffAction<Weak>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
+                        yield return base.DebuffAction<Vulnerable>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
+                    }
+                    yield return base.AttackAction(selector.SelectedEnemy);
+                    if (level != 0) {
+                        yield return new RemoveStatusEffectAction(Battle.Player.GetStatusEffect<HeatStatus>());
+                    }
                     if (!this.IsUpgraded)
                     {
-                        yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
+                        yield return base.DebuffAction<Weak>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
+                        yield return base.DebuffAction<Vulnerable>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
                     }
-                    else
-                    {
-                        yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
-                    }
-                    yield return new ApplyStatusEffectAction<DysonSphereStatus>(Battle.Player, 1, null, null, null, 0f, true);
                     yield break;
                 }
             }

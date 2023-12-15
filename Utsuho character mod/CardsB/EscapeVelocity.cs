@@ -115,13 +115,16 @@ namespace Utsuho_character_mod.CardsR
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                for (int i = 0; i < Value1; i++)
+                for (int i = 0; i < Value2; i++)
                 {
-                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                    yield return new DiscardAction(card);
+                    if (Battle.HandZone.Count != 0)
+                    {
+                        Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                        yield return new DiscardAction(card);
+                    }
                 }
-                for (int i = 0; i< Value1; i++)
+                    for (int i = 0; i< Value1; i++)
                 {
                     yield return new DrawCardAction();
                 }

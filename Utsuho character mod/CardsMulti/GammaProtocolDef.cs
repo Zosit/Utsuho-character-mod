@@ -95,8 +95,8 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "OmegaStatus" },
-                UpgradedRelativeEffects: new List<string>() { "OmegaStatus" },
+                RelativeEffects: new List<string>() { "RadiationStatus" },
+                UpgradedRelativeEffects: new List<string>() { "RadiationStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -115,7 +115,7 @@ namespace Utsuho_character_mod.CardsMulti
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return new ApplyStatusEffectAction<GammaStatus>(Battle.Player, Value1, null, null, null, 0f, true);
+                yield return new ApplyStatusEffectAction<RadiationStatus>(Battle.Player, Value1, null, null, null, 0f, true);
                 yield break;
             }
 

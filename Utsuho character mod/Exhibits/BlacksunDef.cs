@@ -22,6 +22,7 @@ using LBoL.EntityLib.Exhibits;
 using LBoL.Core.Units;
 using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
+using System.Linq;
 
 namespace Utsuho_character_mod.Exhibits
 {
@@ -65,7 +66,7 @@ namespace Utsuho_character_mod.Exhibits
                 Owner: "Utsuho",
                 LosableType: ExhibitLosableType.DebutLosable,
                 Rarity: Rarity.Shining,
-                Value1: 1,
+                Value1: 3,
                 Value2: null,
                 Value3: null,
                 Mana: new ManaGroup() { Colorless = 1 },
@@ -87,41 +88,26 @@ namespace Utsuho_character_mod.Exhibits
         [EntityLogic(typeof(BlackSunDefinition))]
         public sealed class BlackSun : ShiningExhibit
         {
+            private string GunName
+            {
+                get
+                {
+                    return "无差别起火";
+                }
+            }
             protected override void OnEnterBattle()
             {
-                ReactBattleEvent<UnitEventArgs>(base.Battle.Player.TurnStarted, new EventSequencedReactor<UnitEventArgs>(this.OnPlayerTurnStarted));
-                ReactBattleEvent<CardUsingEventArgs>(base.Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsed));
-                triggered = false;
+                base.ReactBattleEvent<GameEventArgs>(base.Battle.Reshuffling, new EventSequencedReactor<GameEventArgs>(this.Reshuffling));
             }
 
-            private IEnumerable<BattleAction> OnPlayerTurnStarted(GameEventArgs args)
+            private IEnumerable<BattleAction> Reshuffling(GameEventArgs args)
             {
-                triggered = false;
+                List<Card> cards = base.Battle.DiscardZone.ToList<Card>();
+                int total = cards.FindAll((Card card) => card.Id == "DarkMatter").Count;
+                yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(base.Value1 * total)), this.GunName, GunType.Single);
+
                 yield break;
             }
-
-
-            private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
-            {
-                if ((args.Card.Id == "DarkMatter") && (triggered == false))
-                {
-                    NotifyActivating();
-                    triggered = true;
-                    GameMaster.Instance.StartCoroutine(ResetTrigger());
-                    yield return new GainManaAction(Mana);
-                }
-                yield break;
-            }
-
-
-            IEnumerator ResetTrigger()
-            {
-                // keeps the exhibits icon fully lit for 1.5 sec after it has activated
-                yield return new WaitForSeconds(1.5f);
-                NotifyChanged();
-            }
-
-            private bool triggered;
         }
     }
 }

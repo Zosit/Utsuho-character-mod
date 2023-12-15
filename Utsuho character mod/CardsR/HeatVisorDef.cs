@@ -18,11 +18,11 @@ using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
-    public sealed class BlastBurnDef : CardTemplate
+    public sealed class HeatVisorDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(BlastBurn);
+            return nameof(HeatVisor);
         }
 
         public override CardImages LoadCardImages()
@@ -40,7 +40,7 @@ namespace Utsuho_character_mod.CardsR
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13130,
+                Index: 13330,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -54,26 +54,26 @@ namespace Utsuho_character_mod.CardsR
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Common,
-                Type: CardType.Attack,
-                TargetType: TargetType.SingleEnemy,
+                Rarity: Rarity.Uncommon,
+                Type: CardType.Defense,
+                TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1 },
-                UpgradedCost: new ManaGroup() { Red = 1 },
+                Cost: new ManaGroup() { Red = 1, Any = 2 },
+                UpgradedCost: new ManaGroup() { Red = 1, Any = 2 },
                 MoneyCost: null,
-                Damage: 0,
-                UpgradedDamage: 0,
-                Block: null,
-                UpgradedBlock: null,
+                Damage: null,
+                UpgradedDamage: null,
+                Block: 18,
+                UpgradedBlock: 24,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 2,
-                UpgradedValue1: 2,
-                Value2: null,
-                UpgradedValue2: null,
-                Mana: null,
-                UpgradedMana: null,
+                Value1: 40,
+                UpgradedValue1: 30,
+                Value2: 1,
+                UpgradedValue2: 1,
+                Mana: new ManaGroup() { Red = 1 },
+                UpgradedMana: new ManaGroup() { Red = 1 },
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -93,8 +93,8 @@ namespace Utsuho_character_mod.CardsR
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "HeatStatus", "Weak", "Vulnerable" },
-                UpgradedRelativeEffects: new List<string>() { "HeatStatus", "Weak", "Vulnerable" },
+                RelativeEffects: new List<string>() { "HeatStatus" },
+                UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -106,43 +106,15 @@ namespace Utsuho_character_mod.CardsR
             return cardConfig;            
         }
 
-        [EntityLogic(typeof(BlastBurnDef))]
-        public sealed class BlastBurn : Card
+        [EntityLogic(typeof(HeatVisorDef))]
+        public sealed class HeatVisor : Card
         {
-            public override int AdditionalDamage
-            {
-                get
-                {
-                    int level = base.GetSeLevel<HeatStatus>();
-                    return level;
-                }
-            }
-
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-
-                if (!base.Battle.BattleShouldEnd)
-                {
-                    int level = base.GetSeLevel<HeatStatus>();
-                    if (this.IsUpgraded)
-                    {
-                        yield return base.DebuffAction<Weak>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
-                        yield return base.DebuffAction<Vulnerable>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
-                    }
-                    yield return base.AttackAction(selector.SelectedEnemy);
-                    if (level != 0) {
-                        yield return new RemoveStatusEffectAction(Battle.Player.GetStatusEffect<HeatStatus>());
-                    }
-                    if (!this.IsUpgraded)
-                    {
-                        yield return base.DebuffAction<Weak>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
-                        yield return base.DebuffAction<Vulnerable>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
-                    }
-                    yield break;
-                }
+                yield return base.DefenseAction();
+                yield return new ApplyStatusEffectAction<HeatVisorStatus>(Battle.Player, new int?(base.Value2), null, null, null, 0f, true);
+                yield break;
             }
-
         }
-
     }
 }

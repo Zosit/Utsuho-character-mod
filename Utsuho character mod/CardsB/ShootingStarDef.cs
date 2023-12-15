@@ -15,18 +15,15 @@ using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsB.DarkMatterDef;
-using LBoL.Base.Extensions;
-using JetBrains.Annotations;
-using System.Linq;
 using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
-    public sealed class EntropicStarDef : CardTemplate
+    public sealed class ShootingStarDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(EntropicStar);
+            return nameof(ShootingStar);
         }
 
         public override CardImages LoadCardImages()
@@ -44,7 +41,7 @@ namespace Utsuho_character_mod.CardsR
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13240,
+                Index: 13050,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -58,22 +55,22 @@ namespace Utsuho_character_mod.CardsR
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Uncommon,
-                Type: CardType.Ability,
-                TargetType: TargetType.Nobody,
+                Rarity: Rarity.Common,
+                Type: CardType.Attack,
+                TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Black = 1, Any = 1 },
+                Cost: new ManaGroup() { Black = 2 },
+                UpgradedCost: new ManaGroup() { Black = 2 },
                 MoneyCost: null,
-                Damage: null,
-                UpgradedDamage: null,
+                Damage: 8,
+                UpgradedDamage: 10,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 2,
-                UpgradedValue1: 3,
+                Value1: null,
+                UpgradedValue1: null,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -110,23 +107,23 @@ namespace Utsuho_character_mod.CardsR
             return cardConfig;
         }
 
-        [EntityLogic(typeof(EntropicStarDef))]
-        public sealed class EntropicStar : Card
+        [EntityLogic(typeof(ShootingStarDef))]
+        public sealed class ShootingStar : Card
         {
-            protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
+            public override IEnumerable<BattleAction> OnDraw()
             {
-                if (GameRun != null)
-                {
-                    List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => card != this).ToList<Card>();
-                    int total = cards.FindAll((Card card) => card.Id == "DarkMatter").Count;
-                    for (int i = 0; i < total; i++)
-                    {
-                        yield return new AddCardsToDiscardAction(Library.CreateCard("DarkMatter"));
-                    }
-                    yield return new ApplyStatusEffectAction<Firepower>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
-                }
+                yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"));
                 yield break;
             }
+
+            protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
+            {
+                yield return AttackAction(selector.SelectedEnemy);
+                yield return AttackAction(selector.SelectedEnemy);
+                yield break;
+            }
+
         }
+
     }
 }

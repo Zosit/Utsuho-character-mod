@@ -35,8 +35,8 @@ WasteNotStatus:
 
 CautionStatus:
   Name: CAUTION!
-  Description: "All cards have |Exile| and |Retain|.\nWhen you play a card, add {Level} random cards to your hand."
-  Brief: "All cards have |Exile| and |Retain|.\nWhen you play a card, add random cards to your hand."
+  Description: "At the start of {PlayerName}'s turn, enter |Burst| and gain |Time Limit| <sprite=\"ManaSprite\" name=\"1\">."
+  Brief: "At the start of turn, enter |Burst| and gain |Time Limit| <sprite=\"ManaSprite\" name=\"1\">."
 
 TurboFuelStatus:
   Name: Turbo Fuel
@@ -73,12 +73,11 @@ QuantumReflectorStatus:
   Description: "Whenever Dark Matter is randomly targeted through it's effect, gain {Level} |Reflection|."
   Brief: "Whenever Dark Matter is randomly targeted through it's effect, gain |Reflection|."
 
-GammaStatus:
-  Name: Gamma
-  Description: "At the end of your turn, deal {Level} damage to all enemies."
-  Brief: "At the end of your turn, deal damage to all enemies."
-
-DysonSphereStatus:
-  Name: Dyson Sphere
+SunSpotStatus:
+  Name: Sun Spot
   Description: "When you play a |Dark Matter|, trigger your |Heat| {Level} more times per turn."
   Brief: "When you play a |Dark Matter|, trigger your |Heat| extra times."
+
+HeatVisorStatus:
+  Name: Heat Visor
+  Description: "Prevent the next {Level} times the player would lose life before your next turn."

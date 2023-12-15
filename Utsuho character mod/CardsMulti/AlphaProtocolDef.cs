@@ -96,8 +96,8 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "GammaStatus" },
-                UpgradedRelativeEffects: new List<string>() { "GammaStatus" },
+                RelativeEffects: new List<string>() { "RadiationStatus" },
+                UpgradedRelativeEffects: new List<string>() { "RadiationStatus" },
                 RelativeCards: new List<string>() { "BetaProtocol", "GammaProtocol" },
                 UpgradedRelativeCards: new List<string>() { "BetaProtocol+", "GammaProtocol+" },
                 Owner: "Utsuho",
@@ -128,9 +128,12 @@ namespace Utsuho_character_mod.CardsMulti
                 }
                 for (int i = 0; i < Value1; i++)
                 {
-                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                    yield return new DiscardAction(card);
+                    if (Battle.HandZone.Count != 0)
+                    {
+                        Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                        yield return new DiscardAction(card);
+                    }
                 }
                 yield break;
             }

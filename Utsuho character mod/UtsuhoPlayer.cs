@@ -88,9 +88,9 @@ namespace Utsuho_character_mod
             UltimateSkillB: "UtsuhoUltB",
             ExhibitA: "ControlRod",
             ExhibitB: "BlackSun",
-            DeckA: new List<string> { "Shoot", "Shoot", "Boundary", "Boundary", "MarisaAttackR", "MarisaAttackR", "MarisaBlockB", "MarisaBlockB", "MarisaBlockB", "PowerCycle" },
-            DeckB: new List<string> { "Shoot", "Shoot", "Boundary", "Boundary", "MarisaAttackB", "MarisaAttackB", "MarisaBlockR", "MarisaBlockR", "MarisaBlockR", "StarBreak" },
-            DifficultyA: 2,
+            DeckA: new List<string> { "Shoot", "Shoot", "Boundary", "Boundary", "MarisaAttackR", "MarisaAttackR", "MarisaBlockB", "MarisaBlockB", "MarisaBlockB", "HellGeyser" },
+            DeckB: new List<string> { "Shoot", "Shoot", "Boundary", "Boundary", "MarisaAttackB", "MarisaAttackB", "MarisaBlockR", "MarisaBlockR", "MarisaBlockR", "ShootingStar" },
+            DifficultyA: 3,
             DifficultyB: 3
             );
             return config;
@@ -116,7 +116,7 @@ namespace Utsuho_character_mod
 
         public override ModelOption LoadModelOptions()
         {
-            return new ModelOption(ResourceLoader.LoadSpriteAsync("Utsuho_Sprite.png", directorySource, ppu: 84));
+            return new ModelOption(ResourceLoader.LoadSpriteAsync("Utsuho_Sprite.png", directorySource, ppu: 56));
         }
 
 
@@ -127,7 +127,7 @@ namespace Utsuho_character_mod
         {
 
             var config = UnitModelConfig.FromName("Reimu").Copy();
-            config.Flip = false;
+            config.Flip = true;
             config.Type = 0;
             config.Offset = new Vector2(0, 0.04f);
             return config;

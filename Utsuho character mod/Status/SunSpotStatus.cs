@@ -21,11 +21,11 @@ using LBoL.EntityLib.StatusEffects.Marisa;
 
 namespace Utsuho_character_mod.Status
 {
-    public sealed class DysonSphereEffect : StatusEffectTemplate
+    public sealed class SunSpotEffect : StatusEffectTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(DysonSphereStatus);
+            return nameof(SunSpotStatus);
         }
 
         [DontOverwrite]
@@ -68,8 +68,8 @@ namespace Utsuho_character_mod.Status
             return statusEffectConfig;
         }
     }
-    [EntityLogic(typeof(DysonSphereEffect))]
-    public sealed class DysonSphereStatus : StatusEffect
+    [EntityLogic(typeof(SunSpotEffect))]
+    public sealed class SunSpotStatus : StatusEffect
     {
         private string GunName
         {
@@ -90,7 +90,7 @@ namespace Utsuho_character_mod.Status
         {
             if (args.Card.Id == "DarkMatter")
             {
-                int dyLevel = base.GetSeLevel<DysonSphereStatus>();
+                int dyLevel = base.GetSeLevel<SunSpotStatus>();
 
                 for (int i = 0; i < dyLevel; i++)
                 {

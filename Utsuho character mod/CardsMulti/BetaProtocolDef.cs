@@ -96,8 +96,8 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "GammaStatus" },
-                UpgradedRelativeEffects: new List<string>() { "GammaStatus" },
+                RelativeEffects: new List<string>() { "RadiationStatus" },
+                UpgradedRelativeEffects: new List<string>() { "RadiationStatus" },
                 RelativeCards: new List<string>() { "GammaProtocol" },
                 UpgradedRelativeCards: new List<string>() { "GammaProtocol+" },
                 Owner: "Utsuho",
@@ -118,19 +118,22 @@ namespace Utsuho_character_mod.CardsMulti
             {
                 if (!this.IsUpgraded)
                 {
-                    Card[] cards = { Library.CreateCard("OmegaProtocol") };
+                    Card[] cards = { Library.CreateCard("GammaProtocol") };
                     yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
                 }
                 else
                 {
-                    Card[] cards = { Library.CreateCard("OmegaProtocol+") };
+                    Card[] cards = { Library.CreateCard("GammaProtocol+") };
                     yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
                 }
                 for (int i = 0; i < Value1; i++)
                 {
-                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                    yield return new ExileCardAction(card);
+                    if(Battle.HandZone.Count != 0)
+                    {
+                        Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                        yield return new ExileCardAction(card);
+                    }
                 }
                 yield break;
             }

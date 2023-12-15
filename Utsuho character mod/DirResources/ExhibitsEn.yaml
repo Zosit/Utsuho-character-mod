@@ -4,4 +4,4 @@ ControlRod:
 
 BlackSun:
   Name: Black Sun
-  Description: "On the first Dark Matter you play each turn, gain {Mana}."
+  Description: "When the Draw pile is shuffled, Deal {Value1} damage to each enemy for each |Dark Matter| in your discard."

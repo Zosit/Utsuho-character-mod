@@ -15,15 +15,18 @@ using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsB.DarkMatterDef;
+using LBoL.Base.Extensions;
+using JetBrains.Annotations;
+using System.Linq;
 using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
-    public sealed class StarBreakDef : CardTemplate
+    public sealed class HighTensionDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(StarBreak);
+            return nameof(HighTension);
         }
 
         public override CardImages LoadCardImages()
@@ -41,7 +44,7 @@ namespace Utsuho_character_mod.CardsR
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13050,
+                Index: 13240,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -55,24 +58,24 @@ namespace Utsuho_character_mod.CardsR
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Common,
+                Rarity: Rarity.Uncommon,
                 Type: CardType.Attack,
                 TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 2 },
-                UpgradedCost: new ManaGroup() { Black = 2 },
+                Cost: new ManaGroup() { Black = 2, Any = 1 },
+                UpgradedCost: new ManaGroup() { Black = 2, Any = 1 },
                 MoneyCost: null,
-                Damage: 8,
-                UpgradedDamage: 10,
+                Damage: 15,
+                UpgradedDamage: 15,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: null,
-                UpgradedValue1: null,
-                Value2: null,
-                UpgradedValue2: null,
+                Value1: 4,
+                UpgradedValue1: 6,
+                Value2: 5,
+                UpgradedValue2: 5,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -107,23 +110,29 @@ namespace Utsuho_character_mod.CardsR
             return cardConfig;
         }
 
-        [EntityLogic(typeof(StarBreakDef))]
-        public sealed class StarBreak : Card
+        [EntityLogic(typeof(HighTensionDef))]
+        public sealed class HighTension : Card
         {
-            public override IEnumerable<BattleAction> OnDraw()
-            {
-                yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"));
-                yield break;
-            }
-
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return AttackAction(selector.SelectedEnemy);
-                yield return AttackAction(selector.SelectedEnemy);
+                DeltaDamage = 0;
+                for (int i = 0; i < Value1; i++)
+                {
+                    if (Battle.DrawZone.Count != 0)
+                    {
+                        IReadOnlyList<Card> drawZoneIndexOrder = base.Battle.DrawZoneIndexOrder;
+                        Card card = Util.UsefulFunctions.RandomUtsuho(drawZoneIndexOrder);
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                        if (card.Id == "DarkMatter")
+                        {
+                            DeltaDamage += Value2;
+                        }
+                        yield return new MoveCardAction(card, CardZone.Discard);
+                    }
+                }
+                yield return AttackAction(selector);
                 yield break;
             }
-
         }
-
     }
 }

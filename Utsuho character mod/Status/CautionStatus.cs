@@ -19,6 +19,7 @@ using LBoL.Core.Randoms;
 using LBoL.Core.Cards;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Util;
+using LBoL.EntityLib.StatusEffects.ExtraTurn;
 
 namespace Utsuho_character_mod.Status
 {
@@ -52,7 +53,7 @@ namespace Utsuho_character_mod.Status
                             IsVerbose: false,
                             IsStackable: true,
                             StackActionTriggerLevel: null,
-                            HasLevel: true,
+                            HasLevel: false,
                             LevelStackType: StackType.Add,
                             HasDuration: false,
                             DurationStackType: StackType.Add,
@@ -75,43 +76,14 @@ namespace Utsuho_character_mod.Status
     {
         protected override void OnAdded(Unit unit)
         {
-            this.CardToHold(base.Battle.EnumerateAllCards());
-            base.ReactOwnerEvent<CardUsingEventArgs>(base.Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsed));
-            base.HandleOwnerEvent<CardsEventArgs>(base.Battle.CardsAddedToDiscard, new GameEventHandler<CardsEventArgs>(this.OnAddCard));
-            base.HandleOwnerEvent<CardsEventArgs>(base.Battle.CardsAddedToHand, new GameEventHandler<CardsEventArgs>(this.OnAddCard));
-            base.HandleOwnerEvent<CardsEventArgs>(base.Battle.CardsAddedToExile, new GameEventHandler<CardsEventArgs>(this.OnAddCard));
-            base.HandleOwnerEvent<CardsAddingToDrawZoneEventArgs>(base.Battle.CardsAddedToDrawZone, new GameEventHandler<CardsAddingToDrawZoneEventArgs>(this.OnAddCardToDraw));
+            ReactOwnerEvent(Owner.TurnStarting, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarting));
         }
-        private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
+        private IEnumerable<BattleAction> OnOwnerTurnStarting(UnitEventArgs args)
         {
-            for (int i = 0; i < this.Level; i++)
+            if (!Battle.BattleShouldEnd)
             {
-                Card card = base.Battle.RollCards(new CardWeightTable(RarityWeightTable.OnlyCommon, OwnerWeightTable.Valid, CardTypeWeightTable.CanBeLoot), 1, null)[0];
-                if (card != null)
-                {
-                    card.IsRetain = true;
-                    card.IsExile = true;
-                    yield return new AddCardsToHandAction(new Card[] { card });
-                }
-            }
-            yield break;
-        }
-        private void OnAddCardToDraw(CardsAddingToDrawZoneEventArgs args)
-        {
-            this.CardToHold(args.Cards);
-        }
-
-        private void OnAddCard(CardsEventArgs args)
-        {
-            this.CardToHold(args.Cards);
-        }
-
-        private void CardToHold(IEnumerable<Card> cards)
-        {
-            foreach (Card card in cards)
-            {
-                card.IsRetain = true;
-                card.IsExile = true;
+                yield return new ApplyStatusEffectAction<Burst>(Owner, 1, null, null, null, 0f, true);
+                yield return new ApplyStatusEffectAction<TimeIsLimited>(Battle.Player, 1, null, null, null, 0f, true);
             }
         }
     }

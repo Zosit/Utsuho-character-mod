@@ -18,11 +18,11 @@ using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
-    public sealed class FireWallDef : CardTemplate
+    public sealed class HellGeyserDefinition : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(FireWall);
+            return nameof(HellGeyser);
         }
 
         public override CardImages LoadCardImages()
@@ -40,7 +40,7 @@ namespace Utsuho_character_mod.CardsR
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13330,
+                Index: 13055,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -54,26 +54,26 @@ namespace Utsuho_character_mod.CardsR
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Uncommon,
-                Type: CardType.Defense,
-                TargetType: TargetType.Nobody,
+                Rarity: Rarity.Common,
+                Type: CardType.Attack,
+                TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1, Any = 2 },
-                UpgradedCost: new ManaGroup() { Red = 1, Any = 2 },
+                Cost: new ManaGroup() { Red = 2 },
+                UpgradedCost: null,
                 MoneyCost: null,
-                Damage: null,
+                Damage: 0,
                 UpgradedDamage: null,
-                Block: 18,
-                UpgradedBlock: 24,
+                Block: null,
+                UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 20,
-                UpgradedValue1: 20,
-                Value2: null,
-                UpgradedValue2: null,
-                Mana: new ManaGroup() { Red = 1 },
-                UpgradedMana: new ManaGroup() { Red = 1 },
+                Value1: 10,
+                UpgradedValue1: 10,
+                Value2: 9,
+                UpgradedValue2: 15,
+                Mana: null,
+                UpgradedMana: null,
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -106,28 +106,39 @@ namespace Utsuho_character_mod.CardsR
             return cardConfig;            
         }
 
-        [EntityLogic(typeof(FireWallDef))]
-        public sealed class FireWall : Card
+        [EntityLogic(typeof(HellGeyserDefinition))]
+        public sealed class HellGeyser : Card
         {
             public override int AdditionalDamage
             {
                 get
                 {
-                    int level = base.GetSeLevel<HeatStatus>();
-                    return level;
+                    HeatStatus statusEffect = base.Battle.Player.GetStatusEffect<HeatStatus>();
+                    if (statusEffect != null)
+                    {
+                        return statusEffect.Level;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
             }
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return base.DefenseAction();
-                int level = base.GetSeLevel<HeatStatus>();
-                if (level >= Value1)
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
+                yield return base.AttackAction(selector.SelectedEnemy);
+
+                if (!base.Battle.BattleShouldEnd)
                 {
-                    yield return new GainManaAction(Mana);
+                    int level = base.GetSeLevel<HeatStatus>();
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value2) - level, null, null, null, 0f, true);
+                    yield break;
                 }
-                yield break;
             }
+
         }
+
     }
 }
