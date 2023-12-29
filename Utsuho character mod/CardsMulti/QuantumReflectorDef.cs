@@ -37,7 +37,9 @@ namespace Utsuho_character_mod.CardsMulti
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationCard(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override CardConfig MakeConfig()
@@ -98,8 +100,8 @@ namespace Utsuho_character_mod.CardsMulti
 
                 RelativeEffects: new List<string>() { "Reflect" },
                 UpgradedRelativeEffects: new List<string>() { "Reflect" },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",

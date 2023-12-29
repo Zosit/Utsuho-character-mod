@@ -38,7 +38,9 @@ namespace Utsuho_character_mod.CardsMulti
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationCard(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override CardConfig MakeConfig()
@@ -99,8 +101,8 @@ namespace Utsuho_character_mod.CardsMulti
 
                 RelativeEffects: new List<string>() { "HeatStatus" },
                 UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "Flippin'Loser",
@@ -115,7 +117,7 @@ namespace Utsuho_character_mod.CardsMulti
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => (card != this) && (card.Id == "DarkMatter")).ToList<Card>();
+                List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => (card is UtsuhoCard uCard) && (uCard.isMass)).ToList<Card>();
                 yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1) * cards.Count, null, null, null, 0f, true);
                 foreach (Card card in cards)
                 {

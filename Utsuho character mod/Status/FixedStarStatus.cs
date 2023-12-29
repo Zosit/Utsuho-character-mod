@@ -33,7 +33,9 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationStatus(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         [DontOverwrite]

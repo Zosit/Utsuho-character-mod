@@ -34,7 +34,9 @@ namespace Utsuho_character_mod.CardsB
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationCard(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override CardConfig MakeConfig()
@@ -59,7 +61,7 @@ namespace Utsuho_character_mod.CardsB
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1 },
+                Cost: new ManaGroup() { Any = 1 },
                 UpgradedCost: null,
                 MoneyCost: null,
                 Damage: null,
@@ -107,8 +109,12 @@ namespace Utsuho_character_mod.CardsB
         }
 
         [EntityLogic(typeof(DarkMatterDef))]
-        public sealed class DarkMatter : Card
+        public sealed class DarkMatter : UtsuhoCard
         {
+            public DarkMatter() : base()
+            {
+                isMass = true;
+            }
             public override bool Triggered
             {
                 get
@@ -118,14 +124,33 @@ namespace Utsuho_character_mod.CardsB
             }
             public override IEnumerable<BattleAction> OnDraw()
             {
-                this.IsTempRetain = true;
-                yield break;
+                return this.EnterHandReactor();
+            }
+            public override IEnumerable<BattleAction> OnMove(CardZone srcZone, CardZone dstZone)
+            {
+                if (dstZone != CardZone.Hand)
+                {
+                    return null;
+                }
+                return this.EnterHandReactor();
             }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
+                this.IsTempRetain = false;
                 yield break;
             }
-
+            private IEnumerable<BattleAction> EnterHandReactor()
+            {
+                this.IsTempRetain = true;
+                yield break;
+            }
+            protected override void OnEnterBattle(BattleController battle)
+            {
+                if (this.Zone == CardZone.Hand)
+                {
+                    this.IsTempRetain = true;
+                }
+            }
         }
 
     }

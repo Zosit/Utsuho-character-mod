@@ -35,7 +35,9 @@ namespace Utsuho_character_mod.CardsR
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationCard(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override CardConfig MakeConfig()
@@ -65,8 +67,8 @@ namespace Utsuho_character_mod.CardsR
                 MoneyCost: null,
                 Damage: 8,
                 UpgradedDamage: 10,
-                Block: null,
-                UpgradedBlock: null,
+                Block: 8,
+                UpgradedBlock: 12,
                 Shield: null,
                 UpgradedShield: null,
                 Value1: null,
@@ -108,14 +110,17 @@ namespace Utsuho_character_mod.CardsR
         }
 
         [EntityLogic(typeof(ShootingStarDef))]
-        public sealed class ShootingStar : Card
+        public sealed class ShootingStar : UtsuhoCard
         {
-            public override IEnumerable<BattleAction> OnDraw()
+            public ShootingStar() : base()
+            {
+                isMass = true;
+            }
+            public override IEnumerable<BattleAction> OnPull()
             {
                 yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"));
-                yield break;
+                yield return DefenseAction();
             }
-
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield return AttackAction(selector.SelectedEnemy);

@@ -34,13 +34,15 @@ namespace Utsuho_character_mod.CardsMulti
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationCard(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13390, 
+                Index: 13170,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -54,7 +56,7 @@ namespace Utsuho_character_mod.CardsMulti
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Uncommon,
+                Rarity: Rarity.Common,
                 Type: CardType.Defense,
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },

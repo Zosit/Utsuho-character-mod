@@ -19,11 +19,11 @@ using LBoL.EntityLib.StatusEffects.Basic;
 
 namespace Utsuho_character_mod.CardsB
 {
-    public sealed class SpatialDistortionDef : CardTemplate
+    public sealed class GravityDistortionDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(SpatialDistortion);
+            return nameof(GravityDistortion);
         }
 
         public override CardImages LoadCardImages()
@@ -35,7 +35,9 @@ namespace Utsuho_character_mod.CardsB
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationCard(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override CardConfig MakeConfig()
@@ -64,12 +66,12 @@ namespace Utsuho_character_mod.CardsB
                 UpgradedCost: new ManaGroup() { Black = 1, Any = 2 },
                 MoneyCost: null,
                 Damage: 16,
-                UpgradedDamage: 18,
+                UpgradedDamage: 22,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: null,
+                Value1: 10,
                 UpgradedValue1: 10,
                 Value2: null,
                 UpgradedValue2: null,
@@ -96,8 +98,8 @@ namespace Utsuho_character_mod.CardsB
 
                 RelativeEffects: new List<string>() { "Reflect" },
                 UpgradedRelativeEffects: new List<string>() { "Reflect" },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -107,22 +109,27 @@ namespace Utsuho_character_mod.CardsB
             return cardConfig;            
         }
 
-        [EntityLogic(typeof(SpatialDistortionDef))]
-        public sealed class SpatialDistortion : Card
+        [EntityLogic(typeof(GravityDistortionDef))]
+        public sealed class GravityDistortion : UtsuhoCard
         {
+            public GravityDistortion() : base()
+            {
+                isMass = true;
+            }
+            public override IEnumerable<BattleAction> OnPull()
+            {
+                yield return new ApplyStatusEffectAction<Reflect>(Battle.Player, new int?(Value1), null, null, null, 0f, true);
+                if (IsUpgraded)
+                {
+                    yield return new DrawCardAction();
+                }
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
 
                 if (!base.Battle.BattleShouldEnd)
                 {
-                    Card[] cards = { Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter") };
-                    yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
-                    if (this.IsUpgraded)
-                    {
-                        yield return new ApplyStatusEffectAction<Reflect>(Battle.Player, new int?(Value1), null, null, null, 0f, true);
-                    }
                     yield return base.AttackAction(selector);
-
                     yield break;
                 }
             }

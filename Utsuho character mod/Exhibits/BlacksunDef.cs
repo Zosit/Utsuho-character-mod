@@ -35,7 +35,9 @@ namespace Utsuho_character_mod.Exhibits
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationExhibit(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override ExhibitSprites LoadSprite()
@@ -66,7 +68,7 @@ namespace Utsuho_character_mod.Exhibits
                 Owner: "Utsuho",
                 LosableType: ExhibitLosableType.DebutLosable,
                 Rarity: Rarity.Shining,
-                Value1: 3,
+                Value1: 1,
                 Value2: null,
                 Value3: null,
                 Mana: new ManaGroup() { Colorless = 1 },
@@ -103,7 +105,7 @@ namespace Utsuho_character_mod.Exhibits
             private IEnumerable<BattleAction> Reshuffling(GameEventArgs args)
             {
                 List<Card> cards = base.Battle.DiscardZone.ToList<Card>();
-                int total = cards.FindAll((Card card) => card.Id == "DarkMatter").Count;
+                int total = cards.Count;
                 yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(base.Value1 * total)), this.GunName, GunType.Single);
 
                 yield break;

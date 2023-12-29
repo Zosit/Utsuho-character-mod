@@ -32,7 +32,9 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationStatus(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         [DontOverwrite]
@@ -72,27 +74,6 @@ namespace Utsuho_character_mod.Status
     [EntityLogic(typeof(MassDriverEffect))]
     public sealed class MassDriverStatus : StatusEffect
     {
-        private string GunName
-        {
-            get
-            {
-                if (base.Level <= 10)
-                {
-                    return "无差别起火";
-                }
-                return "无差别起火B";
-            }
-        }
-        protected override void OnAdded(Unit unit)
-        {
-            base.ReactOwnerEvent<CardUsingEventArgs>(base.Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsed));
-        }
-        private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
-        {
-            if (args.Card.Id == "DarkMatter")
-            {
-                yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)base.Level), this.GunName, GunType.Single);
-            }
-        }
+
     }
 }

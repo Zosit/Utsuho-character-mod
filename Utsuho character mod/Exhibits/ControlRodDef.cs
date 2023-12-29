@@ -34,7 +34,9 @@ namespace Utsuho_character_mod.Exhibits
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationExhibit(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override ExhibitSprites LoadSprite()

@@ -1,7 +1,0 @@
-ControlRod:
-  Name: Control Rod
-  Description: "Whenever you play a card, gain 1 |Heat|."
-
-BlackSun:
-  Name: Black Sun
-  Description: "When the Draw pile is shuffled, Deal {Value1} damage to each enemy for each |Dark Matter| in your discard."

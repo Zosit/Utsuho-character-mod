@@ -34,7 +34,9 @@ namespace Utsuho_character_mod.CardsMulti
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationCard(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override CardConfig MakeConfig()
@@ -93,8 +95,8 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "HeatStatus", "DysonSphereStatus" },
-                UpgradedRelativeEffects: new List<string>() { "HeatStatus", "DysonSphereStatus" },
+                RelativeEffects: new List<string>() { "HeatStatus", "SunSpotStatus" },
+                UpgradedRelativeEffects: new List<string>() { "HeatStatus", "SunSpotStatus" },
                 RelativeCards: new List<string>() { "DarkMatter" },
                 UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",

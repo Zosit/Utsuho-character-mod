@@ -1,0 +1,7 @@
+ControlRod:
+  Name: 제어봉
+  Description: "카드를 사용할 때 마다 |작열|을 1 얻습니다."
+
+BlackSun:
+  Name: 검은 태양
+  Description: "뽑을 카드 더미를 섞을때마다, 섞여진 |암흑 물질|의 수 만큼 모든 적에게 피해를 {Value1} 줍니다."

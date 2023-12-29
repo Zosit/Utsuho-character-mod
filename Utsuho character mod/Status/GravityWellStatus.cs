@@ -31,7 +31,9 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationStatus(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         [DontOverwrite]
@@ -84,7 +86,7 @@ namespace Utsuho_character_mod.Status
             NotifyActivating();
             //GravityWellStatus statusEffect = Battle.Player.GetStatusEffect<GravityWellStatus>();
             yield return new CastBlockShieldAction(base.Owner, base.Owner, 0, base.Level, BlockShieldType.Direct, false);
-            yield return new AddCardsToDiscardAction(Library.CreateCard("DarkMatter"));
+            yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"));
             yield break;
         }
     }

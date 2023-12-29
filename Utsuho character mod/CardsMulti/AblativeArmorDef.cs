@@ -35,7 +35,9 @@ namespace Utsuho_character_mod.CardsMulti
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationCard(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override CardConfig MakeConfig()
@@ -115,10 +117,10 @@ namespace Utsuho_character_mod.CardsMulti
                 if (!Battle.BattleShouldEnd)
                 {
                     DeltaShield = 0;
-                    if (Battle.DiscardZone.Count != 0)
+                    if (Battle.HandZone.Count != 0)
                     {
                         Card card = UsefulFunctions.RandomUtsuho(Battle.DiscardZone);
-                        while (card.Id == "DarkMatter")
+                        while((card is UtsuhoCard uCard) && (uCard.isMass))
                         {
                             yield return new ExileCardAction(card);
                             DeltaShield += Value1;

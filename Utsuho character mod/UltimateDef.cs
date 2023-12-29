@@ -28,7 +28,9 @@ namespace Utsuho_character_mod
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationUlt(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override Sprite LoadSprite()

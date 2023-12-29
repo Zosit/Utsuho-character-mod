@@ -33,7 +33,9 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationStatus(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         [DontOverwrite]
@@ -83,7 +85,7 @@ namespace Utsuho_character_mod.Status
             {
                 yield break;
             }
-            if ((args.Cause != ActionCause.AutoExile) && (args.Card.BaseName != "Resonance"))
+            if ((args.Cause != ActionCause.AutoExile) && (args.Card.BaseName != "Resonance+"))
             {
                 base.NotifyActivating();
                 yield return new AddCardsToHandAction(Library.CreateCards<Resonance>(1, true));

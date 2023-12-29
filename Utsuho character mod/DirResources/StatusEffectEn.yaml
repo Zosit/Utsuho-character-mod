@@ -10,13 +10,13 @@ ChargingStatus:
 
 GravityWellStatus:
   Name: Gravity Well
-  Description: At the end of {PlayerName}'s turn, Gain {Level} Barrier and add a |Dark Matter| to your discard pile.
-  Brief: At the end of {PlayerName}'s turn, Gain Barrier and add a |Dark Matter| to your discard pile.
+  Description: At the end of {PlayerName}'s turn, Gain {Level} Barrier and add a |Dark Matter| to your hand.
+  Brief: At the end of {PlayerName}'s turn, Gain Barrier and add a |Dark Matter| to your hand.
 
 MassDriverStatus:
   Name: Mass Driver
-  Description: When you play a |Dark Matter|, deal {Level} damage to all enemies.
-  Brief: When you play a |Dark Matter|, deal damage to all enemies.
+  Description: Whenever a card with |Mass| is Pulled, deal {Level} damage to all enemies.
+  Brief: Whenever a card with |Mass| is Pulled, deal damage to all enemies.
 
 ResonanceStatus:
   Name: Resonance
@@ -70,8 +70,8 @@ ConflagrationStatus:
 
 QuantumReflectorStatus:
   Name: Quantum Reflector
-  Description: "Whenever Dark Matter is randomly targeted through it's effect, gain {Level} |Reflection|."
-  Brief: "Whenever Dark Matter is randomly targeted through it's effect, gain |Reflection|."
+  Description: "Whenever a card with |Mass| is Pulled, gain {Level} |Reflection|."
+  Brief: "Whenever a card with |Mass| is Pulled, gain |Reflection|."
 
 SunSpotStatus:
   Name: Sun Spot

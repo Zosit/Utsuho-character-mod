@@ -38,13 +38,15 @@ namespace Utsuho_character_mod.CardsMulti
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationCard(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13170,
+                Index: 13390,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -58,13 +60,13 @@ namespace Utsuho_character_mod.CardsMulti
                 IsPooled: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Common,
+                Rarity: Rarity.Uncommon,
                 Type: CardType.Attack,
                 TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
                 Cost: new ManaGroup() { Black = 1, Red = 1 },
-                UpgradedCost: null,
+                UpgradedCost: new ManaGroup() { Any = 1 },
                 MoneyCost: null,
                 Damage: 0,
                 UpgradedDamage: 0,
@@ -72,8 +74,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 8,
-                UpgradedValue1: 10,
+                Value1: 12,
+                UpgradedValue1: 14,
                 Value2: 10,
                 UpgradedValue2: 8,
                 Mana: null,
@@ -132,12 +134,12 @@ namespace Utsuho_character_mod.CardsMulti
             {
                 int level = base.GetSeLevel<HeatStatus>();
                 int total = 0;
-                Card[] array = base.Battle.DiscardZone.SampleManyOrAll(999, base.GameRun.BattleRng);
+                Card[] array = base.Battle.HandZone.SampleManyOrAll(999, base.GameRun.BattleRng);
                 if (array.Length != 0)
                 {
                     foreach (Card card in array)
                     {
-                        if (card.Id == "DarkMatter")
+                        if ((card is UtsuhoCard uCard) && (uCard.isMass))
                         {
                             total++;
                         }
@@ -154,7 +156,7 @@ namespace Utsuho_character_mod.CardsMulti
                 }
                 if ((level/Value2) != 0)
                 {
-                    yield return new AddCardsToDiscardAction(Library.CreateCards<DarkMatter>(level/Value2));
+                    yield return new AddCardsToHandAction(Library.CreateCards<DarkMatter>(level/Value2));
                 }
 
                 yield break;

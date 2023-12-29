@@ -38,7 +38,9 @@ namespace Utsuho_character_mod.CardsR
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationCard(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override CardConfig MakeConfig()
@@ -99,8 +101,8 @@ namespace Utsuho_character_mod.CardsR
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -123,7 +125,7 @@ namespace Utsuho_character_mod.CardsR
                         IReadOnlyList<Card> drawZoneIndexOrder = base.Battle.DrawZoneIndexOrder;
                         Card card = Util.UsefulFunctions.RandomUtsuho(drawZoneIndexOrder);
                         foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                        if (card.Id == "DarkMatter")
+                        if ((card is UtsuhoCard uCard) && (uCard.isMass))
                         {
                             DeltaDamage += Value2;
                         }

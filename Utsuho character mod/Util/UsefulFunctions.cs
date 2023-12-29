@@ -19,7 +19,7 @@ namespace Utsuho_character_mod.Util
         {
             foreach (Card card in cards)
             {
-                if (card.Id == "DarkMatter")
+                if((card is UtsuhoCard uCard) && (uCard.isMass))
                 {
                     return card;
                 }
@@ -30,20 +30,28 @@ namespace Utsuho_character_mod.Util
         {
             foreach (Card card in cards)
             {
-                if (card.Id == "DarkMatter")
+                if ((card is UtsuhoCard uCard) && (uCard.isMass))
+                {
                     return card;
+                }
             }
             return cards.Sample(cards[0].GameRun.BattleRng);
         }
         public static IEnumerable<BattleAction> RandomCheck(Card card, BattleController battle)
         {
-            if (card.Id == "DarkMatter")
+            if ((card is UtsuhoCard uCard) && (uCard.isMass))
             {
                 if (battle.Player.HasStatusEffect<QuantumReflectorStatus>())
                 {
                     QuantumReflectorStatus status = battle.Player.GetStatusEffect<QuantumReflectorStatus>();
                     yield return new ApplyStatusEffectAction<Reflect>(battle.Player, status.Level, null, null, null, 0f, true);
                 }
+                if (battle.Player.HasStatusEffect<MassDriverStatus>())
+                {
+                    MassDriverStatus status = battle.Player.GetStatusEffect<MassDriverStatus>();
+                    yield return new DamageAction(battle.Player, battle.EnemyGroup.Alives, DamageInfo.Reaction((float)status.Level), "无差别起火", GunType.Single);
+                }
+                foreach (BattleAction action in uCard.OnPull()) { yield return action; }
             }
         }
 
@@ -85,8 +93,8 @@ namespace Utsuho_character_mod.Util
         public static GlobalLocalization LocalizationModel(DirectorySource dirsorc)
         {
             var loc = new GlobalLocalization(dirsorc);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "PlayerModelEn.yaml");
-            loc.LocalizationFiles.AddLocaleFile(Locale.Ko, "PlayerModelKo.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "UnitModelEn.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.Ko, "UnitModelKo.yaml");
             return loc;
         }
     }

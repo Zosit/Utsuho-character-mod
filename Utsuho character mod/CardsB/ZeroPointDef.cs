@@ -15,6 +15,7 @@ using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
+using System.Runtime.CompilerServices;
 
 namespace Utsuho_character_mod.CardsB
 {
@@ -34,7 +35,9 @@ namespace Utsuho_character_mod.CardsB
 
         public override LocalizationOption LoadLocalization()
         {
-            return UsefulFunctions.LocalizationCard(directorySource);
+            var gl = new GlobalLocalization(directorySource);
+            gl.DiscoverAndLoadLocFiles(this);
+            return gl;
         }
 
         public override CardConfig MakeConfig()
@@ -67,7 +70,7 @@ namespace Utsuho_character_mod.CardsB
                 Block: null,
                 UpgradedBlock: null,
                 Shield: 6,
-                UpgradedShield: 6,
+                UpgradedShield: 8,
                 Value1: null,
                 UpgradedValue1: null,
                 Value2: null,
@@ -87,16 +90,16 @@ namespace Utsuho_character_mod.CardsB
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.None,
-                UpgradedKeywords: Keyword.None,
+                Keywords: Keyword.Replenish,
+                UpgradedKeywords: Keyword.Replenish,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -107,24 +110,17 @@ namespace Utsuho_character_mod.CardsB
         }
 
         [EntityLogic(typeof(ZeroPointDefinition))]
-        public sealed class ZeroPoint : Card
+        public sealed class ZeroPoint : UtsuhoCard
         {
-
-            protected override void OnEnterBattle(BattleController battle)
+            public ZeroPoint() : base()
             {
-                base.ReactBattleEvent<CardUsingEventArgs>(battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsed));
+                isMass = true;
             }
-            private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
+            public override IEnumerable<BattleAction> OnPull()
             {
-                if ((args.Card.Id == "DarkMatter") && (this.Zone == CardZone.Discard))
-                {
-                    if (base.Battle.BattleShouldEnd)
-                    {
-                        yield break;
-                    }
-                    yield return new MoveCardAction(this, CardZone.Hand);
-                    yield break;
-                }
+                Card card = base.CloneBattleCard();
+                card.IsExile = true;
+                yield return new AddCardsToHandAction(new Card[] { card });
             }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
