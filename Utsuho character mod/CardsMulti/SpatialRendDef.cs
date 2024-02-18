@@ -61,19 +61,19 @@ namespace Utsuho_character_mod.CardsMulti
                 TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Black = 1, Red = 1, Any = 1 },
+                Cost: new ManaGroup() { Black = 1, Red = 1, Any = 2 },
+                UpgradedCost: new ManaGroup() { Black = 1, Red = 1, Any = 2 },
                 MoneyCost: null,
-                Damage: 15,
+                Damage: 20,
                 UpgradedDamage: 20,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 2,
-                UpgradedValue1: 3,
-                Value2: 10,
-                UpgradedValue2: 14,
+                Value1: 3,
+                UpgradedValue1: 6,
+                Value2: 20,
+                UpgradedValue2: 20,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -89,16 +89,16 @@ namespace Utsuho_character_mod.CardsMulti
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Retain | Keyword.Exile,
-                UpgradedKeywords: Keyword.Retain | Keyword.Exile,
+                Keywords: Keyword.Accuracy | Keyword.Exile,
+                UpgradedKeywords:  Keyword.Accuracy,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -118,14 +118,17 @@ namespace Utsuho_character_mod.CardsMulti
                     this.DeltaDamage = 0;
                     for (int i = 0; i < Value1; i++)
                     {
-                        IReadOnlyList<Card> drawZoneIndexOrder = base.Battle.DrawZoneIndexOrder;
-                        Card card = Util.UsefulFunctions.RandomUtsuho(drawZoneIndexOrder);
-                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                        if ((card is UtsuhoCard uCard) && (uCard.isMass))
+                        if ((Battle.ExileZone.Count != 0) && (Battle.HandZone.Count != Battle.MaxHand))
                         {
-                            this.DeltaDamage += Value2;
+                            IReadOnlyList<Card> exileZone = Battle.ExileZone;
+                            Card card = Util.UsefulFunctions.RandomUtsuho(exileZone);
+                            foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                            if ((card is UtsuhoCard uCard) && (uCard.isMass))
+                            {
+                                this.DeltaDamage += Value2;
+                                yield return new MoveCardAction(card, CardZone.Hand);
+                            }
                         }
-                        yield return new ExileCardAction(card);
                     }
 
                     yield return base.AttackAction(selector);

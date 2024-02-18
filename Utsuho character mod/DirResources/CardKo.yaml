@@ -1,3 +1,4 @@
+# prettier-ignore
 HellGeyser:
   Name: 헬 가이저
   Description: "|작열|을 {Value1} 얻습니다.\n|냉각|하고 그 수치만큼 피해를 줍니다.\n|작열|을 {Value2} 얻습니다."
@@ -95,11 +96,13 @@ Conflagration:
 
 DarkMatter:
   Name: 암흑 물질
-  Description: "|뽑을때 발동|: 이번 턴 |보존|됩니다.\n무작위 대상의 |우츠호|카드는 {SelfName}을 대상으로 합니다."
+  Description: "|뽑을때 발동|: 이번 턴 |보존|됩니다.\n|응집|"
+  DetailText: "응집: |우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
 
 ShootingStar:
   Name: 유성
-  Description: "피해를 {Damage}씩 2번 줍니다.\n|뽑을때 발동|: 패에 |암흑 물질|을 추가합니다."
+  Description: "피해를 {Damage}씩 2번 줍니다.\n|응집|\n|응집될시 발동|: 방어를 {Block} 얻고 패에 |암흑 물질|을 추가합니다."
+  DetailText: "응집: |우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
 
 CloakStar:
   Name: 별의 망토
@@ -111,15 +114,16 @@ SpaceScanner:
 
 WarpShield:
   Name: 왜곡 방패
-  Description: "|방어|를 {Block} 얻습니다.\n뽑을 카드 더미의 무작위 카드를 {Value2}장 패로 가져옵니다.\n|암흑 물질|을 가져온 만큼 |방어|를 추가로 {Value1} 얻습니다."
+  Description: "|방어|를 {Block} 얻습니다.\n뽑을 카드 더미의 무작위 카드를 {Value2}장 패로 가져옵니다.\n|응집|한 만큼 |방어|를 추가로 {Value1} 얻습니다."
+  UpgradedDescription: "|방어|를 {Block} 얻습니다.\n뽑을 카드 더미의 무작위 카드를 {Value2}장 패로 가져옵니다.\n|응집|한 만큼 |보호막|을 추가로 {Value1} 얻습니다."
 
-VacuumWave:
-  Name: 진공파
-  Description: "모든 적에게 피해를 {Damage} 줍니다.\n패의 무작위 카드를 한장 버립니다.\n|암흑 물질|을 버렸다면, 추가로 피해를 1번 더 줍니다."
+VacuumSlash:
+  Name: 진공참
+  Description: "모든 적에게 피해를 {Damage} 줍니다.\n패의 무작위 카드를 한장 버립니다.\n|응집|했다면, 추가로 피해를 {Value1}번 더 줍니다."
 
 AbyssNova:
   Name: 어비스 노바
-  Description: "피해를 {Damage} 줍니다. |전장|의 |암흑 물질| 마다, {SelfName}가 추가로 피해를 {Value1} 줍니다."
+  Description: "피해를 {Damage} 줍니다. |전장|의 |응집|카드 마다, {SelfName}가 추가로 피해를 {Value1} 줍니다."
 
 SubterraneanSun:
   Name: 서브터레이니언 선
@@ -137,19 +141,20 @@ BlackHole:
 
 GravityWell:
   Name: 중력 분출
-  Description: "{PlayerName}의 턴 종료시, |보호막|을 {Value1} 얻고 |암흑 물질|을 버린 카드 더미에 1장 추가합니다."
+  Description: "{PlayerName}의 턴 종료시, |보호막|을 {Value1} 얻고 |암흑 물질|을 손에 1장 넣습니다."
 
 PlanetaryOrbit:
   Name: 행성 궤도
   Description: "뽑을 카드 더미와 버린 카드 더미를 바꿉니다.\n버린 카드 더미의 카드 수 만큼 모든 적에게 피해를 줍니다.\n뽑을 카드 더미의 카드 수 만큼 |방어|를 얻습니다."
 
-Stasis:
-  Name: 정지
-  Description: "패의 카드를 고르고, 이번 턴 동안 그 카드를 |보존|합니다."
+Ultraviolet:
+  Name: 이글거리는 자외선
+  Description: "{Mana}를 얻습니다.\n|응집|\n|응집될 시 발동|: 카드를 {Value1}장 뽑습니다."
+  DetailText: "응집: |우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
 
 HighTension:
   Name: 하이텐션 블레이드
-  Description: "뽑을 카드 더미에서 무작위 카드를 {Value1}장 버릴 카드 더미로 보냅니다.\n피해를 {Damage} 줍니다.\n옮겨진 |암흑 물질|마다 피해량이 {Value2} 증가합니다."
+  Description: "뽑을 카드 더미에서 무작위 카드를 {Value1}장 버릴 카드 더미로 보냅니다.\n피해를 {Damage} 줍니다.\n|응집|할때마다 피해량이 {Value2} 증가합니다."
 
 EscapeVelocity:
   Name: 탈출 속도
@@ -157,15 +162,16 @@ EscapeVelocity:
 
 MassDriver:
   Name: 매스 드라이버
-  Description: "|암흑 물질|을 사용할때마다, 모든 적에게 피해를 {Value1} 줍니다."
+  Description: "|응집|카드를 뽑을때 마다, 모든 적에게 피해를 {Value1} 줍니다."
 
 ZeroPoint:
   Name: 제로 포인트 모듈
-  Description: "|보호막|을 {Shield} 얻습니다.\n|암흑 물질|을 사용할 때 마다, 버린 카드 더미에서 {SelfName}을 패로 가져옵니다."
+  Description: "|보호막|을 {Shield} 얻습니다.\n|응집|.\n|응집될 시|: |소멸|을 가진 {SelfName}의 복사본을 손에 넣습니다."
+  DetailText: "응집: |우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
 
 SuperGiant:
   Name: 초거성
-  Description: "피해를 {Damage} 줍니다.\n패의 |암흑 물질| 마다, {SelfName}의 {Mana}비용이 감소합니다."
+  Description: "피해를 {Damage} 줍니다.\n패의 |응집|카드 마다, {SelfName}의 {Mana}비용이 감소합니다."
 
 WhiteHole:
   Name: 화이트홀
@@ -174,12 +180,12 @@ WhiteHole:
 
 GravityDistortion:
   Name: 공간 왜곡
-  Description: "모든 적에게 피해를 {Damage} 줍니다.\n뽑을 카드 더미에 |암흑 물질|을 2장 추가합니다."
-  UpgradedDescription: "모든 적에게 피해를 {Damage} 줍니다.\n뽑을 카드 더미에 |암흑 물질|을 2장 추가합니다.\n|반사|를 {Value1} 얻습니다."
+  Description: "|허약|을 {Value2} 주고 모든 적에게 피해를 {Damage} 줍니다.\n|응집|\n|응집될 시|: |반사|를 {Value1} 얻습니다."
+  DetailText: "응집: |우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
 
 FixedStar:
   Name: 픽스드 스타
-  Description: "{PlayerName}의 턴 종료시, 카드를 {Value1}장 골라 이번 턴 |보존|합니다.\n{PlayerName}의 턴 시작시, 무작위 카드를 {Value1}장 버립니다."
+  Description: "{PlayerName}의 턴 종료시, 카드를 {Value1}장 골라 이번 턴 |보존|합니다.\n모든 |암흑 물질|이 이 전투 동안 |자동소멸|을 얻습니다."
 
 Coolant:
   Name: 냉각제
@@ -203,7 +209,7 @@ ExpandingBrilliance:
 
 Caution:
   Name: CAUTION!
-  Description: '{PlayerName}의 턴 시작시, |버스트|상태가 되고 |시간 제한| <sprite="ManaSprite" name="1">을 얻습니다.'
+  Description: "{PlayerName}의 턴 시작시, |버스트|상태가 되고 |시간 제한| <sprite=\"ManaSprite\" name=\"1\">을 얻습니다."
 
 GammaRays:
   Name: 감마광선
@@ -222,14 +228,14 @@ MaintainReaction:
   Name: 유지보수
   Description: "카드가 |보존|되면, |작열|을 {Value1} 얻습니다."
 
-Initialize:
-  Name: 초기화
+Ignition:
+  Name: 점화
   Description: "|{Mana}를 지불할 시:|\n|작열|을 {Value1} 얻고 패에 |암흑 물질|을 한장 추가합니다."
 
 Crossfeed:
   Name: 교차공급
-  Description: "|냉각|하고 그 수치만큼 피해를 줍니다.\n버린 카드 더미의 |암흑 물질|마다 |작열|을 {Value2} 얻습니다.\n{PlayerName}의 |작열| 10마다 |암흑 물질|을 {Value1}장 버린 카드 더미에 추가합니다."
-  ExtraDescription1: "|냉각|하고 피해를 {Damage} 줍니다.\n버린 카드 더미의 |암흑 물질|마다 |작열|을 {Value2} 얻습니다.\n{PlayerName}의 |작열| 10마다 |암흑 물질|을 {Value1}장 버린 카드 더미에 추가합니다."
+  Description: "|냉각|하고 그 수치만큼 피해를 줍니다.\n패의 |응집|카드마다 |작열|을 {Value1} 얻습니다.\n{PlayerName}의 |작열| 10마다 |암흑 물질|을 {Value2}장 손에 추가합니다."
+  ExtraDescription1: "|냉각|하고 피해를 {Damage} 줍니다.\n패의 |암흑 물질|마다 |작열|을 {Value1} 얻습니다.\n{PlayerName}의 |작열| 10마다 |암흑 물질|을 {Value2}장 손에 추가합니다."
 
 EternityEngine:
   Name: 영구동력
@@ -239,10 +245,11 @@ EternityEngine:
 Starlight:
   Name: 별빛
   Description: "|작열|을 {Value1} 얻습니다.\n{PlayerName}의 |작열|이 {Value2} 이상이면, |암흑 물질|을 2장 패에 추가하고 |보호막|을 {Shield} 얻습니다."
+  UpgradedDescription: "|작열|을 {Value1} 얻습니다.\n|보호막|을 {Shield} 얻습니다.\n|암흑 물질|을 2장 패에 추가합니다."
 
 QuantumReflector:
   Name: 양자 반사
-  Description: "|암흑 물질|이 무작위 효과의 대상이 될 때마다, |반사|를 {Value1} 얻습니다."
+  Description: "|응집|할 때마다, |반사|를 {Value1} 얻습니다."
 
 AlphaProtocol:
   Name: 알파 프로토콜
@@ -265,15 +272,15 @@ SunSpot:
 
 AblativeArmor:
   Name: 융제 장갑
-  Description: "|방어|를 {Block} 얻습니다.\n버린 카드 더미의 모든 |암흑 물질|을 |소멸|시키고, |소멸|한 만큼 |보호막|을 {Value1} 얻습니다."
+  Description: "|방어|를 {Block} 얻습니다.\n패의 모든 |응집|카드를 |소멸|시키고, |소멸|한 만큼 |보호막|을 {Value1} 얻습니다."
 
 SpatialRend:
   Name: 공간 절단
-  Description: "뽑을 카드 더미에서 무작위 카드 {Value1}장을 |소멸|시킵니다.\n피해를 {Damage} 줍니다.\n|소멸|된 |암흑 물질| 마다, 피해를 추가로 {Value2} 줍니다"
+  Description: "뽑을 카드 더미에서 무작위 카드 {Value1}장을 |소멸|시킵니다.\n피해를 {Damage} 줍니다.\n|소멸|된 |응집|카드 마다, 피해를 추가로 {Value2} 줍니다"
 
 SunCrow:
   Name: 태양을 훔친 까마귀
-  Description: "이 전투의 모든 |암흑 물질|을 제거합니다.\n제거할때마다 |작열|을 {Value1} 얻습니다."
+  Description: "이 전투의 모든 |응집|카드를 제거합니다.\n제거할때마다 |작열|을 {Value1} 얻습니다."
 
 HotSpring:
   Name: 구 지옥 온천

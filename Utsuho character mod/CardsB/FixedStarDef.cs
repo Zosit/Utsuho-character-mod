@@ -97,8 +97,8 @@ namespace Utsuho_character_mod.CardsB
 
                 RelativeEffects: new List<string>() { "FixedStarStatus" },
                 UpgradedRelativeEffects: new List<string>() { "FixedStarStatus" },
-                RelativeCards: new List<string>() { },
-                UpgradedRelativeCards: new List<string>() { },
+                RelativeCards: new List<string>() { "DarkMatter" },
+                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -111,8 +111,6 @@ namespace Utsuho_character_mod.CardsB
         [EntityLogic(typeof(FixedStarDefinition))]
         public sealed class FixedStar : Card
         {
-
-
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 if (!Battle.BattleShouldEnd)

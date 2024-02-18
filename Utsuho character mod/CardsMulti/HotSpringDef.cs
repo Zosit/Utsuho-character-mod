@@ -74,8 +74,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 4,
-                UpgradedValue1: 6,
+                Value1: 6,
+                UpgradedValue1: 9,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -105,7 +105,7 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Flippin'Loser",
                 SubIllustrator: new List<string>() { }
              );
 

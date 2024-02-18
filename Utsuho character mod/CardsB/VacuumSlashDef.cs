@@ -20,11 +20,11 @@ using Utsuho_character_mod.Util;
 
 namespace Utsuho_character_mod.CardsR
 {
-    public sealed class VacuumWaveDef : CardTemplate
+    public sealed class VacuumSlashDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(VacuumWave);
+            return nameof(VacuumSlash);
         }
 
         public override CardImages LoadCardImages()
@@ -66,14 +66,14 @@ namespace Utsuho_character_mod.CardsR
                 Cost: new ManaGroup() { Black = 1, Any = 1 },
                 UpgradedCost: new ManaGroup() { Black = 1, Any = 1 },
                 MoneyCost: null,
-                Damage: 9,
-                UpgradedDamage: 12,
+                Damage: 8,
+                UpgradedDamage: null,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: null,
-                UpgradedValue1: null,
+                Value1: 1,
+                UpgradedValue1: 2,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -110,8 +110,8 @@ namespace Utsuho_character_mod.CardsR
             return cardConfig;
         }
 
-        [EntityLogic(typeof(VacuumWaveDef))]
-        public sealed class VacuumWave : Card
+        [EntityLogic(typeof(VacuumSlashDef))]
+        public sealed class VacuumSlash : Card
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
@@ -121,6 +121,10 @@ namespace Utsuho_character_mod.CardsR
                 if ((card is UtsuhoCard uCard) && (uCard.isMass))
                 {
                     yield return AttackAction(selector);
+                    if (this.IsUpgraded)
+                    {
+                        yield return AttackAction(selector);
+                    }
                 }
                 yield return AttackAction(selector);
                 yield break;

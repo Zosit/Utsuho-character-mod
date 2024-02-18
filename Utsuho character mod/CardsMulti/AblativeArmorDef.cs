@@ -90,7 +90,7 @@ namespace Utsuho_character_mod.CardsMulti
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Retain,
+                Keywords: Keyword.Exile | Keyword.Retain,
                 UpgradedKeywords: Keyword.Retain,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
@@ -98,8 +98,8 @@ namespace Utsuho_character_mod.CardsMulti
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -119,13 +119,13 @@ namespace Utsuho_character_mod.CardsMulti
                     DeltaShield = 0;
                     if (Battle.HandZone.Count != 0)
                     {
-                        Card card = UsefulFunctions.RandomUtsuho(Battle.DiscardZone);
+                        Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
                         while((card is UtsuhoCard uCard) && (uCard.isMass))
                         {
                             yield return new ExileCardAction(card);
                             DeltaShield += Value1;
-                            if (Battle.DiscardZone.Count != 0)
-                                card = UsefulFunctions.RandomUtsuho(Battle.DiscardZone);
+                            if (Battle.HandZone.Count != 0)
+                                card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
                             else
                                 break;
                         }

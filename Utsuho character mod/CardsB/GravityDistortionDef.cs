@@ -66,15 +66,15 @@ namespace Utsuho_character_mod.CardsB
                 UpgradedCost: new ManaGroup() { Black = 1, Any = 2 },
                 MoneyCost: null,
                 Damage: 16,
-                UpgradedDamage: 22,
+                UpgradedDamage: 18,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 10,
-                UpgradedValue1: 10,
-                Value2: null,
-                UpgradedValue2: null,
+                Value1: 8,
+                UpgradedValue1: 12,
+                Value2: 1,
+                UpgradedValue2: 2,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -96,8 +96,8 @@ namespace Utsuho_character_mod.CardsB
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "Reflect" },
-                UpgradedRelativeEffects: new List<string>() { "Reflect" },
+                RelativeEffects: new List<string>() { "Reflect", "Weak" },
+                UpgradedRelativeEffects: new List<string>() { "Reflect", "Weak" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -119,16 +119,16 @@ namespace Utsuho_character_mod.CardsB
             public override IEnumerable<BattleAction> OnPull()
             {
                 yield return new ApplyStatusEffectAction<Reflect>(Battle.Player, new int?(Value1), null, null, null, 0f, true);
-                if (IsUpgraded)
-                {
-                    yield return new DrawCardAction();
-                }
             }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
 
                 if (!base.Battle.BattleShouldEnd)
                 {
+                    foreach (BattleAction battleAction in base.DebuffAction<Weak>(selector.GetUnits(base.Battle), 0, base.Value2, 0, 0, true, 0.2f))
+                    {
+                        yield return battleAction;
+                    }
                     yield return base.AttackAction(selector);
                     yield break;
                 }

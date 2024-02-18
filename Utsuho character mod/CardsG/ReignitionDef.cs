@@ -62,7 +62,7 @@ namespace Utsuho_character_mod.CardsG
                 Colors: new List<ManaColor>() { ManaColor.Green },
                 IsXCost: false,
                 Cost: new ManaGroup() { Green = 1, Any = 2 },
-                UpgradedCost: new ManaGroup() { Green = 1, Any = 2 },
+                UpgradedCost: new ManaGroup() { Green = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: 0,
                 UpgradedDamage: 0,

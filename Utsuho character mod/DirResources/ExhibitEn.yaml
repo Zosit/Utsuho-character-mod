@@ -4,4 +4,4 @@ ControlRod:
 
 BlackSun:
   Name: Black Sun
-  Description: "When the Draw pile is shuffled, Deal {Value1} damage to each enemy for each card in your discard."
+  Description: "When the Draw pile is shuffled, Deal {Value1} damage to each enemy for each card in the Discard pile."

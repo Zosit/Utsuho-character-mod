@@ -20,6 +20,7 @@ using LBoL.Core.Cards;
 using LBoL.Core.Battle.Interactions;
 using LBoL.Base.Extensions;
 using System.Linq;
+using static Utsuho_character_mod.CardsB.DarkMatterDef;
 
 namespace Utsuho_character_mod.Status
 {
@@ -77,10 +78,22 @@ namespace Utsuho_character_mod.Status
     {
         protected override void OnAdded(Unit unit)
         {
-            ReactOwnerEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
+            //ReactOwnerEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
             ReactOwnerEvent(Owner.TurnEnding, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnEnding));
+
+            foreach (Card card in base.Battle.EnumerateAllCards())
+            {
+                if (card is DarkMatter)
+                {
+                    card.IsAutoExile = true;
+                }
+            }
+            base.HandleOwnerEvent<CardsEventArgs>(base.Battle.CardsAddedToDiscard, new GameEventHandler<CardsEventArgs>(this.OnAddCard));
+            base.HandleOwnerEvent<CardsEventArgs>(base.Battle.CardsAddedToHand, new GameEventHandler<CardsEventArgs>(this.OnAddCard));
+            base.HandleOwnerEvent<CardsEventArgs>(base.Battle.CardsAddedToExile, new GameEventHandler<CardsEventArgs>(this.OnAddCard));
+            base.HandleOwnerEvent<CardsAddingToDrawZoneEventArgs>(base.Battle.CardsAddedToDrawZone, new GameEventHandler<CardsAddingToDrawZoneEventArgs>(this.OnAddCardToDraw));
         }
-        private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
+        /*private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
         {
             if (Battle.BattleShouldEnd)
             {
@@ -94,7 +107,7 @@ namespace Utsuho_character_mod.Status
                 yield return new DiscardAction(card);
             }
             yield break;
-        }
+        }*/
         private IEnumerable<BattleAction> OnOwnerTurnEnding(UnitEventArgs args)
         {
             if (Battle.BattleShouldEnd)
@@ -121,6 +134,26 @@ namespace Utsuho_character_mod.Status
                 }
             }
             yield break;
+        }
+        private void OnAddCard(CardsEventArgs args)
+        {
+            foreach (Card card in args.Cards)
+            {
+                if (card is DarkMatter)
+                {
+                    card.IsAutoExile = true;
+                }
+            }
+        }
+        private void OnAddCardToDraw(CardsAddingToDrawZoneEventArgs args)
+        {
+            foreach (Card card in args.Cards)
+            {
+                if (card is DarkMatter)
+                {
+                    card.IsAutoExile = true;
+                }
+            }
         }
     }
 }

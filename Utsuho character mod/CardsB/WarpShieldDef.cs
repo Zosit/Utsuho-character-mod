@@ -70,11 +70,11 @@ namespace Utsuho_character_mod.CardsR
                 Damage: null,
                 UpgradedDamage: null,
                 Block: 18,
-                UpgradedBlock: 24,
-                Shield: null,
-                UpgradedShield: null,
+                UpgradedBlock: 22,
+                Shield: 0,
+                UpgradedShield: 0,
                 Value1: 6,
-                UpgradedValue1: 8,
+                UpgradedValue1: 6,
                 Value2: 2,
                 UpgradedValue2: 2,
                 Mana: null,
@@ -117,6 +117,7 @@ namespace Utsuho_character_mod.CardsR
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 DeltaBlock = 0;
+                DeltaShield = 0;
                 for (int i = 0; i < Value2; i++)
                 {
                     if (Battle.DrawZone.Count != 0)
@@ -126,12 +127,22 @@ namespace Utsuho_character_mod.CardsR
                         foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                         if ((card is UtsuhoCard uCard) && (uCard.isMass))
                         {
-                            DeltaBlock += Value1;
+                            if (!this.IsUpgraded)
+                            {
+                                DeltaBlock += Value1;
+                            }
+                            else
+                            {
+                                DeltaShield += Value1;
+                            }
+
                         }
                         yield return new MoveCardAction(card, CardZone.Hand);
                     }
                 }
                 yield return DefenseAction();
+                DeltaBlock = 0;
+                DeltaShield = 0;
                 yield break;
             }
         }

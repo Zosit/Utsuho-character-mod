@@ -13,20 +13,21 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
-using Utsuho_character_mod.Status;
-using static Utsuho_character_mod.CardsB.DarkMatterDef;
+using System.Linq;
 using LBoL.Base.Extensions;
 using LBoL.Core.Battle.Interactions;
-using System.Linq;
+using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
+using static Utsuho_character_mod.CardsB.DarkMatterDef;
+using static Utsuho_character_mod.CardsG.ReignitionDef;
 
-namespace Utsuho_character_mod.CardsR
+namespace Utsuho_character_mod.CardsMulti
 {
-    public sealed class StasisDef : CardTemplate
+    public sealed class IgnitionDefinition : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(Stasis);
+            return nameof(Ignition);
         }
 
         public override CardImages LoadCardImages()
@@ -46,7 +47,7 @@ namespace Utsuho_character_mod.CardsR
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13190,
+                Index: 13420,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -63,10 +64,10 @@ namespace Utsuho_character_mod.CardsR
                 Rarity: Rarity.Uncommon,
                 Type: CardType.Skill,
                 TargetType: TargetType.Nobody,
-                Colors: new List<ManaColor>() { ManaColor.Black },
-                IsXCost: false,
-                Cost: new ManaGroup() { Black = 1 },
-                UpgradedCost: new ManaGroup() { Any = 0 },
+                Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
+                IsXCost: true,
+                Cost: new ManaGroup() { Black = 1, Red = 1 },
+                UpgradedCost: null,
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -74,12 +75,12 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: null,
-                UpgradedValue1: null,
-                Value2: null,
-                UpgradedValue2: null,
-                Mana: null,
-                UpgradedMana: null,
+                Value1: 8,
+                UpgradedValue1: 12,
+                Value2: 1,
+                UpgradedValue2: 1,
+                Mana: new ManaGroup() { Any = 1 },
+                UpgradedMana: new ManaGroup() { Any = 1 },
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -93,16 +94,16 @@ namespace Utsuho_character_mod.CardsR
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Exile,
-                UpgradedKeywords: Keyword.None,
+                Keywords: Keyword.Initial | Keyword.Ethereal | Keyword.Exile,
+                UpgradedKeywords: Keyword.Initial | Keyword.Ethereal | Keyword.Exile,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { },
-                UpgradedRelativeEffects: new List<string>() { },
-                RelativeCards: new List<string>() { },
-                UpgradedRelativeCards: new List<string>() { },
+                RelativeEffects: new List<string>() { "HeatStatus" },
+                UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
+                RelativeCards: new List<string>() { "DarkMatter" },
+                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -112,34 +113,23 @@ namespace Utsuho_character_mod.CardsR
             return cardConfig;
         }
 
-        [EntityLogic(typeof(StasisDef))]
-        public sealed class Stasis : Card
+        [EntityLogic(typeof(IgnitionDefinition))]
+        public sealed class Ignition : Card
         {
-            public override Interaction Precondition()
+
+            public override ManaGroup GetXCostFromPooled(ManaGroup pooledMana)
             {
-                List<Card> list = (base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>());
-                if (!list.Empty<Card>())
-                {
-                    return new SelectCardInteraction(0, 99, list, SelectedCardHandling.DoNothing);
-                }
-                return null;
+                return pooledMana;
             }
+
+
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                if (precondition != null)
-                {
-                    IReadOnlyList<Card> selectedCards = ((SelectCardInteraction)precondition).SelectedCards;
-                    if (selectedCards.Count > 0)
-                    {
-                        foreach (Card card in selectedCards)
-                        {
-                            card.IsTempRetain = true;
-                        }
-                    }
-                }
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, SynergyAmount(consumingMana, ManaColor.Any, 1) * new int?(Value1), null, null, null, 0f, true);
+                yield return new AddCardsToHandAction(Library.CreateCards<DarkMatter>(SynergyAmount(consumingMana, ManaColor.Any, 1)));
+
                 yield break;
             }
         }
-
     }
 }

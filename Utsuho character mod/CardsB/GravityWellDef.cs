@@ -71,7 +71,7 @@ namespace Utsuho_character_mod.CardsB
                 Shield: null,
                 UpgradedShield: null,
                 Value1: 3,
-                UpgradedValue1: 4,
+                UpgradedValue1: 5,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,

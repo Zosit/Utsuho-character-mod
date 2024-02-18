@@ -70,10 +70,10 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: 10,
                 UpgradedShield: 10,
-                Value1: 12,
-                UpgradedValue1: 16,
+                Value1: 16,
+                UpgradedValue1: 20,
                 Value2: 40,
-                UpgradedValue2: 40,
+                UpgradedValue2: 0,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -118,7 +118,7 @@ namespace Utsuho_character_mod.CardsMulti
                     yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, Value1, null, null, null, 0f, true);
 
                     int level = base.GetSeLevel<HeatStatus>();
-                    if (level >= Value2)
+                    if ((level >= Value2) || this.IsUpgraded)
                     {
                         yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
                         yield return base.DefenseAction();

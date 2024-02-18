@@ -58,7 +58,7 @@ NuclearStrike:
 
 HeatVisor:
   Name: Nuclear Heat Visor
-  Description: "Gain {Block} |Block|.\nIf {PlayerName} has {Value1} or more |Heat|, prevent the next time the player would lose life before your next turn.."
+  Description: "Gain {Block} |Block|.\nIf {PlayerName} has {Value1} or more |Heat|, prevent the next time the player would lose life before your next turn."
 
 HeatShield:
   Name: Heat Shield
@@ -114,10 +114,11 @@ SpaceScanner:
 WarpShield:
   Name: Warp Shield
   Description: "Gain {Block} |Block|.\nMove {Value2} random cards from the draw pile to the hand.\nGain {Value1} more |Block| for each card with |Mass| moved."
+  UpgradedDescription: "Gain {Block} |Block|.\nMove {Value2} random cards from the draw pile to the hand.\nGain {Value1} |Barrier| for each card with |Mass| moved."
 
-VacuumWave:
+VacuumSlash:
   Name: Vacuum Wave
-  Description: "Deal {Damage} damage to each enemy.\nDiscard a random card.\nIf you Pulled a card with |Mass|, deal that much damage 1 additional time."
+  Description: "Deal {Damage} damage to each enemy.\nDiscard a random card.\nIf you Pulled a card with |Mass|, deal that much damage {Value1} additional times."
 
 AbyssNova: 
   Name: Abyss Nova
@@ -125,7 +126,7 @@ AbyssNova:
 
 SubterraneanSun: 
   Name: Subterranean Sun
-  Description: "|While in hand|: At the start of {PlayerName}'s turn remove a random card from combat and deal {Damage} damage to a random enemy.\nRepeat this an additional time for each turn {SelfName} is |Retained|."
+  Description: "|While in hand|: At the start of {PlayerName}'s turn, remove a random card from combat and deal {Damage} damage to a random enemy.\nRepeat this an additional time for each turn {SelfName} is |Retained|."
 
 NightFalls: 
   Name: Night Falls
@@ -135,7 +136,7 @@ NightFalls:
 BlackHole: 
   Name: Black Hole
   Description: "|While in hand|: At the start of {PlayerName}'s turn, gain {Value1} |Block| and discard a random card."
-  DetailText: "Playing {SelfName} has no effect other than sending it to the discard pile."
+  DetailText: "Playing {SelfName} has no effect other than |Exiling| it from the hand."
 
 GravityWell:
   Name: Gravity Well
@@ -145,13 +146,14 @@ PlanetaryOrbit:
   Name: Planetary Orbit
   Description: "Swap the draw and discard piles.\nDeal damage equal to the number of cards in the discard pile to each enemy.\nGain |Block| equal to the number of cards in the draw pile."
 
-Stasis:
-  Name: Stasis
-  Description: "Choose any number of cards in the hand. |Retain| them this turn."
+Ultraviolet:
+  Name: Blazing Ultraviolet
+  Description: "Gain {Mana}.\nHas |Mass|\n|When Pulled|:\nDraw {Value1} cards."
+  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\""
 
 HighTension:
   Name: High Tension Blade
-  Description: "Move {Value1} random cards from the draw pile to the discard pile.\nDeal {Damage} damage.\nIncrease this damage by {Value2} for each card with |Mass| moved this way."
+  Description: "Move {Value1} random cards from the draw pile to the discard pile.\nDeal {Damage} damage.\nIncrease this damage by {Value2} for each card with |Mass| moved."
 
 EscapeVelocity:
   Name: Escape Velocity
@@ -177,14 +179,13 @@ WhiteHole:
 
 GravityDistortion:
   Name: Gravity Distortion
-  Description: "Deal {Damage} damage to each enemy.\nHas |Mass|.\n|When Pulled|: Gain {Value1} |Reflection|"
-  UpgradedDescription: "Deal {Damage} damage to each enemy.\nHas |Mass|.\n|When Pulled|: Draw 1 card and gain {Value1} |Reflection|"
+  Description: "Apply {Value2} |Weak| and deal {Damage} damage to each enemy.\nHas |Mass|.\n|When Pulled|: Gain {Value1} |Reflection|"
   DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\""
 
 
 FixedStar:
   Name: Fixed Star
-  Description: "At the end of {PlayerName}'s turn, choose up to {Value1} cards in the hand. |Retain| them this turn.\nAt the start of {PlayerName}'s turn, discard {Value1} random cards."
+  Description: "At the end of {PlayerName}'s turn, choose up to {Value1} cards in the hand. |Retain| them this turn.\nAll |Dark Matter| gain |Auto-Exile| until end of combat."
 
 Coolant:
   Name: Coolant
@@ -227,8 +228,8 @@ MaintainReaction:
   Name: Maintain Reaction
   Description: "Whenever a card is |Retained|, gain {Value1} |Heat|."
 
-Initialize:
-  Name: Initialize
+Ignition:
+  Name: Ignition
   Description: "|For each {Mana} spent|:\nGain {Value1} |Heat| and add a |Dark Matter| to the hand."
 
 Crossfeed:
@@ -239,11 +240,12 @@ Crossfeed:
 EternityEngine: 
   Name: Eternity Engine
   Description: "|While in hand|: At the start of {PlayerName}'s turn, gain {Value1} |Firepower| and |Exile| a random card in the hand."
-  DetailText: "Playing {SelfName} has no effect other than sending it to the discard pile."
+  DetailText: "Playing {SelfName} has no effect other than |Exiling| it from the hand."
 
 Starlight:
   Name: Starlight
   Description: "Gain {Value1} |Heat|.\nIf {PlayerName} has {Value2} or more |Heat|, gain {Shield} |Barrier| and add 2 |Dark Matter| to the hand."
+  UpgradedDescription: "Gain {Value1} |Heat|.\nGain {Shield} |Barrier|.\nAdd 2 |Dark Matter| to the hand."
 
 QuantumReflector:
   Name: Quantum Reflector
@@ -274,7 +276,7 @@ AblativeArmor:
 
 SpatialRend:
   Name: Spatial Rend
-  Description: "|Exile| {Value1} random cards from the draw pile.\nDeal {Damage} damage.\nFor each card with |Mass| |Exiled|, deal {Value2} more damage."
+  Description: "Return {Value1} random cards with |Mass| from |Exile| to your hand.\nDeal {Damage} damage.\nFor each card with |Mass| returned, deal {Value2} more damage."
 
 SunCrow: 
   Name: The Crow who Stole the Sun

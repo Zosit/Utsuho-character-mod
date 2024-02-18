@@ -13,20 +13,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
-using System.Linq;
+using Utsuho_character_mod.Status;
+using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using LBoL.Base.Extensions;
 using LBoL.Core.Battle.Interactions;
-using Utsuho_character_mod.Status;
+using System.Linq;
 using Utsuho_character_mod.Util;
-using static Utsuho_character_mod.CardsB.DarkMatterDef;
 
-namespace Utsuho_character_mod.CardsMulti
+namespace Utsuho_character_mod.CardsR
 {
-    public sealed class InitializeDefinition : CardTemplate
+    public sealed class UltravioletDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(Initialize);
+            return nameof(Ultraviolet);
         }
 
         public override CardImages LoadCardImages()
@@ -46,7 +46,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13420,
+                Index: 13190,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -63,10 +63,10 @@ namespace Utsuho_character_mod.CardsMulti
                 Rarity: Rarity.Uncommon,
                 Type: CardType.Skill,
                 TargetType: TargetType.Nobody,
-                Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
-                IsXCost: true,
-                Cost: new ManaGroup() { Black = 1, Red = 1 },
-                UpgradedCost: null,
+                Colors: new List<ManaColor>() { ManaColor.Black },
+                IsXCost: false,
+                Cost: new ManaGroup() { Black = 1 },
+                UpgradedCost: new ManaGroup() { Black = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -74,12 +74,12 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 8,
-                UpgradedValue1: 12,
-                Value2: 1,
-                UpgradedValue2: 1,
-                Mana: new ManaGroup() { Any = 1 },
-                UpgradedMana: new ManaGroup() { Any = 1 },
+                Value1: 1,
+                UpgradedValue1: 2,
+                Value2: null,
+                UpgradedValue2: null,
+                Mana: new ManaGroup() { Philosophy = 2 },
+                UpgradedMana: new ManaGroup() { Philosophy = 3 },
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -93,16 +93,16 @@ namespace Utsuho_character_mod.CardsMulti
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Initial | Keyword.Ethereal | Keyword.Exile,
-                UpgradedKeywords: Keyword.Initial | Keyword.Ethereal | Keyword.Exile,
+                Keywords: Keyword.Retain,
+                UpgradedKeywords: Keyword.Retain,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "HeatStatus" },
-                UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
-                RelativeCards: new List<string>() { "DarkMatter" },
-                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
+                RelativeEffects: new List<string>() { },
+                UpgradedRelativeEffects: new List<string>() { },
+                RelativeCards: new List<string>() { },
+                UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -112,23 +112,22 @@ namespace Utsuho_character_mod.CardsMulti
             return cardConfig;
         }
 
-        [EntityLogic(typeof(InitializeDefinition))]
-        public sealed class Initialize : Card
+        [EntityLogic(typeof(UltravioletDef))]
+        public sealed class Ultraviolet : UtsuhoCard
         {
-
-            public override ManaGroup GetXCostFromPooled(ManaGroup pooledMana)
+            public Ultraviolet() : base()
             {
-                return pooledMana;
+                isMass = true;
             }
-
-
+            public override IEnumerable<BattleAction> OnPull()
+            {
+                yield return new DrawManyCardAction(Value1);
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, SynergyAmount(consumingMana, ManaColor.Any, 1) * new int?(Value1), null, null, null, 0f, true);
-                yield return new AddCardsToHandAction(Library.CreateCards<DarkMatter>(SynergyAmount(consumingMana, ManaColor.Any, 1)));
-
-                yield break;
+                yield return new GainManaAction(Mana);
             }
         }
+
     }
 }
