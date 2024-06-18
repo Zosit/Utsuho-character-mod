@@ -1,19 +1,19 @@
 HellGeyser:
   Name: Hell Geyser
-  Description: "Gain {Value1} |Heat|.\n|Vent| for damage.\nGain {Value2} |Heat|."
-  ExtraDescription1: "Gain {Value1} |Heat|.\n|Vent| to deal {Damage} damage.\nGain {Value2} |Heat|."
+  ExtraDescription1: "Gain {Value1} |Heat|.\n|Vent| for damage.\nGain {Value2} |Heat|."
+  Description: "Gain {Value1} |Heat|.\n|Vent| to deal {Damage} damage.\nGain {Value2} |Heat|."
 
 FlareUp:
   Name: Flare Up
-  Description: "|Vent| for damage.\nApply {Value1} |Weak| and |Vulnerable|."
-  ExtraDescription1: "|Vent| to deal {Damage} damage.\nApply {Value1} |Weak| and |Vulnerable|."
-  UpgradedDescription: "Apply {Value1} |Weak| and |Vulnerable|.\n|Vent| for damage."
-  UpgradedExtraDescription1: "Apply {Value1} |Weak| and |Vulnerable|.\n|Vent| to deal {Damage} damage."
+  ExtraDescription1: "|Vent| for damage.\nApply {Value1} |Weak| and |Vulnerable|."
+  Description: "|Vent| to deal {Damage} damage.\nApply {Value1} |Weak| and |Vulnerable|."
+  UpgradedExtraDescription1: "Apply {Value1} |Weak| and |Vulnerable|.\n|Vent| for damage."
+  UpgradedDescription: "Apply {Value1} |Weak| and |Vulnerable|.\n|Vent| to deal {Damage} damage."
 
 PlasmaBurn:
   Name: Plasma Burn
-  Description: "Gain {Value1} |Heat|.\nIf {PlayerName} has {Value2} or more |Heat|, |Vent| for Damage."
-  ExtraDescription1: "Gain {Value1} |Heat|.\nIf {PlayerName} has {Value2} or more |Heat|, |Vent| to deal {Damage} damage."
+  ExtraDescription1: "Gain {Value1} |Heat|.\nIf {PlayerName} has {Value2} or more |Heat|, |Vent| for Damage."
+  Description: "Gain {Value1} |Heat|.\nIf {PlayerName} has {Value2} or more |Heat|, |Vent| to deal {Damage} damage."
 
 StartReactor:
   Name: Start Reactor
@@ -53,8 +53,8 @@ NuclearFusion:
 
 NuclearStrike:
   Name: Nuclear Strike
-  Description: "|Vent| for damage.\nGain {Value1} |Heat|."
-  ExtraDescription1: "|Vent| to deal {Damage} damage.\nGain {Value1} |Heat|."
+  ExtraDescription1: "|Vent| for damage.\nGain {Value1} |Heat|."
+  Description: "|Vent| to deal {Damage} damage.\nGain {Value1} |Heat|."
 
 HeatVisor:
   Name: Nuclear Heat Visor
@@ -75,10 +75,10 @@ SunlightReverie:
 
 NuclearDive:
   Name: Uncontainable Nuclear Reaction Dive
-  Description: "Double {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| for damage."
-  ExtraDescription1: "Double {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage."
-  UpgradedDescription: "Triple {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| for damage."
-  UpgradedExtraDescription1: "Triple {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage."
+  ExtraDescription1: "Double {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| for damage."
+  Description: "Double {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage."
+  ExtraUpgradedDescription1: "Triple {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| for damage."
+  UpgradedDescription: "Triple {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage."
 
 BunkerDown:
   Name: Bunker Down
@@ -234,8 +234,8 @@ Ignition:
 
 Crossfeed:
   Name: Crossfeed
-  Description: "|Vent| for damage.\nGain {Value1} |Heat| for each card with |Mass| in the hand.\nAdd 1 |Dark Matter| to the hand for every {Value2} |Heat| {PlayerName} had."
-  ExtraDescription1: "|Vent| for {damage} damage.\nGain {Value1} |Heat| for each |Dark Matter| in the hand.\nAdd 1 |Dark Matter| to the hand for every {Value2} |Heat| {PlayerName} had."
+  ExtraDescription1: "|Vent| for damage.\nGain {Value1} |Heat| for each card with |Mass| in the hand.\nAdd 1 |Dark Matter| to the hand for every {Value2} |Heat| {PlayerName} had."
+  Description: "|Vent| for {Damage} damage.\nGain {Value1} |Heat| for each |Dark Matter| in the hand.\nAdd 1 |Dark Matter| to the hand for every {Value2} |Heat| {PlayerName} had."
 
 EternityEngine: 
   Name: Eternity Engine

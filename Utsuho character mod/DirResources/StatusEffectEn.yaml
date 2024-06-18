@@ -60,8 +60,8 @@ MaintainReactionStatus:
 
 FixedStarStatus:
   Name: Fixed Star
-  Description: "At the end of your turn, |retain| {Level} cards this turn.\n All |Dark Matter| have |Auto-Exile| until end of combat."
-  Brief: "At the end of your turn, |retain| cards this turn. All |Dark Matter| have |Auto-Exile| until end of combat."
+  Description: "At the end of your turn, |retain| up to {Level} cards this turn.\n All |Dark Matter| have |Auto-Exile| until end of combat."
+  Brief: "At the end of your turn, |retain| up to cards this turn. All |Dark Matter| have |Auto-Exile| until end of combat."
 
 ConflagrationStatus:
   Name: Conflagration
@@ -81,3 +81,7 @@ SunSpotStatus:
 HeatVisorStatus:
   Name: Heat Visor
   Description: "Prevent the next {Level} times the player would lose life before your next turn."
+
+SkyFlightStatus:
+ Name: Sky Flight
+ Description: "Draw {Level} cards at the start of your next turn"

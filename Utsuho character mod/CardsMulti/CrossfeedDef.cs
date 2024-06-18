@@ -58,6 +58,7 @@ namespace Utsuho_character_mod.CardsMulti
                 DebugLevel: 0,
                 Revealable: false,
                 IsPooled: true,
+                FindInBattle: true,
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Uncommon,
@@ -119,15 +120,8 @@ namespace Utsuho_character_mod.CardsMulti
             {
                 get
                 {
-                    HeatStatus statusEffect = base.Battle.Player.GetStatusEffect<HeatStatus>();
-                    if (statusEffect != null)
-                    {
-                        return statusEffect.Level;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                    int level = base.GetSeLevel<HeatStatus>();
+                    return level;
                 }
             }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)

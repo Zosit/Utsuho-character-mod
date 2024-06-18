@@ -62,6 +62,7 @@ namespace Utsuho_character_mod.CardsR
                 DebugLevel: 0,
                 Revealable: false,
                 IsPooled: true,
+                FindInBattle: true,
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Uncommon,

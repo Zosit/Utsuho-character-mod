@@ -54,6 +54,7 @@ namespace Utsuho_character_mod.CardsB
                 DebugLevel: 0,
                 Revealable: false,
                 IsPooled: false,
+                FindInBattle: false,
                 HideMesuem: false,
                 IsUpgradable: false,
                 Rarity: Rarity.Common,
@@ -101,7 +102,7 @@ namespace Utsuho_character_mod.CardsB
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Flippin'Loser",
                 SubIllustrator: new List<string>() { }
              );
 

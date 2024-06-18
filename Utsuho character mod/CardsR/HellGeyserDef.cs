@@ -54,6 +54,7 @@ namespace Utsuho_character_mod.CardsR
                 DebugLevel: 0,
                 Revealable: false,
                 IsPooled: true,
+                FindInBattle: true,
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Common,
@@ -64,8 +65,8 @@ namespace Utsuho_character_mod.CardsR
                 Cost: new ManaGroup() { Red = 2 },
                 UpgradedCost: null,
                 MoneyCost: null,
-                Damage: 0,
-                UpgradedDamage: null,
+                Damage: 10,
+                UpgradedDamage: 10,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
@@ -111,26 +112,22 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(HellGeyserDefinition))]
         public sealed class HellGeyser : Card
         {
+            int damageReduction = 0;
             public override int AdditionalDamage
             {
                 get
                 {
-                    HeatStatus statusEffect = base.Battle.Player.GetStatusEffect<HeatStatus>();
-                    if (statusEffect != null)
-                    {
-                        return statusEffect.Level;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                    int level = base.GetSeLevel<HeatStatus>();
+                    return level - damageReduction;
                 }
             }
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
+                damageReduction = 10;
                 yield return base.AttackAction(selector.SelectedEnemy);
+                damageReduction = 0;
 
                 if (!base.Battle.BattleShouldEnd)
                 {

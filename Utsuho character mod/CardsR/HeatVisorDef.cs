@@ -54,6 +54,7 @@ namespace Utsuho_character_mod.CardsR
                 DebugLevel: 0,
                 Revealable: false,
                 IsPooled: true,
+                FindInBattle: true,
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Uncommon,
@@ -114,7 +115,9 @@ namespace Utsuho_character_mod.CardsR
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield return base.DefenseAction();
-                yield return new ApplyStatusEffectAction<HeatVisorStatus>(Battle.Player, new int?(base.Value2), null, null, null, 0f, true);
+                int level = base.GetSeLevel<HeatStatus>();
+                if (level >= Value1)
+                    yield return new ApplyStatusEffectAction<HeatVisorStatus>(Battle.Player, new int?(base.Value2), null, null, null, 0f, true);
                 yield break;
             }
         }

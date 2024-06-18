@@ -85,7 +85,7 @@ namespace Utsuho_character_mod.Status
         }
         protected override void OnAdded(Unit unit)
         {
-            ReactOwnerEvent(Owner.TurnEnded, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnEnded));
+            ReactOwnerEvent(Owner.TurnEnding, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnEnded));
         }
         private IEnumerable<BattleAction> OnOwnerTurnEnded(UnitEventArgs args)
         {
