@@ -15,18 +15,15 @@ using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using static Utsuho_character_mod.CardsB.DarkMatterDef;
-using LBoL.Base.Extensions;
-using JetBrains.Annotations;
-using System.Linq;
 using Utsuho_character_mod.Util;
 
-namespace Utsuho_character_mod.CardsG
+namespace Utsuho_character_mod.CardsR
 {
-    public sealed class GammaRaysDef : CardTemplate
+    public sealed class FireBurstDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(GammaRays);
+            return nameof(FireBurst);
         }
 
         public override CardImages LoadCardImages()
@@ -46,39 +43,39 @@ namespace Utsuho_character_mod.CardsG
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13630,
+                Index: 13010,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
                 Order: 10,
                 AutoPerform: true,
                 Perform: new string[0][],
-                GunName: "Simple1",
-                GunNameBurst: "Simple1",
+                GunName: "小面红",
+                GunNameBurst: "小面红",
                 DebugLevel: 0,
                 Revealable: false,
-                IsPooled: true,
+                IsPooled: false,
                 FindInBattle: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Uncommon,
-                Type: CardType.Skill,
-                TargetType: TargetType.Nobody,
-                Colors: new List<ManaColor>() { ManaColor.Green },
+                Rarity: Rarity.Common,
+                Type: CardType.Attack,
+                TargetType: TargetType.SingleEnemy,
+                Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Green = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Green = 1, Any = 1 },
+                Cost: new ManaGroup() { Red = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Any = 2 },
                 MoneyCost: null,
-                Damage: null,
-                UpgradedDamage: null,
+                Damage: 10,
+                UpgradedDamage: 14,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 9,
-                UpgradedValue1: 9,
-                Value2: 0,
-                UpgradedValue2: 3,
+                Value1: null,
+                UpgradedValue1: null,
+                Value2: null,
+                UpgradedValue2: null,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -94,14 +91,14 @@ namespace Utsuho_character_mod.CardsG
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.None,
-                UpgradedKeywords: Keyword.None,
+                Keywords: Keyword.Basic,
+                UpgradedKeywords: Keyword.Basic,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.Grow,
+                UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "RadiationStatus" },
-                UpgradedRelativeEffects: new List<string>() { "RadiationStatus" },
+                RelativeEffects: new List<string>() { },
+                UpgradedRelativeEffects: new List<string>() { },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -113,15 +110,16 @@ namespace Utsuho_character_mod.CardsG
             return cardConfig;
         }
 
-        [EntityLogic(typeof(GammaRaysDef))]
-        public sealed class GammaRays : Card
+        [EntityLogic(typeof(FireBurstDef))]
+        public sealed class FireBurst : UtsuhoCard
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return BuffAction<RadiationStatus>(Value1, 0, 0, 0, 0.2f);
-                this.DeltaValue1 += this.Value2;
+                yield return AttackAction(selector.SelectedEnemy);
                 yield break;
             }
+
         }
+
     }
 }

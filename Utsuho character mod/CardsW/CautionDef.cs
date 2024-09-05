@@ -100,8 +100,8 @@ namespace Utsuho_character_mod.CardsW
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "CautionStatus" },
-                UpgradedRelativeEffects: new List<string>() { "CautionStatus" },
+                RelativeEffects: new List<string>() { "CautionStatus", "Burst", "TimeIsLimited" },
+                UpgradedRelativeEffects: new List<string>() { "CautionStatus", "Burst", "TimeIsLimited" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",

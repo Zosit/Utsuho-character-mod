@@ -19,6 +19,10 @@ using LBoL.Base.Extensions;
 using JetBrains.Annotations;
 using System.Linq;
 using Utsuho_character_mod.Util;
+using LBoL.Presentation.UI.Panels;
+using LBoL.Presentation.UI;
+using LBoL.Core.Battle.Interactions;
+using LBoL.EntityLib.Cards.Character.Marisa;
 
 namespace Utsuho_character_mod.CardsU
 {
@@ -77,9 +81,9 @@ namespace Utsuho_character_mod.CardsU
                 UpgradedShield: null,
                 Value1: 4,
                 UpgradedValue1: 6,
-                Value2: null,
-                UpgradedValue2: null,
-                Mana: null,
+                Value2: 4,
+                UpgradedValue2: 6,
+                Mana: new ManaGroup() { Red = 1, Any = 1 },
                 UpgradedMana: null,
                 Scry: null,
                 UpgradedScry: null,
@@ -116,6 +120,46 @@ namespace Utsuho_character_mod.CardsU
         [EntityLogic(typeof(CoolantDef))]
         public sealed class Coolant : Card
         {
+            ManaGroup temp;
+            bool isKicked = false;
+            protected override void OnEnterBattle(BattleController battle)
+            {
+                base.ReactBattleEvent<ManaEventArgs>(base.Battle.ManaConsuming, new EventSequencedReactor<ManaEventArgs>(this.OnManaConsuming));
+                base.ReactBattleEvent<ManaEventArgs>(base.Battle.ManaConsumed, new EventSequencedReactor<ManaEventArgs>(this.OnManaConsumed));
+            }
+            private IEnumerable<BattleAction> OnManaConsuming(ManaEventArgs args)
+            {
+                BattleManaPanel panel = UiManager.GetPanel<BattleManaPanel>();
+                ManaGroup pool = panel.PooledMana + args.Value;
+                if ((args.ActionSource == this) && (args.Cause == ActionCause.CardUse))
+                {
+                    //check pool size and check kick colored mana in pool
+                    if (pool.CanAfford(this.Mana))
+                    {
+                        //save the pool state
+                        temp = pool;
+                        isKicked = true;
+                    }
+                    else
+                    {
+                        isKicked = false;
+                    }
+                }
+                return null;
+            }
+            private IEnumerable<BattleAction> OnManaConsumed(ManaEventArgs args)
+            {
+                if (isKicked)
+                {
+                    isKicked = false;
+                    BattleManaPanel panel = UiManager.GetPanel<BattleManaPanel>();
+                    ManaGroup pool = panel.PooledMana;
+                    yield return new ConsumeManaAction(pool);
+                    yield return BuffAction<Firepower>(base.Value2, 0, 0, 0, 0.2f);
+                }
+            }
+
+
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield return BuffAction<Spirit>(base.Value1, 0, 0, 0, 0.2f);

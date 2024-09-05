@@ -78,11 +78,14 @@ namespace Utsuho_character_mod.Status
         {
             get
             {
-                if (base.Level <= 50)
-                {
-                    return "无差别起火";
-                }
-                return "无差别起火B";
+                return "GuihuoExplodeR2";
+            }
+        }
+        public int HeatDamage
+        {
+            get
+            {
+                return Level / 5;
             }
         }
         protected override void OnAdded(Unit unit)
@@ -105,7 +108,7 @@ namespace Utsuho_character_mod.Status
             {
                 if (base.Battle.Player.GetStatusEffect<ConflagrationStatus>() != null)
                 {
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, (level / 5), null, null, null, 0f, true);
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, HeatDamage, null, null, null, 0f, true);
                 }
                 else
                 {

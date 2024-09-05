@@ -1,3 +1,19 @@
+InverseBeam:
+  Name: Inverse Beam
+  Description: Deal {Damage} damage.
+
+BlowAway:
+  Description: Gain {Block} |Block|.
+  Name: Blow Away
+
+FireBurst:
+  Description: Deal {Damage} damage.
+  Name: Fire Burst
+
+Gridlock:
+  Description: Gain {Block} |Block|.
+  Name: Gridlock
+
 HellGeyser:
   Name: Hell Geyser
   ExtraDescription1: "Gain {Value1} |Heat|.\n|Vent| for damage.\nGain {Value2} |Heat|."
@@ -41,7 +57,7 @@ SkyFlight:
 
 Salvo:
   Name: Salvo
-  Description: "Deal {Damage} damage to a random enemy 1 time.\nFor each other card played this turn, deal damage an additional time."
+  Description: "Deal {Damage} damage to a random enemy {SalvoCount:plural one='% time.' other='% times.'}\nFor each other card played this turn, deal damage an additional time."
 
 MegaFlare:
   Name: Mega Flare
@@ -96,12 +112,12 @@ Conflagration:
 DarkMatter:
   Name: Dark Matter
   Description: "|On Enter Hand|: |Retain| this turn.\nHas |Mass|."
-  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\""
+  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
 
 ShootingStar:
   Name: Shooting Star
   Description: "Deal {Damage} damage 2 times.\nHas |Mass|.\n|When Pulled|: Gain {Block} block and add a |Dark Matter| to the hand."
-  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\""
+  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
 
 CloakStar:
   Name: Cloak of Stars
@@ -118,7 +134,8 @@ WarpShield:
 
 VacuumSlash:
   Name: Vacuum Wave
-  Description: "Deal {Damage} damage to each enemy.\nDiscard a random card.\nIf you Pulled a card with |Mass|, deal that much damage {Value1} additional times."
+  Description: "Deal {Damage} damage to each enemy.\nDiscard a random card.\nIf you Pulled a card with |Mass|, deal that much damage {Value1} additional time."
+  UpgradedDescription: "Deal {Damage} damage to each enemy.\nDiscard a random card.\nIf you Pulled a card with |Mass|, deal that much damage {Value1} additional times."
 
 AbyssNova: 
   Name: Abyss Nova
@@ -126,11 +143,11 @@ AbyssNova:
 
 SubterraneanSun: 
   Name: Subterranean Sun
-  Description: "|While in hand|: At the start of {PlayerName}'s turn, remove a random card from combat and deal {Damage} damage to a random enemy.\nRepeat this an additional time for each turn {SelfName} is |Retained|."
+  Description: "|While in hand|: At the start of {PlayerName}'s turn, remove a random card from the |battlefield| and deal {Damage} damage to a random enemy {RemoveCount:plural one='% time.' other='% times.'}\nRepeat this an additional time for each turn {SelfName} is |Retained|."
 
 NightFalls: 
   Name: Night Falls
-  Description: "Add |Dark Matter| to the hand until it is full.\nDeal damage equal to {Value1} times the |Dark Matter| added to the hand."
+  Description: "Add |Dark Matter| to the hand until it is full.\nDeal damage equal to {Value1} times the |Dark Matter| added to the hand. ({DamageEstimate})"
   ExtraDescription1: "Add |Dark Matter| to the hand until it is full.\nDeal {Damage} damage.\nIncrease this damage by {Value1} for each |Dark Matter| added to the hand."
 
 BlackHole: 
@@ -144,12 +161,14 @@ GravityWell:
 
 PlanetaryOrbit:
   Name: Planetary Orbit
-  Description: "Swap the draw and discard piles.\nDeal damage equal to the number of cards in the discard pile to each enemy.\nGain |Block| equal to the number of cards in the draw pile."
-
+  Description: "Swap the draw and discard piles.\nDeal damage equal to the number of cards swapped to each enemy. ({DamagePredict})\n{SelfName} |Pulls| all cards with |Mass| that are swapped."
+  UpgradedDescription: "Swap the draw and discard piles.\nDeal damage equal to double the number of cards swapped to each enemy. ({DamagePredict})\n{SelfName} |Pulls| all cards with |Mass| that are swapped."
+ 
 Ultraviolet:
   Name: Blazing Ultraviolet
-  Description: "Gain {Mana}.\nHas |Mass|\n|When Pulled|:\nDraw {Value1} cards."
-  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\""
+  Description: "Gain {Mana}.\nHas |Mass|\n|When Pulled|:\nDraw {Value1} card."
+  UpgradedDescriptionDescription: "Gain {Mana}.\nHas |Mass|\n|When Pulled|:\nDraw {Value1} cards."
+  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
 
 HighTension:
   Name: High Tension Blade
@@ -166,7 +185,7 @@ MassDriver:
 ZeroPoint:
   Name: Zero Point Module
   Description: "Gain {Shield} |Barrier|.\nHas |Mass|.\n|When Pulled|: Add a copy of {SelfName} to the hand with |Exile|."
-  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\""
+  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
 
 SuperGiant:
   Name: Super Giant
@@ -180,7 +199,7 @@ WhiteHole:
 GravityDistortion:
   Name: Gravity Distortion
   Description: "Apply {Value2} |Weak| and deal {Damage} damage to each enemy.\nHas |Mass|.\n|When Pulled|: Gain {Value1} |Reflection|"
-  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\""
+  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
 
 
 FixedStar:
@@ -189,11 +208,14 @@ FixedStar:
 
 Coolant:
   Name: Coolant
-  Description: "Gain {Value1} |Spirit|.\nDiscard all\nnon-defense cards from the hand."
+  Description: "|Kicker| {Mana}: Gain {Value2} Firepower\nGain {Value1} |Spirit|.\nDiscard all\nnon-defense cards from the hand."
+  DetailText: "Kicker: All pooled mana is spent when playing this card. If you can afford the card cost and the kicker, get an extra effect."
 
 Blueshift:
   Name: Blueshift
-  Description: "Gain {Block} |Block|.\nReturn {SelfName} to the hand."
+  Description: "|MultiKicker| {Mana}: Add a {SelfName} to the hand.\nGain {Block} |Block|."
+  UpgradedDescription: "|MultiKicker| {Mana}: Add a upgraded {SelfName} to the hand.\nGain {Block} |Block|."
+  DetailText: "MultiKicker: All pooled mana is spent when playing this card. For each time you can afford the kicker after the card cost, get an extra effect."
 
 Resonance:
   Name: Resonance
@@ -235,7 +257,7 @@ Ignition:
 Crossfeed:
   Name: Crossfeed
   ExtraDescription1: "|Vent| for damage.\nGain {Value1} |Heat| for each card with |Mass| in the hand.\nAdd 1 |Dark Matter| to the hand for every {Value2} |Heat| {PlayerName} had."
-  Description: "|Vent| for {Damage} damage.\nGain {Value1} |Heat| for each |Dark Matter| in the hand.\nAdd 1 |Dark Matter| to the hand for every {Value2} |Heat| {PlayerName} had."
+  Description: "|Vent| for {Damage} damage.\nGain {Value1} |Heat| for each card with |Mass| in the hand.\nAdd 1 |Dark Matter| to the hand for every {Value2} |Heat| {PlayerName} had."
 
 EternityEngine: 
   Name: Eternity Engine
@@ -280,7 +302,7 @@ SpatialRend:
 
 SunCrow: 
   Name: The Crow who Stole the Sun
-  Description: "Remove all cards with |Mass| from combat.\nGain {Value1} |Heat| for each card removed."
+  Description: "Remove all cards with |Mass| from the |battlefield|.\nGain {Value1} |Heat| for each card removed. ({RemoveCount})"
 
 HotSpring:
   Name: Earth Spirit Hot Spring

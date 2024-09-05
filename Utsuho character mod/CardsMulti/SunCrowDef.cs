@@ -75,8 +75,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 12,
-                UpgradedValue1: 16,
+                Value1: 16,
+                UpgradedValue1: 20,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -97,8 +97,8 @@ namespace Utsuho_character_mod.CardsMulti
                 Keywords: Keyword.None,
                 UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Battlefield,
+                UpgradedRelativeKeyword: Keyword.Battlefield,
 
                 RelativeEffects: new List<string>() { "HeatStatus" },
                 UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
@@ -116,6 +116,20 @@ namespace Utsuho_character_mod.CardsMulti
         [EntityLogic(typeof(SunCrowDef))]
         public sealed class SunCrow : Card
         {
+            public int RemoveCount
+            {
+                get
+                {
+                    if (base.Battle != null)
+                    {
+                        return base.Value1 * base.Battle.EnumerateAllCards().Where((Card card) => (card is UtsuhoCard uCard) && (uCard.isMass)).ToList<Card>().Count;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => (card is UtsuhoCard uCard) && (uCard.isMass)).ToList<Card>();

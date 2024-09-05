@@ -49,7 +49,7 @@ namespace Utsuho_character_mod.Util
                 if (battle.Player.HasStatusEffect<MassDriverStatus>())
                 {
                     MassDriverStatus status = battle.Player.GetStatusEffect<MassDriverStatus>();
-                    yield return new DamageAction(battle.Player, battle.EnemyGroup.Alives, DamageInfo.Reaction((float)status.Level), "无差别起火", GunType.Single);
+                    yield return new DamageAction(battle.Player, battle.EnemyGroup.Alives, DamageInfo.Reaction((float)status.Level), "厄运之轮", GunType.Single);
                 }
                 foreach (BattleAction action in uCard.OnPull()) { yield return action; }
             }

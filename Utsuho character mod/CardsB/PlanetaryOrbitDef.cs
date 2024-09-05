@@ -52,8 +52,8 @@ namespace Utsuho_character_mod.CardsR
                 Order: 10,
                 AutoPerform: true,
                 Perform: new string[0][],
-                GunName: "Simple1",
-                GunNameBurst: "Simple1",
+                GunName: "狐狸",
+                GunNameBurst: "狐狸",
                 DebugLevel: 0,
                 Revealable: false,
                 IsPooled: true,
@@ -65,19 +65,19 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.AllEnemies,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 2, Any = 2 },
-                UpgradedCost: new ManaGroup() { Black = 2, Any = 1 },
+                Cost: new ManaGroup() { Black = 1, Any = 2 },
+                UpgradedCost: new ManaGroup() { Black = 1, Any = 2 },
                 MoneyCost: null,
                 Damage: 0,
                 UpgradedDamage: 0,
-                Block: 0,
-                UpgradedBlock: 0,
+                Block: null,
+                UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
                 Value1: 1,
-                UpgradedValue1: 1,
-                Value2: 1,
-                UpgradedValue2: 1,
+                UpgradedValue1: 2,
+                Value2: null,
+                UpgradedValue2: null,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -115,6 +115,22 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(PlanetaryOrbitDef))]
         public sealed class PlanetaryOrbit : Card
         {
+            public int DamagePredict
+            {
+                get
+                {
+                    if (base.Battle != null)
+                    {
+                        Card[] array = base.Battle.DrawZone.SampleManyOrAll(999, base.GameRun.BattleRng);
+                        Card[] array2 = base.Battle.DiscardZone.ToArray<Card>();
+                        return Value1 * (array.Length + array2.Length);
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 Card[] array = base.Battle.DrawZone.SampleManyOrAll(999, base.GameRun.BattleRng);
@@ -123,6 +139,7 @@ namespace Utsuho_character_mod.CardsR
                 {
                     foreach (Card card in array)
                     {
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                         yield return new DiscardAction(card);
                         this.DeltaDamage += Value1;
                     }
@@ -131,16 +148,15 @@ namespace Utsuho_character_mod.CardsR
                 {
                     foreach (Card card in array2)
                     {
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                         yield return new MoveCardToDrawZoneAction(card, DrawZoneTarget.Top);
-                        this.DeltaBlock += Value2;
+                        this.DeltaDamage += Value1;
                     }
                 }
 
-                    yield return AttackAction(selector);
+                yield return AttackAction(selector);
 
-                    yield return DefenseAction();
                 this.DeltaDamage = 0;
-                this.DeltaBlock = 0;
 
                 yield break;
             }

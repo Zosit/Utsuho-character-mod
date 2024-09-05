@@ -76,11 +76,7 @@ namespace Utsuho_character_mod.Status
         {
             get
             {
-                if (base.Level <= 10)
-                {
-                    return "无差别起火";
-                }
-                return "无差别起火B";
+                return "GuihuoExplodeG2";
             }
         }
         protected override void OnAdded(Unit unit)

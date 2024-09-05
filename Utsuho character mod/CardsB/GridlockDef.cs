@@ -14,24 +14,20 @@ using System.Collections.Generic;
 using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
-using static Utsuho_character_mod.CardsB.DarkMatterDef;
-using LBoL.Base.Extensions;
-using JetBrains.Annotations;
-using System.Linq;
 using Utsuho_character_mod.Util;
 
-namespace Utsuho_character_mod.CardsG
+namespace Utsuho_character_mod.CardsR
 {
-    public sealed class GammaRaysDef : CardTemplate
+    public sealed class GridlockDef : CardTemplate
     {
         public override IdContainer GetId()
         {
-            return nameof(GammaRays);
+            return nameof(Gridlock);
         }
 
         public override CardImages LoadCardImages()
         {
-            var imgs = new CardImages(embeddedSource);
+            var imgs = new CardImages(BepinexPlugin.embeddedSource);
             imgs.AutoLoad(this, extension: ".png");
             return imgs;
         }
@@ -46,7 +42,7 @@ namespace Utsuho_character_mod.CardsG
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13630,
+                Index: 13020,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -57,28 +53,28 @@ namespace Utsuho_character_mod.CardsG
                 GunNameBurst: "Simple1",
                 DebugLevel: 0,
                 Revealable: false,
-                IsPooled: true,
+                IsPooled: false,
                 FindInBattle: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Uncommon,
-                Type: CardType.Skill,
+                Rarity: Rarity.Common,
+                Type: CardType.Defense,
                 TargetType: TargetType.Nobody,
-                Colors: new List<ManaColor>() { ManaColor.Green },
+                Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Green = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Green = 1, Any = 1 },
+                Cost: new ManaGroup() { Black = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Any = 2 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
-                Block: null,
-                UpgradedBlock: null,
+                Block: 10,
+                UpgradedBlock: 13,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 9,
-                UpgradedValue1: 9,
-                Value2: 0,
-                UpgradedValue2: 3,
+                Value1: null,
+                UpgradedValue1: null,
+                Value2: null,
+                UpgradedValue2: null,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -94,14 +90,14 @@ namespace Utsuho_character_mod.CardsG
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.None,
-                UpgradedKeywords: Keyword.None,
+                Keywords: Keyword.Basic,
+                UpgradedKeywords: Keyword.Basic,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.Grow,
+                UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "RadiationStatus" },
-                UpgradedRelativeEffects: new List<string>() { "RadiationStatus" },
+                RelativeEffects: new List<string>() { },
+                UpgradedRelativeEffects: new List<string>() { },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -110,18 +106,18 @@ namespace Utsuho_character_mod.CardsG
                 SubIllustrator: new List<string>() { }
              );
 
-            return cardConfig;
+            return cardConfig;            
         }
 
-        [EntityLogic(typeof(GammaRaysDef))]
-        public sealed class GammaRays : Card
+        [EntityLogic(typeof(GridlockDef))]
+        public sealed class Gridlock : Card
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return BuffAction<RadiationStatus>(Value1, 0, 0, 0, 0.2f);
-                this.DeltaValue1 += this.Value2;
-                yield break;
+                yield return base.DefenseAction();
             }
+
         }
+
     }
 }

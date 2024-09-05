@@ -19,6 +19,9 @@ using LBoL.Base.Extensions;
 using JetBrains.Annotations;
 using System.Linq;
 using Utsuho_character_mod.Util;
+using LBoL.Presentation.UI.Panels;
+using LBoL.Presentation.UI;
+using System.Reflection.Emit;
 
 namespace Utsuho_character_mod.CardsU
 {
@@ -66,21 +69,21 @@ namespace Utsuho_character_mod.CardsU
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Blue },
                 IsXCost: false,
-                Cost: new ManaGroup() { Any = 3 },
-                UpgradedCost: new ManaGroup() { Any = 1 },
+                Cost: new ManaGroup() { Any = 0 },
+                UpgradedCost: new ManaGroup() { Any = 0 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
-                Block: 18,
-                UpgradedBlock: 8,
+                Block: 12,
+                UpgradedBlock: 12,
                 Shield: null,
                 UpgradedShield: null,
                 Value1: null,
                 UpgradedValue1: null,
                 Value2: null,
                 UpgradedValue2: null,
-                Mana: null,
-                UpgradedMana: null,
+                Mana: new ManaGroup() { Any = 2 },
+                UpgradedMana: new ManaGroup() { Any = 2 },
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -94,8 +97,8 @@ namespace Utsuho_character_mod.CardsU
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.None,
-                UpgradedKeywords: Keyword.None,
+                Keywords: Keyword.Exile | Keyword.Ethereal,
+                UpgradedKeywords: Keyword.Exile,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
@@ -116,10 +119,49 @@ namespace Utsuho_character_mod.CardsU
         [EntityLogic(typeof(BlueshiftDef))]
         public sealed class Blueshift : Card
         {
+            ManaGroup temp;
+            int KickCount = 0;
+            protected override void OnEnterBattle(BattleController battle)
+            {
+                base.ReactBattleEvent<ManaEventArgs>(base.Battle.ManaConsuming, new EventSequencedReactor<ManaEventArgs>(this.OnManaConsuming));
+                base.ReactBattleEvent<ManaEventArgs>(base.Battle.ManaConsumed, new EventSequencedReactor<ManaEventArgs>(this.OnManaConsumed));
+            }
+            private IEnumerable<BattleAction> OnManaConsuming(ManaEventArgs args)
+            {
+                BattleManaPanel panel = UiManager.GetPanel<BattleManaPanel>();
+                ManaGroup pool = panel.PooledMana + args.Value;
+                if ((args.ActionSource == this) && (args.Cause == ActionCause.CardUse))
+                {
+                    if (pool.CanAfford(this.Mana))
+                    {
+                        temp = pool;
+                        KickCount = panel.PooledMana.Amount / 2;
+                    }
+                }
+                    return null;
+            }
+            private IEnumerable<BattleAction> OnManaConsumed(ManaEventArgs args)
+            {
+                if (KickCount > 0)
+                {
+                    if (!this.IsUpgraded)
+                    {
+                        yield return new AddCardsToHandAction(Library.CreateCards<Blueshift>(KickCount));
+                    }
+                    else
+                    {
+                        yield return new AddCardsToHandAction(Library.CreateCards<Blueshift>(KickCount, true));
+                    }
+
+                    KickCount = 0;
+                    BattleManaPanel panel = UiManager.GetPanel<BattleManaPanel>();
+                    ManaGroup pool = panel.PooledMana;
+                    yield return new ConsumeManaAction(pool);
+                }
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield return DefenseAction();
-                yield return new MoveCardAction(this, CardZone.Hand);
                 yield break;
             }
         }

@@ -90,9 +90,9 @@ namespace Utsuho_character_mod
             UltimateSkillB: "UtsuhoUltB",
             ExhibitA: "ControlRod",
             ExhibitB: "BlackSun",
-            DeckA: new List<string> { "Shoot", "Shoot", "Boundary", "Boundary", "MarisaAttackR", "MarisaAttackR", "MarisaBlockB", "MarisaBlockB", "MarisaBlockB", "HellGeyser" },
-            DeckB: new List<string> { "Shoot", "Shoot", "Boundary", "Boundary", "MarisaAttackB", "MarisaAttackB", "MarisaBlockR", "MarisaBlockR", "MarisaBlockR", "ShootingStar" },
-            DifficultyA: 3,
+            DeckA: new List<string> { "Shoot", "Shoot", "Boundary", "Boundary", "FireBurst", "FireBurst", "Gridlock", "Gridlock", "Gridlock", "HellGeyser" },
+            DeckB: new List<string> { "Shoot", "Shoot", "Boundary", "Boundary", "InverseBeam", "InverseBeam", "BlowAway", "BlowAway", "BlowAway", "ShootingStar" },
+            DifficultyA: 2,
             DifficultyB: 3
             );
             return config;

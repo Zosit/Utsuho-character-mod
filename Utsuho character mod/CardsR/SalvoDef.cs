@@ -51,8 +51,8 @@ namespace Utsuho_character_mod.CardsR
                 Order: 10,
                 AutoPerform: true,
                 Perform: new string[0][],
-                GunName: "Simple1",
-                GunNameBurst: "Simple1",
+                GunName: "Huanggua1",
+                GunNameBurst: "Huanggua1",
                 DebugLevel: 0,
                 Revealable: false,
                 IsPooled: true,
@@ -114,12 +114,25 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(SalvoDef))]
         public sealed class Salvo : Card
         {
-
+            public int SalvoCount
+            {
+                get
+                {
+                    if (base.Battle != null)
+                    {
+                        return base.Battle._turnCardUsageHistory.Count + 1;
+                    }
+                    else
+                    {
+                        return 1;
+                    }
+                }
+            }
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 int num;
-                for (int i = 0; i < (base.Battle._turnCardUsageHistory.Count + 1); i = num + 1) 
+                for (int i = 0; i < SalvoCount; i = num + 1) 
                 {
                     EnemyUnit target = Battle.EnemyGroup.Alives.Sample(GameRun.BattleRng);
                     if (target != null && target.IsAlive)

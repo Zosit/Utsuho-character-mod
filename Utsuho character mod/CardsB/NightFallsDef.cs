@@ -54,8 +54,8 @@ namespace Utsuho_character_mod.CardsR
                 Order: 10,
                 AutoPerform: true,
                 Perform: new string[0][],
-                GunName: "Simple1",
-                GunNameBurst: "Simple1",
+                GunName: "病气A",
+                GunNameBurst: "病气A",
                 DebugLevel: 0,
                 Revealable: false,
                 IsPooled: true,
@@ -117,13 +117,41 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(NightFallsDef))]
         public sealed class NightFalls : Card
         {
+            public int AddCount
+            {
+                get
+                {
+                    if (base.Battle != null)
+                    {
+                        return base.Battle.MaxHand - base.Battle.HandZone.Count;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
+            public int DamageEstimate
+            {
+                get
+                {
+                    if (base.Battle != null)
+                    {
+                        return (Value1 * (AddCount + 1));
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 /*foreach (BattleAction battleAction in base.DebuffAction<Weak>(selector.GetUnits(base.Battle), 0, base.Value1, 0, 0, true, 0.2f))
                 {
                     yield return battleAction;
                 }*/
-                int num = base.Battle.MaxHand - base.Battle.HandZone.Count;
+                int num = AddCount;
                 this.DeltaDamage += Value1 * num;
                 yield return new AddCardsToHandAction(Library.CreateCards<DarkMatter>(num));
                 yield return AttackAction(selector);

@@ -53,8 +53,8 @@ namespace Utsuho_character_mod.CardsR
                 Order: 10,
                 AutoPerform: true,
                 Perform: new string[0][],
-                GunName: "Simple1",
-                GunNameBurst: "Simple1",
+                GunName: "元鬼玉",
+                GunNameBurst: "元鬼玉",
                 DebugLevel: 0,
                 Revealable: false,
                 IsPooled: true,
@@ -97,8 +97,8 @@ namespace Utsuho_character_mod.CardsR
                 Keywords: Keyword.Retain | Keyword.Forbidden,
                 UpgradedKeywords: Keyword.Retain | Keyword.Forbidden,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Battlefield,
+                UpgradedRelativeKeyword: Keyword.Battlefield,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
@@ -116,10 +116,24 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(SubterraneanSunDef))]
         public sealed class SubterraneanSun : Card
         {
-            private int count = 1;
-
+            public int count = 0;
+            public int RemoveCount
+            {
+                get
+                {
+                    if (base.Battle != null)
+                    {
+                        return count + 1;
+                    }
+                    else
+                    {
+                        return 1;
+                    }
+                }
+            }
             public override IEnumerable<BattleAction> OnTurnStartedInHand()
             {
+                count++;
                 for (int i = 0; i < count; i++)
                 {
                     List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => card != this).ToList<Card>();
@@ -136,7 +150,6 @@ namespace Utsuho_character_mod.CardsR
                         }
                     }
                 }
-                count++;
                 yield break;
             }
         }

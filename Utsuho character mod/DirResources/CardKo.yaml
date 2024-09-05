@@ -1,4 +1,22 @@
 # prettier-ignore
+InverseBeam:
+  Name: 반사 광선
+  Description: 피해를 {Damage} 줍니다.
+
+BlowAway:
+  Description: |-
+    |방어|를 {Block} 얻습니다.
+  Name: 날려버리기
+
+FireBurst:
+  Description: 피해를 {Damage} 줍니다.
+  Name: 화염 폭발
+
+Gridlock:
+  Description: |-
+    |방어|를 {Block} 얻습니다.
+  Name: 그리드 락
+  
 HellGeyser:
   Name: 헬 가이저
   Description: "|작열|을 {Value1} 얻습니다.\n|냉각|하고 그 수치만큼 피해를 줍니다.\n|작열|을 {Value2} 얻습니다."
@@ -120,6 +138,7 @@ WarpShield:
 VacuumSlash:
   Name: 진공참
   Description: "모든 적에게 피해를 {Damage} 줍니다.\n패의 무작위 카드를 한장 버립니다.\n|응집|했다면, 추가로 피해를 {Value1}번 더 줍니다."
+  UpgradedDescription: "모든 적에게 피해를 {Damage} 줍니다.\n패의 무작위 카드를 한장 버립니다.\n|응집|했다면, 추가로 피해를 {Value1}번 더 줍니다."
 
 AbyssNova:
   Name: 어비스 노바
@@ -150,6 +169,7 @@ PlanetaryOrbit:
 Ultraviolet:
   Name: 이글거리는 자외선
   Description: "{Mana}를 얻습니다.\n|응집|\n|응집될 시 발동|: 카드를 {Value1}장 뽑습니다."
+  UpgradedDescriptionDescription: "{Mana}를 얻습니다.\n|응집|\n|응집될 시 발동|: 카드를 {Value1}장 뽑습니다."
   DetailText: "응집: |우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
 
 HighTension:
@@ -189,11 +209,14 @@ FixedStar:
 
 Coolant:
   Name: 냉각제
-  Description: "|영력|을 {Value1} 얻습니다.\n패의 방어카드가 아닌 카드를 전부 버립니다."
+  Description: "|전력| {Mana}: 화력을 {Value2} 얻습니다.\n|영력|을 {Value1} 얻습니다.\n패의 방어카드가 아닌 카드를 전부 버립니다."
+  DetailText: "전력: 이 카드를 사용할 때 모든 마나가 사용됩니다. 카드 비용과 전력 비용을 감당할 수 있다면 추가 효과를 얻습니다."
 
 Blueshift:
   Name: 청색편이
-  Description: "|방어|를 {Block}얻습니다.\n{SelfName}를 패로 가져옵니다."
+  Description: "|과잉전력| {Mana}: {SelfName}를 손으로 가져옵니다.\n|방어|를 {Block}얻습니다."
+  UpgradedDescription: "|과잉전력| {Mana}: 강화된 {SelfName}를 손으로 가져옵니다\n|방어|를 {Block}얻습니다."
+  DetailText: "과잉전력: 이 카드를 사용할 때 모든 마나가 사용됩니다. 카드 비용을 제외한 나머지 마나로 과잉전력의 비용을 충족할 때 마다 추가 효과가 발동합니다."
 
 Resonance:
   Name: 공명
@@ -280,7 +303,7 @@ SpatialRend:
 
 SunCrow:
   Name: 태양을 훔친 까마귀
-  Description: "이 전투의 모든 |응집|카드를 제거합니다.\n제거할때마다 |작열|을 {Value1} 얻습니다."
+  Description: "|전장|의 모든 |응집|카드를 제거합니다.\n제거할때마다 |작열|을 {Value1} 얻습니다."
 
 HotSpring:
   Name: 구 지옥 온천
