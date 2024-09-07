@@ -50,7 +50,7 @@ namespace Utsuho_character_mod
                 Damage: 30,
                 Value1: 30,
                 Value2: 0,
-                Keywords: Keyword.None,
+                Keywords: Keyword.Accuracy,
                 RelativeEffects: new List<string>() { "HeatStatus" },
                 RelativeCards: new List<string>() { }
                 );
@@ -117,7 +117,7 @@ namespace Utsuho_character_mod
                 Damage: 30,
                 Value1: 0,
                 Value2: 0,
-                Keywords: Keyword.None,
+                Keywords: Keyword.Accuracy,
                 RelativeEffects: new List<string>() { },
                 RelativeCards: new List<string>() { "DarkMatter" }
                 );

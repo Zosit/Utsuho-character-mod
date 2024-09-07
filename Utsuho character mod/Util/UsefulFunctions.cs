@@ -41,17 +41,20 @@ namespace Utsuho_character_mod.Util
         {
             if ((card is UtsuhoCard uCard) && (uCard.isMass))
             {
-                if (battle.Player.HasStatusEffect<QuantumReflectorStatus>())
+                int totalIterations = 1;
+                if (battle.Player.HasStatusEffect<QuantumDissonanceStatus>())
                 {
-                    QuantumReflectorStatus status = battle.Player.GetStatusEffect<QuantumReflectorStatus>();
-                    yield return new ApplyStatusEffectAction<Reflect>(battle.Player, status.Level, null, null, null, 0f, true);
+                    QuantumDissonanceStatus status = battle.Player.GetStatusEffect<QuantumDissonanceStatus>();
+                    totalIterations += status.Level;
                 }
                 if (battle.Player.HasStatusEffect<MassDriverStatus>())
                 {
                     MassDriverStatus status = battle.Player.GetStatusEffect<MassDriverStatus>();
-                    yield return new DamageAction(battle.Player, battle.EnemyGroup.Alives, DamageInfo.Reaction((float)status.Level), "厄运之轮", GunType.Single);
+                    for (int i = 0; i < totalIterations; i++)
+                        yield return new DamageAction(battle.Player, battle.EnemyGroup.Alives, DamageInfo.Reaction((float)status.Level), "厄运之轮", GunType.Single);
                 }
-                foreach (BattleAction action in uCard.OnPull()) { yield return action; }
+                for (int i = 0; i < totalIterations; i++)
+                    foreach (BattleAction action in uCard.OnPull()) { yield return action; }
             }
         }
 

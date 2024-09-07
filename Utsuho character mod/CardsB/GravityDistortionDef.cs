@@ -66,18 +66,18 @@ namespace Utsuho_character_mod.CardsB
                 Cost: new ManaGroup() { Black = 1, Any = 2 },
                 UpgradedCost: new ManaGroup() { Black = 1, Any = 2 },
                 MoneyCost: null,
-                Damage: 16,
-                UpgradedDamage: 18,
+                Damage: 17,
+                UpgradedDamage: 20,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 8,
-                UpgradedValue1: 12,
+                Value1: null,
+                UpgradedValue1: null,
                 Value2: 1,
                 UpgradedValue2: 2,
-                Mana: null,
-                UpgradedMana: null,
+                Mana: new ManaGroup() { Black = 2 },
+                UpgradedMana: new ManaGroup() { Philosophy = 2 },
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -119,7 +119,7 @@ namespace Utsuho_character_mod.CardsB
             }
             public override IEnumerable<BattleAction> OnPull()
             {
-                yield return new ApplyStatusEffectAction<Reflect>(Battle.Player, new int?(Value1), null, null, null, 0f, true);
+                yield return new GainManaAction(Mana);
             }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {

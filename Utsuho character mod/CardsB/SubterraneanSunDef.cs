@@ -20,7 +20,7 @@ using System.Linq;
 using LBoL.Base.Extensions;
 using LBoL.Core.Units;
 
-namespace Utsuho_character_mod.CardsR
+namespace Utsuho_character_mod.CardsB
 {
     public sealed class SubterraneanSunDef : CardTemplate
     {
@@ -136,17 +136,24 @@ namespace Utsuho_character_mod.CardsR
                 count++;
                 for (int i = 0; i < count; i++)
                 {
-                    List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => card != this).ToList<Card>();
-                    if(cards.Count != 0)
+                    //List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => card != this).ToList<Card>();
+                    List<Card> cards = base.Battle.EnumerateAllCards().ToList<Card>();
+                    if (cards.Count != 0)
                     {
                         Card card = Util.UsefulFunctions.RandomUtsuho(cards);
                         foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                        //yield return new ExileCardAction(card);
-                        yield return new RemoveCardAction(card);
-                        EnemyUnit target = Battle.EnemyGroup.Alives.Sample(GameRun.BattleRng);
-                        if (target != null && target.IsAlive)
+                        if (Battle.EnemyGroup.Alives.Count() != 0)
                         {
-                            yield return AttackAction(target);
+                            EnemyUnit target = Battle.EnemyGroup.Alives.Sample(GameRun.BattleRng);
+                            if (target != null && target.IsAlive)
+                            {
+                                yield return AttackAction(target);
+                            }
+                        }
+                        yield return new RemoveCardAction(card);
+                        if (card == this)
+                        {
+                            break;
                         }
                     }
                 }

@@ -61,11 +61,16 @@ namespace Utsuho_character_mod
         {
             var sprites = new PlayerImages();
 
-            var asyncLoading = ResourceLoader.LoadSpriteAsync("utsuho.png", directorySource);
+            var imprint = ResourceLoader.LoadSprite("CardImprint.png", directorySource);
+            /*var asyncLoading = ResourceLoader.LoadSpriteAsync("utsuho.png", directorySource);
 
             sprites.SetStartPanelStand(asyncLoading);
             sprites.SetWinStand(asyncLoading);
-            sprites.SetDeckStand(asyncLoading);
+            sprites.SetDeckStand(asyncLoading);*/
+
+
+            sprites.AutoLoad("", (s) => ResourceLoader.LoadSprite(s, dir, ppu: 100, 1, FilterMode.Bilinear, generateMipMaps: true), (s) => ResourceLoader.LoadSpriteAsync(s, BepinexPlugin.directorySource));
+            sprites.SetCardImprint(() => imprint);
 
             return sprites;
         }

@@ -71,7 +71,7 @@ namespace Utsuho_character_mod.Exhibits
                 Value1: 1,
                 Value2: null,
                 Value3: null,
-                Mana: new ManaGroup() { Colorless = 1 },
+                Mana: new ManaGroup() { Black = 1 },
                 BaseManaRequirement: null,
                 BaseManaColor: ManaColor.Black,
                 BaseManaAmount: 1,

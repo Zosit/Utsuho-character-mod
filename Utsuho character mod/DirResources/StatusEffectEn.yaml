@@ -68,15 +68,15 @@ ConflagrationStatus:
   Description: "When you lose |Heat| at the end of turn, instead gain |Heat|."
   Brief: "When you lose |Heat| at the end of turn, instead gain |Heat|."
 
-QuantumReflectorStatus:
-  Name: Quantum Reflector
-  Description: "Whenever a card with |Mass| is Pulled, gain {Level} |Reflection|."
-  Brief: "Whenever a card with |Mass| is Pulled, gain |Reflection|."
+QuantumDissonanceStatus:
+  Name: Quantum Dissonance
+  Description: "Whenever a card with |Mass| is Pulled, Pull it {Level:plural one='% additional time.' other='% additional times.'}"
+  Brief: "Whenever a card with |Mass| is Pulled, Pull it additional times."
 
 SunSpotStatus:
   Name: Sun Spot
-  Description: "When you play a |Dark Matter|, trigger your |Heat| {Level} more times per turn."
-  Brief: "When you play a |Dark Matter|, trigger your |Heat| extra times."
+  Description: "When you play a |Dark Matter|, trigger your |Heat| {Level:plural one='% time' other='% times'}."
+  Brief: "When you play a |Dark Matter|, trigger your |Heat| additional times."
 
 HeatVisorStatus:
   Name: Heat Visor
