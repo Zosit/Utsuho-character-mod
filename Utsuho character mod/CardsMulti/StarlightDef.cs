@@ -116,10 +116,9 @@ namespace Utsuho_character_mod.CardsMulti
             {
                 if (!base.Battle.BattleShouldEnd)
                 {
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, Value1, null, null, null, 0f, true);
-
-                    yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
                     yield return base.DefenseAction();
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, Value1, null, null, null, 0f, true);
+                    yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
 
                     yield break;
                 }

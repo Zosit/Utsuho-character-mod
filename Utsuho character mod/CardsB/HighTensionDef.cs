@@ -134,6 +134,8 @@ namespace Utsuho_character_mod.CardsR
                     }
                 }
                 yield return AttackAction(selector);
+                DeltaDamage = 0;
+
                 yield break;
             }
         }

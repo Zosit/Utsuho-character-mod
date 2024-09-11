@@ -36,6 +36,7 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 using UnityEngine.Windows;
 using Utsuho_character_mod.Util;
+using static LBoLEntitySideloader.Resource.PlayerImages;
 using static Utsuho_character_mod.BepinexPlugin;
 
 
@@ -43,7 +44,7 @@ namespace Utsuho_character_mod
 {
     public sealed class UtsuhoPlayerDef : PlayerUnitTemplate
     {
-        public static DirectorySource dir = new DirectorySource(PluginInfo.GUID, "Utsuho");
+        //public static DirectorySource dir = new DirectorySource(PluginInfo.GUID, "Utsuho");
 
         public static string name = nameof(Utsuho);
 
@@ -62,14 +63,29 @@ namespace Utsuho_character_mod
             var sprites = new PlayerImages();
 
             var imprint = ResourceLoader.LoadSprite("CardImprint.png", directorySource);
-            /*var asyncLoading = ResourceLoader.LoadSpriteAsync("utsuho.png", directorySource);
+            var collectionIconLoading = ResourceLoader.LoadSprite("CollectionIcon.png", directorySource);
+            var selectionCircleIconLoading = ResourceLoader.LoadSprite("SelectionCircleIcon.png", directorySource);
+            var avatarLoading = ResourceLoader.LoadSprite("Avatar.png", directorySource);
+            var standLoading = ResourceLoader.LoadSpriteAsync("Stand.png", directorySource);
+            var winStandLoading = ResourceLoader.LoadSpriteAsync("WinStand.png", directorySource);
+            var defeatedStandLoading = ResourceLoader.LoadSpriteAsync("DefeatedStand.png", directorySource);
+            var perfectWinIconLoading = ResourceLoader.LoadSpriteAsync("PerfectWinIcon.png", directorySource);
+            var winIconLoading = ResourceLoader.LoadSpriteAsync("WinIcon.png", directorySource);
+            var defeatedIconLoading = ResourceLoader.LoadSpriteAsync("DefeatedIcon.png", directorySource);
 
-            sprites.SetStartPanelStand(asyncLoading);
-            sprites.SetWinStand(asyncLoading);
-            sprites.SetDeckStand(asyncLoading);*/
+            sprites.SetStartPanelStand(standLoading);
+            sprites.SetDeckStand(standLoading);
+            sprites.SetWinStand(winStandLoading);
+            sprites.SetDefeatedStand(defeatedStandLoading);
+            sprites.SetPerfectWinIcon(perfectWinIconLoading);
+            sprites.SetWinIcon(winIconLoading);
+            sprites.SetDefeatedIcon(defeatedIconLoading);
+            sprites.SetCollectionIcon(() => collectionIconLoading);
+            sprites.SetSelectionCircleIcon(() => selectionCircleIconLoading);
+            sprites.SetInRunAvatarPic(() => avatarLoading);
 
 
-            sprites.AutoLoad("", (s) => ResourceLoader.LoadSprite(s, dir, ppu: 100, 1, FilterMode.Bilinear, generateMipMaps: true), (s) => ResourceLoader.LoadSpriteAsync(s, BepinexPlugin.directorySource));
+            //sprites.AutoLoad("", (s) => ResourceLoader.LoadSprite(s, directorySource, ppu: 100, 1, FilterMode.Bilinear, generateMipMaps: true), (s) => ResourceLoader.LoadSpriteAsync(s, BepinexPlugin.directorySource), PlayerImages.UseSame.StandAndDeck);
             sprites.SetCardImprint(() => imprint);
 
             return sprites;
@@ -127,7 +143,7 @@ namespace Utsuho_character_mod
         }
 
 
-        public override UniTask<Sprite> LoadSpellSprite() => ResourceLoader.LoadSpriteAsync("Stand.png", UtsuhoPlayerDef.dir, ppu: 1200);
+        public override UniTask<Sprite> LoadSpellSprite() => ResourceLoader.LoadSpriteAsync("Stand.png", directorySource, ppu: 1200);
 
 
         public override UnitModelConfig MakeConfig()

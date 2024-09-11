@@ -68,12 +68,12 @@ namespace Utsuho_character_mod.CardsR
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
-                Block: null,
-                UpgradedBlock: null,
+                Block: 5,
+                UpgradedBlock: 8,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 5,
-                UpgradedValue1: 8,
+                Value1: null,
+                UpgradedValue1: null,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -117,7 +117,7 @@ namespace Utsuho_character_mod.CardsR
             {
                 if (base.Zone == CardZone.Hand)
                 {
-                    yield return DefenseAction(Value1, 0);
+                    yield return DefenseAction();
                     yield return new AddCardsToDiscardAction(Library.CreateCard("DarkMatter"));
                 }
                 yield break;

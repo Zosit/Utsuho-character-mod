@@ -62,8 +62,8 @@ namespace Utsuho_character_mod.CardsG
                 TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Green },
                 IsXCost: false,
-                Cost: new ManaGroup() { Green = 1, Any = 2 },
-                UpgradedCost: new ManaGroup() { Green = 1, Any = 1 },
+                Cost: new ManaGroup() { Green = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Green = 1 },
                 MoneyCost: null,
                 Damage: 0,
                 UpgradedDamage: 0,
@@ -116,15 +116,14 @@ namespace Utsuho_character_mod.CardsG
             {
                 get
                 {
-                    int total = base.Battle.ExileZone.Count;
-                    if (total != 0)
-                    {
-                        return total;
-                    }
-                    else
+                    if (base.Battle == null)
                     {
                         return 0;
                     }
+                    int total = base.Battle.ExileZone.Count;
+
+                    return total;
+
                 }
             }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)

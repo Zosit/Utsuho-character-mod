@@ -115,7 +115,7 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(PlanetaryOrbitDef))]
         public sealed class PlanetaryOrbit : Card
         {
-            public int DamagePredict
+            public override int AdditionalDamage
             {
                 get
                 {
@@ -139,9 +139,24 @@ namespace Utsuho_character_mod.CardsR
                 {
                     foreach (Card card in array)
                     {
-                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                         yield return new DiscardAction(card);
-                        this.DeltaDamage += Value1;
+                    }
+                }
+                if (array2.Length != 0)
+                {
+                    foreach (Card card in array2)
+                    {
+                        yield return new MoveCardToDrawZoneAction(card, DrawZoneTarget.Top);
+                    }
+                }
+                yield return AttackAction(selector);
+                array = base.Battle.DrawZone.SampleManyOrAll(999, base.GameRun.BattleRng);
+                array2 = base.Battle.DiscardZone.ToArray<Card>();
+                if (array.Length != 0)
+                {
+                    foreach (Card card in array)
+                    {
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                     }
                 }
                 if (array2.Length != 0)
@@ -149,12 +164,9 @@ namespace Utsuho_character_mod.CardsR
                     foreach (Card card in array2)
                     {
                         foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                        yield return new MoveCardToDrawZoneAction(card, DrawZoneTarget.Top);
-                        this.DeltaDamage += Value1;
                     }
                 }
 
-                yield return AttackAction(selector);
 
                 this.DeltaDamage = 0;
 

@@ -98,8 +98,8 @@ NuclearDive:
 
 BunkerDown:
   Name: Bunker Down
-  Description: "Gain {Block} |Block|.\n|Debut:| Gain {Value1} |Barrier| and reduce the cost of {SelfName} by {Mana}."
-  ExtraDescription1: "Gain {Block} |Block|.\n|d:Debut: Gain {Value1} Barrier. {SelfName} costs {Mana} less this combat.|"
+  Description: "Gain {Block} |Block|.\n|Debut:| Gain {Shield} |Barrier| and reduce the cost of {SelfName} by {Mana}."
+  ExtraDescription1: "Gain {Block} |Block|.\n|d:Debut: Gain {Shield} Barrier. {SelfName} costs {Mana} less this combat.|"
 
 WasteNot:
   Name: Waste Not
@@ -147,12 +147,11 @@ SubterraneanSun:
 
 NightFalls: 
   Name: Night Falls
-  Description: "Add |Dark Matter| to the hand until it is full.\nDeal damage equal to {Value1} times the |Dark Matter| added to the hand. ({DamageEstimate})"
-  ExtraDescription1: "Add |Dark Matter| to the hand until it is full.\nDeal {Damage} damage.\nIncrease this damage by {Value1} for each |Dark Matter| added to the hand."
+  Description: "Add |Dark Matter| to the hand until it is full.\nDeal damage equal to {Value1} times the cards with |Mass| in the hand. ({Damage})"
 
 BlackHole: 
   Name: Black Hole
-  Description: "|While in hand|: At the start of {PlayerName}'s turn, gain {Value1} |Block| and discard a random card."
+  Description: "|While in hand|: At the start of {PlayerName}'s turn, gain {Block} |Block| and discard a random card."
   DetailText: "Playing {SelfName} has no effect other than |Exiling| it from the hand."
 
 GravityWell:
@@ -161,9 +160,10 @@ GravityWell:
 
 PlanetaryOrbit:
   Name: Planetary Orbit
-  Description: "Swap the draw and discard piles.\nDeal damage equal to the number of cards swapped to each enemy. ({DamagePredict})\n{SelfName} |Pulls| all cards with |Mass| that are swapped."
-  UpgradedDescription: "Swap the draw and discard piles.\nDeal damage equal to double the number of cards swapped to each enemy. ({DamagePredict})\n{SelfName} |Pulls| all cards with |Mass| that are swapped."
- 
+  Description: "Swap the draw and discard piles.\nDeal damage equal to the number of cards swapped to each enemy. ({Damage})\n{SelfName} |Pull| all cards with |Mass| that were swapped."
+  UpgradedDescription: "Swap the draw and discard piles.\nDeal damage equal to double the number of cards swapped to each enemy. ({Damage})\n{SelfName} |Pull| all cards with |Mass| that were swapped."
+  DetailText: "This does not change the order of the piles."
+
 Ultraviolet:
   Name: Blazing Ultraviolet
   Description: "Gain {Mana}.\nHas |Mass|\n|When Pulled|:\nDraw {Value1} card."
@@ -196,7 +196,7 @@ SuperGiant:
 
 WhiteHole:
   Name: White Hole
-  Description: "|At the end of the turn|: Gain {Value1} |Block| and add a |Dark Matter| to the discard pile."
+  Description: "|At the end of the turn|: Gain {Block} |Block| and add a |Dark Matter| to the discard pile."
   DetailText: "Playing {SelfName} has no effect other than |Exiling| it from the hand."
 
 GravityDistortion:
@@ -243,7 +243,7 @@ GammaRays:
 
 Reignition:
   Name: Reignition
-  Description: "Deal damage equal to the number of cards in |Exile|."
+  Description: "Deal damage equal to the number of cards in |Exile| ({Damage})."
 
 TurboFuel:
   Name: Turbo Fuel
@@ -269,8 +269,8 @@ EternityEngine:
 
 Starlight:
   Name: Starlight
-  Description: "Gain {Value1} |Heat|.\nGain {Block} |Block|.\nAdd 2 |Dark Matter| to the hand."
-  UpgradedDescription: "Gain {Value1} |Heat|.\nGain {Shield} |Barrier|.\nAdd 2 |Dark Matter| to the hand."
+  Description: "Gain {Block} |Block|.\nGain {Value1} |Heat|.\nAdd 2 |Dark Matter| to the hand."
+  UpgradedDescription: "Gain {Shield} |Barrier|.\nGain {Value1} |Heat|.\nAdd 2 |Dark Matter| to the hand."
 
 QuantumDissonance:
   Name: Quantum Dissonance

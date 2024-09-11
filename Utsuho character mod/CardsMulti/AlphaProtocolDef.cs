@@ -105,7 +105,7 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedRelativeCards: new List<string>() { "BetaProtocol+", "GammaProtocol+" },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Zosit",
                 SubIllustrator: new List<string>() { }
              );
 

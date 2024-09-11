@@ -69,10 +69,10 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedDamage: null,
                 Block: 14,
                 UpgradedBlock: 18,
-                Shield: null,
-                UpgradedShield: null,
-                Value1: 16,
-                UpgradedValue1: 22,
+                Shield: 16,
+                UpgradedShield: 22,
+                Value1: null,
+                UpgradedValue1: null,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: new ManaGroup() { Red = 1, Any = 1 },
@@ -102,7 +102,7 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Zosit",
                 SubIllustrator: new List<string>() { }
              );
 
@@ -122,10 +122,10 @@ namespace Utsuho_character_mod.CardsR
             }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return base.DefenseAction();
+                yield return base.DefenseAction(ConfigBlock, 0);
                 if (base.PlayInTriggered)
                 {
-                    yield return base.DefenseAction(0, Value1);
+                    yield return base.DefenseAction(0, this.ConfigShield);
                     this.DecreaseBaseCost(this.Mana);
                 }
                 yield break;

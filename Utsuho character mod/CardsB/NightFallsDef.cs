@@ -107,7 +107,7 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Zosit",
                 SubIllustrator: new List<string>() { }
              );
 
@@ -117,6 +117,40 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(NightFallsDef))]
         public sealed class NightFalls : Card
         {
+            public override int AdditionalDamage
+            {
+                get
+                {
+                    int mass = 0;
+                    if (base.Battle != null)
+                    {
+                        Card[] array = base.Battle.HandZone.SampleManyOrAll(999, base.GameRun.BattleRng);
+                        if (array.Length != 0)
+                        {
+                            foreach (Card card in array)
+                            {
+                                if ((card is UtsuhoCard uCard) && (uCard.isMass))
+                                {
+                                    mass++;
+                                }
+                                if (card == this)
+                                {
+                                    mass++;
+                                }
+                            }
+                        }
+                        /*if(this.Zone == CardZone.PlayArea)
+                        {
+                            mass--;
+                        }*/
+                        return (Value1 * (AddCount + mass));
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
             public int AddCount
             {
                 get
@@ -131,20 +165,7 @@ namespace Utsuho_character_mod.CardsR
                     }
                 }
             }
-            public int DamageEstimate
-            {
-                get
-                {
-                    if (base.Battle != null)
-                    {
-                        return (Value1 * (AddCount + 1));
-                    }
-                    else
-                    {
-                        return 0;
-                    }
-                }
-            }
+
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 /*foreach (BattleAction battleAction in base.DebuffAction<Weak>(selector.GetUnits(base.Battle), 0, base.Value1, 0, 0, true, 0.2f))
@@ -152,10 +173,10 @@ namespace Utsuho_character_mod.CardsR
                     yield return battleAction;
                 }*/
                 int num = AddCount;
-                this.DeltaDamage += Value1 * num;
+                //this.DeltaDamage += Value1 * num;
                 yield return new AddCardsToHandAction(Library.CreateCards<DarkMatter>(num));
                 yield return AttackAction(selector);
-                this.DeltaDamage = 0;
+                //this.DeltaDamage = 0;
                 yield break;
             }
 

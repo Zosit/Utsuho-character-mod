@@ -76,12 +76,12 @@ namespace Utsuho_character_mod.CardsR
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
-                Block: 0,
-                UpgradedBlock: 0,
+                Block: 8,
+                UpgradedBlock: 12,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 8,
-                UpgradedValue1: 12,
+                Value1: null,
+                UpgradedValue1: null,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -131,11 +131,11 @@ namespace Utsuho_character_mod.CardsR
                 if (base.Zone == CardZone.Hand)
                 {
                     Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                    card.NotifyActivating();
                     GameMaster.Instance.StartCoroutine(ResetTrigger());
                     yield return new DiscardAction(card);
-                    yield return DefenseAction(Value1, 0);
+                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                    card.NotifyActivating();
+                    yield return DefenseAction();
                 }
                 yield break;
             }
