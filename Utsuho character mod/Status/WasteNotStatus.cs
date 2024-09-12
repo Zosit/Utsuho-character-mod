@@ -86,12 +86,9 @@ namespace Utsuho_character_mod.Status
             {
                 yield break;
             }
-            if (args.Cause != ActionCause.AutoExile)
-            {
-                base.NotifyActivating();
-                int level = base.GetSeLevel<WasteNotStatus>();
-                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, level, null, null, null, 0f, true);
-            }
+            base.NotifyActivating();
+            int level = base.GetSeLevel<WasteNotStatus>();
+            yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, level, null, null, null, 0f, true);
             yield break;
         }
     }

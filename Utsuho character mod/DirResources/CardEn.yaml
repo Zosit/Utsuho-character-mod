@@ -45,7 +45,8 @@ Aggregate:
 
 Fission:
   Name: Fission
-  Description: "Add a random |Red| attack and defense card to the hand. Mana of any color can be spent to pay their mana costs.\nGain {Value1} |Heat|."
+  Description: "Add a random |Red| attack and defense card to the hand. Mana of any color can be spent to pay their mana costs.\nGain {Value1} |Heat|.\nGain {Mana}."
+  UpgradedDescription: "Add a random upgraded |Red| attack and defense card to the hand. Mana of any color can be spent to pay their mana costs.\nGain {Value1} |Heat|.\nGain {Mana}."
 
 EverythingBurns:
   Name: Everything Burns
@@ -223,6 +224,7 @@ Blueshift:
 Resonance:
   Name: Resonance
   Description: "Deal {Damage} damage.\nFor the rest of combat, each {SelfName} deals {Value1} more damage.\nWhenever {PlayerName} |Exiles| a card that isn't {SelfName}, add a {SelfName} to the hand."
+  UpgradedDescription: "Deal {Damage} damage.\nFor the rest of combat, each {SelfName} deals {Value1} more damage.\nWhenever {PlayerName} |Exiles| a card that isn't {SelfName}, add a {SelfName} to the hand."
 
 Disintegrate:
   Name: Disintegrate
@@ -243,7 +245,7 @@ GammaRays:
 
 Reignition:
   Name: Reignition
-  Description: "Deal damage equal to the number of cards in |Exile| ({Damage})."
+  Description: "Deal damage equal to the {Value1} time the number of cards in |Exile| ({Damage})."
 
 TurboFuel:
   Name: Turbo Fuel
@@ -301,7 +303,7 @@ AblativeArmor:
 
 SpatialRend:
   Name: Spatial Rend
-  Description: "Return {Value1} random cards with |Mass| from |Exile| to your hand.\nDeal {Damage} damage.\nFor each card with |Mass| returned, deal {Value2} more damage."
+  Description: "Return {Value1} random cards from |Exile| to your hand.\nDeal {Damage} damage.\nFor each card returned, deal {Value2} more damage, or {doubleValue} if it had mass."
 
 SunCrow: 
   Name: The Crow who Stole the Sun

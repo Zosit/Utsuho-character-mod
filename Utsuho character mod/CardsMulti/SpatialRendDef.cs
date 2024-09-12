@@ -73,8 +73,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedShield: null,
                 Value1: 3,
                 UpgradedValue1: 6,
-                Value2: 20,
-                UpgradedValue2: 20,
+                Value2: 10,
+                UpgradedValue2: 10,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -112,6 +112,13 @@ namespace Utsuho_character_mod.CardsMulti
         [EntityLogic(typeof(SpatialRendDef))]
         public sealed class SpatialRend : Card
         {
+            public int doubleValue
+            {
+                get
+                {
+                    return 2 * Value2;
+                }
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 if (!base.Battle.BattleShouldEnd)
@@ -126,9 +133,12 @@ namespace Utsuho_character_mod.CardsMulti
                             foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                             if ((card is UtsuhoCard uCard) && (uCard.isMass))
                             {
+                                this.DeltaDamage += (Value2 * 2);
+                            } else
+                            {
                                 this.DeltaDamage += Value2;
-                                yield return new MoveCardAction(card, CardZone.Hand);
                             }
+                            yield return new MoveCardAction(card, CardZone.Hand);
                         }
                     }
 

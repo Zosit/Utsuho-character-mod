@@ -85,7 +85,7 @@ namespace Utsuho_character_mod.Status
             {
                 yield break;
             }
-            if ((args.Cause != ActionCause.AutoExile) && (args.Card.BaseName != "Resonance+"))
+            if ((args.Cause != ActionCause.AutoExile) && (args.Card.BaseName != "Resonance"))
             {
                 base.NotifyActivating();
                 yield return new AddCardsToHandAction(Library.CreateCards<Resonance>(1, true));

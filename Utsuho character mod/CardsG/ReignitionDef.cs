@@ -63,7 +63,7 @@ namespace Utsuho_character_mod.CardsG
                 Colors: new List<ManaColor>() { ManaColor.Green },
                 IsXCost: false,
                 Cost: new ManaGroup() { Green = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Green = 1 },
+                UpgradedCost: new ManaGroup() { Green = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: 0,
                 UpgradedDamage: 0,
@@ -71,8 +71,8 @@ namespace Utsuho_character_mod.CardsG
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: null,
-                UpgradedValue1: null,
+                Value1: 2,
+                UpgradedValue1: 4,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -122,7 +122,7 @@ namespace Utsuho_character_mod.CardsG
                     }
                     int total = base.Battle.ExileZone.Count;
 
-                    return total;
+                    return total * Value1;
 
                 }
             }

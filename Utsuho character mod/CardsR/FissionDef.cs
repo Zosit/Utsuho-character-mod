@@ -66,7 +66,7 @@ namespace Utsuho_character_mod.CardsR
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
                 Cost: new ManaGroup() { Red = 2 },
-                UpgradedCost: new ManaGroup() { Red = 1 },
+                UpgradedCost: new ManaGroup() { Red = 2 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -74,12 +74,12 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 4,
-                UpgradedValue1: 4,
+                Value1: 8,
+                UpgradedValue1: 8,
                 Value2: null,
                 UpgradedValue2: null,
-                Mana: null,
-                UpgradedMana: null,
+                Mana: new ManaGroup() { Red = 2 },
+                UpgradedMana: new ManaGroup() { Philosophy = 2 },
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -99,13 +99,13 @@ namespace Utsuho_character_mod.CardsR
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "ChargingStatus", "HeatStatus" },
-                UpgradedRelativeEffects: new List<string>() { "ChargingStatus", "HeatStatus" },
+                RelativeEffects: new List<string>() { "HeatStatus" },
+                UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Zosit",
                 SubIllustrator: new List<string>() { }
              );
 
@@ -132,16 +132,23 @@ namespace Utsuho_character_mod.CardsR
                         return config.Colors.All((ManaColor color) => color == ManaColor.Red);
                     }
                     return false;
-                }); if ((Attack != null) && (Defense != null))
+                });
+                if (this.IsUpgraded)
+                {
+                    Attack.Upgrade();
+                    Defense.Upgrade();
+                }
+
+                if ((Attack != null) && (Defense != null))
                 {
 
                     Attack.SetBaseCost(ManaGroup.Anys(Attack.ConfigCost.Amount));
                     Defense.SetBaseCost(ManaGroup.Anys(Defense.ConfigCost.Amount));
                     yield return new AddCardsToHandAction(new Card[] { Attack });
                     yield return new AddCardsToHandAction(new Card[] { Defense });
-
                 }
                 yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
+                yield return new GainManaAction(Mana);
                 yield break;
             }
 
