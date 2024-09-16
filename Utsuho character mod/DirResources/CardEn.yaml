@@ -54,7 +54,7 @@ EverythingBurns:
 
 SkyFlight:
   Name: Sky Flight
-  Description: "Gain {Value1} |Graze|.\nAt the start of {PlayerName}'s next turn, draw {Value2} cards."
+  Description: "Gain {Value1} |Graze|."
 
 Salvo:
   Name: Salvo
@@ -87,8 +87,10 @@ RecklessGamble:
 
 SunlightReverie:
   Name: Sunlight Reverie
-  Description: "Add 2 |Flames| to the hand.\n|Exile| a random card in the discard pile."
-  UpgradedDescription: "Add 2 |Rainbows| to the hand.\n|Exile| a random card in the discard pile."
+  Description: "Add 2 |Flames| to the hand.\n|Exile| a random card in the draw pile."
+  UpgradedDescription: "Add 2 |Flames| to the hand.\n|Choose|: |Exile| a random card in the discard pile or the draw pile."
+  ExtraDescription1: "|Exile| a random card from the draw pile."
+  ExtraDescription2: "|Exile| a random card from the discard pile."
 
 NuclearDive:
   Name: Uncontainable Nuclear Reaction Dive
@@ -108,7 +110,7 @@ WasteNot:
 
 Conflagration:
   Name: Conflagration
-  Description: "When {PlayerName} loses |Heat| at the end of the turn, gain that much |Heat| instead."
+  Description: "When {PlayerName} loses |Heat| at the end of the turn, it deals double the damage."
 
 DarkMatter:
   Name: Dark Matter
@@ -187,8 +189,8 @@ MassDriver:
   Description: "Whenever a card with |Mass| is Pulled, deal {Value1} damage to each enemy."
 
 ZeroPoint:
-  Name: Zero Point Module
-  Description: "Gain {Shield} |Barrier|.\nHas |Mass|.\n|When Pulled|: Add a copy of {SelfName} to the hand with |Exile|."
+  Name: Zero-Point Field
+  Description: "Has |Mass|.\n|When Pulled|: Gain {Shield} |Barrier| and add a copy of {SelfName} to the hand with |Exile|."
   DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
 
 SuperGiant:
@@ -307,7 +309,7 @@ SpatialRend:
 
 SunCrow: 
   Name: The Crow who Stole the Sun
-  Description: "Remove all cards with |Mass| from the |battlefield|.\nGain {Value1} |Heat| for each card removed. ({RemoveCount})"
+  Description: "Remove {Value2} random cards from the |battlefield|.\nGain {Value1} |Heat| for each card removed. ({RemoveCount})"
 
 HotSpring:
   Name: Earth Spirit Hot Spring

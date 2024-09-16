@@ -105,7 +105,7 @@ namespace Utsuho_character_mod.CardsR
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
                 RelativeCards: new List<string>() { "RManaCard" },
-                UpgradedRelativeCards: new List<string>() { "PManaCard" },
+                UpgradedRelativeCards: new List<string>() { "RManaCard" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "Zosit",
@@ -120,20 +120,53 @@ namespace Utsuho_character_mod.CardsR
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                if (!this.IsUpgraded) {
-                    yield return new AddCardsToHandAction(Library.CreateCards<RManaCard>(Value1, false));
+                yield return new AddCardsToHandAction(Library.CreateCards<RManaCard>(Value1, false));
+                if (!this.IsUpgraded)
+                {
+                    if (Battle.DrawZone.NotEmpty())
+                    {
+                        Card card = UsefulFunctions.RandomUtsuho(Battle.DrawZone);
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                        if (card != null)
+                            yield return new ExileCardAction(card);
+                    }
                 }
                 else
                 {
-                    yield return new AddCardsToHandAction(Library.CreateCards<PManaCard>(Value1, false));
+                    List<SunlightReverie> list = Library.CreateCards<SunlightReverie>(2, true).ToList<SunlightReverie>();
+                    SunlightReverie first = list[0];
+                    SunlightReverie discardConsider = list[1];
+                    first.ShowWhichDescription = 1;
+                    discardConsider.ShowWhichDescription = 2;
+                    first.SetBattle(base.Battle);
+                    discardConsider.SetBattle(base.Battle);
+                    MiniSelectCardInteraction interaction = new MiniSelectCardInteraction(list, false, false, false)
+                    {
+                        Source = this
+                    };
+                    yield return new InteractionAction(interaction, false);
+                    if (interaction.SelectedCard == first)
+                    {
+                        if (Battle.DrawZone.NotEmpty())
+                        {
+                            Card card = UsefulFunctions.RandomUtsuho(Battle.DrawZone);
+                            if (card != null)
+                                yield return new ExileCardAction(card);
+                            foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                        }
+                    }
+                    else
+                    {
+                        if (Battle.DiscardZone.NotEmpty())
+                        {
+                            Card card = UsefulFunctions.RandomUtsuho(Battle.DiscardZone);
+                            if (card != null)
+                                yield return new ExileCardAction(card);
+                            foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                        }
+                    }
                 }
-                if (Battle.DiscardZone.NotEmpty())
-                {
-                    Card card = UsefulFunctions.RandomUtsuho(Battle.DiscardZone);
-                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                    if (card != null)
-                        yield return new ExileCardAction(card);
-                }
+
 
                 yield break;
             }           

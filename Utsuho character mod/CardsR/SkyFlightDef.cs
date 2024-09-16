@@ -63,7 +63,7 @@ namespace Utsuho_character_mod.CardsR
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
                 Cost: new ManaGroup() { Red = 2, Any = 1 },
-                UpgradedCost: new ManaGroup() { Red = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Red = 1, Any = 2 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -71,10 +71,10 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 2,
-                UpgradedValue1: 2,
-                Value2: 2,
-                UpgradedValue2: 2,
+                Value1: 3,
+                UpgradedValue1: 4,
+                Value2: null,
+                UpgradedValue2: null,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -90,8 +90,8 @@ namespace Utsuho_character_mod.CardsR
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.None,
-                UpgradedKeywords: Keyword.None,
+                Keywords: Keyword.Exile,
+                UpgradedKeywords: Keyword.Exile,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
@@ -102,7 +102,7 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Zosit",
                 SubIllustrator: new List<string>() { }
              );
 
@@ -115,7 +115,7 @@ namespace Utsuho_character_mod.CardsR
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield return new ApplyStatusEffectAction<Graze>(Battle.Player, new int?(Value1), null, null, null, 0f, true);
-                yield return new ApplyStatusEffectAction<SkyFlightStatus>(Battle.Player, new int?(Value2), null, null, null, 0.2f);
+                //yield return new ApplyStatusEffectAction<SkyFlightStatus>(Battle.Player, new int?(Value2), null, null, null, 0.2f);
                 yield break;
             }
 

@@ -75,10 +75,10 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 16,
+                Value1: 15,
                 UpgradedValue1: 20,
-                Value2: null,
-                UpgradedValue2: null,
+                Value2: 20,
+                UpgradedValue2: 20,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -122,7 +122,16 @@ namespace Utsuho_character_mod.CardsMulti
                 {
                     if (base.Battle != null)
                     {
-                        return base.Value1 * base.Battle.EnumerateAllCards().Where((Card card) => (card is UtsuhoCard uCard) && (uCard.isMass)).ToList<Card>().Count;
+                        List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => card != this).ToList<Card>();
+                        if (cards.Count < Value2)
+                        {
+                            return cards.Count * Value1;
+                        }
+                        else
+                        {
+                            return Value1 * Value2;
+                        }
+
                     }
                     else
                     {
@@ -132,12 +141,23 @@ namespace Utsuho_character_mod.CardsMulti
             }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => (card is UtsuhoCard uCard) && (uCard.isMass)).ToList<Card>();
-                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1) * cards.Count, null, null, null, 0f, true);
-                foreach (Card card in cards)
+                int count = 0;
+                for (int i = 0; i < Value2; i++)
                 {
-                    yield return new RemoveCardAction(card);
+                    //List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => card != this).ToList<Card>();
+                    List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => card != this).ToList<Card>();
+                    if (cards.Count != 0)
+                    {
+                        Card card = Util.UsefulFunctions.RandomUtsuho(cards);
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+
+                        yield return new RemoveCardAction(card);
+                        count++;
+                    }
                 }
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1) * count, null, null, null, 0f, true);
+
+
                 yield break;
             }
         }

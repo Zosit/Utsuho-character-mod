@@ -99,21 +99,21 @@ namespace Utsuho_character_mod.Status
             {
                 if (level >= 5)
                 {
-                    yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(level / 5)), this.GunName, GunType.Single);
+                    if (base.Battle.Player.GetStatusEffect<ConflagrationStatus>() != null)
+                    {
+                        yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(2 * (level / 5))), this.GunName, GunType.Single);
+                    }
+                    else
+                    {
+                        yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(level / 5)), this.GunName, GunType.Single);
+                    }
                 }
             }
 
 
             if (!Battle.BattleShouldEnd)
             {
-                if (base.Battle.Player.GetStatusEffect<ConflagrationStatus>() != null)
-                {
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, HeatDamage, null, null, null, 0f, true);
-                }
-                else
-                {
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level / 5), null, null, null, 0f, true);
-                }
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level / 5), null, null, null, 0f, true);
             }
             yield break;
         }

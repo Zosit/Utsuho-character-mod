@@ -131,15 +131,16 @@ namespace Utsuho_character_mod.CardsR
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                int num;
-                for (int i = 0; i < SalvoCount; i = num + 1) 
+                for (int i = 0; i < SalvoCount; i++) 
                 {
-                    EnemyUnit target = Battle.EnemyGroup.Alives.Sample(GameRun.BattleRng);
-                    if (target != null && target.IsAlive)
+                    if (!Battle.BattleShouldEnd)
                     {
-                        yield return AttackAction(target);
+                        EnemyUnit target = Battle.EnemyGroup.Alives.Sample(GameRun.BattleRng);
+                        if (target != null && target.IsAlive)
+                        {
+                            yield return AttackAction(target);
+                        }
                     }
-                    num = i;
                 }
                 yield break;
             }

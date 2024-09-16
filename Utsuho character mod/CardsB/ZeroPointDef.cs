@@ -63,15 +63,15 @@ namespace Utsuho_character_mod.CardsB
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Any = 1 },
-                UpgradedCost: new ManaGroup() { Any = 0 },
+                Cost: new ManaGroup() { },
+                UpgradedCost: new ManaGroup() { },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
                 Block: null,
                 UpgradedBlock: null,
-                Shield: 6,
-                UpgradedShield: 8,
+                Shield: 4,
+                UpgradedShield: 6,
                 Value1: null,
                 UpgradedValue1: null,
                 Value2: null,
@@ -91,8 +91,8 @@ namespace Utsuho_character_mod.CardsB
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Replenish,
-                UpgradedKeywords: Keyword.Replenish,
+                Keywords: Keyword.None | Keyword.Forbidden,
+                UpgradedKeywords: Keyword.Replenish | Keyword.Forbidden,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
@@ -120,19 +120,10 @@ namespace Utsuho_character_mod.CardsB
             public override IEnumerable<BattleAction> OnPull()
             {
                 Card card = base.CloneBattleCard();
-                card.IsExile = true;
+                card.IsEthereal = true;
+                yield return DefenseAction();
                 yield return new AddCardsToHandAction(new Card[] { card });
-            }
-            protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
-            {
-                if (!Battle.BattleShouldEnd)
-                {
-                    yield return DefenseAction();
-                    yield break;
-                }
-            }
-
+            }           
         }
-
     }
 }

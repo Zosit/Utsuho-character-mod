@@ -76,7 +76,7 @@ namespace Utsuho_character_mod
             GameMaster.Instance.StartCoroutine(DeactivateDeez(bgGo));
 
             yield return PerformAction.Spell(Owner, new UtsuhoUltRDef().UniqueId);*/
-
+            yield return PerformAction.Spell(Battle.Player, "UtsuhoUltA");
             yield return new DamageAction(base.Owner, selector.GetEnemy(base.Battle), this.Damage, base.GunName, GunType.Single);
             if (!base.Battle.BattleShouldEnd)
             {
@@ -143,6 +143,7 @@ namespace Utsuho_character_mod
             GameMaster.Instance.StartCoroutine(DeactivateDeez(bgGo));
 
             yield return PerformAction.Spell(Owner, new UtsuhoUltRDef().UniqueId);*/
+            yield return PerformAction.Spell(Battle.Player, "UtsuhoUltB");
             yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, Damage, this.GunName, GunType.Single);
             if (!base.Battle.BattleShouldEnd) {
                 Card[] cards = { Library.CreateCard("DarkMatter") };

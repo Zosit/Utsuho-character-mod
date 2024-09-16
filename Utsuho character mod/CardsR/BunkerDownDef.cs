@@ -70,7 +70,7 @@ namespace Utsuho_character_mod.CardsR
                 Block: 14,
                 UpgradedBlock: 18,
                 Shield: 16,
-                UpgradedShield: 22,
+                UpgradedShield: 20,
                 Value1: null,
                 UpgradedValue1: null,
                 Value2: null,
