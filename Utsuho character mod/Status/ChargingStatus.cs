@@ -45,7 +45,7 @@ namespace Utsuho_character_mod.Status
             var statusEffectConfig = new StatusEffectConfig(
                             Id: "",
                             Index: 0,
-                            Order: 10,
+                            Order: 11,
                             Type: StatusEffectType.Positive,
                             IsVerbose: false,
                             IsStackable: true,
@@ -73,17 +73,17 @@ namespace Utsuho_character_mod.Status
     {
         protected override void OnAdded(Unit unit)
         {
-            ReactOwnerEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
+            ReactOwnerEvent(Owner.TurnEnding, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnEnding));
         }
-        private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
+        private IEnumerable<BattleAction> OnOwnerTurnEnding(UnitEventArgs args)
         {
             if (Battle.BattleShouldEnd)
             {
                 yield break;
             }
             NotifyActivating();
-            int level = base.GetSeLevel<ChargingStatus>();
-            yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, level, null, null, null, 0f, true);
+            int level = this.Level;
+            yield return new ApplyStatusEffectAction<HeatStatus>(base.Owner, level, null, null, null, 0f, true);
             yield break;
         }
     }

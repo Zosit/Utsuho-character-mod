@@ -9,6 +9,5 @@ namespace Utsuho_character_mod
         public const string Name = "Character Mod";
         public const string version = "1.0.0";
         public static readonly Harmony harmony = new Harmony(GUID);
-
     }
 }

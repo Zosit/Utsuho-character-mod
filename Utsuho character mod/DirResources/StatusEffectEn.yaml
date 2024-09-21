@@ -1,12 +1,12 @@
 HeatStatus:
   Name: Heat
-  Description: "At the end of {PlayerName}'s turn, lose 1 of every 5 |Heat| ({HeatDamage}) and deal that much damage to all enemies.\nThe keyword |Vent| spends all of this at once for an effect."
-  Brief: "At the end of {PlayerName}'s turn, lose 1 of every 5 |Heat| and deal that much damage to all enemies.\nThe keyword |Vent| spends all of this at once for an effect."
+  Description: "At the end of {OwnerName}'s turn, lose 1 of every 5 |Heat| ({HeatDamage}) and deal that much damage to all enemies.\nThe keyword |Vent| spends all of this at once for an effect."
+  Brief: "At the end of {OwnerName}s turn, lose 1 of every 5 |Heat| and deal that much damage to all enemies.\nThe keyword |Vent| spends all of this at once for an effect."
 
 ChargingStatus:
   Name: Charging
-  Description: Gain {Level} |Heat| at the start of each turn.
-  Brief: Gain |Heat| at the start of each turn.
+  Description: Gain {Level} |Heat| at the end of each turn.
+  Brief: Gain |Heat| at the end of each turn.
 
 GravityWellStatus:
   Name: Gravity Well

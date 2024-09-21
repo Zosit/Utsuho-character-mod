@@ -110,7 +110,8 @@ using Untitled;
 using Untitled.ConfigDataBuilder;
 using Untitled.ConfigDataBuilder.Base;
 using Debug = UnityEngine.Debug;
-
+using LBoLEntitySideloader.Entities;
+using Utsuho_character_mod;
 
 namespace Utsuho_character_mod
 {
@@ -149,6 +150,9 @@ namespace Utsuho_character_mod
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(AddWatermark.API.GUID))
                 WatermarkWrapper.ActivateWatermark();
 
+            Func<Sprite> getSprite = () => ResourceLoader.LoadSprite("BossIcon.png", directorySource);
+            EnemyUnitTemplate.AddBossNodeIcon(nameof(UtsuhoBossDef.Utsuho), getSprite);
+            
             // unload asset bundles OnDestroy
             //utsuhoAB = ResourceLoader.LoadAssetBundle("utsuhoBundle", UtsuhoPlayerDef.dir);
         }

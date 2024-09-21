@@ -148,7 +148,6 @@ namespace Utsuho_character_mod
 
         public override UnitModelConfig MakeConfig()
         {
-
             var config = UnitModelConfig.FromName("Reimu").Copy();
             config.Flip = true;
             config.Type = 0;

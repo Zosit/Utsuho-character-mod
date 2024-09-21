@@ -33,7 +33,7 @@ PlasmaBurn:
 
 StartReactor:
   Name: Start Reactor
-  Description: "At the start of {PlayerName}'s turn, gain {Value1} |Heat|."
+  Description: "At the end of {PlayerName}'s turn, gain {Value1} |Heat|."
 
 MaxPower:
   Name: Max Power

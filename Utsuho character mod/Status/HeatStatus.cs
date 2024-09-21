@@ -94,26 +94,33 @@ namespace Utsuho_character_mod.Status
         }
         private IEnumerable<BattleAction> OnOwnerTurnEnding(UnitEventArgs args)
         {
-            int level = base.GetSeLevel<HeatStatus>();
+            int level = this.Level;
             if (!Battle.BattleShouldEnd)
             {
                 if (level >= 5)
                 {
-                    if (base.Battle.Player.GetStatusEffect<ConflagrationStatus>() != null)
+                    if (base.Owner == Battle.Player)
                     {
-                        yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(2 * (level / 5))), this.GunName, GunType.Single);
+                        if (base.Battle.Player.GetStatusEffect<ConflagrationStatus>() != null)
+                        {
+                            yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(2 * (level / 5))), this.GunName, GunType.Single);
+                        }
+                        else
+                        {
+                            yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(level / 5)), this.GunName, GunType.Single);
+                        }
                     }
                     else
                     {
-                        yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)(level / 5)), this.GunName, GunType.Single);
+                        yield return new DamageAction(base.Owner, base.Battle.Player, DamageInfo.Reaction((float)((level / 5))), this.GunName, GunType.Single);
                     }
                 }
-            }
+                }
 
 
             if (!Battle.BattleShouldEnd)
             {
-                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level / 5), null, null, null, 0f, true);
+                yield return new ApplyStatusEffectAction<HeatStatus>(base.Owner, -(level / 5), null, null, null, 0f, true);
             }
             yield break;
         }
