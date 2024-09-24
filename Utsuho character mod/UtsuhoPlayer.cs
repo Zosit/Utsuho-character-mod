@@ -10,6 +10,7 @@ using LBoL.Core.Randoms;
 using LBoL.Core.Units;
 using LBoL.EntityLib.Cards.Character.Reimu;
 using LBoL.EntityLib.Cards.Neutral.NoColor;
+using LBoL.EntityLib.EnemyUnits.Lore;
 using LBoL.EntityLib.Exhibits.Common;
 using LBoL.EntityLib.Exhibits.Shining;
 using LBoL.EntityLib.PlayerUnits;
@@ -123,6 +124,11 @@ namespace Utsuho_character_mod
         [EntityLogic(typeof(UtsuhoPlayerDef))]
         public sealed class Utsuho : PlayerUnit { }
 
+        public override EikiSummonInfo AssociateEikiSummon()
+        {
+            return new EikiSummonInfo(typeof(UtsuhoBossDef.Utsuho));
+        }
+
     }
 
     public sealed class UtsuhoModelDef : UnitModelTemplate
@@ -159,5 +165,6 @@ namespace Utsuho_character_mod
             return config;
 
         }
+
     }
 }

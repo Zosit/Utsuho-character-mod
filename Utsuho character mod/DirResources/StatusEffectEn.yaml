@@ -63,10 +63,10 @@ FixedStarStatus:
   Description: "At the end of your turn, |retain| up to {Level} cards this turn.\n All |Dark Matter| have |Auto-Exile| until end of combat."
   Brief: "At the end of your turn, |retain| up to cards this turn. All |Dark Matter| have |Auto-Exile| until end of combat."
 
-ConflagrationStatus:
-  Name: Conflagration
-  Description: "When you lose |Heat| at the end of turn, instead gain |Heat|."
-  Brief: "When you lose |Heat| at the end of turn, instead gain |Heat|."
+TokamakStatus:
+  Name: "Hell's Tokamak"
+  Description: "At the start of your turn, gain {Value1} |Heat|."
+  Brief: "At the start of your turn, gain {Value1} |Heat|."
 
 QuantumDissonanceStatus:
   Name: Quantum Dissonance

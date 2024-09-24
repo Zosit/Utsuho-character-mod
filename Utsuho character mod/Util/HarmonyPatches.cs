@@ -11,7 +11,7 @@ using static Utsuho_character_mod.UtsuhoBossDef;
 using LBoL.Core.Battle.BattleActions;
 using LBoL.EntityLib.StatusEffects.Enemy;
 
-[HarmonyPatch(typeof(Siji))]
+/*[HarmonyPatch(typeof(Siji))]
 class Siji_OnBattleStarted_Patch
 {
     [HarmonyPatch(nameof(Siji.OnBattleStarted), typeof(GameEventArgs))]
@@ -50,4 +50,4 @@ class Siji_OnBattleStarted_Patch
         }
         return true;
     }
-}
+}*/

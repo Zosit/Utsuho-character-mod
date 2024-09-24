@@ -108,9 +108,9 @@ WasteNot:
   Name: Waste Not
   Description: "Whenever a card is |Exiled|, gain {Value1} |Heat|."
 
-Conflagration:
-  Name: Conflagration
-  Description: "When {PlayerName} loses |Heat| at the end of the turn, it deals double the damage."
+Tokamak:
+  Name: "Hell's Tokamak"
+  Description: "Gain {Value1} |Heat|.\nAt the start of your next turn, gain {Value1} |Heat|."
 
 DarkMatter:
   Name: Dark Matter

@@ -16,7 +16,7 @@ using LBoL.Core.Battle;
 using LBoL.Core;
 using LBoL.Core.Battle.BattleActions;
 using LBoL.Core.Cards;
-using static Utsuho_character_mod.CardsR.ConflagrationDefinition;
+using static Utsuho_character_mod.CardsR.TokamakDefinition;
 using LBoL.EntityLib.StatusEffects.Marisa;
 
 namespace Utsuho_character_mod.Status

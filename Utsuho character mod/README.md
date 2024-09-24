@@ -1,5 +1,5 @@
 ## Character mod for game Lost Branch of Legend
-Adds Utsuho as a character. Includes starter exhibits and character specific cards. 
+Adds Utsuho as a character. Includes starter exhibits, character specific cards, and a boss fight. 
 Still missing most card and character art. Let me know if you want to contribute in the LBoL discord!
 https://discord.gg/CX9BABzA
 
@@ -15,6 +15,7 @@ Programmer/Designer:
 - Zosit
 
 Artists:
+- Zosit
 - Xeno
 - Flippin'Loser
 

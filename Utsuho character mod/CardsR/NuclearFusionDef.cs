@@ -66,8 +66,8 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1, Any = 2 },
-                UpgradedCost: new ManaGroup() { Red = 1, Any = 2 },
+                Cost: new ManaGroup() { Red = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Red = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -75,8 +75,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 7,
-                UpgradedValue1: 10,
+                Value1: 8,
+                UpgradedValue1: 12,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -106,7 +106,7 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedRelativeCards: new List<string>() { "NuclearStrike" },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Zosit",
                 SubIllustrator: new List<string>() { }
              );
 

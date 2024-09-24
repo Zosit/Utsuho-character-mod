@@ -194,7 +194,7 @@ namespace Utsuho_character_mod
                         break;
                     case MoveType.Flare:
                         yield return base.AttackMove(base.GetMove(3), base.Gun2, this.GetStatusEffect<HeatStatus>().Level, 1, false, "Instant", true);
-                        yield return new SimpleEnemyMove(Intention.Unknown(), PositiveActions(null, typeof(HeatStatus), -(this.GetStatusEffect<HeatStatus>().Level), 0, 0f));
+                        yield return new SimpleEnemyMove(IntentionTemplate.CreateIntention(typeof(VentIntentionDef.VentIntention)), PositiveActions(null, typeof(HeatStatus), -(this.GetStatusEffect<HeatStatus>().Level), 0, 0f));
                         Type typeFromHandle = typeof(Weak);
                         Type typeFromHandle2 = typeof(Vulnerable);
                         yield return base.NegativeMove(null, typeFromHandle, null, base.Power, false, false, null);
@@ -218,7 +218,7 @@ namespace Utsuho_character_mod
                             }
                         }
                         yield return new SimpleEnemyMove(Intention.SpellCard(this.SpellCardName, new int?(base.Damage4 + mass * 5 + _spellTimes * 4), true), this.AttackActions(this.SpellCardName, base.Gun4, base.Damage4 + mass * 5, 1, true, "Instant"));
-                        yield return new SimpleEnemyMove(Intention.Unknown());
+                        yield return new SimpleEnemyMove(IntentionTemplate.CreateIntention(typeof(PullIntentionDef.PullIntention)));
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

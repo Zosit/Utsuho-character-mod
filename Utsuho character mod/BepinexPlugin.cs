@@ -112,6 +112,8 @@ using Untitled.ConfigDataBuilder.Base;
 using Debug = UnityEngine.Debug;
 using LBoLEntitySideloader.Entities;
 using Utsuho_character_mod;
+using static Utsuho_character_mod.VentIntentionDef;
+using static Utsuho_character_mod.PullIntentionDef;
 
 namespace Utsuho_character_mod
 {
@@ -152,7 +154,8 @@ namespace Utsuho_character_mod
 
             Func<Sprite> getSprite = () => ResourceLoader.LoadSprite("BossIcon.png", directorySource);
             EnemyUnitTemplate.AddBossNodeIcon(nameof(UtsuhoBossDef.Utsuho), getSprite);
-            
+            IntentionTemplate.CreateIntention<VentIntention>();
+            IntentionTemplate.CreateIntention<PullIntention>();
             // unload asset bundles OnDestroy
             //utsuhoAB = ResourceLoader.LoadAssetBundle("utsuhoBundle", UtsuhoPlayerDef.dir);
         }
