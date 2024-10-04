@@ -116,8 +116,7 @@ namespace Utsuho_character_mod.CardsR
             {
                 get
                 {
-                    int level = base.GetSeLevel<HeatStatus>();
-                    return level;
+                    return base.GetSeLevel<HeatStatus>() + Value1;
                 }
             }
 
@@ -125,13 +124,15 @@ namespace Utsuho_character_mod.CardsR
             {
                 if (!base.Battle.BattleShouldEnd)
                 {
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, Value1, null, null, null, 0f, true);
 
                     int level = base.GetSeLevel<HeatStatus>();
-                    if (level >= Value2)
+                    if (level + Value1 >= Value2)
                     {
                         yield return base.AttackAction(selector);
                         yield return new RemoveStatusEffectAction(Battle.Player.GetStatusEffect<HeatStatus>());
+                    } else
+                    {
+                        yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, Value1, null, null, null, 0f, true);
                     }
 
                     yield break;

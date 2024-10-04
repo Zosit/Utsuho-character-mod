@@ -42,11 +42,11 @@ namespace Utsuho_character_mod.Util
             if ((card is UtsuhoCard uCard) && (uCard.isMass))
             {
                 int totalIterations = 1;
-                if (battle.Player.HasStatusEffect<QuantumDissonanceStatus>())
+                /*if (battle.Player.HasStatusEffect<QuantumDissonanceStatus>())
                 {
                     QuantumDissonanceStatus status = battle.Player.GetStatusEffect<QuantumDissonanceStatus>();
                     totalIterations += status.Level;
-                }
+                }*/
                 if (battle.Player.HasStatusEffect<MassDriverStatus>())
                 {
                     MassDriverStatus status = battle.Player.GetStatusEffect<MassDriverStatus>();

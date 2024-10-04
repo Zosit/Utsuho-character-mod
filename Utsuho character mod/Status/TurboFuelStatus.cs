@@ -65,7 +65,7 @@ namespace Utsuho_character_mod.Status
                             CountStackType: StackType.Keep,
                             LimitStackType: StackType.Keep,
                             ShowPlusByLimit: false,
-                            Keywords: Keyword.None,
+                            Keywords: Keyword.Exile,
                             RelativeEffects: new List<string>() { },
                             VFX: "Default",
                             VFXloop: "Default",

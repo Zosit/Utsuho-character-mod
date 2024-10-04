@@ -81,17 +81,18 @@ namespace Utsuho_character_mod.Status
             //ReactOwnerEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
             ReactOwnerEvent(Owner.TurnEnding, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnEnding));
 
-            foreach (Card card in base.Battle.EnumerateAllCards())
+            /*foreach (Card card in base.Battle.EnumerateAllCards())
             {
                 if (card is DarkMatter)
                 {
                     card.IsAutoExile = true;
                 }
-            }
-            base.HandleOwnerEvent<CardsEventArgs>(base.Battle.CardsAddedToDiscard, new GameEventHandler<CardsEventArgs>(this.OnAddCard));
+            }*/
+            base.HandleOwnerEvent<CardEventArgs>(base.Battle.CardDrawn, new GameEventHandler<CardEventArgs>(this.OnDrawCard));
+            /*base.HandleOwnerEvent<CardsEventArgs>(base.Battle.CardsAddedToDiscard, new GameEventHandler<CardsEventArgs>(this.OnAddCard));
             base.HandleOwnerEvent<CardsEventArgs>(base.Battle.CardsAddedToHand, new GameEventHandler<CardsEventArgs>(this.OnAddCard));
             base.HandleOwnerEvent<CardsEventArgs>(base.Battle.CardsAddedToExile, new GameEventHandler<CardsEventArgs>(this.OnAddCard));
-            base.HandleOwnerEvent<CardsAddingToDrawZoneEventArgs>(base.Battle.CardsAddedToDrawZone, new GameEventHandler<CardsAddingToDrawZoneEventArgs>(this.OnAddCardToDraw));
+            base.HandleOwnerEvent<CardsAddingToDrawZoneEventArgs>(base.Battle.CardsAddedToDrawZone, new GameEventHandler<CardsAddingToDrawZoneEventArgs>(this.OnAddCardToDraw));*/
         }
         /*private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
         {
@@ -135,7 +136,14 @@ namespace Utsuho_character_mod.Status
             }
             yield break;
         }
-        private void OnAddCard(CardsEventArgs args)
+        private void OnDrawCard(CardEventArgs args)
+        {
+            if (args.Card is DarkMatter)
+            {
+                args.Card.IsAutoExile = true;
+            }
+        }
+        /* void OnAddCardToDraw(CardsAddingToDrawZoneEventArgs args)
         {
             foreach (Card card in args.Cards)
             {
@@ -144,16 +152,6 @@ namespace Utsuho_character_mod.Status
                     card.IsAutoExile = true;
                 }
             }
-        }
-        private void OnAddCardToDraw(CardsAddingToDrawZoneEventArgs args)
-        {
-            foreach (Card card in args.Cards)
-            {
-                if (card is DarkMatter)
-                {
-                    card.IsAutoExile = true;
-                }
-            }
-        }
+        */
     }
 }

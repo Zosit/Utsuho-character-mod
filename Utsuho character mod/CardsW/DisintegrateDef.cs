@@ -93,10 +93,10 @@ namespace Utsuho_character_mod.CardsW
                 UpgradedUltimateCost: null,
 
                 Keywords: Keyword.Exile,
-                UpgradedKeywords: Keyword.Exile,
+                UpgradedKeywords: Keyword.Exile | Keyword.Accuracy,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Expel,
+                UpgradedRelativeKeyword: Keyword.Expel,
 
                 RelativeEffects: new List<string>() {  },
                 UpgradedRelativeEffects: new List<string>() { },

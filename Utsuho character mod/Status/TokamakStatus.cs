@@ -60,7 +60,7 @@ namespace Utsuho_character_mod.Status
                             LimitStackType: StackType.Keep,
                             ShowPlusByLimit: false,
                             Keywords: Keyword.None,
-                            RelativeEffects: new List<string>() { },
+                            RelativeEffects: new List<string>() { "HeatStatus" },
                             VFX: "Default",
                             VFXloop: "Default",
                             SFX: "Default"

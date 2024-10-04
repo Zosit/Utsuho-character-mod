@@ -125,7 +125,6 @@ namespace Utsuho_character_mod.CardsR
                     {
                         IReadOnlyList<Card> drawZoneIndexOrder = base.Battle.DrawZoneIndexOrder;
                         Card card = Util.UsefulFunctions.RandomUtsuho(drawZoneIndexOrder);
-                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                         if ((card is UtsuhoCard uCard) && (uCard.isMass))
                         {
                             if (!this.IsUpgraded)
@@ -139,6 +138,7 @@ namespace Utsuho_character_mod.CardsR
 
                         }
                         yield return new MoveCardAction(card, CardZone.Hand);
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                     }
                 }
                 yield return DefenseAction();

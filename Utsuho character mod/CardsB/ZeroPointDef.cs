@@ -94,8 +94,8 @@ namespace Utsuho_character_mod.CardsB
                 Keywords: Keyword.None | Keyword.Forbidden,
                 UpgradedKeywords: Keyword.Replenish | Keyword.Forbidden,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Ethereal,
+                UpgradedRelativeKeyword: Keyword.Ethereal,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
@@ -103,7 +103,7 @@ namespace Utsuho_character_mod.CardsB
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Zosit",
                 SubIllustrator: new List<string>() { }
              );
 

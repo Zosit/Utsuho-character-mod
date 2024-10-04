@@ -137,7 +137,7 @@ namespace Utsuho_character_mod.CardsB
                 for (int i = 0; i < count; i++)
                 {
                     //List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => card != this).ToList<Card>();
-                    List<Card> cards = base.Battle.EnumerateAllCards().ToList<Card>();
+                    List<Card> cards = base.Battle.EnumerateAllCards().Where((Card card) => card.Zone != CardZone.Exile).ToList<Card>();
                     if (cards.Count != 0)
                     {
                         Card card = Util.UsefulFunctions.RandomUtsuho(cards);

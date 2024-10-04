@@ -130,8 +130,7 @@ namespace Utsuho_character_mod.CardsR
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                int level = base.GetSeLevel<HeatStatus>();
-                yield return base.DamageSelfAction(level / 10);
+                yield return base.DamageSelfAction(this.AdditionalDamage / 10);
 
                 if (!base.Battle.BattleShouldEnd)
                 {

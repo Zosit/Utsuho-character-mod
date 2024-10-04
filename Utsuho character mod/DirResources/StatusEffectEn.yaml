@@ -65,13 +65,13 @@ FixedStarStatus:
 
 TokamakStatus:
   Name: "Hell's Tokamak"
-  Description: "At the start of your turn, gain {Value1} |Heat|."
-  Brief: "At the start of your turn, gain {Value1} |Heat|."
+  Description: "At the start of your turn, gain {Level} |Heat|."
+  Brief: "At the start of your turn, gain {Level} |Heat|."
 
 QuantumDissonanceStatus:
   Name: Quantum Dissonance
-  Description: "Whenever a card with |Mass| is Pulled, Pull it {Level:plural one='% additional time.' other='% additional times.'}"
-  Brief: "Whenever a card with |Mass| is Pulled, Pull it additional times."
+  Description: "When the first {Level} |Dark Matter| are played each turn, Scry 3."
+  Brief: "When the first |Dark Matter| are played each turn, Scry 3."
 
 SunSpotStatus:
   Name: Sun Spot
@@ -81,7 +81,4 @@ SunSpotStatus:
 HeatVisorStatus:
   Name: Heat Visor
   Description: "Prevent the next {Level} times the player would lose life before your next turn."
-
-SkyFlightStatus:
- Name: Sky Flight
- Description: "Draw {Level} cards at the start of your next turn"
+  Brief: "Prevent the next time the player would lose life before your next turn."

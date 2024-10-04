@@ -100,8 +100,8 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "HotSpringStatus", "RadiationStatus" },
-                UpgradedRelativeEffects: new List<string>() { "HotSpringStatus", "RadiationStatus" },
+                RelativeEffects: new List<string>() { "HotSpringStatus" },
+                UpgradedRelativeEffects: new List<string>() { "HotSpringStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",

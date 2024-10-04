@@ -96,8 +96,8 @@ namespace Utsuho_character_mod.CardsR
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "ChargingStatus", "HeatStatus" },
-                UpgradedRelativeEffects: new List<string>() { "ChargingStatus", "HeatStatus" },
+                RelativeEffects: new List<string>() { "ChargingStatus" },
+                UpgradedRelativeEffects: new List<string>() { "ChargingStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",

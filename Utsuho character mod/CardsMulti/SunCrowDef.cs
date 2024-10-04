@@ -75,8 +75,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 15,
-                UpgradedValue1: 20,
+                Value1: 7,
+                UpgradedValue1: 10,
                 Value2: 20,
                 UpgradedValue2: 20,
                 Mana: null,
@@ -116,7 +116,7 @@ namespace Utsuho_character_mod.CardsMulti
         [EntityLogic(typeof(SunCrowDef))]
         public sealed class SunCrow : Card
         {
-            public int RemoveCount
+            /*public int RemoveCount
             {
                 get
                 {
@@ -138,7 +138,7 @@ namespace Utsuho_character_mod.CardsMulti
                         return 0;
                     }
                 }
-            }
+            }*/
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 int count = 0;
@@ -152,6 +152,10 @@ namespace Utsuho_character_mod.CardsMulti
                         foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
 
                         yield return new RemoveCardAction(card);
+                        if (card is UtsuhoCard)
+                        {
+                            count++;
+                        }
                         count++;
                     }
                 }

@@ -66,8 +66,8 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 2, Any = 1 },
-                UpgradedCost: new ManaGroup() { Black = 2, Any = 1 },
+                Cost: new ManaGroup() { Black = 1, Any = 2 },
+                UpgradedCost: new ManaGroup() { Black = 1, Any = 2 },
                 MoneyCost: null,
                 Damage: 15,
                 UpgradedDamage: 15,
@@ -125,12 +125,12 @@ namespace Utsuho_character_mod.CardsR
                     {
                         IReadOnlyList<Card> drawZoneIndexOrder = base.Battle.DrawZoneIndexOrder;
                         Card card = Util.UsefulFunctions.RandomUtsuho(drawZoneIndexOrder);
-                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                         if ((card is UtsuhoCard uCard) && (uCard.isMass))
                         {
                             DeltaDamage += Value2;
                         }
                         yield return new MoveCardAction(card, CardZone.Discard);
+                        foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                     }
                 }
                 yield return AttackAction(selector);

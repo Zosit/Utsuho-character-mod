@@ -197,7 +197,6 @@
         <DoNotPublicize Include="LBoL.Core:LBoL.Core.StatusEffects.StatusEffect.OnRemoved" />
         <DoNotPublicize Include="LBoL.Core:LBoL.Core.StatusEffects.StatusEffect.NotifyActivating" />
         <DoNotPublicize Include="LBoL.Core:LBoL.Core.StatusEffects.StatusEffect.NotifyChanged" />
-        <DoNotPublicize Include="LBoL.Core:LBoL.Core.StatusEffects.StatusEffect.React" />
         <DoNotPublicize Include="LBoL.Core:LBoL.Core.StatusEffects.StatusEffect.StackAction" />
         <DoNotPublicize Include="LBoL.Core:LBoL.Core.StatusEffects.StatusEffect.ShouldPreventCardUsage" />
         <DoNotPublicize Include="LBoL.Core:LBoL.Core.StatusEffects.StatusEffect.get_PreventCardUsageMessage" />

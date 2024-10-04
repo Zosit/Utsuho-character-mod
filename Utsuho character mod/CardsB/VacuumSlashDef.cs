@@ -116,22 +116,22 @@ namespace Utsuho_character_mod.CardsR
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                yield return new DiscardAction(card);
-                if ((card is UtsuhoCard uCard) && (uCard.isMass))
-                {
-                    yield return AttackAction(selector);
-                    if (this.IsUpgraded)
+                if (Battle.HandZone.Count > 0) {
+                    Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                    foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                    yield return new DiscardAction(card);
+                    if ((card is UtsuhoCard uCard) && (uCard.isMass))
                     {
                         yield return AttackAction(selector);
+                        if (this.IsUpgraded)
+                        {
+                            yield return AttackAction(selector);
+                        }
                     }
                 }
                 yield return AttackAction(selector);
                 yield break;
             }
-
         }
-
     }
 }

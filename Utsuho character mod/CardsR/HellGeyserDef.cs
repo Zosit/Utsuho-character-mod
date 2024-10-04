@@ -112,7 +112,6 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(HellGeyserDefinition))]
         public sealed class HellGeyser : Card
         {
-            private bool changeDamage = true;
             public override int AdditionalDamage
             {
                 get

@@ -148,27 +148,26 @@ namespace Utsuho_character_mod
             MoveType Next;
             protected override void OnEnterBattle(BattleController battle)
             {
+                GameDifficulty difficulty = base.GameRun.Difficulty;
+                if (difficulty == GameDifficulty.Lunatic)
+                {
+                    this.React(new ApplyStatusEffectAction(typeof(ChargingStatus), this, Count1, null, null, null, 0f, true));
+                    this.React(new ApplyStatusEffectAction(typeof(HeatStatus), this, Count1, null, null, null, 0f, true));
+
+                    //yield return new ApplyStatusEffectAction<ChargingStatus>(this, Count1, null, null, null, 0f, true);
+                    //yield return new ApplyStatusEffectAction<HeatStatus>(this, Count1, null, null, null, 0f, true);
+                    this.Next = MoveType.Aggregate;
+                }
                 base.ReactBattleEvent<CardEventArgs>(battle.CardDrawn, new Func<GameEventArgs, IEnumerable<BattleAction>>(this.OnCardTouched));
                 base.ReactBattleEvent<CardUsingEventArgs>(battle.CardUsed, new Func<GameEventArgs, IEnumerable<BattleAction>>(this.OnCardTouched));
                 base.ReactBattleEvent<CardsEventArgs>(battle.CardsAddedToHand, new Func<GameEventArgs, IEnumerable<BattleAction>>(this.OnCardTouched));
                 base.ReactBattleEvent<CardEventArgs>(base.Battle.CardExiled, new Func<GameEventArgs, IEnumerable<BattleAction>>(this.OnCardTouched));
-                base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleStarted, new Func<GameEventArgs, IEnumerable<BattleAction>>(this.OnBattleStarted));
+                //base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleStarted, new Func<GameEventArgs, IEnumerable<BattleAction>>(this.OnBattleStarted));
             }
             private IEnumerable<BattleAction> OnCardTouched(GameEventArgs arg)
             {
                 if(this.Next == MoveType.Giant)
                     base.UpdateTurnMoves();
-                yield break;
-            }
-            private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs arg)
-            {
-                GameDifficulty difficulty = base.GameRun.Difficulty;
-                if (difficulty == GameDifficulty.Lunatic)
-                {
-                    yield return new ApplyStatusEffectAction<ChargingStatus>(this, Count1, null, null, null, 0f, true);
-                    yield return new ApplyStatusEffectAction<HeatStatus>(this, Count1, null, null, null, 0f, true);
-                    this.Next = MoveType.Aggregate;
-                }
                 yield break;
             }
             private IEnumerable<BattleAction> OkuuDefend()

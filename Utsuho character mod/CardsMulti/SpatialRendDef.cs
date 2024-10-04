@@ -15,6 +15,7 @@ using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
+using System.Linq;
 
 namespace Utsuho_character_mod.CardsMulti
 {
@@ -71,10 +72,10 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 3,
-                UpgradedValue1: 6,
+                Value1: 4,
+                UpgradedValue1: 4,
                 Value2: 10,
-                UpgradedValue2: 10,
+                UpgradedValue2: 15,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -91,7 +92,7 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedUltimateCost: null,
 
                 Keywords: Keyword.Accuracy | Keyword.Exile,
-                UpgradedKeywords:  Keyword.Accuracy,
+                UpgradedKeywords:  Keyword.Accuracy | Keyword.Exile,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
@@ -127,18 +128,22 @@ namespace Utsuho_character_mod.CardsMulti
                     for (int i = 0; i < Value1; i++)
                     {
                         if ((Battle.ExileZone.Count != 0) && (Battle.HandZone.Count != Battle.MaxHand))
-                        {
-                            IReadOnlyList<Card> exileZone = Battle.ExileZone;
-                            Card card = Util.UsefulFunctions.RandomUtsuho(exileZone);
-                            foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                            if ((card is UtsuhoCard uCard) && (uCard.isMass))
+                        {                          
+                            Card[] exileZone = Battle.ExileZone.Where((Card card) => ((card.Id != "NightMana1") && (card.Id != "NightMana2") && (card.Id != "NightMana3") && (card.Id != "NightMana4"))).ToArray();
+                            if (exileZone.Length > 0)
                             {
-                                this.DeltaDamage += (Value2 * 2);
-                            } else
-                            {
-                                this.DeltaDamage += Value2;
+                                Card card = Util.UsefulFunctions.RandomUtsuho(exileZone);
+                                foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                                if ((card is UtsuhoCard uCard) && (uCard.isMass))
+                                {
+                                    this.DeltaDamage += (Value2 * 2);
+                                }
+                                else
+                                {
+                                    this.DeltaDamage += Value2;
+                                }
+                                yield return new MoveCardAction(card, CardZone.Hand);
                             }
-                            yield return new MoveCardAction(card, CardZone.Hand);
                         }
                     }
 

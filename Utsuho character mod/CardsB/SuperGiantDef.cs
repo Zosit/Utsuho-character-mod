@@ -70,8 +70,8 @@ namespace Utsuho_character_mod.CardsR
                 Cost: new ManaGroup() { Black = 1, Any = 6 },
                 UpgradedCost: new ManaGroup() { Black = 1, Any = 6 },
                 MoneyCost: null,
-                Damage: 45,
-                UpgradedDamage: 60,
+                Damage: 50,
+                UpgradedDamage: 70,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
@@ -119,142 +119,19 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(SuperGiantDef))]
         public sealed class SuperGiant : Card
         {
-            public override IEnumerable<BattleAction> OnDraw()
+            public override ManaGroup AdditionalCost
             {
-                return this.EnterHandReactor();
-            }
-
-            public override IEnumerable<BattleAction> OnMove(CardZone srcZone, CardZone dstZone)
-            {
-                if (dstZone != CardZone.Hand)
+                get
                 {
-                    return null;
-                }
-                return this.EnterHandReactor();
-            }
-            private IEnumerable<BattleAction> OnCardUse(CardUsingEventArgs args)
-            {
-                if ((args.Card is UtsuhoCard uCard) && (uCard.isMass))
-                {
-                    if (base.Battle.BattleShouldEnd)
+                    if (base.Battle != null)
                     {
-                        yield break;
+                        List<Card> cards = base.Battle.HandZone.Where((Card card) => (card != this) && (card is UtsuhoCard uCard) && (uCard.isMass)).ToList<Card>();
+                        int total = cards.Count;
+                        return base.Mana * -total;
                     }
-
-                    List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
-                    int total = cards.FindAll((Card card) => (card is UtsuhoCard uCard) && (uCard.isMass)).Count;
-                    this.SetTurnCost(this.BaseCost);
-                    this.DecreaseTurnCost(new ManaGroup() { Any = total });
+                    else
+                        return ManaGroup.Empty;
                 }
-            }
-            private IEnumerable<BattleAction> OnCardMove(CardMovingEventArgs args)
-            {
-                if ((args.Card is UtsuhoCard uCard) && (uCard.isMass))
-                {
-                    if (base.Battle.BattleShouldEnd)
-                    {
-                        yield break;
-                    }
-                    if (base.Zone != CardZone.Hand)
-                    {
-                        yield break;
-                    }
-                    if ((args.SourceZone == CardZone.Hand) || args.DestinationZone == CardZone.Hand)
-                    {
-                        List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
-                        int total = cards.FindAll((Card card) => (card is UtsuhoCard uCard) && (uCard.isMass)).Count;
-                        this.SetTurnCost(this.BaseCost);
-                        this.DecreaseTurnCost(new ManaGroup() { Any = total });
-                    }
-                }
-            }
-            private IEnumerable<BattleAction> OnCardDraw(CardEventArgs args)
-            {
-                if ((args.Card is UtsuhoCard uCard) && (uCard.isMass))
-                {
-                    if (base.Battle.BattleShouldEnd)
-                    {
-                        yield break;
-                    }
-                    if (base.Zone != CardZone.Hand)
-                    {
-                        yield break;
-                    }
-                    List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
-                    int total = cards.FindAll((Card card) => (card is UtsuhoCard uCard) && (uCard.isMass)).Count;
-                    this.SetTurnCost(this.BaseCost);
-                    this.DecreaseTurnCost(new ManaGroup() { Any = total });
-                }
-            }
-            private IEnumerable<BattleAction> OnCardAdded(CardsEventArgs args)
-            {
-                foreach (Card card in args.Cards)
-                {
-                    if ((card is UtsuhoCard uCard) && (uCard.isMass))
-                    {
-                        if (base.Battle.BattleShouldEnd)
-                        {
-                            yield break;
-                        }
-                        if (base.Zone != CardZone.Hand)
-                        {
-                            yield break;
-                        }
-                        List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
-                        int total = cards.FindAll((Card card) => (card is UtsuhoCard uCard) && (uCard.isMass)).Count;
-                        this.SetTurnCost(this.BaseCost);
-                        this.DecreaseTurnCost(new ManaGroup() { Any = total });
-                    }
-                }
-            }
-            private IEnumerable<BattleAction> OnCardExiled(CardEventArgs args)
-            {
-                if ((args.Card is UtsuhoCard uCard) && (uCard.isMass))
-                {
-                    if (base.Battle.BattleShouldEnd)
-                    {
-                        yield break;
-                    }
-                    if (base.Zone != CardZone.Hand)
-                    {
-                        yield break;
-                    }
-                    List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
-                    int total = cards.FindAll((Card card) => (card is UtsuhoCard uCard) && (uCard.isMass)).Count;
-                    this.SetTurnCost(this.BaseCost);
-                    this.DecreaseTurnCost(new ManaGroup() { Any = total });
-                }
-            }
-            protected override void OnEnterBattle(BattleController battle)
-            {
-                if (this.Zone == CardZone.Hand)
-                {
-                    List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
-                    int total = cards.FindAll((Card card) => (card is UtsuhoCard uCard) && (uCard.isMass)).Count;
-                    this.DecreaseTurnCost(new ManaGroup() { Any = total });
-                }
-
-                base.ReactBattleEvent<CardMovingEventArgs>(battle.CardMoved, new EventSequencedReactor<CardMovingEventArgs>(this.OnCardMove));
-                base.ReactBattleEvent<CardEventArgs>(battle.CardDrawn, new EventSequencedReactor<CardEventArgs>(this.OnCardDraw));
-                base.ReactBattleEvent<CardUsingEventArgs>(battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUse));
-                base.ReactBattleEvent<CardsEventArgs>(battle.CardsAddedToHand, new EventSequencedReactor<CardsEventArgs>(this.OnCardAdded));
-                base.ReactBattleEvent<CardEventArgs>(base.Battle.CardExiled, new EventSequencedReactor<CardEventArgs>(this.OnCardExiled));
-            }
-
-            private IEnumerable<BattleAction> EnterHandReactor()
-            {
-                if (base.Battle.BattleShouldEnd)
-                {
-                    yield break;
-                }
-                if (base.Zone != CardZone.Hand)
-                {
-                    yield break;
-                }
-                List<Card> cards = base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>();
-                int total = cards.FindAll((Card card) => (card is UtsuhoCard uCard) && (uCard.isMass)).Count;
-                this.SetTurnCost(this.BaseCost);
-                this.DecreaseTurnCost(new ManaGroup() { Any = total });
             }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {

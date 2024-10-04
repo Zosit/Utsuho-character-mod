@@ -115,7 +115,7 @@ namespace Utsuho_character_mod.Status
                         yield return new DamageAction(base.Owner, base.Battle.Player, DamageInfo.Reaction((float)((level / 5))), this.GunName, GunType.Single);
                     }
                 }
-                }
+            }
 
 
             if (!Battle.BattleShouldEnd)

@@ -65,8 +65,8 @@ namespace Utsuho_character_mod.CardsB
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 2, Any = 2 },
-                UpgradedCost: new ManaGroup() { Black = 1, Any = 1 },
+                Cost: new ManaGroup() { Black = 2, Any = 0 },
+                UpgradedCost: new ManaGroup() { Any = 0 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -74,8 +74,8 @@ namespace Utsuho_character_mod.CardsB
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 1,
-                UpgradedValue1: 1,
+                Value1: 2,
+                UpgradedValue1: 2,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -96,13 +96,13 @@ namespace Utsuho_character_mod.CardsB
                 Keywords: Keyword.None,
                 UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Scry,
+                UpgradedRelativeKeyword: Keyword.Scry,
 
-                RelativeEffects: new List<string>() { },
-                UpgradedRelativeEffects: new List<string>() { },
-                RelativeCards: new List<string>() { },
-                UpgradedRelativeCards: new List<string>() { },
+                RelativeEffects: new List<string>() { "QuantumDissonanceStatus" },
+                UpgradedRelativeEffects: new List<string>() { "QuantumDissonanceStatus" },
+                RelativeCards: new List<string>() { "DarkMatter" },
+                UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "",
@@ -117,7 +117,7 @@ namespace Utsuho_character_mod.CardsB
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return BuffAction<QuantumDissonanceStatus>(Value1, 0, 0, 0, 0.2f);
+                yield return new ApplyStatusEffectAction<QuantumDissonanceStatus>(Battle.Player, Value1, null, Value1, null, 0f, true);
                 yield break;
             }
         }

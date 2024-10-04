@@ -67,7 +67,7 @@ namespace Utsuho_character_mod.CardsR
                 Colors: new List<ManaColor>() { ManaColor.Black },
                 IsXCost: false,
                 Cost: new ManaGroup() { Black = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Black = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Any = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,

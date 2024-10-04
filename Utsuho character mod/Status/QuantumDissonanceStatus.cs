@@ -55,8 +55,8 @@ namespace Utsuho_character_mod.Status
                             HasDuration: false,
                             DurationStackType: StackType.Add,
                             DurationDecreaseTiming: DurationDecreaseTiming.Custom,
-                            HasCount: false,
-                            CountStackType: StackType.Keep,
+                            HasCount: true,
+                            CountStackType: StackType.Add,
                             LimitStackType: StackType.Keep,
                             ShowPlusByLimit: false,
                             Keywords: Keyword.None,
@@ -71,6 +71,37 @@ namespace Utsuho_character_mod.Status
     [EntityLogic(typeof(QuantumDissonanceEffect))]
     public sealed class QuantumDissonanceStatus : StatusEffect
     {
-
+        protected override void OnAdded(Unit unit)
+        {
+            base.ReactOwnerEvent<CardUsingEventArgs>(base.Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsed));
+            ReactOwnerEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
+        }
+        private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
+        {
+            if (Battle.BattleShouldEnd)
+            {
+                yield break;
+            }
+            NotifyActivating();
+            this.Count = base.GetSeLevel<QuantumDissonanceStatus>();
+        }
+        private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
+        {
+            if (base.Battle.BattleShouldEnd)
+            {
+                yield break;
+            }
+            if (args.Card.Id == "DarkMatter")
+            {
+                int count = base.Count;
+                base.Count = count - 1;
+                this.NotifyChanged();
+                if (base.Count >= 0)
+                {
+                    yield return new ScryAction(new ScryInfo(3));
+                }
+            }
+            yield break;
+        }
     }
 }
