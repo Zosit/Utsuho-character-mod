@@ -148,16 +148,7 @@ namespace Utsuho_character_mod
             MoveType Next;
             protected override void OnEnterBattle(BattleController battle)
             {
-                GameDifficulty difficulty = base.GameRun.Difficulty;
-                if (difficulty == GameDifficulty.Lunatic)
-                {
-                    this.React(new ApplyStatusEffectAction(typeof(ChargingStatus), this, Count1, null, null, null, 0f, true));
-                    this.React(new ApplyStatusEffectAction(typeof(HeatStatus), this, Count1, null, null, null, 0f, true));
 
-                    //yield return new ApplyStatusEffectAction<ChargingStatus>(this, Count1, null, null, null, 0f, true);
-                    //yield return new ApplyStatusEffectAction<HeatStatus>(this, Count1, null, null, null, 0f, true);
-                    this.Next = MoveType.Aggregate;
-                }
                 base.ReactBattleEvent<CardEventArgs>(battle.CardDrawn, new Func<GameEventArgs, IEnumerable<BattleAction>>(this.OnCardTouched));
                 base.ReactBattleEvent<CardUsingEventArgs>(battle.CardUsed, new Func<GameEventArgs, IEnumerable<BattleAction>>(this.OnCardTouched));
                 base.ReactBattleEvent<CardsEventArgs>(battle.CardsAddedToHand, new Func<GameEventArgs, IEnumerable<BattleAction>>(this.OnCardTouched));
@@ -181,8 +172,24 @@ namespace Utsuho_character_mod
                 switch (this.Next)
                 {
                     case MoveType.Reactor:
-                        yield return base.PositiveMove(base.GetMove(0), typeof(ChargingStatus), Count1, null, true, null);
-                        break;
+                        GameDifficulty difficulty = base.GameRun.Difficulty;
+                        if (difficulty == GameDifficulty.Lunatic)
+                        {
+                            this.React(new ApplyStatusEffectAction(typeof(ChargingStatus), this, Count1, null, null, null, 0f, true));
+                            this.React(new ApplyStatusEffectAction(typeof(HeatStatus), this, Count1, null, null, null, 0f, true));
+
+                            //yield return new ApplyStatusEffectAction<ChargingStatus>(this, Count1, null, null, null, 0f, true);
+                            //yield return new ApplyStatusEffectAction<HeatStatus>(this, Count1, null, null, null, 0f, true);
+                            this.Next = MoveType.Aggregate;
+                            yield return base.AttackMove(base.GetMove(1), base.Gun1, base.Damage1, 1, false, "Instant", true);
+                            yield return base.DefendMove(this, null, base.Damage1, 0, 0, false, null);
+                            break;
+                        }
+                        else
+                        {
+                            yield return base.PositiveMove(base.GetMove(0), typeof(ChargingStatus), Count1, null, true, null);
+                            break;
+                        }
                     case MoveType.Aggregate:
                         yield return base.AttackMove(base.GetMove(1), base.Gun1, base.Damage1, 1, false, "Instant", true);
                         yield return base.DefendMove(this, null, base.Damage1, 0, 0, false, null);
