@@ -2,6 +2,7 @@ InverseBeam:
   Name: Inverse Beam
   Description: Deal {Damage} damage.
 
+
 BlowAway:
   Description: Gain {Block} |Block|.
   Name: Blow Away
@@ -94,10 +95,8 @@ SunlightReverie:
 
 NuclearDive:
   Name: Uncontainable Nuclear Reaction Dive
-  ExtraDescription1: "Double {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| for damage."
-  Description: "Double {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage."
-  ExtraUpgradedDescription1: "Triple {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| for damage."
-  UpgradedDescription: "Triple {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage."
+  Description: "Double {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage.\n|Expel|: Gain {Mana}."
+  UpgradedDescription: "Triple {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage.\n|Expel|: Gain {Mana}."
 
 BunkerDown:
   Name: Bunker Down
@@ -247,7 +246,7 @@ GammaRays:
 
 Reignition:
   Name: Reignition
-  Description: "Deal damage equal to the {Value1} time the number of cards in |Exile| ({Damage})."
+  Description: "Deal damage equal to {Value1} times the number of cards in |Exile| ({Damage})."
 
 TurboFuel:
   Name: Turbo Fuel

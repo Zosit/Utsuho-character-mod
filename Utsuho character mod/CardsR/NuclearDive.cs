@@ -75,8 +75,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedValue1: null,
                 Value2: null,
                 UpgradedValue2: null,
-                Mana: null,
-                UpgradedMana: null,
+                Mana: new ManaGroup() { Red = 4 },
+                UpgradedMana: new ManaGroup() { Red = 4 },
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -93,8 +93,8 @@ namespace Utsuho_character_mod.CardsR
                 Keywords: Keyword.Accuracy | Keyword.Exile,
                 UpgradedKeywords: Keyword.Accuracy | Keyword.Exile,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Expel,
+                UpgradedRelativeKeyword: Keyword.Expel,
 
                 RelativeEffects: new List<string>() { "HeatStatus" },
                 UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
@@ -102,7 +102,7 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Zosit",
                 SubIllustrator: new List<string>() { }
              );
 
@@ -112,25 +112,58 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(NuclearDiveDefinition))]
         public sealed class NuclearDive : Card
         {
+            private int tempDamage = 0;
             public override int AdditionalDamage
             {
                 get
                 {
-                    int level = base.GetSeLevel<HeatStatus>();
-                    if (!IsUpgraded)
+                    if (tempDamage != 0)
                     {
-                        return level * 2;
+                        return tempDamage;
                     }
                     else
                     {
-                        return level * 3;
+                        int level = base.GetSeLevel<HeatStatus>();
+                        if (!IsUpgraded)
+                        {
+                            return level * 2;
+                        }
+                        else
+                        {
+                            return level * 3;
+                        }
                     }
                 }
+            }
+            protected override void OnEnterBattle(BattleController battle)
+            {
+                base.ReactBattleEvent<DieEventArgs>(base.Battle.EnemyDied, new EventSequencedReactor<DieEventArgs>(this.OnEnemyDied));
+            }
+            private IEnumerable<BattleAction> OnEnemyDied(DieEventArgs args)
+            {
+                if (args.DieSource == this && !args.Unit.HasStatusEffect<Servant>())
+                {
+                    yield return new GainManaAction(Mana);
+                }
+                yield break;
             }
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return base.DamageSelfAction(this.AdditionalDamage / 10);
+                int level = base.GetSeLevel<HeatStatus>();
+                if (!IsUpgraded && (level != 0))
+                {
+                    tempDamage = level * 2;
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, level, null, null, null, 0f, true);
+                }
+                else
+                {
+                    tempDamage = level * 3;
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, level * 2, null, null, null, 0f, true);
+                }
+
+                int level2 = base.GetSeLevel<HeatStatus>();
+                yield return base.DamageSelfAction(level2 / 10);
 
                 if (!base.Battle.BattleShouldEnd)
                 {

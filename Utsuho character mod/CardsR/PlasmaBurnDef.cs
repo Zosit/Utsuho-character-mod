@@ -112,11 +112,20 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(PlasmaBurnDef))]
         public sealed class PlasmaBurn : Card
         {
+            private int tempDamage = 0;
             public override int AdditionalDamage
             {
                 get
                 {
-                    return base.GetSeLevel<HeatStatus>() + Value1;
+                    if (tempDamage != 0)
+                    {
+                        return tempDamage;
+                    }
+                    else
+                    {
+                        return base.GetSeLevel<HeatStatus>() + Value1;
+
+                    }
                 }
             }
 
@@ -124,17 +133,15 @@ namespace Utsuho_character_mod.CardsR
             {
                 if (!base.Battle.BattleShouldEnd)
                 {
-
+                    tempDamage = base.GetSeLevel<HeatStatus>() + Value1;
                     int level = base.GetSeLevel<HeatStatus>();
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, Value1, null, null, null, 0f, true);
                     if (level + Value1 >= Value2)
                     {
                         yield return base.AttackAction(selector);
                         yield return new RemoveStatusEffectAction(Battle.Player.GetStatusEffect<HeatStatus>());
-                    } else
-                    {
-                        yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, Value1, null, null, null, 0f, true);
                     }
-
+                    tempDamage = 0;
                     yield break;
                 }
             }

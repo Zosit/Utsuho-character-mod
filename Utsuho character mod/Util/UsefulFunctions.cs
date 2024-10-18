@@ -61,22 +61,25 @@ namespace Utsuho_character_mod.Util
     public static GlobalLocalization LocalizationCard(DirectorySource dirsorc)
         {
             var loc = new GlobalLocalization(dirsorc);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "CardsEn.yaml");
-            loc.LocalizationFiles.AddLocaleFile(Locale.Ko, "CardsKo.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "CardEn.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.Ko, "CardKo.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.Ja, "CardJa.yaml");
             return loc;
         }
         public static GlobalLocalization LocalizationStatus(DirectorySource dirsorc)
         {
             var loc = new GlobalLocalization(dirsorc);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "StatusEffectsEn.yaml");
-            loc.LocalizationFiles.AddLocaleFile(Locale.Ko, "StatusEffectsKo.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "StatusEffectEn.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.Ko, "StatusEffectKo.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.Ja, "StatusEffectJa.yaml");
             return loc;
         }
         public static GlobalLocalization LocalizationExhibit(DirectorySource dirsorc)
         {
             var loc = new GlobalLocalization(dirsorc);
-            loc.LocalizationFiles.AddLocaleFile(Locale.En, "ExhibitsEn.yaml");
-            loc.LocalizationFiles.AddLocaleFile(Locale.Ko, "ExhibitsKo.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.En, "ExhibitEn.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.Ko, "ExhibitKo.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.Ja, "ExhibitJa.yaml");
             return loc;
         }
         public static GlobalLocalization LocalizationUlt(DirectorySource dirsorc)
@@ -84,6 +87,7 @@ namespace Utsuho_character_mod.Util
             var loc = new GlobalLocalization(dirsorc);
             loc.LocalizationFiles.AddLocaleFile(Locale.En, "UltimateSkillEn.yaml");
             loc.LocalizationFiles.AddLocaleFile(Locale.Ko, "UltimateSkillKo.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.Ja, "UltimateSkillJa.yaml");
             return loc;
         }
         public static GlobalLocalization LocalizationPlayer(DirectorySource dirsorc)
@@ -91,6 +95,7 @@ namespace Utsuho_character_mod.Util
             var loc = new GlobalLocalization(dirsorc);
             loc.LocalizationFiles.AddLocaleFile(Locale.En, "PlayerUnitEn.yaml");
             loc.LocalizationFiles.AddLocaleFile(Locale.Ko, "PlayerUnitKo.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.Ja, "PlayerUnitJa.yaml");
             return loc;
         }
         public static GlobalLocalization LocalizationModel(DirectorySource dirsorc)
@@ -98,6 +103,7 @@ namespace Utsuho_character_mod.Util
             var loc = new GlobalLocalization(dirsorc);
             loc.LocalizationFiles.AddLocaleFile(Locale.En, "UnitModelEn.yaml");
             loc.LocalizationFiles.AddLocaleFile(Locale.Ko, "UnitModelKo.yaml");
+            loc.LocalizationFiles.AddLocaleFile(Locale.Ja, "UnitModelJa.yaml");
             return loc;
         }
     }

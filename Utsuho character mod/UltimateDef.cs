@@ -28,9 +28,7 @@ namespace Utsuho_character_mod
 
         public override LocalizationOption LoadLocalization()
         {
-            var gl = new GlobalLocalization(directorySource);
-            gl.DiscoverAndLoadLocFiles(this);
-            return gl;
+            return UsefulFunctions.LocalizationUlt(directorySource);
         }
 
         public override Sprite LoadSprite()
@@ -76,7 +74,7 @@ namespace Utsuho_character_mod
             GameMaster.Instance.StartCoroutine(DeactivateDeez(bgGo));
 
             yield return PerformAction.Spell(Owner, new UtsuhoUltRDef().UniqueId);*/
-            yield return PerformAction.Spell(Battle.Player, "UtsuhoUltA");
+            yield return PerformAction.Spell(Battle.Player, "UtsuhoUltR");
             yield return new DamageAction(base.Owner, selector.GetEnemy(base.Battle), this.Damage, base.GunName, GunType.Single);
             if (!base.Battle.BattleShouldEnd)
             {

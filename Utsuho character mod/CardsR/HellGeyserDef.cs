@@ -112,22 +112,33 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(HellGeyserDefinition))]
         public sealed class HellGeyser : Card
         {
+            private int tempDamage = 0;
             public override int AdditionalDamage
             {
                 get
                 {
-                    return base.GetSeLevel<HeatStatus>() + Value1;
+                    if (tempDamage != 0 )
+                    {
+                        return tempDamage;
+                    }
+                    else
+                    {
+                        return base.GetSeLevel<HeatStatus>() + Value1;
+                    }
                 }
             }
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
+                tempDamage = base.GetSeLevel<HeatStatus>() + Value1;
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
                 yield return base.AttackAction(selector.SelectedEnemy);
 
                 if (!base.Battle.BattleShouldEnd)
                 {
                     int level = base.GetSeLevel<HeatStatus>();
                     yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value2) - level, null, null, null, 0f, true);
+                    tempDamage = 0;
                     yield break;
                 }
             }
