@@ -60,18 +60,13 @@ MaintainReactionStatus:
 
 FixedStarStatus:
   Name: Fixed Star
-  Description: "At the end of your turn, |retain| up to {Level} cards this turn.\n All |Dark Matter| have |Auto-Exile| until end of combat."
-  Brief: "At the end of your turn, |retain| up to cards this turn. All |Dark Matter| have |Auto-Exile| until end of combat."
+  Description: "At the end of your turn, |retain| up to {Level} cards this turn.\n All |Dark Matter| have |Auto-Exile| when drawn."
+  Brief: "At the end of your turn, |retain| up to cards this turn. All |Dark Matter| have |Auto-Exile| when drawn."
 
 TokamakStatus:
   Name: "Hell's Tokamak"
   Description: "At the start of your turn, gain {Level} |Heat|."
   Brief: "At the start of your turn, gain {Level} |Heat|."
-
-QuantumDissonanceStatus:
-  Name: Quantum Dissonance
-  Description: "When the first {Level} |Dark Matter| are played each turn, Scry 3."
-  Brief: "When the first |Dark Matter| are played each turn, Scry 3."
 
 SunSpotStatus:
   Name: Sun Spot

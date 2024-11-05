@@ -117,8 +117,13 @@ namespace Utsuho_character_mod.CardsR
         }
 
         [EntityLogic(typeof(SuperGiantDef))]
-        public sealed class SuperGiant : Card
+        public sealed class SuperGiant : UtsuhoCard
         {
+            private int pullReduction = 0;
+            public SuperGiant() : base()
+            {
+                isMass = true;
+            }
             public override ManaGroup AdditionalCost
             {
                 get
@@ -127,7 +132,7 @@ namespace Utsuho_character_mod.CardsR
                     {
                         List<Card> cards = base.Battle.HandZone.Where((Card card) => (card != this) && (card is UtsuhoCard uCard) && (uCard.isMass)).ToList<Card>();
                         int total = cards.Count;
-                        return base.Mana * -total;
+                        return base.Mana * -(total + pullReduction);
                     }
                     else
                         return ManaGroup.Empty;
@@ -136,6 +141,11 @@ namespace Utsuho_character_mod.CardsR
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield return AttackAction(selector);
+                yield break;
+            }
+            public override IEnumerable<BattleAction> OnPull()
+            {
+                this.pullReduction++;
                 yield break;
             }
         }

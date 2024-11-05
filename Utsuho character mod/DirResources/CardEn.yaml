@@ -194,7 +194,7 @@ ZeroPoint:
 
 SuperGiant:
   Name: Super Giant
-  Description: "Deal {Damage} damage.\nFor each card with |Mass| in the hand, reduce the cost of {SelfName} by {Mana}."
+  Description: "Deal {Damage} damage.\nFor each card with |Mass| in the hand, reduce the cost of {SelfName} by {Mana}.\nHas |Mass|.\n|When Pulled|: Reduce the cost of {SelfName} by {Mana}."
 
 WhiteHole:
   Name: White Hole
@@ -275,9 +275,9 @@ Starlight:
   Description: "Gain {Block} |Block|.\nGain {Value1} |Heat|.\nAdd 2 |Dark Matter| to the hand."
   UpgradedDescription: "Gain {Shield} |Barrier|.\nGain {Value1} |Heat|.\nAdd 2 |Dark Matter| to the hand."
 
-QuantumDissonance:
-  Name: Quantum Dissonance
-  Description: "When the first {Value1} |Dark Matter| are played each turn, Scry 3."
+QuantumLink:
+  Name: Quantum Link
+  Description: "Choose up to {Value1} card{Value1:plural one='' other='s'} without Mass from the draw pile and put {Value1:plural one='it' other='them'} into the hand.\n Discard a random card."
 
 AlphaProtocol:
   Name: Alpha Protocol

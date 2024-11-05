@@ -68,7 +68,7 @@ namespace Utsuho_character_mod.CardsMulti
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Blue },
                 IsXCost: false,
                 Cost: new ManaGroup() { Black = 1, Blue = 1, Any = 2 },
-                UpgradedCost: new ManaGroup() { Black = 1, Blue = 1 },
+                UpgradedCost: new ManaGroup() { Black = 1, Blue = 1, Any = 2 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -95,7 +95,7 @@ namespace Utsuho_character_mod.CardsMulti
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.None,
+                Keywords: Keyword.Ethereal,
                 UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.Exile,
