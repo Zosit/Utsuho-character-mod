@@ -162,8 +162,8 @@ GravityWell:
 
 PlanetaryOrbit:
   Name: Planetary Orbit
-  Description: "Swap the draw and discard piles.\nDeal damage equal to the number of cards swapped to each enemy. ({Damage})\n{SelfName} |Pull| all cards with |Mass| that were swapped."
-  UpgradedDescription: "Swap the draw and discard piles.\nDeal damage equal to double the number of cards swapped to each enemy. ({Damage})\n{SelfName} |Pull| all cards with |Mass| that were swapped."
+  Description: "Swap the draw and discard piles.\nDeal damage equal to the number of cards swapped to each enemy. ({Damage})\n|Pull| all cards with |Mass| that were swapped."
+  UpgradedDescription: "Swap the draw and discard piles.\nDeal damage equal to double the number of cards swapped to each enemy. ({Damage})\n|Pull| all cards with |Mass| that were swapped."
   DetailText: "This does not change the order of the piles."
 
 Ultraviolet:
@@ -277,7 +277,7 @@ Starlight:
 
 QuantumLink:
   Name: Quantum Link
-  Description: "Choose up to {Value1} card{Value1:plural one='' other='s'} without Mass from the draw pile and put {Value1:plural one='it' other='them'} into the hand.\n Discard a random card."
+  Description: "Choose up to {Value1} card{Value1:plural one='' other='s'} without Mass from the draw pile and put {Value1:plural one='it' other='them'} into the hand.\nDiscard a random card."
 
 AlphaProtocol:
   Name: Alpha Protocol

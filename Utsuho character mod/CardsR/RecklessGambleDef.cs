@@ -94,7 +94,9 @@ namespace Utsuho_character_mod.CardsR
                 PassiveCost: null,
                 UpgradedPassiveCost: null,
                 ActiveCost: null,
+                ActiveCost2: null,
                 UpgradedActiveCost: null,
+                UpgradedActiveCost2: null,
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
@@ -120,18 +122,12 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(RecklessGambleDef))]
         public sealed class RecklessGamble : Card
         {
-            IEnumerator ResetTrigger()
-            {
-                yield return new WaitForSecondsRealtime(1.0f);
-                NotifyChanged();
-            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield return new DrawManyCardAction(Value1);
                 Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
                 foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                card.NotifyActivating();
-                GameMaster.Instance.StartCoroutine(ResetTrigger());
+                yield return new WaitForYieldInstructionAction(new WaitForSeconds(0.5f));
                 yield return new ExileCardAction(card);
 
                 yield break;

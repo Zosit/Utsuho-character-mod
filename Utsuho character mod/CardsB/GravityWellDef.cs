@@ -86,7 +86,9 @@ namespace Utsuho_character_mod.CardsB
                 PassiveCost: null,
                 UpgradedPassiveCost: null,
                 ActiveCost: null,
+                ActiveCost2: null,
                 UpgradedActiveCost: null,
+                UpgradedActiveCost2: null,
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
@@ -102,7 +104,7 @@ namespace Utsuho_character_mod.CardsB
                 UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "AltAlias",
                 SubIllustrator: new List<string>() { }
              );
 

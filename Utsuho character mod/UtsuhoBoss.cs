@@ -60,7 +60,9 @@ namespace Utsuho_character_mod
                 RollBossExhibit: true,
                 PlayerRoot: new Vector2(-4f, 0.5f),
                 PreBattleDialogName: "",
-                PostBattleDialogName: ""
+                PostBattleDialogName: "",
+                IsSub: false,
+                Subs: new List<string>() { }
             );
             return config;
         }

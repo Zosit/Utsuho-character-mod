@@ -95,7 +95,9 @@ namespace Utsuho_character_mod.CardsMulti
                 PassiveCost: null,
                 UpgradedPassiveCost: null,
                 ActiveCost: null,
+                ActiveCost2: null,
                 UpgradedActiveCost: null,
+                UpgradedActiveCost2: null,
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
@@ -121,19 +123,13 @@ namespace Utsuho_character_mod.CardsMulti
         [EntityLogic(typeof(EternityEngineDef))]
         public sealed class EternityEngine : Card
         {
-            IEnumerator ResetTrigger()
-            {
-                yield return new WaitForSecondsRealtime(1.0f);
-                NotifyChanged();
-            }
             public override IEnumerable<BattleAction> OnTurnStartedInHand()
             {
                 if (base.Zone == CardZone.Hand)
                 {
                     Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
                     foreach(BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) {  yield return action; }
-                    card.NotifyActivating();
-                    GameMaster.Instance.StartCoroutine(ResetTrigger());
+                    yield return new WaitForYieldInstructionAction(new WaitForSeconds(0.5f));
                     yield return new ExileCardAction(card);
                     yield return BuffAction<Firepower>(Value1, 0, 0, 0, 0.2f);
                 }

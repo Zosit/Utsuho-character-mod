@@ -30,6 +30,7 @@ namespace Utsuho_character_mod.CardsR
         {
             var imgs = new CardImages(embeddedSource);
             imgs.AutoLoad(this, extension: ".png");
+            //imgs.AutoLoad(this.GetId(), extension: ".png", relativePath: "", subIds: new List<string>() { "Alt" }, hasUpgradeImage: false);
             return imgs;
         }
 
@@ -87,7 +88,9 @@ namespace Utsuho_character_mod.CardsR
                 PassiveCost: null,
                 UpgradedPassiveCost: null,
                 ActiveCost: null,
+                ActiveCost2: null,
                 UpgradedActiveCost: null,
+                UpgradedActiveCost2: null,
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
@@ -104,7 +107,7 @@ namespace Utsuho_character_mod.CardsR
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "Flippin'Loser",
-                SubIllustrator: new List<string>() { }
+                SubIllustrator: new List<string>() { "AltAlias" }
              );
 
             return cardConfig;

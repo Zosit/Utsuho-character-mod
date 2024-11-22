@@ -92,7 +92,9 @@ namespace Utsuho_character_mod.CardsR
                 PassiveCost: null,
                 UpgradedPassiveCost: null,
                 ActiveCost: null,
+                ActiveCost2: null,
                 UpgradedActiveCost: null,
+                UpgradedActiveCost2: null,
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
@@ -118,6 +120,26 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(SunlightReverieDef))]
         public sealed class SunlightReverie : Card
         {
+            public override Interaction Precondition()
+            {
+                if (this.IsUpgraded)
+                {
+                    List<SunlightReverie> list = Library.CreateCards<SunlightReverie>(2, true).ToList<SunlightReverie>();
+                    SunlightReverie first = list[0];
+                    SunlightReverie discardConsider = list[1];
+                    first.ChoiceCardIndicator = 1;
+                    discardConsider.ChoiceCardIndicator = 2;
+                    first.SetBattle(base.Battle);
+                    discardConsider.SetBattle(base.Battle);
+                    MiniSelectCardInteraction interaction = new MiniSelectCardInteraction(list, false, false, false)
+                    {
+                        Source = this
+                    };
+                    return interaction;
+                }
+                else
+                    return null;
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 yield return new AddCardsToHandAction(Library.CreateCards<RManaCard>(Value1, false));
@@ -133,19 +155,8 @@ namespace Utsuho_character_mod.CardsR
                 }
                 else
                 {
-                    List<SunlightReverie> list = Library.CreateCards<SunlightReverie>(2, true).ToList<SunlightReverie>();
-                    SunlightReverie first = list[0];
-                    SunlightReverie discardConsider = list[1];
-                    first.ShowWhichDescription = 1;
-                    discardConsider.ShowWhichDescription = 2;
-                    first.SetBattle(base.Battle);
-                    discardConsider.SetBattle(base.Battle);
-                    MiniSelectCardInteraction interaction = new MiniSelectCardInteraction(list, false, false, false)
-                    {
-                        Source = this
-                    };
-                    yield return new InteractionAction(interaction, false);
-                    if (interaction.SelectedCard == first)
+                    MiniSelectCardInteraction interaction = (MiniSelectCardInteraction)precondition;
+                    if (interaction.SelectedCard.ChoiceCardIndicator == 1)
                     {
                         if (Battle.DrawZone.NotEmpty())
                         {

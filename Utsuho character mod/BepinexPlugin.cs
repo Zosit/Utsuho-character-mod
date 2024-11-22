@@ -71,7 +71,6 @@ using LBoL.EntityLib.Stages.NormalStages;
 using LBoL.EntityLib.StatusEffects.Basic;
 using LBoL.EntityLib.StatusEffects.Cirno;
 using LBoL.EntityLib.StatusEffects.Enemy;
-using LBoL.EntityLib.StatusEffects.Enemy.SeijaItems;
 using LBoL.EntityLib.StatusEffects.Marisa;
 using LBoL.EntityLib.StatusEffects.Neutral;
 using LBoL.EntityLib.StatusEffects.Neutral.Black;
@@ -152,6 +151,7 @@ namespace Utsuho_character_mod
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(AddWatermark.API.GUID))
                 WatermarkWrapper.ActivateWatermark();
 
+            Util.AssetManager.Load();
             Func<Sprite> getSprite = () => ResourceLoader.LoadSprite("BossIcon.png", directorySource);
             EnemyUnitTemplate.AddBossNodeIcon(nameof(UtsuhoBossDef.Utsuho), getSprite);
             IntentionTemplate.CreateIntention<VentIntention>();

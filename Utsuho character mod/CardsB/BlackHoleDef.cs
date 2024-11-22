@@ -95,7 +95,9 @@ namespace Utsuho_character_mod.CardsR
                 PassiveCost: null,
                 UpgradedPassiveCost: null,
                 ActiveCost: null,
+                ActiveCost2: null,
                 UpgradedActiveCost: null,
+                UpgradedActiveCost2: null,
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
@@ -111,7 +113,7 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "AltAlias",
                 SubIllustrator: new List<string>() { }
              );
 
@@ -121,17 +123,12 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(BlackHoleDef))]
         public sealed class BlackHole : Card
         {
-            IEnumerator ResetTrigger()
-            {
-                yield return new WaitForSecondsRealtime(1.0f);
-                NotifyChanged();
-            }
             public override IEnumerable<BattleAction> OnTurnStartedInHand()
             {
                 if (base.Zone == CardZone.Hand)
                 {
                     Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                    GameMaster.Instance.StartCoroutine(ResetTrigger());
+                    yield return new WaitForYieldInstructionAction(new WaitForSeconds(0.5f));
                     yield return new DiscardAction(card);
                     foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
                     card.NotifyActivating();

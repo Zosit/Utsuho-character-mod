@@ -19,6 +19,7 @@ using static Utsuho_character_mod.CardsB.DarkMatterDef;
 using LBoL.Base.Extensions;
 using Utsuho_character_mod.Util;
 using LBoL.Core.Battle.Interactions;
+using UnityEngine;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -90,7 +91,9 @@ namespace Utsuho_character_mod.CardsR
                 PassiveCost: null,
                 UpgradedPassiveCost: null,
                 ActiveCost: null,
+                ActiveCost2: null,
                 UpgradedActiveCost: null,
+                UpgradedActiveCost2: null,
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
@@ -116,7 +119,26 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(EscapeVelocityDef))]
         public sealed class EscapeVelocity : Card
         {
-
+            public override Interaction Precondition()
+            {
+                if (this.IsUpgraded)
+                {
+                    List<EscapeVelocity> list = Library.CreateCards<EscapeVelocity>(2, true).ToList<EscapeVelocity>();
+                    EscapeVelocity first = list[0];
+                    EscapeVelocity escapeConsider = list[1];
+                    first.ChoiceCardIndicator = 1;
+                    escapeConsider.ChoiceCardIndicator = 2;
+                    first.SetBattle(base.Battle);
+                    escapeConsider.SetBattle(base.Battle);
+                    MiniSelectCardInteraction interaction = new MiniSelectCardInteraction(list, false, false, false)
+                    {
+                        Source = this
+                    };
+                    return interaction;
+                }
+                else
+                    return null;
+            }
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
@@ -138,19 +160,8 @@ namespace Utsuho_character_mod.CardsR
                 }
                 else
                 {
-                    List<EscapeVelocity> list = Library.CreateCards<EscapeVelocity>(2, true).ToList<EscapeVelocity>();
-                    EscapeVelocity first = list[0];
-                    EscapeVelocity escapeConsider = list[1];
-                    first.ShowWhichDescription = 1;
-                    escapeConsider.ShowWhichDescription = 2;
-                    first.SetBattle(base.Battle);
-                    escapeConsider.SetBattle(base.Battle);
-                    MiniSelectCardInteraction interaction = new MiniSelectCardInteraction(list, false, false, false)
-                    {
-                        Source = this
-                    };
-                    yield return new InteractionAction(interaction, false);
-                    if (interaction.SelectedCard == first)
+                    MiniSelectCardInteraction interaction = (MiniSelectCardInteraction)precondition;
+                    if (interaction.SelectedCard.ChoiceCardIndicator == 1)
                     {
                         for (int i = 0; i < Value2; i++)
                         {
@@ -172,6 +183,7 @@ namespace Utsuho_character_mod.CardsR
                         {
                             yield return new DrawCardAction();
                         }
+                        yield return new WaitForYieldInstructionAction(new WaitForSeconds(0.5f));
                         for (int i = 0; i < Value2; i++)
                         {
                             if (Battle.HandZone.Count != 0)

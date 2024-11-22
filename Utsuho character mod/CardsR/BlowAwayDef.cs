@@ -86,7 +86,9 @@ namespace Utsuho_character_mod.CardsR
                 PassiveCost: null,
                 UpgradedPassiveCost: null,
                 ActiveCost: null,
+                ActiveCost2: null,
                 UpgradedActiveCost: null,
+                UpgradedActiveCost2: null,
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
@@ -103,7 +105,7 @@ namespace Utsuho_character_mod.CardsR
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "Flippin'Loser",
-                SubIllustrator: new List<string>() { }
+                SubIllustrator: new List<string>() { "AltAlias" }
              );
 
             return cardConfig;            
