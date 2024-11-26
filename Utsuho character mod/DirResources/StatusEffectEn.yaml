@@ -77,3 +77,8 @@ HeatVisorStatus:
   Name: Heat Visor
   Description: "Prevent the next {Level} times the player would lose life before your next turn."
   Brief: "Prevent the next time the player would lose life before your next turn."
+  
+HeatWaveStatus:
+  Name: Heat Wave
+  Description: "At the end of your next {Duration:plural one='turn' other='% turns'}, don't lose any |Heat|."
+  Brief: "At the end of your next turn, don't lose any |Heat|."

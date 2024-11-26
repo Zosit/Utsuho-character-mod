@@ -131,7 +131,6 @@ namespace Utsuho_character_mod
 
         internal static IResourceSource embeddedSource = new EmbeddedSource(Assembly.GetExecutingAssembly());
 
-        // add this for audio loading
         internal static DirectorySource directorySource = new DirectorySource(Utsuho_character_mod.PInfo.GUID, "");
 
         internal static AssetBundle utsuhoAB;

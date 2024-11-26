@@ -94,7 +94,7 @@ namespace Utsuho_character_mod.Exhibits
             {
                 get
                 {
-                    return "无差别起火";
+                    return "Junko3C";
                 }
             }
             protected override void OnEnterBattle()

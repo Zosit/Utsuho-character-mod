@@ -19,6 +19,7 @@ using LBoL.Core.Cards;
 using static Utsuho_character_mod.CardsR.TokamakDefinition;
 using LBoL.EntityLib.StatusEffects.Marisa;
 using System.Linq;
+using Utsuho_character_mod.CardsR;
 
 namespace Utsuho_character_mod.Status
 {
@@ -118,7 +119,7 @@ namespace Utsuho_character_mod.Status
             }
 
 
-            if (!Battle.BattleShouldEnd)
+            if (!Battle.BattleShouldEnd && (base.Owner.GetStatusEffect<HeatWaveStatus>() == null))
             {
                 yield return new ApplyStatusEffectAction<HeatStatus>(base.Owner, -(level / 5), null, null, null, 0f, true);
             }

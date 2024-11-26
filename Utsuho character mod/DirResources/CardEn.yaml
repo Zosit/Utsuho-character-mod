@@ -38,7 +38,7 @@ StartReactor:
 
 MaxPower:
   Name: Max Power
-  Description: "|Exile| the hand.\nLose all mana and gain {Mana}.\nDraw {Value1} cards.\nGain {Value1} |Temporary Firepower|.\n|Time Limit| <sprite=\"ManaSprite\" name=\"1\">."
+  Description: "|Exile| the hand.\nGain {Mana}.\nDraw {Value1} cards.\nGain {Value1} |Temporary Firepower|.\n|Time Limit| <sprite=\"ManaSprite\" name=\"1\">."
 
 Aggregate:
   Name: Aggregate
@@ -71,16 +71,15 @@ NuclearFusion:
 
 NuclearStrike:
   Name: Nuclear Strike
-  ExtraDescription1: "|Vent| for damage.\nGain {Value1} |Heat|."
-  Description: "|Vent| to deal {Damage} damage.\nGain {Value1} |Heat|."
+  Description: "|Vent| to deal {Damage} damage to each enemy.\nGain {Value1} |Heat|."
 
 HeatVisor:
   Name: Nuclear Heat Visor
   Description: "Gain {Block} |Block|.\nIf {PlayerName} has {Value1} or more |Heat|, prevent the next time the player would lose life before your next turn."
 
-HeatShield:
-  Name: Heat Shield
-  Description: "Gain {Block} |Block|.\nIf {PlayerName} has {Value2} or less |Heat|, gain {Value1} |Heat|."
+HeatWave:
+  Name: Heat Wave
+  Description: "Gain {Value1} |Heat|.\nAt the end of your turn, don't lose any |Heat|."
 
 RecklessGamble:
   Name: Reckless Gamble
@@ -101,7 +100,7 @@ NuclearDive:
 BunkerDown:
   Name: Bunker Down
   Description: "Gain {Block} |Block|.\n|Debut:| Gain {Shield} |Barrier| and reduce the cost of {SelfName} by {Mana}."
-  ExtraDescription1: "Gain {Block} |Block|.\n|d:Debut: Gain {Shield} Barrier. {SelfName} costs {Mana} less this combat.|"
+  ExtraDescription1: "Gain {Block} |Block|.\n|d:Debut: Gain {Shield} Barrier and reduce the cost of {SelfName} by {Mana}.|"
 
 WasteNot:
   Name: Waste Not
@@ -109,7 +108,8 @@ WasteNot:
 
 Tokamak:
   Name: "Hell's Tokamak"
-  Description: "Gain {Value1} |Heat|.\nAt the start of your next turn, gain {Value1} |Heat|."
+  Description: "Gain {Value1} |Heat|.\n|Debut:| At the start of your next turn, gain {Value1} |Heat| and reduce the cost of {SelfName} by {Mana}."
+  ExtraDescription1: "Gain {Value1} |Heat|.\n|d:Debut: At the start of your next turn, gain {Value1} Heat and reduce the cost of {SelfName} by {Mana}.|"
 
 DarkMatter:
   Name: Dark Matter

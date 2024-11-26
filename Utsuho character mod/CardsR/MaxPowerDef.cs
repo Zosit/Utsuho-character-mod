@@ -131,7 +131,7 @@ namespace Utsuho_character_mod.CardsR
                     }
                 }
                 yield return new DrawManyCardAction(Value1);
-                yield return new LoseManaAction(base.Battle.BattleMana);
+                //yield return new LoseManaAction(base.Battle.BattleMana);
                 yield return new GainManaAction(new ManaGroup() { Philosophy = Value1 });
                 yield return new ApplyStatusEffectAction<TempFirepower>(Battle.Player, base.Value1, null, null, null, 0.2f);
                 yield return new ApplyStatusEffectAction<TimeIsLimited>(Battle.Player, 1, null, null, null, 0f, true);

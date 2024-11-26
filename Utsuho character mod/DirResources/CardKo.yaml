@@ -97,11 +97,9 @@ SunlightReverie:
 
 NuclearDive:
   Name: 핵반응 제어불능 다이브
-  Description: "{PlayerName}의 |작열|이 두배로 증가합니다.\n{PlayerName}의 |작열| 10 마다 피해를 1 받습니다.\n|냉각|하고 그 수치만큼 피해를 줍니다."
-  ExtraDescription1: "{PlayerName}의 |작열|이 두배로 증가합니다.\n{PlayerName}의 |작열| 10 마다 피해를 1 받습니다.\n|냉각|하고 피해를 {Damage} 줍니다."
-  UpgradedDescription: "{PlayerName}의 |작열|이 세배로 증가합니다.\n{PlayerName}의 |작열| 10 마다 1의 피해를 받습니다.\n|냉각|하고 그 수치만큼 피해를 줍니다."
-  UpgradedExtraDescription1: "{PlayerName}의 |작열|이 세배로 증가합니다.\n{PlayerName}의 |작열| 10 마다 피해를 1 받습니다.\n|냉각|하고 피해를 {Damage} 줍니다."
-
+  Description: "{PlayerName}의 |작열|이 두배로 증가합니다.\n{PlayerName}의 |작열| 10 마다 피해를 1 받습니다.\n|냉각|하고 그 수치만큼 피해를 줍니다.\n|퇴치|: {Mana}를 얻습니다."
+  UpgradedDescription: "{PlayerName}의 |작열|이 세배로 증가합니다.\n{PlayerName}의 |작열| 10 마다 1의 피해를 받습니다.\n|냉각|하고 그 수치만큼 피해를 줍니다.\n|퇴치|: {Mana}를 얻습니다."
+  
 BunkerDown:
   Name: 긴급 대피
   Description: "|방어|를 {Block} 얻습니다.\n|선보임:| |보호막|을 {Shield} 얻고 {SelfName}의 비용을 {Mana} 줄입니다."
@@ -149,7 +147,7 @@ AbyssNova:
 
 SubterraneanSun:
   Name: 서브터레이니언 선
-  Description: "|손에 있을 경우:| {PlayerName}의 턴 시작시 |전장|의 무작위 카드를 {RemoveCount}장 제거하고 무작위 적에게 피해를 {Damage}씩 {RemoveCount}번 준다.\n{SelfName}이 |보존|된 턴만큼 이 효과를 추가로 반복합니다."
+  Description: "|손에 있을 경우:| {PlayerName}의 턴 시작시 뽑을 카드 더미/버린 카드 더미/손의 무작위 카드를 {RemoveCount}장 제거하고 무작위 적에게 피해를 {Damage}씩 {RemoveCount}번 준다.\n{SelfName}이 |보존|된 턴만큼 이 효과를 추가로 반복합니다."
 
 NightFalls:
   Name: 밤이 내려온다
@@ -193,12 +191,12 @@ MassDriver:
 
 ZeroPoint:
   Name: 제로 포인트 모듈
-  Description: "|응집|.\n|응집될 시|: |보호막|을 {Shield} 얻고 |소멸|을 가진 {SelfName}의 복사본을 손에 넣습니다."
+  Description: "|응집|.\n|응집될 시|: |보호막|을 {Shield} 얻고 |휘발성|을 가진 {SelfName}의 복사본을 손에 넣습니다."
   DetailText: "응집: |우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
 
 SuperGiant:
   Name: 초거성
-  Description: "피해를 {Damage} 줍니다.\n패의 |응집|카드 마다, {SelfName}의 {Mana}비용이 감소합니다."
+  Description: "피해를 {Damage} 줍니다.\n패의 |응집|카드 마다, {SelfName}의 {Mana}비용이 감소합니다.\n|응집|.\n|응집될 시|: {SelfName}의 비용이 {Mana}만큼 감소합니다."
 
 WhiteHole:
   Name: 화이트홀
@@ -212,7 +210,7 @@ GravityDistortion:
 
 FixedStar:
   Name: 픽스드 스타
-  Description: "{PlayerName}의 턴 종료시, 손에서 카드를 {Value1}장 골라 이번 턴 |보존|합니다.\n모든 |암흑 물질|이 이 전투 동안 |자동소멸|을 얻습니다."
+  Description: "{PlayerName}의 턴 종료시, 손에서 카드를 {Value1}장 골라 이번 턴 |보존|합니다.\n모든 |암흑 물질|이 이 전투 동안 드로우 했을 경우 |자동소멸|을 얻습니다."
 
 Coolant:
   Name: 냉각제
@@ -278,9 +276,9 @@ Starlight:
   Description: "|방어|를 {Block} 얻습니다.\n|작열|을 {Value1} 얻습니다.\n|암흑 물질|을 2장 패에 추가합니다."
   UpgradedDescription: "|보호막|을 {Shield} 얻습니다.\n|작열|을 {Value1} 얻습니다.\n|암흑 물질|을 2장 패에 추가합니다."
 
-QuantumDissonance:
-  Name: 양자 불일치
-  Description: "|응집|할 때마다, |응집될시|효과가 추가로 발동합니다."
+QuantumLink:
+  Name: 양자 연결
+  Description: "뽑을 카드 더미에서 |응집|을 가지지 않은 카드를 {Value1}장 골라 손으로 가져옵니다.\n무작위 카드를 1장 버립니다."
 
 AlphaProtocol:
   Name: 알파 프로토콜
@@ -308,10 +306,11 @@ AblativeArmor:
 SpatialRend:
   Name: 공간 절단
   Description: "|소멸|된 카드중 무작위 {Value1}장을 손으로 가져옵니다.\n피해를 {Damage} 줍니다.\n가져온 카드 마다, 피해를 추가로 {Value2} 주며, |응집|됐다면 대신 {doubleValue} 줍니다."
+  DetailText: "|소멸|한 기나긴 밤은 가져오지 않습니다."
 
 SunCrow:
   Name: 태양을 훔친 까마귀
-  Description: "|전장|의 무작위 카드를 {Value2}장 제거합니다.\n제거된 카드마다 |작열|을 {Value1} 얻습니다. ({RemoveCount})"
+  Description: "|전장|의 무작위 카드를 {Value2}장 제거합니다.\n제거된 카드마다 |작열|을 {Value1} 얻습니다. |응집|됐다면 두배로 얻습니다. ({RemoveCount})"
 
 HotSpring:
   Name: 구 지옥 온천

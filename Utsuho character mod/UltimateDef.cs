@@ -63,7 +63,7 @@ namespace Utsuho_character_mod
         public UtsuhoUltR()
         {
             base.TargetType = TargetType.SingleEnemy;
-            base.GunName = "Simple1";
+            base.GunName = "光辉宝枪";
         }
 
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector)
@@ -130,7 +130,7 @@ namespace Utsuho_character_mod
         public UtsuhoUltB()
         {
             base.TargetType = TargetType.AllEnemies;
-            base.GunName = "Simple1";
+            base.GunName = "黑天马的罪孽";
         }
 
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector)

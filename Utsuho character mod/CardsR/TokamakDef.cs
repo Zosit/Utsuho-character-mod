@@ -58,12 +58,12 @@ namespace Utsuho_character_mod.CardsR
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Rare,
-                Type: CardType.Ability,
+                Type: CardType.Skill,
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1, Any = 2 },
-                UpgradedCost: new ManaGroup() { Red = 1, Any = 2 },
+                Cost: new ManaGroup() { Red = 2, Any = 2 },
+                UpgradedCost: new ManaGroup() { Red = 2, Any = 2 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -71,11 +71,11 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 30,
-                UpgradedValue1: 40,
+                Value1: 50,
+                UpgradedValue1: 70,
                 Value2: null,
                 UpgradedValue2: null,
-                Mana: null,
+                Mana: new ManaGroup() { Red = 1, Any = 1 },
                 UpgradedMana: null,
                 Scry: null,
                 UpgradedScry: null,
@@ -92,8 +92,8 @@ namespace Utsuho_character_mod.CardsR
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.None,
-                UpgradedKeywords: Keyword.None,
+                Keywords: Keyword.Debut,
+                UpgradedKeywords: Keyword.Debut,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
@@ -114,14 +114,24 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(TokamakDefinition))]
         public sealed class Tokamak : Card
         {
-
-
+            protected override string GetBaseDescription()
+            {
+                if (base.DebutActive)
+                {
+                    return base.GetBaseDescription();
+                }
+                return this.ExtraDescription1;
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 if (!base.Battle.BattleShouldEnd)
                 {
                     yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(Value1), null, null, null, 0f, true);
-                    yield return new ApplyStatusEffectAction<TokamakStatus>(Battle.Player, new int?(Value1), null, null, null, 0f, true);
+                    if (base.PlayInTriggered)
+                    {
+                        yield return new ApplyStatusEffectAction<TokamakStatus>(Battle.Player, new int?(Value1), null, null, null, 0f, true);
+                        this.DecreaseBaseCost(this.Mana);
+                    }
                     yield break;
                 }
             }

@@ -145,9 +145,11 @@ namespace Utsuho_character_mod
 
         public override ModelOption LoadModelOptions()
         {
-            return new ModelOption(ResourceLoader.LoadSpriteAsync("Utsuho_Sprite.png", directorySource, ppu: 56));
+            return new ModelOption(ResourceLoader.LoadSpriteAsync("Utsuho_Sprite.png", directorySource, ppu: 565));
         }
-
+        public static Sprite hurtSprite = ResourceLoader.LoadSprite("UtsuhoHurt_Sprite.png", directorySource, ppu: 565);
+        public static Sprite castSprite = ResourceLoader.LoadSprite("UtsuhoCast_Sprite.png", directorySource, ppu: 565);
+        public static Sprite defaultSprite = ResourceLoader.LoadSprite("Utsuho_Sprite.png", directorySource, ppu: 565);
 
         public override UniTask<Sprite> LoadSpellSprite() => ResourceLoader.LoadSpriteAsync("SpellCard.png", directorySource, ppu: 336);
 
@@ -155,6 +157,7 @@ namespace Utsuho_character_mod
         public override UnitModelConfig MakeConfig()
         {
             var config = UnitModelConfig.FromName("Reimu").Copy();
+            config.Name = "Utsuho";
             config.Flip = true;
             config.Type = 0;
             config.Offset = new Vector2(0, 0.04f);

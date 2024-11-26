@@ -45,7 +45,7 @@ namespace Utsuho_character_mod.CardsR
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13310,
+                Index: 13160,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -60,7 +60,7 @@ namespace Utsuho_character_mod.CardsR
                 FindInBattle: true,
                 HideMesuem: false,
                 IsUpgradable: true,
-                Rarity: Rarity.Uncommon,
+                Rarity: Rarity.Common,
                 Type: CardType.Skill,
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Red },
@@ -74,8 +74,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 8,
-                UpgradedValue1: 8,
+                Value1: 10,
+                UpgradedValue1: 10,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: new ManaGroup() { Red = 2 },

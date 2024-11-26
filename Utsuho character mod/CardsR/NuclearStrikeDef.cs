@@ -49,8 +49,8 @@ namespace Utsuho_character_mod.CardsR
                 Order: 10,
                 AutoPerform: true,
                 Perform: new string[0][],
-                GunName: "火激光",
-                GunNameBurst: "火激光",
+                GunName: "ERinShoot1",
+                GunNameBurst: "ERinShoot1",
                 DebugLevel: 0,
                 Revealable: false,
                 IsPooled: false,
@@ -59,7 +59,7 @@ namespace Utsuho_character_mod.CardsR
                 IsUpgradable: true,
                 Rarity: Rarity.Rare,
                 Type: CardType.Attack,
-                TargetType: TargetType.SingleEnemy,
+                TargetType: TargetType.AllEnemies,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
                 Cost: new ManaGroup() { Red = 1 },
@@ -125,7 +125,7 @@ namespace Utsuho_character_mod.CardsR
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return base.AttackAction(selector.SelectedEnemy);
+                yield return base.AttackAction(selector);
 
                 if (!base.Battle.BattleShouldEnd)
                 {

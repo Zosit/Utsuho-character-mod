@@ -12,7 +12,7 @@ using LBoL.Core.Battle.BattleActions;
 using LBoL.EntityLib.StatusEffects.Enemy;
 using LBoL.Core.Units;
 using LBoLEntitySideloader.Entities;
-using LBoL.EntityLib.Cards.Neutral.Black;
+using LBoL.Presentation.Units;
 using LBoL.Base;
 using LBoL.Core.Cards;
 using LBoL.Base.Extensions;
@@ -27,6 +27,12 @@ using LBoL.Presentation.UI.Panels;
 using System.Collections;
 using System.Reflection.Emit;
 using System.Reflection;
+using LBoL.Presentation.UI.Widgets;
+using LBoL.Presentation;
+using UnityEngine;
+using LBoLEntitySideloader.Resource;
+using static Utsuho_character_mod.BepinexPlugin;
+using Cysharp.Threading.Tasks.Triggers;
 
 namespace PullFix.Patches
 {
@@ -47,6 +53,98 @@ namespace PullFix.Patches
             return matcher;
         }
     }
+
+
+    [HarmonyPatch(typeof(UnitView))]
+    class UnitView_SetTrigger_Patch
+    {
+        [HarmonyPatch(nameof(UnitView.SetTrigger), typeof(string))]
+        static bool Prefix(UnitView __instance, string triggerName)
+        {
+            if (__instance._modelName == "Utsuho")
+            {
+                if(triggerName == "hit" && __instance.spriteRenderer.sprite != UtsuhoModelDef.hurtSprite)
+                    __instance.StartCoroutine(AnimateHurt(__instance));
+                if (triggerName == "spell" && __instance.spriteRenderer.sprite != UtsuhoModelDef.castSprite)
+                    __instance.StartCoroutine(AnimateCast(__instance));
+                if (triggerName == "shoot1" && __instance.spriteRenderer.sprite != UtsuhoModelDef.castSprite)
+                    __instance.StartCoroutine(AnimateCast(__instance));
+                if (triggerName == "shoot2" && __instance.spriteRenderer.sprite != UtsuhoModelDef.castSprite)
+                    __instance.StartCoroutine(AnimateCast(__instance));
+                if (triggerName == "shoot3" && __instance.spriteRenderer.sprite != UtsuhoModelDef.castSprite)
+                    __instance.StartCoroutine(AnimateCast(__instance));
+                if (triggerName == "shoot4" && __instance.spriteRenderer.sprite != UtsuhoModelDef.castSprite)
+                    __instance.StartCoroutine(AnimateCast(__instance));
+            }
+            return true;
+        }
+        private static IEnumerator AnimateHurt(UnitView __instance)
+        {
+            yield return __instance.spriteRenderer.sprite = UtsuhoModelDef.hurtSprite;
+            yield return new WaitForSeconds(1.0f);
+            yield return __instance.spriteRenderer.sprite = UtsuhoModelDef.defaultSprite;
+        }
+        private static IEnumerator AnimateCast(UnitView __instance)
+        {
+            yield return __instance.spriteRenderer.sprite = UtsuhoModelDef.castSprite;
+            yield return new WaitForSeconds(1.0f);
+            yield return __instance.spriteRenderer.sprite = UtsuhoModelDef.defaultSprite;
+        }
+        /*[HarmonyPatch(nameof(UnitView.CrashRunner), typeof(bool), typeof(bool), typeof(float))]
+        static void Postfix(UnitView __instance, ref IEnumerator __result, bool shield, bool block, float speed)
+        {
+
+            if (__instance._modelName == "Utsuho")
+            {
+                __instance.spriteRenderer.sprite = UtsuhoModelDef.hurtSprite;
+
+                //__result = GetEnumerator(__instance);
+            }
+        }*/
+    }
+
+    /*[HarmonyPatch(typeof(UnitView))]
+    class UnitView_ShootAnimation_Patch
+    {
+        [HarmonyPatch(nameof(UnitView.ShootStartAnimation), typeof(string), typeof(List<float>), typeof(List<float>))]
+        static bool Prefix(UnitView __instance, bool order, bool keyTimes, float speeds)
+        {
+
+            if (__instance._modelName == "Utsuho")
+            {
+                __instance.spriteRenderer.sprite = UtsuhoModelDef.hurtSprite;
+
+                //__result = GetEnumerator(__instance);
+
+            }
+            return true;
+        }
+        [HarmonyPatch(nameof(UnitView.ShootStartAnimation), typeof(string), typeof(List<float>), typeof(List<float>))]
+        static void Postfix(UnitView __instance, bool order, bool keyTimes, float speeds)
+        {
+
+            if (__instance._modelName == "Utsuho")
+            {
+                __instance.spriteRenderer.sprite = UtsuhoModelDef.hurtSprite;
+
+                //__result = GetEnumerator(__instance);
+            }
+        }*/
+
+    }
+    /*[HarmonyPatch(typeof(UnitView))]
+    class UnitView_CrashAnimation_Patch
+    {
+        [HarmonyPrefix]
+        [HarmonyPatch(nameof(UnitView.Crashing), MethodType.Getter)]
+        static bool Prefix(UnitView __instance, ref bool __result)
+        {
+            __instance.spriteRenderer.sprite = UtsuhoModelDef.hurtSprite;
+
+            return true;
+        }
+    }*/
+
     /*[HarmonyPatch(typeof(BattleController), nameof(BattleController.ShuffleDrawPile))]
     class ShuffleDrawPile_Patch
     {
@@ -84,11 +182,11 @@ namespace PullFix.Patches
                  .LeaveJumpFix().InstructionEnumeration();
         }
 
-    }*/
+    }
 
 
 
-}
+}*/
 
 /*[HarmonyPatch(typeof(FangxiangHeal))]
 class FangxiangHeal_OnUse_Patch
