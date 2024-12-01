@@ -322,3 +322,7 @@ Dojo:
 Remember:
   Name: "Help Me Remember, Satori-sama!"
   Description: "Return any number of cards from |Exile| to the hand."
+  
+CollapsingStar:
+  Name: Collapsing Star
+  Description: "When you add a |Dark Matter|, draw {Value1:plural one='a card.' other='% cards.'}\nWhen you gain |Heat|, gain {Mana} for every 10 |Heat| gained."

@@ -106,7 +106,7 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "AltAlias",
                 SubIllustrator: new List<string>() { }
              );
 

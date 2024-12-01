@@ -100,7 +100,7 @@ namespace Utsuho_character_mod
 
         public override Sprite LoadSprite()
         {
-            return ResourceLoader.LoadSprite("Nuclear.png", embeddedSource);
+            return ResourceLoader.LoadSprite("UtsuhoUltB.png", embeddedSource);
         }
 
         public override UltimateSkillConfig MakeConfig()

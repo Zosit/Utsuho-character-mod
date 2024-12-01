@@ -104,8 +104,8 @@ namespace Utsuho_character_mod.CardsB
                 UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "Zosit",
-                SubIllustrator: new List<string>() { }
+                Illustrator: "AltAlias",
+                SubIllustrator: new List<string>() { "Zosit" }
              );
 
             return cardConfig;

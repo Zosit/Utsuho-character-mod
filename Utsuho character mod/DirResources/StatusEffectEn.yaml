@@ -40,8 +40,8 @@ CautionStatus:
 
 TurboFuelStatus:
   Name: Turbo Fuel
-  Description: "At the start of your turn, gain {Level} {manatype} and draw {Level} cards.\nThen exile a random card in your hand."
-  Brief: "At the start of your turn, gain mana and draw cards.\nThen exile a random card in your hand."
+  Description: "At the start of your turn, gain {Level} {Mana} and draw {Level} cards.\nThen exile a random card in your hand."
+  Brief: "At the start of your turn, gain {Mana}{Mana} and draw cards.\nThen exile a random card in your hand."
 
 RadiationStatus:
   Name: Radiation
@@ -82,3 +82,8 @@ HeatWaveStatus:
   Name: Heat Wave
   Description: "At the end of your next {Duration:plural one='turn' other='% turns'}, don't lose any |Heat|."
   Brief: "At the end of your next turn, don't lose any |Heat|."
+  
+CollapsingStarStatus:
+  Name: Collapsing Star
+  Description: "When you add a |Dark Matter|, draw {Level:plural one='a card.' other='% cards.'}\nWhen you gain |Heat|, gain {Level} {Mana} for every 10 |Heat| gained."
+  Brief: "When you add a |Dark Matter|, draw a card. When you gain |Heat|, gain {Mana} for every 10 |Heat| gained."

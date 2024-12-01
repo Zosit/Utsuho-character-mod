@@ -82,3 +82,8 @@ SunSpotStatus:
 HeatVisorStatus:
   Name: 핵열 바이저
   Description: "다음 턴이 되기 전까지 받는 피해를 {Level}회 방지합니다."
+
+HeatWaveStatus:
+  Name: 작열 파도
+  Description: "다음 {Duration}턴 종료시, |작열|을 잃지 않습니다."
+  Brief: "다음 턴 종료시, |작열|을 잃지 않습니다."

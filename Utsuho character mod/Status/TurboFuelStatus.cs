@@ -77,13 +77,8 @@ namespace Utsuho_character_mod.Status
     [EntityLogic(typeof(TurboFuelEffect))]
     public sealed class TurboFuelStatus : StatusEffect
     {
-        public ManaGroup manatype
-        {
-            get
-            {
-                return new ManaGroup() { Philosophy = 1 };
-            }
-        }
+        public ManaGroup Mana { get; set; } = ManaGroup.Philosophies(1);
+
         protected override void OnAdded(Unit unit)
         {
             ReactOwnerEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));

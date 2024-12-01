@@ -40,7 +40,7 @@ StartReactor:
 
 MaxPower:
   Name: 최대화력
-  Description: "패를 전부 |소멸|시킵니다.\n마나를 전부 잃고 {Mana}를 얻습니다. 카드를 {Value1}장 뽑습니다.\n|일시 화력|을 {Value1} 얻습니다.\n|시간 제한| <sprite=\"ManaSprite\" name=\"1\">."
+  Description: "패를 전부 |소멸|시킵니다.\n{Mana}를 얻습니다. 카드를 {Value1}장 뽑습니다.\n|일시 화력|을 {Value1} 얻습니다.\n|시간 제한| <sprite=\"ManaSprite\" name=\"1\">."
 
 Aggregate:
   Name: 집열
@@ -73,16 +73,15 @@ NuclearFusion:
 
 NuclearStrike:
   Name: 뉴클리어 스트라이크
-  Description: "|냉각|하고 그 수치만큼 피해를 줍니다.\n|작열|을 {Value1} 얻습니다."
-  ExtraDescription1: "|냉각|하고 피해를 {Damage} 줍니다.\n|작열|을 {Value1} 얻습니다."
+  Description: "|냉각|하고 그 수치만큼 모든 적에게 피해를 줍니다.\n|작열|을 {Value1} 얻습니다."
 
 HeatVisor:
   Name: 핵열 바이저
   Description: "|방어|를 {Block} 얻습니다.\n{PlayerName}의 |작열|이 {Value1} 이상이라면, 다음 턴이 되기 전까지 받는 피해를 1회 방지합니다."
 
-HeatShield:
-  Name: 작열 방패
-  Description: "|방어|를 {Block} 얻습니다.\n{PlayerName}의 |작열|이 {Value2} 이하라면, |작열|을 {Value1} 얻습니다."
+HeatWave:
+  Name: 작열 파도
+  Description: "|작열|을 {Value1} 얻습니다.\n이번 턴 종료시, |작열|을 잃지 않습니다."
 
 RecklessGamble:
   Name: 무모한 도박
@@ -103,7 +102,7 @@ NuclearDive:
 BunkerDown:
   Name: 긴급 대피
   Description: "|방어|를 {Block} 얻습니다.\n|선보임:| |보호막|을 {Shield} 얻고 {SelfName}의 비용을 {Mana} 줄입니다."
-  ExtraDescription1: "|방어|를 {Block} 얻습니다.\n|d:선보임: |보호막|을 {Shield} 얻습니다. 이번 전투동안 {SelfName}의 비용이 {Mana} 감소합니다.|"
+  ExtraDescription1: "|방어|를 {Block} 얻습니다.\n|d:선보임: |보호막|을 {Shield} 얻고, {SelfName}의 비용이 {Mana} 감소합니다.|"
 
 WasteNot:
   Name: 재활용
@@ -111,7 +110,8 @@ WasteNot:
 
 Tokamak:
   Name: "헬스 토카막"
-  Description: "|작열|을 {Value1} 얻습니다.\n다음 턴 시작시, |작열|을 {Value1} 얻습니다."
+  Description: "|작열|을 {Value1} 얻습니다.\n|선보임:| 다음 턴 시작시, |작열|을 {Value1} 얻고 {SelfName}의 비용을 {Mana} 줄입니다."
+  ExtraDescription1: "|작열|을 {Value1} 얻습니다.\n|d:선보임: 다음 턴 시작시, |작열|을 {Value1} 얻고 {SelfName}의 비용을 {Mana} 줄입니다.|"
 
 DarkMatter:
   Name: 암흑 물질
