@@ -16,7 +16,7 @@ GravityWellStatus:
 
 MassDriverStatus:
   Name: 매스 드라이버
-  Description: "|암흑 물질|을 사용할 때마다, 모든 적에게 피해를 {level} 줍니다."
+  Description: "|암흑 물질|을 사용할 때마다, 모든 적에게 피해를 {Level} 줍니다."
   Brief: "|암흑 물질|을 사용할 때마다, 모든 적에게 피해를 줍니다."
 
 ResonanceStatus:
@@ -41,12 +41,12 @@ CautionStatus:
 
 TurboFuelStatus:
   Name: 터보연료
-  Description: "턴 시작시, {manatype}를 {level} 얻고 카드를 {level}장 뽑습니다.\n그 후 패의 무작위 카드를 소멸시킵니다."
-  Brief: "턴 시작시, 마나를 얻고 카드를 뽑습니다.\n그 후 패의 무작위 카드를 소멸시킵니다."
+  Description: "턴 시작시, {Mana}를 {Level} 얻고 카드를 {Level}장 뽑습니다.\n그 후 패의 무작위 카드를 소멸시킵니다."
+  Brief: "턴 시작시, {Mana}{Mana}를 얻고 카드를 뽑습니다.\n그 후 패의 무작위 카드를 소멸시킵니다."
 
 RadiationStatus:
   Name: 방사능
-  Description: "턴 종료시 모든 적에게 피해를 {level} 줍니다."
+  Description: "턴 종료시 모든 적에게 피해를 {Level} 줍니다."
   Brief: "턴 종료시 모든 적에게 피해를 줍니다."
 
 HotSpringStatus:
@@ -56,7 +56,7 @@ HotSpringStatus:
 
 MaintainReactionStatus:
   Name: 유지 보수
-  Description: "카드가 |보존|되면, |작열|을 {level} 얻습니다."
+  Description: "카드가 |보존|되면, |작열|을 {Level} 얻습니다."
   Brief: "카드가 |보존|되면, |작열|을 얻습니다."
 
 FixedStarStatus:
@@ -87,3 +87,28 @@ HeatWaveStatus:
   Name: 작열 파도
   Description: "다음 {Duration}턴 종료시, |작열|을 잃지 않습니다."
   Brief: "다음 턴 종료시, |작열|을 잃지 않습니다."
+
+CollapsingStarStatus:
+  Name: 붕괴하는 별
+  Description: "|암흑 물질|을 추가하면, 카드를 {Level}장 뽑습니다.\n|작열|을 얻으면, 얻은 |작열| 10마다 {Mana}를 {Level}번 얻습니다."
+  Brief: "|암흑 물질|을 추가하면, 카드를 뽑습니다.\n|작열|을 얻으면, 얻은 |작열| 10마다 {Mana}를 얻습니다."
+  
+PlasmaBurnStatus:
+  Name: 플라즈마 연소
+  Description: "{PlayerName}의 턴 시작시, 체력을 {Level} 잃습니다."
+  Brief: "{PlayerName}의 턴 시작시, 체력을 잃습니다."
+
+MassStatus:
+  Name: 응집
+  Description: "|우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
+  Brief: "|우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
+  
+KickerStatus:
+  Name: 전력
+  Description: "이 카드를 사용할 때 모든 마나가 사용됩니다. 카드 비용과 전력 비용을 감당할 수 있다면 추가 효과를 얻습니다."
+  Brief: "이 카드를 사용할 때 모든 마나가 사용됩니다. 카드 비용과 전력 비용을 감당할 수 있다면 추가 효과를 얻습니다."
+  
+MultiKickerStatus:
+  Name: 과잉전력
+  Description: "이 카드를 사용할 때 모든 마나가 사용됩니다. 카드 비용을 제외한 나머지 마나로 과잉전력의 비용을 충족할 때 마다 추가 효과가 발동합니다."
+  Brief: "이 카드를 사용할 때 모든 마나가 사용됩니다. 카드 비용을 제외한 나머지 마나로 과잉전력의 비용을 충족할 때 마다 추가 효과가 발동합니다."

@@ -19,8 +19,8 @@ Gridlock:
   
 HellGeyser:
   Name: 헬 가이저
-  Description: "|작열|을 {Value1} 얻습니다.\n|냉각|하고 그 수치만큼 피해를 줍니다.\n|작열|을 {Value2} 얻습니다."
-  ExtraDescription1: "|작열|을 {Value1} 얻습니다.\n|냉각|하고, 피해를 {Damage} 줍니다.\n|작열|을 {Value2} 얻습니다."
+  Description: "|작열|을 {Value1} 얻습니다.\n|냉각|하고 그 수치만큼 피해를 줍니다.\n소모한 |작열|의 절반만큼 |작열|을 얻습니다."
+  ExtraDescription1: "|작열|을 {Value1} 얻습니다.\n|냉각|하고, 피해를 {Damage} 줍니다.\n소모한 |작열|의 절반만큼 |작열|을 얻습니다."
 
 FlareUp:
   Name: 플레어 업
@@ -31,8 +31,7 @@ FlareUp:
 
 PlasmaBurn:
   Name: 플라즈마 연소
-  Description: "|작열|을 {Value1} 얻습니다.\n{PlayerName}의 |작열|이 {Value2} 이상이라면, |냉각|하고 그 수치만큼 피해를 줍니다."
-  ExtraDescription1: "|작열|을 {Value1} 얻습니다.\n{PlayerName}의 |작열|이 {Value2} 이상이라면, |냉각|하고 피해를 {Damage} 줍니다."
+  Description: "|작열|을 {Value1} 얻습니다.\n|냉각|하고 그 수치만큼 피해를 줍니다.\n다음 턴 시작시 막히지 않은 피해를 반복합니다."
 
 StartReactor:
   Name: 원자로 가동
@@ -48,8 +47,8 @@ Aggregate:
 
 Fission:
   Name: 핵분열
-  Description: "무작위 |빨간색| 공격과 방어카드를 얻습니다. 해당 카드의 코스트는 임의의 마나로 지불할 수 있습니다.\n|작열|을 {Value1} 얻습니다.\n{Mana}를 얻습니다."
-  UpgradedDescription: "무작위 |강화|된 |빨간색| 공격과 방어카드를 얻습니다. 해당 카드의 코스트는 임의의 마나로 지불할 수 있습니다.\n|작열|을 {Value1} 얻습니다.\n{Mana}를 얻습니다."
+  Description: "손에서 카드를 한장 |소멸|시킵니다.\n무작위 |빨간색| 공격과 방어카드를 얻습니다. 해당 카드의 코스트는 임의의 마나로 지불할 수 있습니다.\n|작열|을 {Value1} 얻습니다."
+  UpgradedDescription: "손에서 카드를 한장 |소멸|시킵니다.\n무작위 |강화|된 |빨간색| 공격과 방어카드를 얻습니다. 해당 카드의 코스트는 임의의 마나로 지불할 수 있습니다.\n|작열|을 {Value1} 얻습니다."
 
 EverythingBurns:
   Name: 전부 불타버려
@@ -96,8 +95,8 @@ SunlightReverie:
 
 NuclearDive:
   Name: 핵반응 제어불능 다이브
-  Description: "{PlayerName}의 |작열|이 두배로 증가합니다.\n{PlayerName}의 |작열| 10 마다 피해를 1 받습니다.\n|냉각|하고 그 수치만큼 피해를 줍니다.\n|퇴치|: {Mana}를 얻습니다."
-  UpgradedDescription: "{PlayerName}의 |작열|이 세배로 증가합니다.\n{PlayerName}의 |작열| 10 마다 1의 피해를 받습니다.\n|냉각|하고 그 수치만큼 피해를 줍니다.\n|퇴치|: {Mana}를 얻습니다."
+  Description: "{PlayerName}의 |작열|이 두배로 증가합니다.\n{PlayerName}의 |작열| 10 마다 피해를 1 받습니다.\n|냉각|하고 그 수치만큼 피해를 줍니다.\n|퇴치|: 소모한 |작열|의 절반만큼 |작열|을 얻습니다."
+  UpgradedDescription: "{PlayerName}의 |작열|이 세배로 증가합니다.\n{PlayerName}의 |작열| 10 마다 1의 피해를 받습니다.\n|냉각|하고 그 수치만큼 피해를 줍니다.\n|퇴치|: 소모한 |작열|의 절반만큼 |작열|을 얻습니다."
   
 BunkerDown:
   Name: 긴급 대피
@@ -115,13 +114,11 @@ Tokamak:
 
 DarkMatter:
   Name: 암흑 물질
-  Description: "|뽑을때 발동|: 이번 턴 |보존|됩니다.\n|응집|"
-  DetailText: "응집: |우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
+  Description: "|뽑을때 발동|: 이번 턴 |보존|됩니다."
 
 ShootingStar:
   Name: 유성
-  Description: "피해를 {Damage}씩 2번 줍니다.\n|응집|\n|응집될시 발동|: 방어를 {Block} 얻고 패에 |암흑 물질|을 추가합니다."
-  DetailText: "응집: |우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
+  Description: "피해를 {Damage}씩 2번 줍니다.\n|응집될시 발동|: 방어를 {Block} 얻고 패에 |암흑 물질|을 추가합니다."
 
 CloakStar:
   Name: 별의 망토
@@ -170,9 +167,8 @@ PlanetaryOrbit:
 
 Ultraviolet:
   Name: 이글거리는 자외선
-  Description: "{Mana}를 얻습니다.\n|응집|\n|응집될 시 발동|: 카드를 {Value1}장 뽑습니다."
-  UpgradedDescriptionDescription: "{Mana}를 얻습니다.\n|응집|\n|응집될 시 발동|: 카드를 {Value1}장 뽑습니다."
-  DetailText: "응집: |우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
+  Description: "{Mana}를 얻습니다.\n|응집될 시 발동|: 카드를 {Value1}장 뽑습니다."
+  UpgradedDescriptionDescription: "{Mana}를 얻습니다.\n|응집될 시 발동|: 카드를 {Value1}장 뽑습니다."
 
 HighTension:
   Name: 하이텐션 블레이드
@@ -191,12 +187,11 @@ MassDriver:
 
 ZeroPoint:
   Name: 제로 포인트 모듈
-  Description: "|응집|.\n|응집될 시|: |보호막|을 {Shield} 얻고 |휘발성|을 가진 {SelfName}의 복사본을 손에 넣습니다."
-  DetailText: "응집: |우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
+  Description: "|응집될 시|: |보호막|을 {Shield} 얻고 |휘발성|을 가진 {SelfName}의 복사본을 손에 넣습니다."
 
 SuperGiant:
   Name: 초거성
-  Description: "피해를 {Damage} 줍니다.\n패의 |응집|카드 마다, {SelfName}의 {Mana}비용이 감소합니다.\n|응집|.\n|응집될 시|: {SelfName}의 비용이 {Mana}만큼 감소합니다."
+  Description: "피해를 {Damage} 줍니다.\n패의 다른 |응집|카드 마다, {SelfName}의 {Mana}비용이 감소합니다.\n|응집될 시|: {SelfName}의 비용이 {Mana}만큼 감소합니다."
 
 WhiteHole:
   Name: 화이트홀
@@ -205,8 +200,7 @@ WhiteHole:
 
 GravityDistortion:
   Name: 공간 왜곡
-  Description: "모든 적에게 |허약|을 {Value2} 주고 피해를 {Damage} 줍니다.\n|응집|\n|응집될 시|: {Mana}를 얻습니다."
-  DetailText: "응집: |우츠호|의 무작위 카드 지정은 {SelfName}을 대상으로 합니다."
+  Description: "모든 적에게 |허약|을 {Value2} 주고 피해를 {Damage} 줍니다.\n|응집될 시|: {Mana}를 얻습니다."
 
 FixedStar:
   Name: 픽스드 스타
@@ -215,13 +209,11 @@ FixedStar:
 Coolant:
   Name: 냉각제
   Description: "|전력| {Mana}: 화력을 {Value2} 얻습니다.\n|영력|을 {Value1} 얻습니다.\n손의 방어카드가 아닌 카드를 전부 버립니다."
-  DetailText: "전력: 이 카드를 사용할 때 모든 마나가 사용됩니다. 카드 비용과 전력 비용을 감당할 수 있다면 추가 효과를 얻습니다."
 
 Blueshift:
   Name: 청색편이
   Description: "|과잉전력| {Mana}: {SelfName}를 손으로 가져옵니다.\n|방어|를 {Block} 얻습니다."
   UpgradedDescription: "|과잉전력| {Mana}: 강화된 {SelfName}를 손으로 가져옵니다\n|방어|를 {Block} 얻습니다."
-  DetailText: "과잉전력: 이 카드를 사용할 때 모든 마나가 사용됩니다. 카드 비용을 제외한 나머지 마나로 과잉전력의 비용을 충족할 때 마다 추가 효과가 발동합니다."
 
 Resonance:
   Name: 공명
@@ -278,7 +270,7 @@ Starlight:
 
 QuantumLink:
   Name: 양자 연결
-  Description: "뽑을 카드 더미에서 |응집|을 가지지 않은 카드를 {Value1}장 골라 손으로 가져옵니다.\n무작위 카드를 1장 버립니다."
+  Description: "뽑을 카드 더미에서 카드를 {Value1}장 골라 손으로 가져옵니다.\n무작위 카드를 1장 버립니다."
 
 AlphaProtocol:
   Name: 알파 프로토콜
@@ -296,7 +288,7 @@ GammaProtocol:
 
 SunSpot:
   Name: 인공태양의 흑점
-  Description: "|작열|을 {Value1} 얻습니다.\n|암흑 물질|을 손에 {Value2}장 추가합니다.\n|암흑 물질|을 사용할시, |작열|이 소모되지 않고 발동합니다."
+  Description: "|작열|을 {Value1} 얻습니다.\n|암흑 물질|을 사용할시, |작열|이 소모되지 않고 두번 발동합니다."
   UpgradedDescription: "|작열|을 {Value1} 얻습니다.\n|암흑 물질|을 손에 {Value2}장 추가합니다.\n|암흑 물질|을 사용할시, |작열|이 소모되지 않고 두번 발동합니다."
 
 AblativeArmor:
@@ -323,3 +315,7 @@ Dojo:
 Remember:
   Name: "도와주세요! 사토리님"
   Description: "|소멸|한 카드들을 골라 패로 가져옵니다."
+
+CollapsingStar:
+  Name: 붕괴하는 별
+  Description: "|암흑 물질|을 추가하면, 카드를 {Value1}장 뽑습니다.\n|작열|을 얻으면, 얻은 |작열| 10마다 {Mana}를 얻습니다."
