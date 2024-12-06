@@ -105,8 +105,8 @@ namespace Utsuho_character_mod.CardsU
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { },
-                UpgradedRelativeEffects: new List<string>() { },
+                RelativeEffects: new List<string>() { "MultiKickerStatus" },
+                UpgradedRelativeEffects: new List<string>() { "MultiKickerStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -119,10 +119,15 @@ namespace Utsuho_character_mod.CardsU
         }
 
         [EntityLogic(typeof(BlueshiftDef))]
-        public sealed class Blueshift : Card
+        public sealed class Blueshift : UtsuhoCard
         {
             ManaGroup temp;
             int KickCount = 0;
+            /*public override void Initialize()
+            {
+                isMultiKicker = true;
+                base.Initialize();
+            }*/
             protected override void OnEnterBattle(BattleController battle)
             {
                 base.ReactBattleEvent<ManaEventArgs>(base.Battle.ManaConsuming, new EventSequencedReactor<ManaEventArgs>(this.OnManaConsuming));

@@ -135,9 +135,12 @@ namespace Utsuho_character_mod
 
         internal static AssetBundle utsuhoAB;
 
+        public static ConfigEntry<bool> act1BossConfig;
+
         private void Awake()
         {
             log = Logger;
+            act1BossConfig = Config.Bind("Act1Boss", "Act1Boss", true, "Enables the Act 1 Utsuho boss for non-Utsuho characters.");
 
             // very important. Without this the entry point MonoBehaviour gets destroyed
             DontDestroyOnLoad(gameObject);

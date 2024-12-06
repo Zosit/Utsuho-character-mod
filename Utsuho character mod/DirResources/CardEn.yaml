@@ -17,8 +17,8 @@ Gridlock:
 
 HellGeyser:
   Name: Hell Geyser
-  ExtraDescription1: "Gain {Value1} |Heat|.\n|Vent| for damage.\nGain {Value2} |Heat|."
-  Description: "Gain {Value1} |Heat|.\n|Vent| to deal {Damage} damage.\nGain {Value2} |Heat|."
+  ExtraDescription1: "Gain {Value1} |Heat|.\n|Vent| for damage.\nGain half the vented |Heat|."
+  Description: "Gain {Value1} |Heat|.\n|Vent| to deal {Damage} damage.\nGain half the vented |Heat|."
 
 FlareUp:
   Name: Flare Up
@@ -29,8 +29,7 @@ FlareUp:
 
 PlasmaBurn:
   Name: Plasma Burn
-  ExtraDescription1: "Gain {Value1} |Heat|.\nIf {PlayerName} has {Value2} or more |Heat|, |Vent| for Damage."
-  Description: "Gain {Value1} |Heat|.\nIf {PlayerName} has {Value2} or more |Heat|, |Vent| to deal {Damage} damage."
+  Description: "Gain {Value1} |Heat|.\n|Vent| to deal {Damage} damage.\nRepeat all unblocked damage at the start of your next turn."
 
 StartReactor:
   Name: Start Reactor
@@ -46,12 +45,12 @@ Aggregate:
 
 Fission:
   Name: Fission
-  Description: "Add a random |Red| attack and defense card to the hand. Mana of any color can be spent to pay their mana costs.\nGain {Value1} |Heat|.\nGain {Mana}."
-  UpgradedDescription: "Add a random upgraded |Red| attack and defense card to the hand. Mana of any color can be spent to pay their mana costs.\nGain {Value1} |Heat|.\nGain {Mana}."
+  Description: "|Exile| a Card from the hand.\nAdd a random |Red| attack and defense card to the hand. Mana of any color can be spent to pay their mana costs.\nGain {Value1} |Heat|."
+  UpgradedDescription: "|Exile| a Card from the hand.\nAdd a random upgraded |Red| attack and defense card to the hand. Mana of any color can be spent to pay their mana costs.\nGain {Value1} |Heat|."
 
 EverythingBurns:
   Name: Everything Burns
-  Description: "|Exile| up to X+2 cards in the hand.\n|For each {Mana} spent|: Deal {Damage} damage."
+  Description: "|Exile| up to X+2 cards from the hand.\n|For each {Mana} spent|: Deal {Damage} damage."
 
 SkyFlight:
   Name: Sky Flight
@@ -94,8 +93,8 @@ SunlightReverie:
 
 NuclearDive:
   Name: Uncontainable Nuclear Reaction Dive
-  Description: "Double {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage.\n|Expel|: Gain {Mana}."
-  UpgradedDescription: "Triple {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage.\n|Expel|: Gain {Mana}."
+  Description: "Double {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage.\n|Expel|: Gain half the vented |Heat|."
+  UpgradedDescription: "Triple {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage.\n|Expel|: Gain half the vented |Heat|."
 
 BunkerDown:
   Name: Bunker Down
@@ -113,13 +112,11 @@ Tokamak:
 
 DarkMatter:
   Name: Dark Matter
-  Description: "|On Enter Hand|: |Retain| this turn.\nHas |Mass|."
-  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
+  Description: "|On Enter Hand|: |Retain| this turn."
 
 ShootingStar:
   Name: Shooting Star
-  Description: "Deal {Damage} damage 2 times.\nHas |Mass|.\n|When Pulled|: Gain {Block} block and add a |Dark Matter| to the hand."
-  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
+  Description: "Deal {Damage} damage 2 times.\n|When Pulled|: Gain {Block} block and add a |Dark Matter| to the hand."
 
 CloakStar:
   Name: Cloak of Stars
@@ -168,9 +165,8 @@ PlanetaryOrbit:
 
 Ultraviolet:
   Name: Blazing Ultraviolet
-  Description: "Gain {Mana}.\nHas |Mass|\n|When Pulled|:\nDraw {Value1} card."
-  UpgradedDescription: "Gain {Mana}.\nHas |Mass|\n|When Pulled|:\nDraw {Value1} cards."
-  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
+  Description: "Gain {Mana}.\n|When Pulled|:\nDraw {Value1} card."
+  UpgradedDescription: "Gain {Mana}.\n|When Pulled|:\nDraw {Value1} card."
 
 HighTension:
   Name: High Tension Blade
@@ -189,12 +185,11 @@ MassDriver:
 
 ZeroPoint:
   Name: Zero-Point Field
-  Description: "Has |Mass|.\n|When Pulled|: Gain {Shield} |Barrier| and add a copy of {SelfName} to the hand with |Ethereal|."
-  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
+  Description: "|When Pulled|: Gain {Shield} |Barrier| and add a copy of {SelfName} to the hand with |Ethereal|."
 
 SuperGiant:
   Name: Super Giant
-  Description: "Deal {Damage} damage.\nFor each card with |Mass| in the hand, reduce the cost of {SelfName} by {Mana}.\nHas |Mass|.\n|When Pulled|: Reduce the cost of {SelfName} by {Mana}."
+  Description: "Deal {Damage} damage.\nFor each other card with |Mass| in the hand, reduce the cost of {SelfName} by {Mana}.\n|When Pulled|: Reduce the cost of {SelfName} by {Mana}."
 
 WhiteHole:
   Name: White Hole
@@ -203,9 +198,7 @@ WhiteHole:
 
 GravityDistortion:
   Name: Gravity Distortion
-  Description: "Apply {Value2} |Weak| and deal {Damage} damage to each enemy.\nHas |Mass|.\n|When Pulled|: Gain {Mana}"
-  DetailText: "Mass: |Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
-
+  Description: "Apply {Value2} |Weak| and deal {Damage} damage to each enemy.\n|When Pulled|: Gain {Mana}"
 
 FixedStar:
   Name: Fixed Star
@@ -213,14 +206,12 @@ FixedStar:
 
 Coolant:
   Name: Coolant
-  Description: "|Kicker| {Mana}: Gain {Value2} Firepower.\nGain {Value1} |Spirit|.\nDiscard all\nnon-defense cards from the hand."
-  DetailText: "Kicker: All pooled mana is spent when playing this card. If you can afford the card cost and the kicker, get an extra effect."
+  Description: "|Kicker| {Mana}: Gain {Value2} Firepower.\nGain {Value1} |Spirit|.\nDiscard all non-defense cards from the hand."
 
 Blueshift:
   Name: Blueshift
   Description: "|MultiKicker| {Mana}: Add a {SelfName} to the hand.\nGain {Block} |Block|."
   UpgradedDescription: "|MultiKicker| {Mana}: Add a upgraded {SelfName} to the hand.\nGain {Block} |Block|."
-  DetailText: "MultiKicker: All pooled mana is spent when playing this card. For each time you can afford the kicker after the card cost, get an extra effect."
 
 Resonance:
   Name: Resonance
@@ -277,7 +268,7 @@ Starlight:
 
 QuantumLink:
   Name: Quantum Link
-  Description: "Choose up to {Value1} card{Value1:plural one='' other='s'} without Mass from the draw pile and put {Value1:plural one='it' other='them'} into the hand.\nDiscard a random card."
+  Description: "Choose up to {Value1} card{Value1:plural one='' other='s'} from the draw pile and put {Value1:plural one='it' other='them'} into the hand.\nDiscard a random card."
 
 AlphaProtocol:
   Name: Alpha Protocol
@@ -295,7 +286,7 @@ GammaProtocol:
 
 SunSpot:
   Name: "Artificial Sun's Spot"
-  Description: "Gain {Value1} |Heat|.\nAdd {Value2} |Dark Matter| to the hand.\nWhenever a |Dark Matter| is played, trigger |Heat| without losing any |Heat|."
+  Description: "Gain {Value1} |Heat|.\nWhenever a |Dark Matter| is played, trigger |Heat| twice without losing any |Heat|."
   UpgradedDescription: "Gain {Value1} |Heat|.\nAdd {Value2} |Dark Matter| to the hand.\nWhenever a |Dark Matter| is played, trigger |Heat| twice without losing any |Heat|."
 
 AblativeArmor:
@@ -304,7 +295,7 @@ AblativeArmor:
 
 SpatialRend:
   Name: Spatial Rend
-  Description: "Return {Value1} random cards from |Exile| to your hand.\nDeal {Damage} damage.\nFor each card returned, deal {Value2} more damage, or {doubleValue} if it had mass."
+  Description: "Return {Value1} random cards from |Exile| to your hand.\nDeal {Damage} damage.\nFor each card returned, deal {Value2} more damage, or {doubleValue} if it had |Mass|."
   DetailText: "Long Night will not be returned from |Exile|."
 
 SunCrow: 

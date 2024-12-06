@@ -35,13 +35,13 @@ WasteNotStatus:
 
 CautionStatus:
   Name: CAUTION!
-  Description: "{PlayerName}のターン開始時、|バースト|状態になり、|時間制限|<sprite=\"ManaSprite\" name=\"1\">。"
-  Brief: "{PlayerName}のターン開始時、|バースト|状態になり、|時間制限|<sprite=\"ManaSprite\" name=\"1\">。"
+  Description: "{PlayerName}のターン開始時、|バースト|状態になり、|時間制限|<sprite=\"ManaSprite\" name=\"1\">を得る。"
+  Brief: "{ターン開始時、|バースト|状態になり、|時間制限|<sprite=\"ManaSprite\" name=\"1\">を得る。"
 
 TurboFuelStatus:
   Name: ターボ燃料
-  Description: "ターン開始時、{manatype}{Level}を得てカードを{Level}枚引く。\nランダムな手札1枚を|廃棄|する。"
-  Brief: "ターン開始時、マナを得てカードを引く。\nランダムな手札1枚を|廃棄|する。"
+  Description: "ターン開始時、{Mana}を{Level}回得てカードを{Level}枚引く。\nその後、ランダムな手札1枚を廃棄する。"
+  Brief: "ターン開始時、{Mana}{Mana}を得てカードを引く。\nその後、ランダムな手札1枚を廃棄する。"
 
 RadiationStatus:
   Name: 放射能
@@ -56,29 +56,53 @@ HotSpringStatus:
 MaintainReactionStatus:
   Name: 反応継続
   Description: "カードを|保留|するたび、|熱|{Level}を得る。"
-  Brief: "カードを|保留|するたび、|熱|{Level}を得る。"
+  Brief: "カードを|保留|するたび、|熱|を得る。"
 
 FixedStarStatus:
   Name: フィクストスター
-  Description: "ターン終了時、手札を{Level}枚まで|保留|する。\nこの戦闘中、全ての|ダークマター|は|自動廃棄|を持つ。"
-  Brief: "ターン終了時、手札を枚まで|保留|する。\nこの戦闘中、全ての|ダークマター|は|自動廃棄|を持つ。"
+  Description: "ターン終了時、手札を{Level}枚まで|保留|する。\nこの戦闘中、全ての|ダークマター|はドローされた時|自動廃棄|を得る。"
+  Brief: "ターン終了時、手札を指定枚数まで|保留|する。この戦闘中、全ての|ダークマター|はドローされた時|自動廃棄|を得る。"
 
 TokamakStatus:
   Name: 「ヘルズトカマク」
   Description: "ターン開始時、|熱|{Level}を得る。"
   Brief: "ターン開始時、|熱|{Level}を得る。"
 
-QuantumDissonanceStatus:
-  Name: 量子不和
-  Description: "各ターン最初に使用された{Level}枚の|ダークマター|は占術3を行う。"
-  Brief: "各ターン最初に使用された枚の|ダークマター|は占術3を行う。"
-
 SunSpotStatus:
   Name: 太陽黒点
-  Description: "|ダークマター|を使用した時、|熱|減衰ダメージを{Level:plural one='%回' other='%回'}発生させる。"
+  Description: "|ダークマター|を使用した時、|熱|減衰ダメージを{Level}回発生させる。"
   Brief: "|ダークマター|を使用した時、|熱|減衰ダメージを追加で発生させる。"
 
 HeatVisorStatus:
   Name: ヒートバイザー
-  Description: "次のターンまでに{Level}回のライフ喪失を無効化する。"
+  Description: "次のターンまで{Level}回のライフ喪失を無効化する。"
   Brief: "次のターンまでのライフ喪失を無効化する。"
+  
+HeatWaveStatus:
+  Name: ヒートウェイブ
+  Description: "{Duration}ターンの間、ターン終了時に|熱|を失わない。"
+  Brief: "次のターン終了時、|熱|を失わない。"
+  
+CollapsingStarStatus:
+  Name: 崩壊する星
+  Description: "|ダークマター|を加えるたび、カードを{Level}枚引く。\n|熱|を得るたび、得た|熱|10点ごとに{Mana}を{Level}回得る。"
+  Brief: "|ダークマター|を加えるたび、カードを1枚引く。|熱|を得るたび、得た|熱|10点ごとに{Mana}を得る。"
+PlasmaBurnStatus:
+  Name: 高温プラズマ
+  Description: "{PlayerName}のターン開始時、ライフを{Level}失う。"
+  Brief: "{PlayerName}のターン開始時、ライフを失う。"
+
+MassStatus:
+  Name: 質量体
+  Description: "ランダムなカードを指定する効果を持つ|空|の専用カードは{SelfName}を優先して選ぶ。これらの効果に選ばれることを「牽引」と呼ぶ。"
+  Brief: "ランダムなカードを指定する効果を持つ|空|の専用カードは{SelfName}を優先して選ぶ。これらの効果に選ばれることを「牽引」と呼ぶ。"
+  
+KickerStatus:
+  Name: キッカー
+  Description: "このカードを使用した時、指定されたマナは全て消費される。このカードのコストとキッカーコストを両方支払えた場合、キッカー効果を得る。"
+  Brief: "このカードを使用した時、指定されたマナは全て消費される。このカードのコストとキッカーコストを両方支払えた場合、キッカー効果を得る。"
+  
+MultiKickerStatus:
+  Name: 多重キッカー
+  Description: "このカードを使用した時、指定されたマナは全て消費される。支払えたキッカーコスト1回分につき、キッカー効果を1回得る。"
+  Brief: "このカードを使用した時、指定されたマナは全て消費される。支払えたキッカーコスト1回分につき、キッカー効果を1回得る。"

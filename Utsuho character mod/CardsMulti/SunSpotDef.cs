@@ -71,10 +71,10 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 40,
-                UpgradedValue1: 40,
-                Value2: 4,
-                UpgradedValue2: 4,
+                Value1: 30,
+                UpgradedValue1: 30,
+                Value2: 0,
+                UpgradedValue2: 2,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -124,10 +124,12 @@ namespace Utsuho_character_mod.CardsMulti
                     yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
                     if (!IsUpgraded)
                     {
-                        yield return new ApplyStatusEffectAction<SunSpotStatus>(Battle.Player, 1, null, null, null, 0f, true);
+                        yield return new ApplyStatusEffectAction<SunSpotStatus>(Battle.Player, 2, null, null, null, 0f, true);
                     }
                     else
                     {
+                        yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
+
                         yield return new ApplyStatusEffectAction<SunSpotStatus>(Battle.Player, 2, null, null, null, 0f, true);
                     }
                     yield break;

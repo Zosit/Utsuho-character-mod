@@ -114,6 +114,7 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(NuclearDiveDefinition))]
         public sealed class NuclearDive : Card
         {
+            private bool enemyDied = false;
             private int tempDamage = 0;
             public override int AdditionalDamage
             {
@@ -145,7 +146,9 @@ namespace Utsuho_character_mod.CardsR
             {
                 if (args.DieSource == this && !args.Unit.HasStatusEffect<Servant>())
                 {
-                    yield return new GainManaAction(Mana);
+                    enemyDied = true;
+                    int level = base.GetSeLevel<HeatStatus>();
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -(level / 2), null, null, null, 0f, true);
                 }
                 yield break;
             }
@@ -171,10 +174,11 @@ namespace Utsuho_character_mod.CardsR
                 {
                     yield return base.AttackAction(selector.SelectedEnemy);
                 }
-                if (!base.Battle.BattleShouldEnd)
+                if (!base.Battle.BattleShouldEnd && (enemyDied == false))
                 {
                     yield return new RemoveStatusEffectAction(Battle.Player.GetStatusEffect<HeatStatus>());
                 }
+                enemyDied = false;
                 yield break;
             }
         }

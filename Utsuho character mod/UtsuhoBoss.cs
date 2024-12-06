@@ -124,6 +124,8 @@ namespace Utsuho_character_mod
             Gun3: new List<string> { "病气A" },
             Gun4: new List<string> { "陨星锤" }
             );
+            if (act1BossConfig.Value == false)
+                config.IsPreludeOpponent = false;
             return config;
         }
         [EntityLogic(typeof(UtsuhoBossDef))]
@@ -156,6 +158,10 @@ namespace Utsuho_character_mod
                 base.ReactBattleEvent<CardsEventArgs>(battle.CardsAddedToHand, new Func<GameEventArgs, IEnumerable<BattleAction>>(this.OnCardTouched));
                 base.ReactBattleEvent<CardEventArgs>(base.Battle.CardExiled, new Func<GameEventArgs, IEnumerable<BattleAction>>(this.OnCardTouched));
                 //base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleStarted, new Func<GameEventArgs, IEnumerable<BattleAction>>(this.OnBattleStarted));
+            }
+            public override void OnSpawn(EnemyUnit spawner)
+            {
+                this.React(new ApplyStatusEffectAction<MirrorImage>(this, null, null, null, null, 0f, true));
             }
             private IEnumerable<BattleAction> OnCardTouched(GameEventArgs arg)
             {

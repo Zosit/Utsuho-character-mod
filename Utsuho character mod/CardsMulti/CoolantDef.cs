@@ -106,8 +106,8 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "Spirit", "Firepower" },
-                UpgradedRelativeEffects: new List<string>() { "Spirit", "Firepower" },
+                RelativeEffects: new List<string>() { "Spirit", "Firepower", "KickerStatus" },
+                UpgradedRelativeEffects: new List<string>() { "Spirit", "Firepower", "KickerStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -120,10 +120,15 @@ namespace Utsuho_character_mod.CardsMulti
         }
 
         [EntityLogic(typeof(CoolantDef))]
-        public sealed class Coolant : Card
+        public sealed class Coolant : UtsuhoCard
         {
             ManaGroup temp;
             bool isKicked = false;
+            /*public override void Initialize()
+            {
+                isKicker = true;
+                base.Initialize();
+            }*/
             protected override void OnEnterBattle(BattleController battle)
             {
                 base.ReactBattleEvent<ManaEventArgs>(base.Battle.ManaConsuming, new EventSequencedReactor<ManaEventArgs>(this.OnManaConsuming));

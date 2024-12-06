@@ -1,7 +1,7 @@
 HeatStatus:
   Name: Heat
   Description: "At the end of {OwnerName}'s turn, lose 1 of every 5 |Heat| ({HeatDamage}) and deal that much damage to all enemies.\nThe keyword |Vent| spends all of this at once for an effect."
-  Brief: "At the end of {OwnerName}s turn, lose 1 of every 5 |Heat| and deal that much damage to all enemies.\nThe keyword |Vent| spends all of this at once for an effect."
+  Brief: "At the end of {OwnerName}'s turn, lose 1 of every 5 |Heat| and deal that much damage to all enemies.\nThe keyword |Vent| spends all of this at once for an effect."
 
 ChargingStatus:
   Name: Charging
@@ -87,3 +87,23 @@ CollapsingStarStatus:
   Name: Collapsing Star
   Description: "When you add a |Dark Matter|, draw {Level:plural one='a card.' other='% cards.'}\nWhen you gain |Heat|, gain {Level} {Mana} for every 10 |Heat| gained."
   Brief: "When you add a |Dark Matter|, draw a card. When you gain |Heat|, gain {Mana} for every 10 |Heat| gained."
+  
+PlasmaBurnStatus:
+  Name: Plasma Burn
+  Description: "At the start of {PlayerName}'s turn, lose {Level} life."
+  Brief: "At the start of {PlayerName}'s turn, lose life."
+
+MassStatus:
+  Name: Mass
+  Description: "|Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
+  Brief: "|Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
+  
+KickerStatus:
+  Name: Kicker
+  Description: "All pooled mana is spent when playing this card. If you can afford the card cost and the kicker, get an extra effect."
+  Brief: "All pooled mana is spent when playing this card. If you can afford the card cost and the kicker, get an extra effect."
+  
+MultiKickerStatus:
+  Name: MultiKicker
+  Description: "All pooled mana is spent when playing this card. For each time you can afford the kicker after the card cost, get an extra effect."
+  Brief: "All pooled mana is spent when playing this card. For each time you can afford the kicker after the card cost, get an extra effect."

@@ -120,9 +120,7 @@ namespace Utsuho_character_mod.CardsB
             public override Interaction Precondition()
             {
                 List<Card> cards = base.Battle.EnumerateAllCards().Where(
-                    (Card card) => (card.Zone == CardZone.Draw) 
-                    && (!(card is UtsuhoCard) 
-                        || ((card is UtsuhoCard uCard) && (uCard.isMass)))).ToList<Card>();
+                    (Card card) => (card.Zone == CardZone.Draw)).ToList<Card>();
                 if (cards.Count <= 0)
                 {
                     return null;

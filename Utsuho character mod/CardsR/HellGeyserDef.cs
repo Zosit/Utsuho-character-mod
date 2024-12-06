@@ -62,8 +62,8 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.SingleEnemy,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 2 },
-                UpgradedCost: null,
+                Cost: new ManaGroup() { Red = 2, Any = 1 },
+                UpgradedCost: new ManaGroup() { Red = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: 0,
                 UpgradedDamage: 0,
@@ -71,10 +71,10 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 10,
-                UpgradedValue1: 10,
-                Value2: 9,
-                UpgradedValue2: 15,
+                Value1: 18,
+                UpgradedValue1: 18,
+                Value2: null,
+                UpgradedValue2: null,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -139,7 +139,7 @@ namespace Utsuho_character_mod.CardsR
                 if (!base.Battle.BattleShouldEnd)
                 {
                     int level = base.GetSeLevel<HeatStatus>();
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value2) - level, null, null, null, 0f, true);
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(tempDamage / 2) - level, null, null, null, 0f, true);
                     tempDamage = 0;
                     yield break;
                 }

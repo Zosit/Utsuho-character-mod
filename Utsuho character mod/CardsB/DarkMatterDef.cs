@@ -15,6 +15,7 @@ using System.Text;
 using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
+using LBoLEntitySideloader.CustomKeywords;
 
 namespace Utsuho_character_mod.CardsB
 {
@@ -105,7 +106,7 @@ namespace Utsuho_character_mod.CardsB
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "Flippin'Loser",
-                SubIllustrator: new List<string>() { }
+                SubIllustrator: new List<string>() { "AltAlias" }
              );
 
             return cardConfig;
@@ -114,9 +115,10 @@ namespace Utsuho_character_mod.CardsB
         [EntityLogic(typeof(DarkMatterDef))]
         public sealed class DarkMatter : UtsuhoCard
         {
-            public DarkMatter() : base()
+            public override void Initialize()
             {
                 isMass = true;
+                base.Initialize();
             }
             public override bool Triggered
             {

@@ -18,6 +18,7 @@ using LBoL.Core.Randoms;
 using LBoL.Core.Battle.Interactions;
 using System.Linq;
 using Utsuho_character_mod.Util;
+using LBoL.Base.Extensions;
 
 namespace Utsuho_character_mod.CardsR
 {
@@ -65,8 +66,8 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 2 },
-                UpgradedCost: new ManaGroup() { Red = 2 },
+                Cost: new ManaGroup() { Red = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Red = 1, Any = 1 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -74,12 +75,12 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 10,
-                UpgradedValue1: 10,
+                Value1: 20,
+                UpgradedValue1: 20,
                 Value2: null,
                 UpgradedValue2: null,
-                Mana: new ManaGroup() { Red = 2 },
-                UpgradedMana: new ManaGroup() { Philosophy = 2 },
+                Mana: null,
+                UpgradedMana: null,
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -95,8 +96,8 @@ namespace Utsuho_character_mod.CardsR
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Exile,
-                UpgradedKeywords: Keyword.Exile,
+                Keywords: Keyword.None,
+                UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
@@ -117,40 +118,55 @@ namespace Utsuho_character_mod.CardsR
         [EntityLogic(typeof(FissionDefinition))]
         public sealed class Fission : Card
         {
+            public override Interaction Precondition()
+            {
+                List<Card> list = (base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>());
+                if (!list.Empty<Card>())
+                {
+                    return new SelectCardInteraction(1, 1, list, SelectedCardHandling.DoNothing);
+                }
+                return null;
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                Card Attack = base.Battle.RollCard(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.Valid, CardTypeWeightTable.OnlyAttack), delegate (CardConfig config)
+                if (precondition != null)
                 {
-                    if (config.Colors.Count > 0)
+                    IReadOnlyList<Card> selectedCards = ((SelectCardInteraction)precondition).SelectedCards;
+                    if (selectedCards.Count > 0)
                     {
-                        return config.Colors.All((ManaColor color) => color == ManaColor.Red);
-                    }
-                    return false;
-                });
-                Card Defense = base.Battle.RollCard(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.Valid, CardTypeWeightTable.OnlyDefense), delegate (CardConfig config)
-                {
-                    if (config.Colors.Count > 0)
-                    {
-                        return config.Colors.All((ManaColor color) => color == ManaColor.Red);
-                    }
-                    return false;
-                });
-                if (this.IsUpgraded)
-                {
-                    Attack.Upgrade();
-                    Defense.Upgrade();
-                }
+                        yield return new ExileManyCardAction(selectedCards);
+                        Card Attack = base.Battle.RollCard(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.Valid, CardTypeWeightTable.OnlyAttack), delegate (CardConfig config)
+                        {
+                            if (config.Colors.Count > 0)
+                            {
+                                return ((config.Colors.All((ManaColor color) => color == ManaColor.Red)) && (!config.IsXCost));
+                            }
+                            return false;
+                        });
+                        Card Defense = base.Battle.RollCard(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.Valid, CardTypeWeightTable.OnlyDefense), delegate (CardConfig config)
+                        {
+                            if (config.Colors.Count > 0)
+                            {
+                                return ((config.Colors.All((ManaColor color) => color == ManaColor.Red)) && (!config.IsXCost));
+                            }
+                            return false;
+                        });
+                        if (this.IsUpgraded)
+                        {
+                            Attack.Upgrade();
+                            Defense.Upgrade();
+                        }
 
-                if ((Attack != null) && (Defense != null))
-                {
-
-                    Attack.SetBaseCost(ManaGroup.Anys(Attack.ConfigCost.Amount));
-                    Defense.SetBaseCost(ManaGroup.Anys(Defense.ConfigCost.Amount));
-                    yield return new AddCardsToHandAction(new Card[] { Attack });
-                    yield return new AddCardsToHandAction(new Card[] { Defense });
+                        if ((Attack != null) && (Defense != null))
+                        {
+                            Attack.SetBaseCost(ManaGroup.Anys(Attack.ConfigCost.Amount));
+                            Defense.SetBaseCost(ManaGroup.Anys(Defense.ConfigCost.Amount));
+                            yield return new AddCardsToHandAction(new Card[] { Attack });
+                            yield return new AddCardsToHandAction(new Card[] { Defense });
+                        }
+                        yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
+                    }
                 }
-                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
-                yield return new GainManaAction(Mana);
                 yield break;
             }
 

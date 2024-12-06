@@ -71,10 +71,10 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 25,
-                UpgradedValue1: 35,
-                Value2: 50,
-                UpgradedValue2: 50,
+                Value1: 12,
+                UpgradedValue1: 16,
+                Value2: null,
+                UpgradedValue2: null,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -98,8 +98,8 @@ namespace Utsuho_character_mod.CardsR
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "HeatStatus" },
-                UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
+                RelativeEffects: new List<string>() { "PlasmaBurnStatus", "HeatStatus" },
+                UpgradedRelativeEffects: new List<string>() { "PlasmaBurnStatus", "HeatStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -131,6 +131,28 @@ namespace Utsuho_character_mod.CardsR
                 }
             }
 
+            protected override void OnEnterBattle(BattleController battle)
+            {
+                base.ReactBattleEvent<DamageEventArgs>(base.Battle.Player.DamageDealt, new EventSequencedReactor<DamageEventArgs>(this.OnPlayerDamageDealt));
+            }
+
+            private IEnumerable<BattleAction> OnPlayerDamageDealt(DamageEventArgs args)
+            {
+                if (base.Battle.BattleShouldEnd)
+                {
+                    yield break;
+                }
+                if (args.Cause == ActionCause.Card && args.ActionSource == this)
+                {
+                    DamageInfo damageInfo = args.DamageInfo;
+                    if (damageInfo.Damage > 0f)
+                    {
+                        yield return new ApplyStatusEffectAction<PlasmaBurnStatus>(args.Target, ((int)damageInfo.Damage), null, null, null, 0f, true);
+                    }
+                }
+                yield break;
+            }
+
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 if (!base.Battle.BattleShouldEnd)
@@ -138,11 +160,8 @@ namespace Utsuho_character_mod.CardsR
                     tempDamage = base.GetSeLevel<HeatStatus>() + Value1;
                     int level = base.GetSeLevel<HeatStatus>();
                     yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, Value1, null, null, null, 0f, true);
-                    if (level + Value1 >= Value2)
-                    {
-                        yield return base.AttackAction(selector);
-                        yield return new RemoveStatusEffectAction(Battle.Player.GetStatusEffect<HeatStatus>());
-                    }
+                    yield return base.AttackAction(selector);
+                    yield return new RemoveStatusEffectAction(Battle.Player.GetStatusEffect<HeatStatus>());
                     tempDamage = 0;
                     yield break;
                 }

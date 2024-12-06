@@ -76,7 +76,7 @@ namespace Utsuho_character_mod.CardsMulti
                 Shield: null,
                 UpgradedShield: null,
                 Value1: 1,
-                UpgradedValue1: 2,
+                UpgradedValue1: 1,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: new ManaGroup() { Philosophy = 2 },
