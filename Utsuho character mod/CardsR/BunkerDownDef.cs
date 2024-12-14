@@ -128,7 +128,7 @@ namespace Utsuho_character_mod.CardsR
                 if (base.PlayInTriggered)
                 {
                     yield return base.DefenseAction(0, this.ConfigShield);
-                    this.DecreaseBaseCost(this.Mana);
+                    this.SetBaseCost(this.Mana);
                 }
                 yield break;
             }

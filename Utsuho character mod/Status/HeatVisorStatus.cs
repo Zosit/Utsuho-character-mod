@@ -92,13 +92,15 @@ namespace Utsuho_character_mod.Status
         private void OnPlayerDamageTaking(DamageEventArgs args)
         {
             DamageInfo damageInfo = args.DamageInfo;
-            int num = damageInfo.Damage.RoundToInt();
-            if (num >= 1 && this.ActiveTimes < base.Level)
+            if ((this.ActiveTimes < base.Level) && !damageInfo.IsGrazed)
             {
                 base.NotifyActivating();
                 int num2 = this.ActiveTimes + 1;
                 this.ActiveTimes = num2;
-                args.DamageInfo = damageInfo.ReduceActualDamageBy(num);
+                damageInfo.Damage = 0;
+                damageInfo.DamageBlocked = 0;
+                damageInfo.DamageShielded = 0;
+                args.DamageInfo = damageInfo;
                 args.AddModifier(this);
             }
         }

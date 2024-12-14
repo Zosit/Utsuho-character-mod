@@ -77,11 +77,11 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 5,
+                Value1: 6,
                 UpgradedValue1: 7,
-                Value2: 5,
-                UpgradedValue2: 7,
-                Mana: new ManaGroup() { Philosophy = 5 },
+                Value2: 30,
+                UpgradedValue2: 35,
+                Mana: new ManaGroup() { Philosophy = 6 },
                 UpgradedMana: new ManaGroup() { Philosophy = 7 },
                 Scry: null,
                 UpgradedScry: null,
@@ -104,8 +104,8 @@ namespace Utsuho_character_mod.CardsR
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() {  },
-                UpgradedRelativeEffects: new List<string>() {  },
+                RelativeEffects: new List<string>() { "HeatStatus" },
+                UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -133,7 +133,7 @@ namespace Utsuho_character_mod.CardsR
                 yield return new DrawManyCardAction(Value1);
                 //yield return new LoseManaAction(base.Battle.BattleMana);
                 yield return new GainManaAction(new ManaGroup() { Philosophy = Value1 });
-                yield return new ApplyStatusEffectAction<TempFirepower>(Battle.Player, base.Value1, null, null, null, 0.2f);
+                yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, base.Value2, null, null, null, 0.2f);
                 yield return new ApplyStatusEffectAction<TimeIsLimited>(Battle.Player, 1, null, null, null, 0f, true);
                 yield break;
             }

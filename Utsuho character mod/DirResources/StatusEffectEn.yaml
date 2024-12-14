@@ -91,12 +91,12 @@ CollapsingStarStatus:
 PlasmaBurnStatus:
   Name: Plasma Burn
   Description: "At the start of {PlayerName}'s turn, lose {Level} life."
-  Brief: "At the start of {PlayerName}'s turn, lose life."
+  Brief: "At the start of {PlayerName}'s turn, the target loses life."
 
 MassStatus:
   Name: Mass
-  Description: "|Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
-  Brief: "|Utsuho| cards with random effects prioritize {SelfName}. These effects are considered \"Pulled\"."
+  Description: "|Utsuho| cards with random effects prioritize {SelfName}. It is considered \"Pulled\"."
+  Brief: "|Utsuho| cards with random effects prioritize {SelfName}. It is considered \"Pulled\"."
   
 KickerStatus:
   Name: Kicker

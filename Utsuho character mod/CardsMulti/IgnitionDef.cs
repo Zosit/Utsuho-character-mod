@@ -76,7 +76,7 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 8,
+                Value1: 9,
                 UpgradedValue1: 12,
                 Value2: 1,
                 UpgradedValue2: 1,

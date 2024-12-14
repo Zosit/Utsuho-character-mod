@@ -115,19 +115,6 @@ namespace Utsuho_character_mod.CardsW
 
         [EntityLogic(typeof(ExpandingBrillianceDefinition))]
         public sealed class ExpandingBrilliance : Card        {
-            public override Interaction Precondition()
-            {
-                List<Card> list = base.Battle.HandZone.Where((Card hand) => hand != this && hand.CanUpgradeAndPositive).ToList<Card>();
-                if (list.Count == 1)
-                {
-                    this.oneTargetHand = list[0];
-                }
-                if (list.Count <= 1)
-                {
-                    return null;
-                }
-                return new SelectHandInteraction(1, 1, list);
-            }
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
@@ -137,23 +124,23 @@ namespace Utsuho_character_mod.CardsW
                     yield return battleAction;
                 }
 
-
-                if (precondition != null)
+                List<Card> list = base.Battle.HandZone.ToList<Card>();
+                if (list.Count > 0)
                 {
-                    Card card = ((SelectHandInteraction)precondition).SelectedCards[0];
+                    SelectHandInteraction interaction = new SelectHandInteraction(1, 1, base.Battle.HandZone.Where((Card hand) => hand != this && hand.CanUpgradeAndPositive).ToList<Card>())
+                    {
+                        Source = this
+                    };
+                    yield return new InteractionAction(interaction, false);
+                    Card card = interaction.SelectedCards.FirstOrDefault<Card>();
                     if (card != null)
                     {
                         yield return new UpgradeCardAction(card);
                     }
-                }
-                else if (this.oneTargetHand != null)
-                {
-                    yield return new UpgradeCardAction(this.oneTargetHand);
-                    this.oneTargetHand = null;
+                    interaction = null;
                 }
                 yield break;
             }
-            private Card oneTargetHand;
         }
     }
 }

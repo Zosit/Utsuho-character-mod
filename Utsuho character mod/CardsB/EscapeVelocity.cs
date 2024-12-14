@@ -121,28 +121,24 @@ namespace Utsuho_character_mod.CardsR
         {
             public override Interaction Precondition()
             {
-                if (this.IsUpgraded)
+                List<EscapeVelocity> list = Library.CreateCards<EscapeVelocity>(2, true).ToList<EscapeVelocity>();
+                EscapeVelocity first = list[0];
+                EscapeVelocity escapeConsider = list[1];
+                first.ChoiceCardIndicator = 1;
+                escapeConsider.ChoiceCardIndicator = 2;
+                first.SetBattle(base.Battle);
+                escapeConsider.SetBattle(base.Battle);
+                MiniSelectCardInteraction interaction = new MiniSelectCardInteraction(list, false, false, false)
                 {
-                    List<EscapeVelocity> list = Library.CreateCards<EscapeVelocity>(2, true).ToList<EscapeVelocity>();
-                    EscapeVelocity first = list[0];
-                    EscapeVelocity escapeConsider = list[1];
-                    first.ChoiceCardIndicator = 1;
-                    escapeConsider.ChoiceCardIndicator = 2;
-                    first.SetBattle(base.Battle);
-                    escapeConsider.SetBattle(base.Battle);
-                    MiniSelectCardInteraction interaction = new MiniSelectCardInteraction(list, false, false, false)
-                    {
-                        Source = this
-                    };
-                    return interaction;
-                }
-                else
-                    return null;
+                    Source = this
+                };
+                return interaction;
             }
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                if (!this.IsUpgraded)
+                MiniSelectCardInteraction interaction = (MiniSelectCardInteraction)precondition;
+                if (interaction.SelectedCard.ChoiceCardIndicator == 1)
                 {
                     for (int i = 0; i < Value2; i++)
                     {
@@ -160,38 +156,18 @@ namespace Utsuho_character_mod.CardsR
                 }
                 else
                 {
-                    MiniSelectCardInteraction interaction = (MiniSelectCardInteraction)precondition;
-                    if (interaction.SelectedCard.ChoiceCardIndicator == 1)
+                    for (int i = 0; i < Value1; i++)
                     {
-                        for (int i = 0; i < Value2; i++)
-                        {
-                            if (Battle.HandZone.Count != 0)
-                            {
-                                Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                                foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                                yield return new DiscardAction(card);
-                            }
-                        }
-                        for (int i = 0; i < Value1; i++)
-                        {
-                            yield return new DrawCardAction();
-                        }
+                        yield return new DrawCardAction();
                     }
-                    else
+                    yield return new WaitForYieldInstructionAction(new WaitForSeconds(0.5f));
+                    for (int i = 0; i < Value2; i++)
                     {
-                        for (int i = 0; i < Value1; i++)
+                        if (Battle.HandZone.Count != 0)
                         {
-                            yield return new DrawCardAction();
-                        }
-                        yield return new WaitForYieldInstructionAction(new WaitForSeconds(0.5f));
-                        for (int i = 0; i < Value2; i++)
-                        {
-                            if (Battle.HandZone.Count != 0)
-                            {
-                                Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                                foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                                yield return new DiscardAction(card);
-                            }
+                            Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                            foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                            yield return new DiscardAction(card);
                         }
                     }
                 }

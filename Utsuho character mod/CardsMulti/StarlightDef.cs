@@ -62,7 +62,7 @@ namespace Utsuho_character_mod.CardsMulti
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Black, ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Black = 1, Red = 1,  },
+                Cost: new ManaGroup() { Hybrid = 2, HybridColor = 7 },
                 UpgradedCost: new ManaGroup() { Any = 2 },
                 MoneyCost: null,
                 Damage: null,

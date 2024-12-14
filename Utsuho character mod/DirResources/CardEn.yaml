@@ -37,7 +37,7 @@ StartReactor:
 
 MaxPower:
   Name: Max Power
-  Description: "|Exile| the hand.\nGain {Mana}.\nDraw {Value1} cards.\nGain {Value1} |Temporary Firepower|.\n|Time Limit| <sprite=\"ManaSprite\" name=\"1\">."
+  Description: "|Exile| the hand.\nGain {Mana}.\nDraw {Value1} cards.\nGain {Value2} |Heat|.\n|Time Limit| <sprite=\"ManaSprite\" name=\"1\">."
 
 Aggregate:
   Name: Aggregate
@@ -78,7 +78,7 @@ HeatVisor:
 
 HeatWave:
   Name: Heat Wave
-  Description: "Gain {Value1} |Heat|.\nAt the end of your turn, don't lose any |Heat|."
+  Description: "Gain {Value1} |Heat|.\nTrigger |Heat| twice without losing any |Heat| ({HeatDamage})."
 
 RecklessGamble:
   Name: Reckless Gamble
@@ -95,11 +95,12 @@ NuclearDive:
   Name: Uncontainable Nuclear Reaction Dive
   Description: "Double {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage.\n|Expel|: Gain half the vented |Heat|."
   UpgradedDescription: "Triple {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage.\n|Expel|: Gain half the vented |Heat|."
+  DetailText: "The damage taken is attack damage."
 
 BunkerDown:
   Name: Bunker Down
-  Description: "Gain {Block} |Block|.\n|Debut:| Gain {Shield} |Barrier| and reduce the cost of {SelfName} by {Mana}."
-  ExtraDescription1: "Gain {Block} |Block|.\n|d:Debut: Gain {Shield} Barrier and reduce the cost of {SelfName} by {Mana}.|"
+  Description: "Gain {Block} |Block|.\n|Debut:| Gain {Shield} |Barrier| and set the cost of {SelfName} to {Mana}."
+  ExtraDescription1: "Gain {Block} |Block|.\n|d:Debut: Gain {Shield} Barrier and set the cost of {SelfName} to {Mana}.|"
 
 WasteNot:
   Name: Waste Not
@@ -174,11 +175,10 @@ HighTension:
 
 EscapeVelocity:
   Name: Escape Velocity
-  Description: "Discard {Value2} random cards.\nDraw {Value1} cards."
-  UpgradedDescription: "|Choose|: Discard {Value2} random cards then Draw {Value1} cards, or Draw {Value1} cards then Discard {Value2} random cards."
+  Description: "|Choose|: Discard {Value2} random cards then Draw {Value1} cards, or Draw {Value1} cards then Discard {Value2} random cards."
   ExtraDescription2: "Draw {Value1} cards.\nDiscard {Value2} random cards."
   ExtraDescription1: "Discard {Value2} random cards.\nDraw {Value1} cards."
-
+  
 MassDriver:
   Name: Mass Driver
   Description: "Whenever a card with |Mass| is Pulled, deal {Value1} damage to each enemy."

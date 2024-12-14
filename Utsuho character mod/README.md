@@ -19,6 +19,7 @@ Artists:
 - Xeno
 - Flippin'Loser
 - AltAlias
+- Kimmchu
 
 Translators:
 - Xeno (English edit)

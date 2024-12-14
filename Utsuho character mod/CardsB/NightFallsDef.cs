@@ -76,7 +76,7 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 4,
+                Value1: 5,
                 UpgradedValue1: 7,
                 Value2: null,
                 UpgradedValue2: null,
@@ -109,8 +109,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "Zosit",
-                SubIllustrator: new List<string>() { }
+                Illustrator: "AltAlias",
+                SubIllustrator: new List<string>() { "Zosit" }
              );
 
             return cardConfig;
