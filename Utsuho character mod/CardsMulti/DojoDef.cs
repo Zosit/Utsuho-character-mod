@@ -102,8 +102,8 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { },
-                UpgradedRelativeEffects: new List<string>() { },
+                RelativeEffects: new List<string>() { "Firepower" },
+                UpgradedRelativeEffects: new List<string>() { "Firepower" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",

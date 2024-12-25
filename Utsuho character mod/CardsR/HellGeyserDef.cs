@@ -129,7 +129,13 @@ namespace Utsuho_character_mod.CardsR
                     }
                 }
             }
-
+            public int halfVent
+            {
+                get
+                {
+                    return (AdditionalDamage) / 2;
+                }
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 tempDamage = base.GetSeLevel<HeatStatus>() + Value1;

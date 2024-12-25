@@ -73,8 +73,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedShield: 10,
                 Value1: 16,
                 UpgradedValue1: 22,
-                Value2: null,
-                UpgradedValue2: null,
+                Value2: 2,
+                UpgradedValue2: 2,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -95,8 +95,8 @@ namespace Utsuho_character_mod.CardsMulti
                 Keywords: Keyword.None,
                 UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Block,
+                UpgradedRelativeKeyword: Keyword.Shield,
 
                 RelativeEffects: new List<string>() { "HeatStatus" },
                 UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
@@ -120,7 +120,10 @@ namespace Utsuho_character_mod.CardsMulti
                 {
                     yield return base.DefenseAction();
                     yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, Value1, null, null, null, 0f, true);
-                    yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
+                    var cards = new List<Card>();
+                    for (int i = 0; i < Value2; i++)
+                        cards.Add(Library.CreateCard("DarkMatter"));
+                    yield return new AddCardsToHandAction(cards);
 
                     yield break;
                 }

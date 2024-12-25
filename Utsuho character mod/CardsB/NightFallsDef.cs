@@ -103,8 +103,8 @@ namespace Utsuho_character_mod.CardsR
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { },
-                UpgradedRelativeEffects: new List<string>() { },
+                RelativeEffects: new List<string>() { "MassStatus" },
+                UpgradedRelativeEffects: new List<string>() { "MassStatus" },
                 RelativeCards: new List<string>() { "DarkMatter" },
                 UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",

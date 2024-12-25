@@ -95,8 +95,8 @@ namespace Utsuho_character_mod.CardsR
                 Keywords: Keyword.Debut,
                 UpgradedKeywords: Keyword.Debut,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Morph,
+                UpgradedRelativeKeyword: Keyword.Morph,
 
                 RelativeEffects: new List<string>() { "TokamakStatus" },
                 UpgradedRelativeEffects: new List<string>() { "TokamakStatus" },

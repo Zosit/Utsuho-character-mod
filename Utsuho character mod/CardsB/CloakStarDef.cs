@@ -72,8 +72,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: 20,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: null,
-                UpgradedValue1: null,
+                Value1: 2,
+                UpgradedValue1: 2,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -96,8 +96,8 @@ namespace Utsuho_character_mod.CardsR
                 Keywords: Keyword.None,
                 UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Block,
+                UpgradedRelativeKeyword: Keyword.Block,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
@@ -119,7 +119,11 @@ namespace Utsuho_character_mod.CardsR
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter"));
+                var list = new List<Card>();
+                for (int i = 0; i < Value1; i++)
+                    list.Add(Library.CreateCard("DarkMatter"));
+                    
+                yield return new AddCardsToHandAction(list);
                 yield return DefenseAction();
                 yield break;
             }

@@ -41,7 +41,7 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override Sprite LoadSprite()
         {
-            return ResourceLoader.LoadSprite("ChargingStatus.png", BepinexPlugin.embeddedSource);
+            return ResourceLoader.LoadSprite(GetId() + ".png", BepinexPlugin.embeddedSource);
         }
 
         public override StatusEffectConfig MakeConfig()
@@ -85,7 +85,7 @@ namespace Utsuho_character_mod.Status
             {
                 yield break;
             }
-            if ((args.Cause != ActionCause.AutoExile) && (args.Card.BaseName != "Resonance"))
+            if ((args.Cause != ActionCause.AutoExile) && (args.Card.Name != "Resonance"))
             {
                 base.NotifyActivating();
                 yield return new AddCardsToHandAction(Library.CreateCards<Resonance>(1, false));

@@ -95,8 +95,8 @@ namespace Utsuho_character_mod.CardsB
                 Keywords: Keyword.None,
                 UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Shield,
+                UpgradedRelativeKeyword: Keyword.Shield,
 
                 RelativeEffects: new List<string>() { "GravityWellStatus" },
                 UpgradedRelativeEffects: new List<string>() { "GravityWellStatus" },

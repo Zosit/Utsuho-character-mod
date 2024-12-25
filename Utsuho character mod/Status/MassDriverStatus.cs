@@ -40,7 +40,7 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override Sprite LoadSprite()
         {
-            return ResourceLoader.LoadSprite("ChargingStatus.png", BepinexPlugin.embeddedSource);
+            return ResourceLoader.LoadSprite(GetId() + ".png", BepinexPlugin.embeddedSource);
         }
 
         public override StatusEffectConfig MakeConfig()
@@ -63,7 +63,7 @@ namespace Utsuho_character_mod.Status
                             LimitStackType: StackType.Keep,
                             ShowPlusByLimit: false,
                             Keywords: Keyword.None,
-                            RelativeEffects: new List<string>() { },
+                            RelativeEffects: new List<string>() { "MassStatus" },
                             VFX: "Default",
                             VFXloop: "Default",
                             SFX: "Default"

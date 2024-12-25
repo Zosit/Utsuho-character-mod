@@ -19,6 +19,7 @@ using LBoL.Base.Extensions;
 using JetBrains.Annotations;
 using System.Linq;
 using Utsuho_character_mod.Util;
+using LBoL.Core.Units;
 
 namespace Utsuho_character_mod.CardsU
 {
@@ -67,16 +68,16 @@ namespace Utsuho_character_mod.CardsU
                 Colors: new List<ManaColor>() { ManaColor.Blue },
                 IsXCost: false,
                 Cost: new ManaGroup() { Blue = 1 },
-                UpgradedCost: new ManaGroup() { Blue = 1 },
+                UpgradedCost: new ManaGroup() { Any = 0 },
                 MoneyCost: null,
-                Damage: 6,
-                UpgradedDamage: 10,
+                Damage: 12,
+                UpgradedDamage: 12,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 3,
-                UpgradedValue1: 5,
+                Value1: 8,
+                UpgradedValue1: 8,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -102,8 +103,8 @@ namespace Utsuho_character_mod.CardsU
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { },
-                UpgradedRelativeEffects: new List<string>() { },
+                RelativeEffects: new List<string>() { "ResonanceStatus" },
+                UpgradedRelativeEffects: new List<string>() { "ResonanceStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -126,14 +127,28 @@ namespace Utsuho_character_mod.CardsU
                     {
                         return 0;
                     }
-                    if (!this.IsUpgraded)
+
+                    return base.GetSeLevel<ResonanceStatus>();
+                }
+            }
+            protected override void OnEnterBattle(BattleController battle)
+            {
+                base.ReactBattleEvent<CardEventArgs>(base.Battle.CardExiled, new EventSequencedReactor<CardEventArgs>(this.OnCardExiled));
+                this.IsAutoExile = true;
+            }
+            private IEnumerable<BattleAction> OnCardExiled(CardEventArgs args)
+            {
+                if ((args.Cause == ActionCause.AutoExile) && (args.Card == this))
+                {
+                    if (!Battle.BattleShouldEnd)
                     {
-                        return base.GetSeLevel<ResonanceStatus>();
+                        EnemyUnit target = Battle.EnemyGroup.Alives.Sample(GameRun.BattleRng);
+                        if (target != null && target.IsAlive)
+                        {
+                            yield return AttackAction(target);
+                        }
                     }
-                    else
-                    {
-                        return base.GetSeLevel<ResonancePlusStatus>();
-                    }
+                    yield return base.BuffAction<ResonanceStatus>(base.Value1, 0, 0, 0, 0.2f);
                 }
             }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
@@ -143,14 +158,7 @@ namespace Utsuho_character_mod.CardsU
                 {
                     yield break;
                 }
-                if (!this.IsUpgraded)
-                {
-                    yield return base.BuffAction<ResonanceStatus>(base.Value1, 0, 0, 0, 0.2f);
-                }
-                else
-                {
-                    yield return base.BuffAction<ResonancePlusStatus>(base.Value1, 0, 0, 0, 0.2f);
-                }
+                yield return base.BuffAction<ResonanceStatus>(base.Value1, 0, 0, 0, 0.2f);
                 yield break;
             }
         }

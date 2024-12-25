@@ -42,7 +42,7 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override Sprite LoadSprite()
         {
-            return ResourceLoader.LoadSprite("ReactorStartSe.png", BepinexPlugin.embeddedSource);
+            return ResourceLoader.LoadSprite(GetId() + ".png", BepinexPlugin.embeddedSource);
         }
 
         public override StatusEffectConfig MakeConfig()
@@ -88,7 +88,7 @@ namespace Utsuho_character_mod.Status
         private IEnumerable<BattleAction> OnStatusApplied(StatusEffectApplyEventArgs args)
         {
             StatusEffect se = args.Effect;
-            if (se is HeatStatus)
+            if ((se is HeatStatus) && (args.Level.Value > 0))
             {
                 int addCount = (args.Level.Value / 10);
                 addCount *= this.Level;

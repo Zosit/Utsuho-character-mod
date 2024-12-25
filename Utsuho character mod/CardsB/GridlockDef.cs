@@ -95,8 +95,8 @@ namespace Utsuho_character_mod.CardsR
                 Keywords: Keyword.Basic,
                 UpgradedKeywords: Keyword.Basic,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Block,
+                UpgradedRelativeKeyword: Keyword.Block,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },

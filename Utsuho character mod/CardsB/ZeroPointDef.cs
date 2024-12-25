@@ -96,8 +96,8 @@ namespace Utsuho_character_mod.CardsB
                 Keywords: Keyword.None | Keyword.Forbidden,
                 UpgradedKeywords: Keyword.Replenish | Keyword.Forbidden,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.Ethereal,
-                UpgradedRelativeKeyword: Keyword.Ethereal,
+                RelativeKeyword: Keyword.Ethereal | Keyword.Shield | Keyword.CopyHint,
+                UpgradedRelativeKeyword: Keyword.Ethereal | Keyword.Shield | Keyword.CopyHint,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },

@@ -16,6 +16,7 @@ using static Utsuho_character_mod.BepinexPlugin;
 using Utsuho_character_mod.Status;
 using Utsuho_character_mod.Util;
 using LBoL.EntityLib.StatusEffects.Basic;
+using System.Linq;
 
 namespace Utsuho_character_mod.CardsB
 {
@@ -97,10 +98,10 @@ namespace Utsuho_character_mod.CardsB
                 UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                UpgradedRelativeKeyword: Keyword.Philosophy,
 
-                RelativeEffects: new List<string>() { "Reflect", "Weak" },
-                UpgradedRelativeEffects: new List<string>() { "Reflect", "Weak" },
+                RelativeEffects: new List<string>() { "Weak" },
+                UpgradedRelativeEffects: new List<string>() { "Weak" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -115,9 +116,11 @@ namespace Utsuho_character_mod.CardsB
         [EntityLogic(typeof(GravityDistortionDef))]
         public sealed class GravityDistortion : UtsuhoCard
         {
+            
             public GravityDistortion() : base()
             {
                 isMass = true;
+                IEnumerable<String> test;
             }
             public override IEnumerable<BattleAction> OnPull()
             {
@@ -126,13 +129,13 @@ namespace Utsuho_character_mod.CardsB
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
 
+                yield return base.AttackAction(selector);
                 if (!base.Battle.BattleShouldEnd)
                 {
                     foreach (BattleAction battleAction in base.DebuffAction<Weak>(selector.GetUnits(base.Battle), 0, base.Value2, 0, 0, true, 0.2f))
                     {
                         yield return battleAction;
                     }
-                    yield return base.AttackAction(selector);
                     yield break;
                 }
             }

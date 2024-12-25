@@ -37,7 +37,7 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override Sprite LoadSprite()
         {
-            return ResourceLoader.LoadSprite("ChargingStatus.png", BepinexPlugin.embeddedSource);
+            return ResourceLoader.LoadSprite(GetId() + ".png", BepinexPlugin.embeddedSource);
         }
 
         public override StatusEffectConfig MakeConfig()
@@ -55,8 +55,8 @@ namespace Utsuho_character_mod.Status
                             HasDuration: false,
                             DurationStackType: StackType.Add,
                             DurationDecreaseTiming: DurationDecreaseTiming.Custom,
-                            HasCount: false,
-                            CountStackType: StackType.Keep,
+                            HasCount: true,
+                            CountStackType: StackType.Add,
                             LimitStackType: StackType.Keep,
                             ShowPlusByLimit: false,
                             Keywords: Keyword.None,
@@ -82,9 +82,8 @@ namespace Utsuho_character_mod.Status
                 yield break;
             }
             NotifyActivating();
-            int level = base.GetSeLevel<HotSpringStatus>();
-            yield return new ApplyStatusEffectAction<RadiationStatus>(Battle.Player, level, null, null, null, 0f, true);
-            yield return new ApplyStatusEffectAction<HotSpringStatus>(Battle.Player, 1, null, null, null, 0f, true);
+            yield return new ApplyStatusEffectAction<RadiationStatus>(Battle.Player, base.Count, null, null, null, 0f, true);
+            base.Count += base.Level;
             yield break;
         }
     }

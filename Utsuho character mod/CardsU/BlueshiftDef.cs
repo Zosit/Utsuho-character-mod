@@ -102,8 +102,8 @@ namespace Utsuho_character_mod.CardsU
                 Keywords: Keyword.Exile | Keyword.Ethereal,
                 UpgradedKeywords: Keyword.Exile,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Block,
+                UpgradedRelativeKeyword: Keyword.Block,
 
                 RelativeEffects: new List<string>() { "MultiKickerStatus" },
                 UpgradedRelativeEffects: new List<string>() { "MultiKickerStatus" },

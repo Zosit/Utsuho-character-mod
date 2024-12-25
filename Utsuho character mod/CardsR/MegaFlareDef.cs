@@ -78,8 +78,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedShield: null,
                 Value1: 2,
                 UpgradedValue1: 2,
-                Value2: null,
-                UpgradedValue2: null,
+                Value2: 4,
+                UpgradedValue2: 4,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -129,10 +129,9 @@ namespace Utsuho_character_mod.CardsR
             }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return AttackAction(selector);
-                yield return AttackAction(selector);
-                yield return AttackAction(selector);
-                yield return AttackAction(selector);
+                for (int i = 0; i < Value2; i++)
+                    yield return AttackAction(selector);
+
                 yield break;
             }           
         }

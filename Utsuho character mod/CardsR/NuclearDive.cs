@@ -138,6 +138,13 @@ namespace Utsuho_character_mod.CardsR
                     }
                 }
             }
+            public int halfVent
+            {
+                get
+                {
+                    return (AdditionalDamage) / 2;
+                }
+            }
             protected override void OnEnterBattle(BattleController battle)
             {
                 base.ReactBattleEvent<DieEventArgs>(base.Battle.EnemyDied, new EventSequencedReactor<DieEventArgs>(this.OnEnemyDied));

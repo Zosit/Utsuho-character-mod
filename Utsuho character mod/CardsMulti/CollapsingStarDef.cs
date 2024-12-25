@@ -95,8 +95,8 @@ namespace Utsuho_character_mod.CardsMulti
                 Keywords: Keyword.Ethereal,
                 UpgradedKeywords: Keyword.Ethereal,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Philosophy,
+                UpgradedRelativeKeyword: Keyword.Philosophy,
 
                 RelativeEffects: new List<string>() { "CollapsingStarStatus" },
                 UpgradedRelativeEffects: new List<string>() { "CollapsingStarStatus" },

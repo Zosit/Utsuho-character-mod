@@ -42,7 +42,7 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override Sprite LoadSprite()
         {
-            return ResourceLoader.LoadSprite("EnergyStatus.png", BepinexPlugin.embeddedSource);
+            return ResourceLoader.LoadSprite(GetId() + ".png", BepinexPlugin.embeddedSource);
         }
 
         public override StatusEffectConfig MakeConfig()
@@ -92,7 +92,7 @@ namespace Utsuho_character_mod.Status
         private void OnPlayerDamageTaking(DamageEventArgs args)
         {
             DamageInfo damageInfo = args.DamageInfo;
-            if ((this.ActiveTimes < base.Level) && !damageInfo.IsGrazed)
+            if ((this.ActiveTimes < base.Level) && !damageInfo.IsGrazed && (damageInfo.Amount >= 10))
             {
                 base.NotifyActivating();
                 int num2 = this.ActiveTimes + 1;

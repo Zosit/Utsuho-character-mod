@@ -145,8 +145,8 @@ namespace Utsuho_character_mod
             yield return new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, Damage, this.GunName, GunType.Single);
             if (!base.Battle.BattleShouldEnd) {
                 Card[] cards = { Library.CreateCard("DarkMatter") };
-                yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
                 yield return new AddCardsToHandAction(Library.CreateCard("DarkMatter"));
+                yield return new AddCardsToDrawZoneAction(cards, DrawZoneTarget.Random);
                 yield return new AddCardsToDiscardAction(Library.CreateCard("DarkMatter"));
             }
         }

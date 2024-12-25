@@ -96,7 +96,7 @@ namespace Utsuho_character_mod.CardsG
                 UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                UpgradedRelativeKeyword: Keyword.Exile,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },

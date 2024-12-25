@@ -99,8 +99,8 @@ namespace Utsuho_character_mod.CardsG
                 Keywords: Keyword.None,
                 UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Philosophy,
+                UpgradedRelativeKeyword: Keyword.Philosophy,
 
                 RelativeEffects: new List<string>() { "TurboFuelStatus" },
                 UpgradedRelativeEffects: new List<string>() { "TurboFuelStatus" },

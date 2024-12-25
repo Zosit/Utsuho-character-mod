@@ -99,8 +99,8 @@ namespace Utsuho_character_mod.CardsR
                 Keywords: Keyword.None,
                 UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Exile,
+                UpgradedRelativeKeyword: Keyword.Exile,
 
                 RelativeEffects: new List<string>() { "HeatStatus" },
                 UpgradedRelativeEffects: new List<string>() { "HeatStatus" },

@@ -72,8 +72,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: 12,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: null,
-                UpgradedValue1: null,
+                Value1: 2,
+                UpgradedValue1: 2,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -96,8 +96,8 @@ namespace Utsuho_character_mod.CardsR
                 Keywords: Keyword.None,
                 UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Block,
+                UpgradedRelativeKeyword: Keyword.Block,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
@@ -105,8 +105,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "Zosit",
-                SubIllustrator: new List<string>() { }
+                Illustrator: "AltAlias",
+                SubIllustrator: new List<string>() { "Zosit" }
              );
 
             return cardConfig;
@@ -126,8 +126,8 @@ namespace Utsuho_character_mod.CardsR
             }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return AttackAction(selector.SelectedEnemy);
-                yield return AttackAction(selector.SelectedEnemy);
+                for(int i = 0; i < Value1; i++)
+                    yield return AttackAction(selector.SelectedEnemy);
                 yield break;
             }
 

@@ -108,7 +108,7 @@ namespace Utsuho_character_mod.CardsG
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Kimmchu",
                 SubIllustrator: new List<string>() { }
              );
 

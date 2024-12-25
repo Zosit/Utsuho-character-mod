@@ -41,7 +41,7 @@ namespace Utsuho_character_mod.Status
         [DontOverwrite]
         public override Sprite LoadSprite()
         {
-            return ResourceLoader.LoadSprite("EnergyStatus.png", BepinexPlugin.embeddedSource);
+            return ResourceLoader.LoadSprite(GetId() + ".png", BepinexPlugin.embeddedSource);
         }
 
         public override StatusEffectConfig MakeConfig()
@@ -119,7 +119,7 @@ namespace Utsuho_character_mod.Status
             }
 
 
-            if (!Battle.BattleShouldEnd && (base.Owner.GetStatusEffect<HeatWaveStatus>() == null))
+            if (!Battle.BattleShouldEnd)
             {
                 yield return new ApplyStatusEffectAction<HeatStatus>(base.Owner, -(level / 5), null, null, null, 0f, true);
             }

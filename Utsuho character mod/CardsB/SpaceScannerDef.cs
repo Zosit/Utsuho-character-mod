@@ -72,10 +72,10 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: null,
-                UpgradedValue1: null,
-                Value2: null,
-                UpgradedValue2: null,
+                Value1: 2,
+                UpgradedValue1: 2,
+                Value2: 1,
+                UpgradedValue2: 1,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: 5,
@@ -105,7 +105,7 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedRelativeCards: new List<string>() { "DarkMatter" },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Zosit",
                 SubIllustrator: new List<string>() { }
              );
 
@@ -119,7 +119,9 @@ namespace Utsuho_character_mod.CardsR
 
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                Card[] cards = { Library.CreateCard("DarkMatter"), Library.CreateCard("DarkMatter") };
+                var cards = new List<Card>();
+                for (int i = 0; i < Value1; i++)
+                    cards.Add(Library.CreateCard("DarkMatter"));
                 yield return new AddCardsToDrawZoneAction(cards , DrawZoneTarget.Random);
                 yield return new ScryAction(this.Scry);
                 yield return new DrawCardAction();

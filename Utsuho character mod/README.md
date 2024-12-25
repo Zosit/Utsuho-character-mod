@@ -15,11 +15,11 @@ Programmer/Designer:
 - Zosit
 
 Artists:
-- Zosit
-- Xeno
-- Flippin'Loser
-- AltAlias
-- Kimmchu
+- Zosit (cards)
+- Xeno (all status and exhibit art)
+- Flippin'Loser (cards)
+- AltAlias (character sprite and cards)
+- Kimmchu (cards)
 
 Translators:
 - Xeno (English edit)

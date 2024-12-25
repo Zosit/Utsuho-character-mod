@@ -77,8 +77,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedShield: null,
                 Value1: 6,
                 UpgradedValue1: 9,
-                Value2: null,
-                UpgradedValue2: null,
+                Value2: 1,
+                UpgradedValue2: 1,
                 Mana: null,
                 UpgradedMana: null,
                 Scry: null,
@@ -120,7 +120,12 @@ namespace Utsuho_character_mod.CardsMulti
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return BuffAction<HotSpringStatus>(Value1, 0, 0, 0, 0.2f);
+                int level = base.GetSeLevel<HotSpringStatus>();
+                if (level == 0)
+                    yield return BuffAction<HotSpringStatus>(Value2, 0, 0, Value1, 0.2f);
+                else
+                    yield return BuffAction<HotSpringStatus>(Value2, 0, 0, 0, 0.2f);
+
                 yield break;
             }
         }

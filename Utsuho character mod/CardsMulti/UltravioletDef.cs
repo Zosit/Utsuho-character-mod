@@ -99,8 +99,8 @@ namespace Utsuho_character_mod.CardsMulti
                 Keywords: Keyword.Retain,
                 UpgradedKeywords: Keyword.Retain,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.Philosophy,
+                UpgradedRelativeKeyword: Keyword.Philosophy,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },

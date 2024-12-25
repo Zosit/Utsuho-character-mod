@@ -100,8 +100,8 @@ namespace Utsuho_character_mod.CardsR
                 Keywords: Keyword.Accuracy,
                 UpgradedKeywords: Keyword.Accuracy,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.None,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.TempMorph,
+                UpgradedRelativeKeyword: Keyword.TempMorph,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },

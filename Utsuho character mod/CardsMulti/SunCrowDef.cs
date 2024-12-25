@@ -102,8 +102,8 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.Battlefield,
                 UpgradedRelativeKeyword: Keyword.Battlefield,
 
-                RelativeEffects: new List<string>() { "HeatStatus" },
-                UpgradedRelativeEffects: new List<string>() { "HeatStatus" },
+                RelativeEffects: new List<string>() { "HeatStatus", "MassStatus" },
+                UpgradedRelativeEffects: new List<string>() { "HeatStatus", "MassStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
@@ -141,6 +141,13 @@ namespace Utsuho_character_mod.CardsMulti
                     }
                 }
             }*/
+            public int doubleValue
+            {
+                get
+                {
+                    return Value1 * 2;
+                }
+            }
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
                 int count = 0;

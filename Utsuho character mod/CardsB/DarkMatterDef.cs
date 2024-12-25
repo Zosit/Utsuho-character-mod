@@ -96,8 +96,8 @@ namespace Utsuho_character_mod.CardsB
                 Keywords: Keyword.Replenish | Keyword.Exile,
                 UpgradedKeywords: Keyword.None,
                 EmptyDescription: false,
-                RelativeKeyword: Keyword.Retain,
-                UpgradedRelativeKeyword: Keyword.None,
+                RelativeKeyword: Keyword.TempRetain,
+                UpgradedRelativeKeyword: Keyword.TempRetain,
 
                 RelativeEffects: new List<string>() { },
                 UpgradedRelativeEffects: new List<string>() { },
