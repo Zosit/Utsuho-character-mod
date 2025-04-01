@@ -104,6 +104,10 @@ namespace Utsuho_character_mod
             ModleName: "",
             NarrativeColor: "#e58c27",
             IsSelectable: true,
+            HasHomeName: false,
+            BasicRingOrder: 4,
+            LeftColor: ManaColor.Red,
+            RightColor: ManaColor.Black,
             MaxHp: 80,
             InitialMana: new LBoL.Base.ManaGroup() { Red = 2, Black = 2 },
             InitialMoney: 10,
@@ -151,7 +155,7 @@ namespace Utsuho_character_mod
         public static Sprite castSprite = ResourceLoader.LoadSprite("UtsuhoCast_Sprite.png", directorySource, ppu: 565);
         public static Sprite defaultSprite = ResourceLoader.LoadSprite("Utsuho_Sprite.png", directorySource, ppu: 565);
 
-        public override UniTask<Sprite> LoadSpellSprite() => ResourceLoader.LoadSpriteAsync("SpellCard.png", directorySource, ppu: 336);
+        public override UniTask<Sprite> LoadSpellSprite() => ResourceLoader.LoadSpriteAsync("SpellCard.png", directorySource, ppu: 3360);
 
 
         public override UnitModelConfig MakeConfig()
@@ -161,8 +165,8 @@ namespace Utsuho_character_mod
             config.Flip = true;
             config.Type = 0;
             config.Offset = new Vector2(0, 0.04f);
-            config.SpellPosition = new Vector2(-1000.00f, 300.00f);
-            config.SpellScale = 0.7f;
+            //config.SpellPosition = new Vector2(-1000.00f, 300.00f);
+            //config.SpellScale = 0.7f;
             config.SpellColor = new Color32[] { new Color32(104, 15, 5, 255), new Color32(255, 46, 72, 255), new Color32(74, 0, 1, 150), new Color32(255, 46, 72, 255) };
             //config.SpellColor = new Color32[] { new Color32(186, 66, 255, 255), new Color32(155, 5, 193, 255), new Color32(186, 66, 255, 150), new Color32(155, 5, 193, 255) };
             return config;

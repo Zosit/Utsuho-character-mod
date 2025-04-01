@@ -62,12 +62,12 @@ namespace Utsuho_character_mod.CardsMulti
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Rare,
-                Type: CardType.Skill,
+                Type: CardType.Ability,
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Red, ManaColor.White },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1, White = 1, Any = 1 },
-                UpgradedCost: new ManaGroup() { Red = 1, White = 1 },
+                Cost: new ManaGroup() { Hybrid = 2, HybridColor = 2 },
+                UpgradedCost: new ManaGroup() { Any = 0 },
                 MoneyCost: null,
                 Damage: null,
                 UpgradedDamage: null,
@@ -75,8 +75,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 5,
-                UpgradedValue1: 8,
+                Value1: 1,
+                UpgradedValue1: 1,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -84,6 +84,8 @@ namespace Utsuho_character_mod.CardsMulti
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
+                Kicker: null,
+                UpgradedKicker: null,
 
                 Loyalty: null,
                 UpgradedLoyalty: null,
@@ -102,13 +104,13 @@ namespace Utsuho_character_mod.CardsMulti
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "Firepower" },
-                UpgradedRelativeEffects: new List<string>() { "Firepower" },
+                RelativeEffects: new List<string>() { "DojoStatus" },
+                UpgradedRelativeEffects: new List<string>() { "DojoStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Camellia",
                 SubIllustrator: new List<string>() { }
              );
 
@@ -120,9 +122,7 @@ namespace Utsuho_character_mod.CardsMulti
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return BuffAction<Firepower>(Value1, 0, 0, 0, 0.2f);
-                yield return new RequestEndPlayerTurnAction();
-                yield break;
+                yield return new ApplyStatusEffectAction<DojoStatus>(Battle.Player, null, null, null, null, 0f, true);
             }
         }
     }

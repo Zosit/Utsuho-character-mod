@@ -80,6 +80,8 @@ namespace Utsuho_character_mod.CardsR
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
+                Kicker: null,
+                UpgradedKicker: null,
 
                 Loyalty: null,
                 UpgradedLoyalty: null,
@@ -104,7 +106,7 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Camellia",
                 SubIllustrator: new List<string>() { }
              );
 

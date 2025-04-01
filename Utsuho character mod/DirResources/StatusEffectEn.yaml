@@ -102,3 +102,8 @@ MultiKickerStatus:
   Name: MultiKicker
   Description: "All floating mana is spent when playing this card.\nFor each time this mana can afford the kicker cost after the card cost, repeat the listed effect once."
   Brief: "All floating mana is spent when playing this card.\nFor each time this mana can afford the kicker cost after the card cost, repeat the listed effect once.\n(Set cost using the mana panel in the bottom left corner)"
+  
+DojoStatus:
+  Name: "Dojo"
+  Description: "Whenever {PlayerName} draws a card outside of the draw step, |Upgrade| it."
+  Brief: "Whenever {PlayerName} draws a card outside of the draw step, |Upgrade| it."

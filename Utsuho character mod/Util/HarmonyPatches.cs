@@ -33,6 +33,9 @@ using UnityEngine;
 using LBoLEntitySideloader.Resource;
 using static Utsuho_character_mod.BepinexPlugin;
 using Cysharp.Threading.Tasks.Triggers;
+using LBoL.EntityLib.Cards.Enemy;
+using Utsuho_character_mod.CardsOther;
+using static Utsuho_character_mod.CardsOther.UtsuhoNewsDef;
 
 namespace PullFix.Patches
 {
@@ -103,35 +106,21 @@ namespace PullFix.Patches
         }*/
     }
 
-    /*[HarmonyPatch(typeof(UnitView))]
-    class UnitView_ShootAnimation_Patch
+    [HarmonyPatch(typeof(Aya))]
+    class OnEnterBattle_Patch
     {
-        [HarmonyPatch(nameof(UnitView.ShootStartAnimation), typeof(string), typeof(List<float>), typeof(List<float>))]
-        static bool Prefix(UnitView __instance, bool order, bool keyTimes, float speeds)
+        [HarmonyPatch(nameof(Aya.OnEnterBattle), typeof(BattleController))]
+        static void Postfix(Aya __instance)
         {
-
-            if (__instance._modelName == "Utsuho")
+            string id = __instance.GameRun.Player.Id;
+            if (id == "Utsuho")
             {
-                __instance.spriteRenderer.sprite = UtsuhoModelDef.hurtSprite;
-
-                //__result = GetEnumerator(__instance);
-
+                __instance.SpecialReport = typeof(UtsuhoNews);
             }
-            return true;
         }
-        [HarmonyPatch(nameof(UnitView.ShootStartAnimation), typeof(string), typeof(List<float>), typeof(List<float>))]
-        static void Postfix(UnitView __instance, bool order, bool keyTimes, float speeds)
-        {
-
-            if (__instance._modelName == "Utsuho")
-            {
-                __instance.spriteRenderer.sprite = UtsuhoModelDef.hurtSprite;
-
-                //__result = GetEnumerator(__instance);
-            }
-        }*/
-
     }
+
+}
     /*[HarmonyPatch(typeof(UnitView))]
     class UnitView_CrashAnimation_Patch
     {

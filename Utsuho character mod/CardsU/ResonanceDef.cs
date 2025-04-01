@@ -85,6 +85,8 @@ namespace Utsuho_character_mod.CardsU
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
+                Kicker: null,
+                UpgradedKicker: null,
 
                 Loyalty: null,
                 UpgradedLoyalty: null,
@@ -97,7 +99,7 @@ namespace Utsuho_character_mod.CardsU
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Exile | Keyword.Ethereal,
+                Keywords: Keyword.Exile | Keyword.Ethereal | Keyword.AutoExile,
                 UpgradedKeywords: Keyword.Exile | Keyword.Ethereal,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
@@ -134,7 +136,6 @@ namespace Utsuho_character_mod.CardsU
             protected override void OnEnterBattle(BattleController battle)
             {
                 base.ReactBattleEvent<CardEventArgs>(base.Battle.CardExiled, new EventSequencedReactor<CardEventArgs>(this.OnCardExiled));
-                this.IsAutoExile = true;
             }
             private IEnumerable<BattleAction> OnCardExiled(CardEventArgs args)
             {

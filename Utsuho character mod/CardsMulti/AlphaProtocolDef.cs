@@ -45,7 +45,7 @@ namespace Utsuho_character_mod.CardsMulti
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13530,
+                Index: 13522,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -83,6 +83,8 @@ namespace Utsuho_character_mod.CardsMulti
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
+                Kicker: null,
+                UpgradedKicker: null,
 
                 Loyalty: null,
                 UpgradedLoyalty: null,

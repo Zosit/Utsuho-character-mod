@@ -82,6 +82,8 @@ namespace Utsuho_character_mod.CardsW
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
+                Kicker: null,
+                UpgradedKicker: null,
 
                 Loyalty: null,
                 UpgradedLoyalty: null,
@@ -106,7 +108,7 @@ namespace Utsuho_character_mod.CardsW
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Camellia",
                 SubIllustrator: new List<string>() { }
              );
 
@@ -125,7 +127,7 @@ namespace Utsuho_character_mod.CardsW
             {
                 if (args.DieSource == this && !args.Unit.HasStatusEffect<Servant>())
                 {
-                    List<Card> list = this.GameRun.BaseDeckWithOutUnremovable.ToList<Card>();
+                    List<Card> list = this.GameRun.BaseDeckWithoutUnremovable.ToList<Card>();
                     if (list.Count > 0)
                     {
                         SelectCardInteraction interaction = new SelectCardInteraction(1, 1, list)

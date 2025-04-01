@@ -18,18 +18,22 @@ HellGeyser:
   Name: Hell Geyser
   Description: "Gain {Value1} |Heat|.\n|Vent| to deal {Damage} damage.\nGain half of the vented |Heat|. ({halfVent})"
   NonbattleDescription: "Gain {Value1} |Heat|.\n|Vent| for damage.\nGain half of the vented |Heat|."
+  FlavorText: Different from a normal Geyser in that instead of sending scalding steam into the heavens, it sends molten rock
 
 ShootingStar:
   Name: Shooting Star
   Description: "Deal {Damage} damage {Value1} times.\n|When Pulled|: Gain {Block} |Block| and add a |Dark Matter| to the hand."
+  FlavorText: No matter what you wish for, it'll be massive.
 
 DarkMatter:
   Name: Dark Matter
   Description: "|When {SelfName} enters the hand|: |Retain| it this turn."
+  FlavorText: An indescribable cluster of mess with a dark aura. No one in thier right mind would want to eat it, right?
 
 Aggregate:
   Name: Aggregate
   Description: "Deal {Damage} damage.\nGain {Block} |Block|.\nGain {Value1} |Heat|."
+  FlavorText: "Processing... Processing... Error: Input not Found."
 
 FlareUp:
   Name: Flare Up
@@ -44,11 +48,13 @@ HeatWave:
   Name: Heat Wave
   Description: "Gain {Value1} |Heat|.\nTrigger |Heat| twice without losing any |Heat| ({HeatDamage})."
   NonbattleDescription: "Gain {Value1} |Heat|.\nTrigger |Heat| twice without losing any |Heat|."
+  FlavorText: Rarely can one feel the moment a heat wave arrives. This is generally regarded as a Good Thing.
 
 WhiteHole:
   Name: White Hole
   Description: "|At the end of the turn|: Gain {Block} |Block| and add a |Dark Matter| to the discard pile."
   DetailText: "Playing {SelfName} has no effect other than |Exiling| it from the hand."
+  FlavorText: "Matter comes out."
 
 CloakStar:
   Name: Cloak of Stars
@@ -69,7 +75,8 @@ Starlight:
 
 RecklessGamble:
   Name: Reckless Gamble
-  Description: "Draw {Value1} cards.\n|Exile| a random card from the hand."
+  Description: "Draw {Value1} cards.\nWhen you can't draw, |Exile| a random card from the hand."
+  FlavorText: All In.
 
 PlasmaBurn:
   Name: Plasma Burn
@@ -111,11 +118,13 @@ BunkerDown:
 EverythingBurns:
   Name: Everything Burns
   Description: "|Exile| up to X+2 cards from the hand.\n|For each {Mana} spent|: Deal {Damage} damage."
+  FlavorText: "Burn the land, boil the sea, even the sky I'll burn with glee~"
 
 BlackHole: 
   Name: Black Hole
   Description: "|While in hand|: At the start of {PlayerName}'s turn, gain {Block} |Block| and discard a random card."
   DetailText: "Playing {SelfName} has no effect other than |Exiling| it from the hand."
+  FlavorText: "Card goes in."
   
 QuantumLink:
   Name: Quantum Link
@@ -129,6 +138,7 @@ NightFalls:
   Name: Night Falls
   Description: "Add |Dark Matter| to the hand until it is full.\nDeal damage equal to {Value1} times the cards with |Mass| in the hand. ({Damage})"
   NonbattleDescription: "Add |Dark Matter| to the hand until it is full.\nDeal damage equal to {Value1} times the cards with |Mass| in the hand."
+  FlavorText: When will the stars come out?
 
 EscapeVelocity:
   Name: Escape Velocity
@@ -179,6 +189,7 @@ MaintainReaction:
 Ignition:
   Name: Ignition
   Description: "|For each {Mana} spent|:\nGain {Value1} |Heat| and add a |Dark Matter| to the hand."
+  FlavorText: The moment the Yatagarasu came to rest in Utsuho was a momentous occasion. The future of Former Hell was irrevocably altered.
 
 NuclearFusion:
   Name: Nuclear Fusion
@@ -191,11 +202,10 @@ NuclearStrike:
 
 NuclearDive:
   Name: Uncontainable Nuclear Reaction Dive
-  Description: "Double {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage.\n|Expel|: Gain half of the vented |Heat|. ({halfVent})"
-  NonbattleDescription: "Double {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| for damage.\n|Expel|: Gain half the vented |Heat|."
-  UpgradedDescription: "Triple {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| to deal {Damage} damage.\n|Expel|: Gain half of the vented |Heat|. ({halfVent})"
-  UpgradedNonbattleDescription: "Triple {PlayerName}'s |Heat|.\nTake 1 damage for every 10 |Heat| {PlayerName} has.\n|Vent| for damage.\n|Expel|: Gain half the vented |Heat|."
-  DetailText: "The damage taken is attack damage, which can be blocked and/or grazed."
+  Description: "Double {PlayerName}'s |Heat|.\n|Vent| to deal {Damage} damage.\n|Expel|: Gain half of the vented |Heat|. ({halfVent})"
+  NonbattleDescription: "Double {PlayerName}'s |Heat|.\n|Vent| for damage.\n|Expel|: Gain half the vented |Heat|."
+  UpgradedDescription: "Triple {PlayerName}'s |Heat|.\n|Vent| to deal {Damage} damage.\n|Expel|: Gain half of the vented |Heat|. ({halfVent})"
+  UpgradedNonbattleDescription: "Triple {PlayerName}'s |Heat|.\n|Vent| for damage.\n|Expel|: Gain half the vented |Heat|."
 
 MegaFlare:
   Name: Mega Flare
@@ -254,6 +264,7 @@ SpatialRend:
 AblativeArmor:
   Name: Ablative Armor
   Description: "Gain {Block} |Block|.\n|Exile| all cards with |Mass| from the hand, and gain {Value1} |Barrier| for each card |Exiled|."
+  FlavorText: "Atomic energy, miko."
 
 SunSpot:
   Name: "Artificial Sun's Spot"
@@ -263,6 +274,7 @@ SunSpot:
 SunCrow: 
   Name: The Crow who Stole the Sun
   Description: "Remove {Value2} random cards from the |Battlefield|.\nGain {Value1} |Heat| for each card removed, or {doubleValue} if it had |Mass|."
+  FlavorText: And they said the original characters had too much exile...
 
 ExpandingBrilliance:
   Name: Expanding Brilliance
@@ -278,7 +290,7 @@ Caution:
 
 Dojo:
   Name: "Okuu's Nuclear Fusion Dojo"
-  Description: "Gain {Value1} |Firepower|.\nEnd {PlayerName}'s turn."
+  Description: "Whenever {PlayerName} draws a card outside of the draw step, |Upgrade| it."
 
 Blueshift:
   Name: Blueshift
@@ -296,6 +308,7 @@ Coolant:
 Remember:
   Name: "Help Me Remember, Satori-sama!"
   Description: "Return any number of cards from |Exile| to the hand."
+  FlavorText: "Who doesn't eat the skin on a peach!??!"
   
 Reignition:
   Name: Reignition
@@ -318,3 +331,7 @@ HotSpring:
 CollapsingStar:
   Name: Collapsing Star
   Description: "Whenever {PlayerName} adds |Dark Matter| during this combat, draw {Value1:plural one='% card.' other='% cards.'}\nWhen you gain |Heat|, gain {Mana} for every 10 |Heat| gained."
+  
+UtsuhoNews:
+  Name: Bunbunmaru - Utsuho Special
+  Description: "|At the end of the turn|: Lose {Value1} |Spirit|."

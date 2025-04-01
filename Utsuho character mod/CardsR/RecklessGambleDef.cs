@@ -70,7 +70,7 @@ namespace Utsuho_character_mod.CardsR
                 TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Red = 1 },
+                Cost: new ManaGroup() { Red = 1, Any = 1 },
                 UpgradedCost: new ManaGroup() { Red = 1 },
                 MoneyCost: null,
                 Damage: null,
@@ -79,8 +79,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 4,
-                UpgradedValue1: 5,
+                Value1: 7,
+                UpgradedValue1: 7,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -88,6 +88,8 @@ namespace Utsuho_character_mod.CardsR
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
+                Kicker: null,
+                UpgradedKicker: null,
 
                 Loyalty: null,
                 UpgradedLoyalty: null,
@@ -124,11 +126,21 @@ namespace Utsuho_character_mod.CardsR
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return new DrawManyCardAction(Value1);
-                Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
-                foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
-                yield return new WaitForYieldInstructionAction(new WaitForSeconds(0.5f));
-                yield return new ExileCardAction(card);
+                for(int i = 0;i < Value1;i++)
+                {
+                    if((base.Battle.HandZone.Count == base.Battle.MaxHand && !(base.Battle.HandZone.Any((Card card) => card.IsAutoExile))) || ((base.Battle.DrawZone.Count + base.Battle.DiscardZone.Count) == 0))
+                    {
+                        if(base.Battle.HandZone.Count != 0)
+                        {
+                            Card card = UsefulFunctions.RandomUtsuho(Battle.HandZone);
+                            foreach (BattleAction action in UsefulFunctions.RandomCheck(card, base.Battle)) { yield return action; }
+                            yield return new WaitForYieldInstructionAction(new WaitForSeconds(0.5f));
+                            yield return new ExileCardAction(card);
+                        }
+                    }
+                    yield return new DrawCardAction();
+                }
+
 
                 yield break;
             }           

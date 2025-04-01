@@ -80,6 +80,8 @@ namespace Utsuho_character_mod.CardsR
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
+                Kicker: null,
+                UpgradedKicker: null,
 
                 Loyalty: null,
                 UpgradedLoyalty: null,
@@ -130,7 +132,8 @@ namespace Utsuho_character_mod.CardsR
                 if (!base.Battle.BattleShouldEnd)
                 {
                     int level = base.GetSeLevel<HeatStatus>();
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1) - level, null, null, null, 0f, true);
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player,-level, null, null, null, 0f, true);
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(base.Value1), null, null, null, 0f, true);
                     yield break;
                 }
             }

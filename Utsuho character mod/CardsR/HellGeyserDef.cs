@@ -80,6 +80,8 @@ namespace Utsuho_character_mod.CardsR
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
+                Kicker: null,
+                UpgradedKicker: null,
 
                 Loyalty: null,
                 UpgradedLoyalty: null,
@@ -104,8 +106,8 @@ namespace Utsuho_character_mod.CardsR
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "Zosit",
-                SubIllustrator: new List<string>() { }
+                Illustrator: "Radal",
+                SubIllustrator: new List<string>() { "Zosit" }
              );
 
             return cardConfig;            
@@ -145,7 +147,8 @@ namespace Utsuho_character_mod.CardsR
                 if (!base.Battle.BattleShouldEnd)
                 {
                     int level = base.GetSeLevel<HeatStatus>();
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(tempDamage / 2) - level, null, null, null, 0f, true);
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, -level, null, null, null, 0f, true);
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, new int?(tempDamage / 2), null, null, null, 0f, true);
                     tempDamage = 0;
                     yield break;
                 }

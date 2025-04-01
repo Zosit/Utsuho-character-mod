@@ -26,7 +26,7 @@ namespace Utsuho_character_mod.Util
     [HarmonyPatch]
     public static class CardOverlay
     {
-        private static readonly string OverlayName = "CardOverlayOkuu";
+        /*private static readonly string OverlayName = "CardOverlayOkuu";
         [HarmonyPatch(typeof(CardWidget), nameof(CardWidget.LazySetCard)), HarmonyPostfix]
         static void AddOverlay(CardWidget __instance)
         {
@@ -47,6 +47,6 @@ namespace Utsuho_character_mod.Util
 
                 overlay.gameObject.SetActive((__instance.Card is UtsuhoCard uCard) && (uCard.isMass));
             }
-        }
+        }*/
     }
 }

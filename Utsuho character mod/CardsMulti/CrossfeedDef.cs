@@ -84,6 +84,8 @@ namespace Utsuho_character_mod.CardsMulti
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
+                Kicker: null,
+                UpgradedKicker: null,
 
                 Loyalty: null,
                 UpgradedLoyalty: null,
@@ -148,7 +150,8 @@ namespace Utsuho_character_mod.CardsMulti
                 }
                 else if (total != 0)
                 {
-                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, (total * this.Value1) - level, null, null, null, 0f, true);
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player,-level, null, null, null, 0f, true);
+                    yield return new ApplyStatusEffectAction<HeatStatus>(Battle.Player, (total * this.Value1), null, null, null, 0f, true);
                 }
                 if ((level/Value2) != 0)
                 {

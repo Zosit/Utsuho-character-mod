@@ -81,6 +81,8 @@ namespace Utsuho_character_mod.CardsR
                 Scry: 5,
                 UpgradedScry: 5,
                 ToolPlayableTimes: null,
+                Kicker: null,
+                UpgradedKicker: null,
 
                 Loyalty: null,
                 UpgradedLoyalty: null,

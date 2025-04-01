@@ -46,7 +46,7 @@ namespace Utsuho_character_mod.CardsG
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
-                Index: 13630,
+                Index: 13645,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -84,6 +84,8 @@ namespace Utsuho_character_mod.CardsG
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
+                Kicker: null,
+                UpgradedKicker: null,
 
                 Loyalty: null,
                 UpgradedLoyalty: null,
@@ -108,8 +110,8 @@ namespace Utsuho_character_mod.CardsG
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "Kimmchu",
-                SubIllustrator: new List<string>() { }
+                Illustrator: "Camellia",
+                SubIllustrator: new List<string>() { "Kimmchu" }
              );
 
             return cardConfig;

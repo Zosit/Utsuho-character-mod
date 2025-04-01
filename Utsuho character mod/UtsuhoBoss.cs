@@ -56,6 +56,8 @@ namespace Utsuho_character_mod
                 FormationName: VanillaFormations.Single,
                 Enemies: new List<string>() { nameof(Utsuho) },
                 EnemyType: EnemyType.Boss,
+                Hidden: false,
+                Environment: null,
                 DebutTime: 1f,
                 RollBossExhibit: true,
                 PlayerRoot: new Vector2(-4f, 0.5f),

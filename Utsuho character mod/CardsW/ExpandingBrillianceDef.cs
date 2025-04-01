@@ -82,6 +82,8 @@ namespace Utsuho_character_mod.CardsW
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
+                Kicker: null,
+                UpgradedKicker: null,
 
                 Loyalty: null,
                 UpgradedLoyalty: null,
@@ -106,7 +108,7 @@ namespace Utsuho_character_mod.CardsW
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Camellia",
                 SubIllustrator: new List<string>() { }
              );
 
@@ -125,9 +127,10 @@ namespace Utsuho_character_mod.CardsW
                 }
 
                 List<Card> list = base.Battle.HandZone.ToList<Card>();
-                if (list.Count > 0)
+                List<Card> upgradeable = list.Where((Card hand) => hand != this && hand.CanUpgradeAndPositive).ToList<Card>();
+                if (upgradeable.Count > 0)
                 {
-                    SelectHandInteraction interaction = new SelectHandInteraction(1, 1, base.Battle.HandZone.Where((Card hand) => hand != this && hand.CanUpgradeAndPositive).ToList<Card>())
+                    SelectHandInteraction interaction = new SelectHandInteraction(1, 1, upgradeable)
                     {
                         Source = this
                     };
