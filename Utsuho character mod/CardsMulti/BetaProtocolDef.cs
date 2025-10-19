@@ -46,6 +46,7 @@ namespace Utsuho_character_mod.CardsMulti
         {
             var cardConfig = new CardConfig(
                 Index: 13531,
+                Pack: null,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -57,7 +58,7 @@ namespace Utsuho_character_mod.CardsMulti
                 DebugLevel: 0,
                 Revealable: false,
                 IsPooled: false,
-                FindInBattle: false,
+                FindInBattle: true,
                 HideMesuem: true,
                 IsUpgradable: true,
                 Rarity: Rarity.Rare,

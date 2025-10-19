@@ -45,6 +45,7 @@ namespace Utsuho_character_mod.CardsR
         {
             var cardConfig = new CardConfig(
                 Index: 13020,
+                Pack: null,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -109,7 +110,7 @@ namespace Utsuho_character_mod.CardsR
                 Owner: "Utsuho",
                 Unfinished: false,
                 Illustrator: "Flippin'Loser",
-                SubIllustrator: new List<string>() { "AltAlias" }
+                SubIllustrator: new List<string>() { "AlteredAlias" }
              );
 
             return cardConfig;

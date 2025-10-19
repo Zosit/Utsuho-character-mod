@@ -20,6 +20,9 @@ using JetBrains.Annotations;
 using System.Linq;
 using Utsuho_character_mod.Util;
 using LBoL.Core.Units;
+using LBoL.Presentation.UI.Panels;
+using LBoL.Presentation.UI;
+using static Utsuho_character_mod.CardsU.BlueshiftDef;
 
 namespace Utsuho_character_mod.CardsU
 {
@@ -48,6 +51,7 @@ namespace Utsuho_character_mod.CardsU
         {
             var cardConfig = new CardConfig(
                 Index: 13620,
+                Pack: null,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -63,15 +67,15 @@ namespace Utsuho_character_mod.CardsU
                 HideMesuem: false,
                 IsUpgradable: true,
                 Rarity: Rarity.Rare,
-                Type: CardType.Attack,
-                TargetType: TargetType.SingleEnemy,
+                Type: CardType.Skill,
+                TargetType: TargetType.Nobody,
                 Colors: new List<ManaColor>() { ManaColor.Blue },
                 IsXCost: false,
-                Cost: new ManaGroup() { Blue = 1 },
-                UpgradedCost: new ManaGroup() { Any = 0 },
+                Cost: new ManaGroup() { Blue = 1, Any = 1 },
+                UpgradedCost: new ManaGroup() { Blue = 1 },
                 MoneyCost: null,
-                Damage: 12,
-                UpgradedDamage: 12,
+                Damage: null,
+                UpgradedDamage: null,
                 Block: null,
                 UpgradedBlock: null,
                 Shield: null,
@@ -80,8 +84,8 @@ namespace Utsuho_character_mod.CardsU
                 UpgradedValue1: 8,
                 Value2: null,
                 UpgradedValue2: null,
-                Mana: null,
-                UpgradedMana: null,
+                Mana: new ManaGroup() { Any = 1 },
+                UpgradedMana: new ManaGroup() { Any = 1 },
                 Scry: null,
                 UpgradedScry: null,
                 ToolPlayableTimes: null,
@@ -99,19 +103,19 @@ namespace Utsuho_character_mod.CardsU
                 UltimateCost: null,
                 UpgradedUltimateCost: null,
 
-                Keywords: Keyword.Exile | Keyword.Ethereal | Keyword.AutoExile,
-                UpgradedKeywords: Keyword.Exile | Keyword.Ethereal,
+                Keywords: Keyword.Exile | Keyword.Ethereal,
+                UpgradedKeywords: Keyword.Exile,
                 EmptyDescription: false,
                 RelativeKeyword: Keyword.None,
                 UpgradedRelativeKeyword: Keyword.None,
 
-                RelativeEffects: new List<string>() { "ResonanceStatus" },
-                UpgradedRelativeEffects: new List<string>() { "ResonanceStatus" },
+                RelativeEffects: new List<string>() { "ResonanceStatus", "MultiKickerStatus" },
+                UpgradedRelativeEffects: new List<string>() { "ResonanceStatus", "MultiKickerStatus" },
                 RelativeCards: new List<string>() { },
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Flippin'Loser",
                 SubIllustrator: new List<string>() { }
              );
 
@@ -121,45 +125,43 @@ namespace Utsuho_character_mod.CardsU
         [EntityLogic(typeof(ResonanceDef))]
         public sealed class Resonance : Card
         {
-            public override int AdditionalDamage
-            {
-                get
-                {
-                    if (base.Battle == null)
-                    {
-                        return 0;
-                    }
-
-                    return base.GetSeLevel<ResonanceStatus>();
-                }
-            }
+            ManaGroup temp;
+            int KickCount = 0;
             protected override void OnEnterBattle(BattleController battle)
             {
-                base.ReactBattleEvent<CardEventArgs>(base.Battle.CardExiled, new EventSequencedReactor<CardEventArgs>(this.OnCardExiled));
+                base.ReactBattleEvent<ManaEventArgs>(base.Battle.ManaConsuming, new EventSequencedReactor<ManaEventArgs>(this.OnManaConsuming));
+                base.ReactBattleEvent<ManaEventArgs>(base.Battle.ManaConsumed, new EventSequencedReactor<ManaEventArgs>(this.OnManaConsumed));
             }
-            private IEnumerable<BattleAction> OnCardExiled(CardEventArgs args)
+            private IEnumerable<BattleAction> OnManaConsuming(ManaEventArgs args)
             {
-                if ((args.Cause == ActionCause.AutoExile) && (args.Card == this))
+                BattleManaPanel panel = UiManager.GetPanel<BattleManaPanel>();
+                ManaGroup pool = panel.PooledMana + args.Value;
+                if ((args.ActionSource == this) && (args.Cause == ActionCause.CardUse))
                 {
-                    if (!Battle.BattleShouldEnd)
+                    if (pool.CanAfford(this.Mana))
                     {
-                        EnemyUnit target = Battle.EnemyGroup.Alives.Sample(GameRun.BattleRng);
-                        if (target != null && target.IsAlive)
-                        {
-                            yield return AttackAction(target);
-                        }
+                        temp = pool;
+                        KickCount = panel.PooledMana.Amount;
                     }
-                    yield return base.BuffAction<ResonanceStatus>(base.Value1, 0, 0, 0, 0.2f);
+                }
+                return null;
+            }
+            private IEnumerable<BattleAction> OnManaConsumed(ManaEventArgs args)
+            {
+                if (KickCount > 0)
+                {
+                    yield return base.BuffAction<ResonanceStatus>(KickCount, 0, 0, 0, 0.2f);
+
+
+                    KickCount = 0;
+                    BattleManaPanel panel = UiManager.GetPanel<BattleManaPanel>();
+                    ManaGroup pool = panel.PooledMana;
+                    yield return new ConsumeManaAction(pool);
                 }
             }
+
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return AttackAction(selector);
-                if (base.Battle.BattleShouldEnd)
-                {
-                    yield break;
-                }
-                yield return base.BuffAction<ResonanceStatus>(base.Value1, 0, 0, 0, 0.2f);
                 yield break;
             }
         }

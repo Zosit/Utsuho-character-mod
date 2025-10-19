@@ -154,7 +154,7 @@ namespace Utsuho_character_mod
                 WatermarkWrapper.ActivateWatermark();
 
             Util.AssetManager.Load();
-            Func<Sprite> getSprite = () => ResourceLoader.LoadSprite("BossIcon.png", directorySource);
+            Func<Sprite> getSprite = () => ResourceLoader.LoadSprite("UtsuhoBossIcon.png", directorySource);
             EnemyUnitTemplate.AddBossNodeIcon(nameof(UtsuhoBossDef.Utsuho), getSprite);
             IntentionTemplate.CreateIntention<VentIntention>();
             IntentionTemplate.CreateIntention<PullIntention>();

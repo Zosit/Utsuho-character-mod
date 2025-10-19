@@ -47,6 +47,7 @@ namespace Utsuho_character_mod.CardsG
         {
             var cardConfig = new CardConfig(
                 Index: 13645,
+                Pack: null,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",

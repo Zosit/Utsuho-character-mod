@@ -48,6 +48,7 @@ namespace Utsuho_character_mod.CardsMulti
             var cardConfig = new CardConfig(
                 Index: 13550,
                 Id: "",
+                Pack: null,
                 ImageId: "",
                 UpgradeImageId: "",
                 Order: 10,
@@ -75,8 +76,8 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 7,
-                UpgradedValue1: 10,
+                Value1: 6,
+                UpgradedValue1: 9,
                 Value2: 20,
                 UpgradedValue2: 20,
                 Mana: null,

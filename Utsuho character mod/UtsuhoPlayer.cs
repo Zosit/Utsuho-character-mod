@@ -31,6 +31,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Rendering;
@@ -63,11 +64,11 @@ namespace Utsuho_character_mod
         {
             var sprites = new PlayerImages();
 
-            var imprint = ResourceLoader.LoadSprite("CardImprint.png", directorySource);
+            /*var imprint = ResourceLoader.LoadSprite("CardImprint.png", directorySource);
             var collectionIconLoading = ResourceLoader.LoadSprite("CollectionIcon.png", directorySource);
             var selectionCircleIconLoading = ResourceLoader.LoadSprite("SelectionCircleIcon.png", directorySource);
             var avatarLoading = ResourceLoader.LoadSprite("Avatar.png", directorySource);
-            var standLoading = ResourceLoader.LoadSpriteAsync("Stand.png", directorySource);
+            var standLoading = ResourceLoader.LoadSpriteAsync("UtsuhoStand.png", directorySource);
             var winStandLoading = ResourceLoader.LoadSpriteAsync("WinStand.png", directorySource);
             var defeatedStandLoading = ResourceLoader.LoadSpriteAsync("DefeatedStand.png", directorySource);
             var perfectWinIconLoading = ResourceLoader.LoadSpriteAsync("PerfectWinIcon.png", directorySource);
@@ -83,11 +84,9 @@ namespace Utsuho_character_mod
             sprites.SetDefeatedIcon(defeatedIconLoading);
             sprites.SetCollectionIcon(() => collectionIconLoading);
             sprites.SetSelectionCircleIcon(() => selectionCircleIconLoading);
-            sprites.SetInRunAvatarPic(() => avatarLoading);
+            sprites.SetInRunAvatarPic(() => avatarLoading);*/
 
-
-            //sprites.AutoLoad("", (s) => ResourceLoader.LoadSprite(s, directorySource, ppu: 100, 1, FilterMode.Bilinear, generateMipMaps: true), (s) => ResourceLoader.LoadSpriteAsync(s, BepinexPlugin.directorySource), PlayerImages.UseSame.StandAndDeck);
-            sprites.SetCardImprint(() => imprint);
+            sprites.AutoLoad("Utsuho", (s) => ResourceLoader.LoadSprite(s, directorySource, ppu: 100, 1, FilterMode.Bilinear, generateMipMaps: true), (s) => ResourceLoader.LoadSpriteAsync(s, BepinexPlugin.directorySource), PlayerImages.UseSame.StandAndDeck);
 
             return sprites;
         }

@@ -4,4 +4,4 @@ VentIntention:
   
 PullIntention:
   Name: 「牽引ダメージ」
-  Description: "{OwnerName}はあなたの手札にあるダークマターの枚数によって追加のダメージを与える。"
+  Description: "{OwnerName}はあなたの手札にある|質量体|の枚数によって追加のダメージを与える。"

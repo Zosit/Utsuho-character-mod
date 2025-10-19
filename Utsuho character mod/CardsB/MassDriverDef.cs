@@ -43,6 +43,7 @@ namespace Utsuho_character_mod.CardsB
         {
             var cardConfig = new CardConfig(
                 Index: 13225,
+                Pack: null,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -71,7 +72,7 @@ namespace Utsuho_character_mod.CardsB
                 UpgradedBlock: null,
                 Shield: null,
                 UpgradedShield: null,
-                Value1: 6,
+                Value1: 5,
                 UpgradedValue1: 8,
                 Value2: null,
                 UpgradedValue2: null,

@@ -75,7 +75,7 @@ Starlight:
 
 RecklessGamble:
   Name: Reckless Gamble
-  Description: "Draw {Value1} cards.\nWhen you can't draw, |Exile| a random card from the hand."
+  Description: "Draw {Value1} cards.\nWhen you can't draw, |Exile| a random card from the hand first."
   FlavorText: All In.
 
 PlasmaBurn:
@@ -273,7 +273,7 @@ SunSpot:
 
 SunCrow: 
   Name: The Crow who Stole the Sun
-  Description: "Remove {Value2} random cards from the |Battlefield|.\nGain {Value1} |Heat| for each card removed, or {doubleValue} if it had |Mass|."
+  Description: "Remove {Value2} random cards from the |Battlefield|.\nFor each card removed, gain {Value1} |Heat|, or {doubleValue} if it had |Mass|."
   FlavorText: And they said the original characters had too much exile...
 
 ExpandingBrilliance:
@@ -299,7 +299,7 @@ Blueshift:
 
 Resonance:
   Name: Resonance
-  Description: "Deal {Damage} damage.\nFor the rest of combat, each {SelfName} deals {Value1} more damage.\nIf {SelfName} Auto Exiles, play it.\nWhenever {PlayerName} |Exiles| a card that isn't {SelfName}, add a {SelfName} to the hand."
+  Description: "|MultiKicker| {Mana}: Return the next card you play to the hand."
 
 Coolant:
   Name: Coolant

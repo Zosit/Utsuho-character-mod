@@ -4,4 +4,4 @@ VentIntention:
   
 PullIntention:
   Name: "Pulling Damage"
-  Description: "{OwnerName} will deal additional damage based on the amount of Dark Matter in the hand."
+  Description: "{OwnerName} will deal additional damage based on the number of cards with |Mass| in the hand."

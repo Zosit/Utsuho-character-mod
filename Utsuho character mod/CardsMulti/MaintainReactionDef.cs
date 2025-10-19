@@ -47,6 +47,7 @@ namespace Utsuho_character_mod.CardsMulti
             var cardConfig = new CardConfig(
                 Index: 13400,
                 Id: "",
+                Pack: null,
                 ImageId: "",
                 UpgradeImageId: "",
                 Order: 10,
@@ -109,7 +110,7 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "AltAlias",
+                Illustrator: "AlteredAlias",
                 SubIllustrator: new List<string>() { }
              );
 

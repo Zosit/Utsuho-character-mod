@@ -78,18 +78,19 @@ namespace Utsuho_character_mod.Status
     {
         protected override void OnAdded(Unit unit)
         {
-            ReactOwnerEvent<CardEventArgs>(base.Battle.CardExiled, new EventSequencedReactor<CardEventArgs>(this.OnCardExiled));
+            ReactOwnerEvent<CardUsingEventArgs>(base.Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsed));
         }
-        private IEnumerable<BattleAction> OnCardExiled(CardEventArgs args)
+        private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
         {
             if (Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            if ((args.Cause != ActionCause.AutoExile) && (args.Card.Name != "Resonance"))
+            if (args.Card.Zone != CardZone.None && (args.Card.Name != "Resonance"))
             {
                 base.NotifyActivating();
-                yield return new AddCardsToHandAction(Library.CreateCards<Resonance>(1, false));
+                yield return new MoveCardAction(args.Card, CardZone.Hand);
+                yield return new ApplyStatusEffectAction<ResonanceStatus>(base.Owner, -1, null, null, null, 0f, true);
             }
             yield break;
         }

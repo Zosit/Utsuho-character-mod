@@ -50,8 +50,8 @@ RadiationStatus:
 
 HotSpringStatus:
   Name: 温泉
-  Description: "ターン開始時、|放射能|{Level}と|温泉|1を得る。"
-  Brief: "ターン開始時、|放射能|と|温泉|1を得る。"
+  Description: "ターン開始時、|放射能|{Level}を得る。\n;毎ターン{Level}増える。。"
+  Brief: "ターン開始時、|放射能|を得る。毎ターン増えていく。"
 
 MaintainReactionStatus:
   Name: 反応継続
@@ -65,8 +65,8 @@ FixedStarStatus:
 
 TokamakStatus:
   Name: 「ヘルズトカマク」
-  Description: "ターン開始時、|熱|{Level}を得る。"
-  Brief: "ターン開始時、|熱|{Level}を得る。"
+  Description: "{PlayerName}の次のターン開始時、|熱|{Level}を得る。"
+  Brief: "{PlayerName}の次のターン開始時、|熱|{Level}を得る。"
 
 SunSpotStatus:
   Name: 太陽黒点
@@ -75,22 +75,23 @@ SunSpotStatus:
 
 HeatVisorStatus:
   Name: ヒートバイザー
-  Description: "次のターンまで{Level}回のライフ喪失を無効化する。"
-  Brief: "次のターンまでのライフ喪失を無効化する。"
+  Description: "次のターンまで{Level}回の10ダメージ以上のライフ喪失を無効化する。"
+  Brief: "次のターンまでの10ダメージ以上ライフ喪失を無効化する。"
   
 HeatWaveStatus:
   Name: ヒートウェイブ
-  Description: "{Duration}ターンの間、ターン終了時に|熱|を失わない。"
-  Brief: "次のターン終了時、|熱|を失わない。"
+  Description: "次の{Duration}ターンの間、ターン終了時に|熱|を失わない。"
+  Brief: "次の一定ターンの間、ターン終了時|熱|を失わない。"
   
 CollapsingStarStatus:
   Name: 崩壊する星
   Description: "|ダークマター|を加えるたび、カードを{Level}枚引く。\n|熱|を得るたび、得た|熱|10点ごとに{Mana}を{Level}回得る。"
   Brief: "|ダークマター|を加えるたび、カードを1枚引く。|熱|を得るたび、得た|熱|10点ごとに{Mana}を得る。"
+  
 PlasmaBurnStatus:
   Name: 高温プラズマ
-  Description: "{PlayerName}のターン開始時、ライフを{Level}失う。"
-  Brief: "{PlayerName}のターン開始時、ライフを失う。"
+  Description: "{PlayerName}の次のターン開始時、ライフを{Level}失う。"
+  Brief: "{PlayerName}の次のターン開始時、ライフを失う。"
 
 MassStatus:
   Name: 質量体
@@ -106,3 +107,9 @@ MultiKickerStatus:
   Name: 多重キッカー
   Description: "このカードを使用した時、指定されたマナは全て消費される。支払えたキッカーコスト1回分につき、キッカー効果を1回得る。"
   Brief: "このカードを使用した時、指定されたマナは全て消費される。支払えたキッカーコスト1回分につき、キッカー効果を1回得る。"
+  
+
+DojoStatus:
+  Name: "お空のニュークリアフュージョン道場"
+  Description: "ドローフェーズ以外で{PlayerName}がカードを引くたびに、そのカードを|アップグレード|する。"
+  Brief: "ドローフェーズ以外で{PlayerName}がカードを引くたびに、そのカードを|アップグレード|する。"

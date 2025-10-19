@@ -18,7 +18,7 @@ Artists:
 - Zosit (cards)
 - Xeno (all status and exhibit art)
 - Flippin'Loser (cards)
-- AltAlias (character sprite and cards)
+- AlteredAlias (character sprite and cards)
 - Kimmchu (cards)
 - Camellia (cards, character portrait)
 - Radalrrayan (cards)

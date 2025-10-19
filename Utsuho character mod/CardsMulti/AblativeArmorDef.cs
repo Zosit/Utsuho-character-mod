@@ -44,6 +44,7 @@ namespace Utsuho_character_mod.CardsMulti
         {
             var cardConfig = new CardConfig(
                 Index: 13527,
+                Pack: null,
                 Id: "",
                 ImageId: "",
                 UpgradeImageId: "",
@@ -73,7 +74,7 @@ namespace Utsuho_character_mod.CardsMulti
                 Shield: 0,
                 UpgradedShield: 0,
                 Value1: 10,
-                UpgradedValue1: 14,
+                UpgradedValue1: 10,
                 Value2: null,
                 UpgradedValue2: null,
                 Mana: null,
@@ -107,7 +108,7 @@ namespace Utsuho_character_mod.CardsMulti
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "Utsuho",
                 Unfinished: false,
-                Illustrator: "AltAlias",
+                Illustrator: "AlteredAlias",
                 SubIllustrator: new List<string>() { }
              );
 

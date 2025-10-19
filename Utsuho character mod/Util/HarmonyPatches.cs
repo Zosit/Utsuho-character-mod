@@ -36,6 +36,8 @@ using Cysharp.Threading.Tasks.Triggers;
 using LBoL.EntityLib.Cards.Enemy;
 using Utsuho_character_mod.CardsOther;
 using static Utsuho_character_mod.CardsOther.UtsuhoNewsDef;
+using DG.Tweening;
+using UnityEngine.UI;
 
 namespace PullFix.Patches
 {
@@ -120,6 +122,31 @@ namespace PullFix.Patches
         }
     }
 
+    [HarmonyPatch(typeof(StartGamePanel), nameof(StartGamePanel.SelectPlayer))]
+    class StartGamePanel_SelectPlayer_Patch
+    {
+        private static int PrevIndex = -1;
+        private static readonly float Modifier = 0.25f;
+        private static void Prefix(StartGamePanel __instance)
+        {
+            if (PrevIndex > -1)
+            {
+                __instance.characterStandPicList[PrevIndex].transform.DOScale(__instance._standPicScale[PrevIndex], 0f).SetUpdate(true);
+            }
+        }
+        private static void Postfix(StartGamePanel __instance)
+        {
+            var slotIndex = __instance.characterStandPicList.FindIndexOf((CanvasGroup canvasGroup) => canvasGroup.GetComponentInChildren<Image>().mainTexture.name == "UtsuhoStand-True");
+            //var slotIndex = __instance.characterStandPicList.FindIndexOf((CanvasGroup canvasGroup) => canvasGroup.GetComponentInChildren<Image>().sprite.name == "");
+            if (slotIndex == -1)
+            {
+                PrevIndex = slotIndex;
+                return;
+            }
+            __instance.characterStandPicList[slotIndex].transform.DOScale(__instance._standPicScale[slotIndex] + Modifier, 0.2f).From(__instance._standPicScale[PrevIndex > -1 ? PrevIndex : slotIndex] + Modifier, true, false).SetUpdate(true).SetAutoKill(true);
+            PrevIndex = slotIndex;
+        }
+    }
 }
     /*[HarmonyPatch(typeof(UnitView))]
     class UnitView_CrashAnimation_Patch
